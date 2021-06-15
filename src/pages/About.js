@@ -5,13 +5,13 @@ const About = () => {
     <div>
       <div className="h-100 bg-navbarbg flex flex-col items-center justify-center">
         <h1 className="text-center	text-align: center ">About Us</h1>
-        <p className="w-115 text-center	text-align: center">
+        <p className="md:w-115 text-center	text-align: center">
           Et has minim elitr intellegat. Mea aeterno eleifend antiopam ad, nam
           no suscipit quaerendum. At nam minimum ponderum. Est audiam animal
           molestiae te.
         </p>
       </div>
-      <div className="w-full h-25 mt-6">
+      <div className="md:w-full md:h-25 mt-6">
         <h2 className="text-center	text-align: center">
           This is fancy headline about us
         </h2>
@@ -19,7 +19,7 @@ const About = () => {
           What we do what we can and how we work is described here
         </p>
       </div>
-      <div className="w-full h-40 flex flex-row justify-around">
+      <div className="md:w-full md:h-40 flex flex-row justify-around">
         <div>
           <div className="flex flex-col items-center">
             <FiBriefcase />

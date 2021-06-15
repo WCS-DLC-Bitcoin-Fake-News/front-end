@@ -1,7 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
 const Navbar = () => {
   return (
-    <nav className="px-32 h-22 flex justify-between items-center bg-navbarbg">
+    <nav className="md:px-32 h-22 flex justify-between items-center bg-navbarbg">
       <div className="text-2xl text-secondary font-bold">
         <Link to="/">LOGO</Link>
       </div>

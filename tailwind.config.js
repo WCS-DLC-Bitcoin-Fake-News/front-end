@@ -9,7 +9,11 @@ module.exports = {
       spacing: {
         22: "88px",
         23: "91px",
+        25: "108px",
+        40: "204",
         100: "560px",
+        115: "730px"
+        
       },
       letterSpacing: {
         wide: "0.2px",

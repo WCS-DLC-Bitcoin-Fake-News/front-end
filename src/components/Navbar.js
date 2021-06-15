@@ -1,7 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
 const Navbar = () => {
   return (
-    <nav className="h-22 flex justify-between items-center">
+    <nav className="px-32 h-22 flex justify-between items-center bg-navbarbg">
       <div className="text-2xl text-secondary font-bold">
         <Link to="/">LOGO</Link>
       </div>
@@ -26,9 +26,12 @@ const Navbar = () => {
         <button className="text-secondary font-bold tracking-wide2">
           Sign In
         </button>
-        <button className="w-23 h-11 font-bold tracking-wide2 bg-primary text-white">
-          <Link to="signup">Sign Up</Link>
-        </button>
+
+        <Link to="signup">
+          <button className="w-23 h-11 font-bold tracking-wide2 bg-primary text-white">
+            Sign Up
+          </button>
+        </Link>
       </ul>
     </nav>
   );

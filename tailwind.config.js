@@ -9,6 +9,7 @@ module.exports = {
       spacing: {
         22: "88px",
         23: "91px",
+        100: "560px",
       },
       letterSpacing: {
         wide: "0.2px",
@@ -21,6 +22,8 @@ module.exports = {
       },
       backgroundColor: {
         primary: "#3C64B1",
+        navbarbg: "#F3F6FA",
+        white: "#FFFFFF",
       },
     },
   },

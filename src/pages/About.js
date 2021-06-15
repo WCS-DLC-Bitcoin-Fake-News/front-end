@@ -11,7 +11,7 @@ const About = () => {
           molestiae te.
         </p>
       </div>
-      <div className="w-full h-25">
+      <div className="w-full h-25 mt-6">
         <h2 className="text-center	text-align: center">
           This is fancy headline about us
         </h2>

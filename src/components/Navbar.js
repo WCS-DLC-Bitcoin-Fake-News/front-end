@@ -23,10 +23,11 @@ const Navbar = () => {
         </li>
       </ul>
       <ul className="w-40 flex items-center justify-between  ">
-        <button className="text-secondary font-bold tracking-wide2">
-          Sign In
-        </button>
-
+        <Link to="signin">
+          <button className="text-secondary font-bold tracking-wide2">
+            Sign In
+          </button>
+        </Link>
         <Link to="signup">
           <button className="w-23 h-11 font-bold tracking-wide2 bg-primary text-white">
             Sign Up

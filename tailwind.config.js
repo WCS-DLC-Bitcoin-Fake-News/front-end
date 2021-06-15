@@ -24,6 +24,7 @@ module.exports = {
         primary: "#3C64B1",
         navbarbg: "#F3F6FA",
         white: "#FFFFFF",
+        signBtn: "#56BC8F",
       },
     },
   },

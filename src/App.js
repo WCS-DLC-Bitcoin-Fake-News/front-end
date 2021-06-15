@@ -5,11 +5,15 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Help from "./pages/Help";
 import Signup from "./pages/Signup";
+import PostForm from "./components/PostForm";
+import Post from "./components/Post";
 
 function App() {
   return (
     <Router>
       <Navbar />
+      <PostForm />
+      <Post />
       <Switch>
         <Route exact path="/" component={Landing} />
         <Route exact path="/about" component={About} />

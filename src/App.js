@@ -6,6 +6,7 @@ import Contact from "./pages/Contact";
 import Help from "./pages/Help";
 import Signup from "./pages/Signup";
 import VoteButtons from "./components/vote-buttons";
+import PostEditor from "./components/PostEditor";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route exact path="/help" component={Help} />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/upvote" component={VoteButtons} />
+        <Route exact path="/post" component={PostEditor} />
       </Switch>
     </Router>
   );

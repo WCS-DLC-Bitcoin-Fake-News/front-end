@@ -5,6 +5,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Help from "./pages/Help";
 import Signup from "./pages/Signup";
+import Signin from "./pages/Signin";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route exact path="/contact" component={Contact} />
         <Route exact path="/help" component={Help} />
         <Route exact path="/signup" component={Signup} />
+        <Route exact path="/signin" component={Signin} />
       </Switch>
     </Router>
   );

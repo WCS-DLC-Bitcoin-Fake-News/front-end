@@ -21,6 +21,11 @@ const Navbar = () => {
             Help
           </NavLink>
         </li>
+        <li>
+          <NavLink to="/post" activeClassName="text-secondary">
+            Post
+          </NavLink>
+        </li>
       </ul>
       <ul className="w-40 flex items-center justify-between  ">
         <button className="text-secondary font-bold tracking-wide2">

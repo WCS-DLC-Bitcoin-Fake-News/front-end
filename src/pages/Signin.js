@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 import { AiOutlineLogin } from "react-icons/ai";
 import { HiOutlineMail } from "react-icons/hi";
 import { RiLockPasswordLine } from "react-icons/ri";
@@ -8,18 +9,51 @@ const Signin = () => {
     email: "",
     password: "",
   });
+  /* const [initialState, setInitialState] = useState({
+    token: localStorage.getItem("token"),
+    isAuthenticated: null,
+    loading: true,
+    user: null,
+  }); */
 
   const { email, password } = formData;
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
+  /* const onSubmit = async (e) => {
+    e.preventDefault();
+    const user = {
+      email,
+      password,
+    };
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      const body = JSON.stringify(user);
+      const res = await axios.post("/users/signin", body, config);
+      if (res.data.token) {
+        console.log(res.data.token);
+        localStorage.setItem("token", res.data.token);
+
+        setInitialState({
+          ...initialState,
+          isAuthenticated: true,
+          loading: false,
+        });
+        console.log(initialState);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }; */
   const onSubmit = (e) => {
     e.preventDefault();
-
     console.log(formData);
   };
-
   return (
     <section className="w-full h-100 bg-navbarbg flex justify-center items-center">
       <div className="w-96 h-74 bg-white">

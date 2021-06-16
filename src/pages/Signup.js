@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 import { BiUser } from "react-icons/bi";
 import { AiOutlineLogin } from "react-icons/ai";
 import { HiOutlineMail } from "react-icons/hi";
@@ -17,12 +18,29 @@ const Signup = () => {
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     if (password !== password2) {
       console.log("Passwords do not match");
     } else {
       console.log(formData);
+      const newUser = {
+        name,
+        email,
+        password,
+      };
+      try {
+        const config = {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        };
+        const body = JSON.stringify(newUser);
+        const res = await axios.post("/users/signup", body, config);
+        console.log(res.data);
+      } catch (error) {
+        console.log(error.response.data);
+      }
     }
   };
 

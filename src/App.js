@@ -7,11 +7,15 @@ import Help from "./pages/Help";
 import Signup from "./pages/Signup";
 import VoteButtons from "./components/vote-buttons";
 import PostEditor from "./components/PostEditor";
+import PostForm from "./components/PostForm";
+import Post from "./components/Post";
 
 function App() {
   return (
     <Router>
       <Navbar />
+      <PostForm />
+      <Post />
       <Switch>
         <Route exact path="/" component={Landing} />
         <Route exact path="/about" component={About} />

@@ -5,7 +5,7 @@ const Navbar = () => {
       <div className="text-2xl text-secondary font-bold">
         <Link to="/">LOGO</Link>
       </div>
-      <ul className="w-48 flex items-center justify-between font-semibold text-sm tracking-wide text-primary">
+      <ul className="w-60 flex items-center justify-between font-semibold text-sm tracking-wide text-primary">
         <li>
           <NavLink to="/about" activeClassName="text-secondary">
             About
@@ -26,12 +26,21 @@ const Navbar = () => {
             Post
           </NavLink>
         </li>
+        <li>
+          <NavLink to="/article" activeClassName="text-secondary">
+            Article
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/upvote" activeClassName="text-secondary">
+            Vote
+          </NavLink>
+        </li>
       </ul>
       <ul className="w-40 flex items-center justify-between  ">
         <button className="text-secondary font-bold tracking-wide2">
           Sign In
         </button>
-
         <Link to="signup">
           <button className="w-23 h-11 font-bold tracking-wide2 bg-primary text-white">
             Sign Up

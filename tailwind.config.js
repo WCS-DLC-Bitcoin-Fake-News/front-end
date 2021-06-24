@@ -12,6 +12,7 @@ module.exports = {
         25: "108px",
         40: "204px",
         100: "560px",
+        110: "613",
         115: "730px"
         
       },
@@ -29,6 +30,7 @@ module.exports = {
         navbarbg: "#F3F6FA",
         white: "#FFFFFF",
         signBtn: "#56BC8F",
+        grayEntries:"#F4F5F4",
       },
     },
   },

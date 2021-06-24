@@ -6,6 +6,7 @@ import Contact from "./pages/Contact";
 import Help from "./pages/Help";
 import Signup from "./pages/Signup";
 import Signin from "./pages/Signin";
+import NewestEntries from "./components/NewestEntries"
 
 function App() {
   return (
@@ -19,6 +20,8 @@ function App() {
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/signin" component={Signin} />
       </Switch>
+      <NewestEntries />
+
     </Router>
   );
 }

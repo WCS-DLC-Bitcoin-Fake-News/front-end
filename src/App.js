@@ -6,7 +6,7 @@ import Contact from "./pages/Contact";
 import Help from "./pages/Help";
 import Signup from "./pages/Signup";
 import Signin from "./pages/Signin";
-import NewestEntries from "./components/NewestEntries"
+import PostEditor from "./components/PostEditor";
 
 function App() {
   return (
@@ -17,11 +17,10 @@ function App() {
         <Route exact path="/about" component={About} />
         <Route exact path="/contact" component={Contact} />
         <Route exact path="/help" component={Help} />
+        <Route exact path="/post" component={PostEditor} />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/signin" component={Signin} />
       </Switch>
-      <NewestEntries />
-
     </Router>
   );
 }

@@ -12,49 +12,6 @@ const NewestEntries = () => {
           Newest Entries
         </div>
       </div>
-
-      {/* <div class="divide-y-2 md:divide-solid">
-        <div className="divide-y-2 md:divide-solid grid grid-cols-2 gap-1  md:mx-10 inline-block align-middle">
-          <div>
-            <div className="text-sm font-semibold">This is a title.</div>
-            <div className="text-sm">
-              Neque porro quisquam est qui dolorem ipsum quia dolor sit amet,
-              consectetur, adipisci velit
-            </div>
-          </div>
-          <div className="md:grid grid-cols-6 gap-1">
-            <div className="md:col-start-3">author_name</div>
-            <div className="md:col-start-5 grid grid-cols-7 ">
-              <GoArrowUp />
-              30
-            </div>
-            <div className="md:col-start-6 grid grid-cols-7 ">
-              <GoArrowDown />
-              40
-            </div>
-          </div>
-
-          <div>
-            <div className="text-sm font-semibold">This is a title.</div>
-            <div className="text-sm">
-              Neque porro quisquam est qui dolorem ipsum quia dolor sit amet,
-              consectetur, adipisci velit
-            </div>
-          </div>
-          <div className="md:grid grid-cols-6 gap-1">
-            <div className="md:col-start-3">author_name</div>
-            <div className="md:col-start-5 grid grid-cols-7 ">
-              <GoArrowUp />
-              up
-            </div>
-            <div className="md:col-start-6 grid grid-cols-7 ">
-              <GoArrowDown />
-              down
-            </div>
-          </div>
-        </div>
-      </div> */}
-
       <div class="mt-2 md:mx-10">
         <div class="w-full overflow-hidden rounded-lg shadow-xs">
           <div class="md:w-full overflow-x-auto">

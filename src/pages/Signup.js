@@ -38,6 +38,10 @@ const Signup = () => {
         const body = JSON.stringify(newUser);
         const res = await axios.post("/users/signup", body, config);
         console.log(res.data);
+        
+        // storing token and userId in the browser localStorage
+        localStorage.setItem('token', res.data.token);
+        localStorage.setItem('user', JSON.stringify(res.data.user));
       } catch (error) {
         console.log(error.response.data);
       }

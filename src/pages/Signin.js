@@ -3,8 +3,10 @@ import axios from "axios";
 import { AiOutlineLogin } from "react-icons/ai";
 import { HiOutlineMail } from "react-icons/hi";
 import { RiLockPasswordLine } from "react-icons/ri";
+import { useHistory } from "react-router-dom";
 
 const Signin = () => {
+  let history = useHistory();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -16,16 +18,15 @@ const Signin = () => {
     user: null,
   }); */
 
-  const { email, password } = formData;
-
-  const onChange = (e) =>
+  const onChange = (e) => {
+    e.preventDefault();
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  }
 
-  /* const onSubmit = async (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     const user = {
-      email,
-      password,
+      ...formData
     };
     try {
       const config = {
@@ -38,22 +39,14 @@ const Signin = () => {
       if (res.data.token) {
         console.log(res.data.token);
         localStorage.setItem("token", res.data.token);
-
-        setInitialState({
-          ...initialState,
-          isAuthenticated: true,
-          loading: false,
-        });
-        console.log(initialState);
+        localStorage.setItem("user", JSON.stringify(res.data.user));
+        history.push("/profile")
       }
     } catch (error) {
       console.log(error);
     }
-  }; */
-  const onSubmit = (e) => {
-    e.preventDefault();
-    console.log(formData);
   };
+
   return (
     <section className="w-full h-100 bg-navbarbg flex justify-center items-center">
       <div className="w-96 h-74 bg-white">
@@ -67,7 +60,7 @@ const Signin = () => {
               type="email"
               placeholder="Email Address"
               name="email"
-              value={email}
+              value={formData.email}
               onChange={onChange}
               className="p-2 w-74 h-5 outline-none"
               required
@@ -79,7 +72,7 @@ const Signin = () => {
               type="password"
               placeholder="Password"
               name="password"
-              value={password}
+              value={formData.password}
               onChange={onChange}
               minLength="8"
               className="p-2 w-74 h-5 outline-none"

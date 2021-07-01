@@ -4,8 +4,10 @@ import { BiUser } from "react-icons/bi";
 import { AiOutlineLogin } from "react-icons/ai";
 import { HiOutlineMail } from "react-icons/hi";
 import { RiLockPasswordLine } from "react-icons/ri";
+import { useHistory } from "react-router-dom";
 
 const Signup = () => {
+  let history = useHistory();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -42,6 +44,7 @@ const Signup = () => {
         // storing token and userId in the browser localStorage
         localStorage.setItem('token', res.data.token);
         localStorage.setItem('user', JSON.stringify(res.data.user));
+        history.push("/")
       } catch (error) {
         console.log(error.response.data);
       }

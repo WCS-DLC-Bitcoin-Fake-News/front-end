@@ -1,5 +1,11 @@
 import { Link, NavLink } from "react-router-dom";
 const Navbar = () => {
+  let isLoggedIn = localStorage.getItem("token")
+  const handleDisconnect = (e) => {
+    e.preventDefault()
+    localStorage.removeItem('token');
+  } 
+  
   return (
     <nav className="md:px-32 h-22 flex justify-between items-center bg-navbarbg">
       <div className="text-2xl text-secondary font-bold">
@@ -28,16 +34,24 @@ const Navbar = () => {
         </li>
       </ul>
       <ul className="w-40 flex items-center justify-between  ">
-        <Link to="signin">
-          <button className="text-secondary font-bold tracking-wide2">
-            Sign In
-          </button>
-        </Link>
-        <Link to="signup">
-          <button className="w-23 h-11 font-bold tracking-wide2 bg-primary text-white">
-            Sign Up
-          </button>
-        </Link>
+        {
+        isLoggedIn 
+        ? <button onClick= {handleDisconnect} >disconnect</button> 
+        :
+        <>
+          <Link to="signin">
+            <button className="text-secondary font-bold tracking-wide2">
+              Sign In
+            </button>
+          </Link>
+          <Link to="signup">
+            <button className="w-23 h-11 font-bold tracking-wide2 bg-primary text-white">
+              Sign Up
+            </button>
+          </Link>
+        </> 
+        }
+        
       </ul>
     </nav>
   );

@@ -2,28 +2,30 @@ import { useState } from "react";
 import ReactQuill from "react-quill";
 import "../../node_modules/react-quill/dist/quill.snow.css";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 
 function PostEditor() {
-  const [post, setPost] = useState("");
+  const [body, setBody] = useState("");
   const [title, setTitle] = useState("")
+  let history = useHistory()
 
-  const addTitle = e => {
+  const editTitle = e => {
     setTitle(e.target.value)
   }
-  const addPost = e => {
-    setPost(e)
+  const editBody = html => {
+    console.log(html)
+    setBody(html)
   }
 
   const onSubmit = async (e) => {
       e.preventDefault();
-      console.log(post);
+      console.log(body);
       const newPost = {
         title,
-        post
+        body
       };
       try {
-
 
         // this const gets the 'token' and 'user'from localStorage. Check Signup.js to see how to access and save in localStorage.
         const token = localStorage.getItem('token');
@@ -38,7 +40,7 @@ function PostEditor() {
                
         // const body = JSON.stringify(newPost);
         const res = await axios.post(`/users/${user._id}/bunkers`, newPost, config);
-        console.log(res.data);
+        history.push("/")
       } catch (error) {
         console.log(error);
       }
@@ -50,17 +52,17 @@ function PostEditor() {
     <>
     <form onSubmit={onSubmit}>
       <label>Title</label>
-      <input onChange={addTitle}></input>
+      <input onChange={editTitle}></input>
       <ReactQuill
         placeholder="Post here"
-        onChange={addPost}
+        onChange={editBody}
         // readOnly={true}
-        value={post}
+        value={body}
       />
       <div>
         {title}
         <br/>
-        {post}
+        {body}
       </div>
       <input
               type="submit"

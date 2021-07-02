@@ -1,4 +1,3 @@
-import { GoArrowUp, GoArrowDown } from "react-icons/go";
 import { useState, useEffect } from "react"
 import axios from "axios";
 const Row = ({author, title, body, createdAt}) => (

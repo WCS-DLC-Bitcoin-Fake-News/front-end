@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react"
 import axios from "axios";
-const Row = ({author, title, body, createdAt}) => (
-    <tr class="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
+import { useHistory } from "react-router-dom";
+const Row = ({author, title, body, handleClick, createdAt}) => (
+
+    <tr onClick= { handleClick } class="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
     <td class="px-4 py-3">
       <div>
         <p class="font-semibold">{title}</p>
@@ -27,8 +29,13 @@ const Row = ({author, title, body, createdAt}) => (
 )
 
 const NewestEntries = () => {
+  let history = useHistory();
   const [bunkers, setBunkers] = useState([])
 
+  const handleClick = () => {
+     console.log("i'm clicked")
+     history.push("/bunkers/1");
+  } 
   const loadBunkers = async () => {
     try {
       const { data } = await axios.get("/bunkers")
@@ -64,7 +71,7 @@ const NewestEntries = () => {
                 Newest Entries
               </tr> */}
               <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-                {bunkers.map((bunker) => <Row  {...bunker}/> )}
+                {bunkers.map((bunker) => <Row  handleClick={handleClick} {...bunker}/> )}
               </tbody>
             </table>
           </div>

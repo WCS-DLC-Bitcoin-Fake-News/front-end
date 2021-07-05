@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { TwitterTweetEmbed } from 'react-twitter-embed';
 import VoteButtons from './voteButton';
-
+import { useParams } from 'react-router';
+import axios from "axios";
 const BunkerHeader = ({author, date}) => {
     return(
         <div className="header" >
@@ -27,7 +28,7 @@ const BunkerHeader = ({author, date}) => {
                 <h1
                     className="text-xl font-medium leading-6 tracking-wide text-gray-300 hover:text-blue-500 cursor-pointer"
                     >
-                    <a href="blog/detail">This is the bunker's title</a>
+                    <a href="/:id">This is the bunker's title</a>
                 </h1>
             </div>
         </div>
@@ -132,29 +133,57 @@ const BunkerFooter = ({ bunkerMetrics }) => {
 }
 
 const Bunker = (props) => {
+        const [author, setAuthor] = useState("Carlos")
+        const [tags, setTags] = useState(["Speculation", "FUD", "Manipulation" ])
+        const [bunkerMetrics, setBunkerMetrics] = useState([
+            {
+                name: "assets",
+                count: 4
+            }, 
+            {
+                name: "contributors",
+                count: 2
+            }, 
+            {
+                name: "stake",
+                count: 1500
+            }, 
+            {
+                name: "days",
+                count: 3
+            }
+        ])
+       
+        const [date, setDate] = useState(3)
+    // have access to ID in the url 
+    let {id} = useParams();
+    console.log(id)
+
+    // wait for the component to be mounted
+    useEffect(() => {
+       console.log("I am mounted") 
+         //make an axios call
+         
+        axios.get(`/bunkers/${id}`)
+            .then(function (response) {
+                console.log(response.data);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     
-    const [author, setAuthor] = useState("Carlos")
-    const [tags, setTags] = useState(["Speculation", "FUD", "Manipulation" ])
-    const [bunkerMetrics, setBunkerMetrics] = useState([
-        {
-            name: "assets",
-            count: 4
-        }, 
-        {
-            name: "contributors",
-            count: 2
-        }, 
-        {
-            name: "stake",
-            count: 1500
-        }, 
-        {
-            name: "days",
-            count: 3
-        }
-    ])
+        
+        // set the value back in the local state
+
+
+
+    }, [])
    
-    const [date, setDate] = useState(3)
+    
+
+
+    console.log("I am rendering")
+
     return (
         <div className="flex justify-between m-6">
             <div className="flex flex-col h-full max-w-lg mx-auto px-4 bg-gray-800 rounded-lg">

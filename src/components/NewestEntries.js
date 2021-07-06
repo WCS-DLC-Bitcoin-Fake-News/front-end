@@ -41,14 +41,14 @@ const NewestEntries = () => {
   const loadBunkers = async () => {
     try {
       const { data } = await axios.get("/bunkers")
-      console.log(bunkers);
+  
       setBunkers([...data])    
     }
     catch(error){
       console.log(error)
     }
   }
-
+  
   useEffect(() => {
     loadBunkers()
   }, [])
@@ -73,7 +73,7 @@ const NewestEntries = () => {
                 Newest Entries
               </tr> */}
               <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-                {bunkers.map((bunker) => <Row  handleClick={handleClick} {...bunker}/> )}
+                {bunkers && bunkers.map((bunker) => <Row  handleClick={handleClick} {...bunker}/> )}
               </tbody>
             </table>
           </div>

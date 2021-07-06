@@ -12,7 +12,7 @@ const Bunker = (props) => {
     const [author, setAuthor] = useState("")
     const [tags, setTags] = useState([])
     const [bunkerMetrics, setBunkerMetrics] = useState([])
-    const [source, setSource] = useState("1")
+    const [source, setSource] = useState("")
     const [date, setDate] = useState(0)
 
     // have access to ID in the url 
@@ -21,11 +21,11 @@ const Bunker = (props) => {
     const fetchBunker = async () => {
         try {
             let { data } = await axios.get(`/bunkers/${id}`)
-            console.log(data)      
+            console.log(data.source) 
+            setSource(data.source);
             setTitle(data.title);
             setAuthor(data.author);
-            setArgument(data.body);
-            setSource(data.source);
+            
         }
         catch (error) {
             console.log(error)

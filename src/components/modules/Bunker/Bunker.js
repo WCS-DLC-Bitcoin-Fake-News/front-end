@@ -4,6 +4,7 @@ import axios from "axios";
 import BunkerHeader from './BunkerHeader';
 import BunkerContent from './BunkerContent';
 import BunkerFooter from './BunkerFooter';
+import BunkerVisualizer from './BunkerVisualizer';
 
 const Bunker = (props) => {
     const [title, setTitle] = useState("")

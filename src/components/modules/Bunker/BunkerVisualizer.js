@@ -3,7 +3,7 @@ import { TwitterTweetEmbed } from 'react-twitter-embed';
 
 const BunkerVisualizer = ({source}) => {
     // Bunkers will have three types (twitter, article, speculation)
-        let idFromUrl = 34
+        let idFromUrl = {source}
         if(true) return <TwitterTweetEmbed
         tweetId={idFromUrl}
         placeholder={'loading'}

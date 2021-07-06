@@ -1,4 +1,4 @@
-const BunkerHeader = ({author, date, title}) => {
+const BunkerHeader = ({author, user, date, title}) => {
     return(
         <div className="header" >
             <div
@@ -12,7 +12,7 @@ const BunkerHeader = ({author, date, title}) => {
                     />
                 <div className="">
                     <p className="text-sm font-semibold tracking-wide text-gray-200">
-                        {author}
+                        {author.user} 
                     </p>
                     <p className="text-xs font-light tracking-wider text-gray-300">
                         {date} Hours ago

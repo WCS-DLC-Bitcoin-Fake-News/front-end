@@ -13,7 +13,7 @@ const Row = ({author, title, body, handleClick, createdAt, _id}) => {
           </p>
         </div>
       </td>
-      <td class="px-4 py-3 text-sm">{ author.name}</td>
+      <td class="px-4 py-3 text-sm">{author.name}</td>
       <td class="px-4 py-3 text-xs">
         <td class="px-2 py-1 text-xs">
           <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
@@ -41,8 +41,6 @@ const NewestEntries = () => {
   const loadBunkers = async () => {
     try {
       const { data } = await axios.get("/bunkers")
-
-  
       setBunkers([...data])    
     }
     catch(error){

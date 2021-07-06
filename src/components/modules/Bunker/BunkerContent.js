@@ -25,6 +25,7 @@ const ReadingTime = () => (
 )
 
 const BunkerContent = ({ tags, argument, source }) => {
+    console.log(source)
     return(
         <>
             {/* Custom visualizer */}

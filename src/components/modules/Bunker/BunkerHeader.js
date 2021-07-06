@@ -12,7 +12,7 @@ const BunkerHeader = ({author, user, date, title}) => {
                     />
                 <div className="">
                     <p className="text-sm font-semibold tracking-wide text-gray-200">
-                        {author.user} 
+                        {author.name} 
                     </p>
                     <p className="text-xs font-light tracking-wider text-gray-300">
                         {date} Hours ago

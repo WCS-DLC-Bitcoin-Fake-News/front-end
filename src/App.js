@@ -9,6 +9,7 @@ import Signup from "./pages/Signup";
 import Signin from "./pages/Signin";
 import PostEditor from "./components/PostEditor";
 import CommentField from "./components/CommentField";
+import CommentTest from "./components/CommentTest";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/signin" component={Signin} />
         <Route exact path="/comments" component={CommentField} />
+        <Route exact path="/commenttest" component={CommentTest} />
       </Switch>
     </Router>
   );

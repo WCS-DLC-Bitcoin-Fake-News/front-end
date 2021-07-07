@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Button, Input } from "antd";
-import axios from "axios";
 const { TextArea } = Input;
 
 function CommentField() {
@@ -13,9 +12,9 @@ function CommentField() {
   };
   return (
     <div>
-      <br />
-      <p> Replies</p>
-      <hr />
+      {/* <br />
+      <h2> Comments</h2>
+      <hr /> */}
       {/* Comment List*/}
       {/* Root Comment Form */}
       <form onSubmit={onSubmit}>

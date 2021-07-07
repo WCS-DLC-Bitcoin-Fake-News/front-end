@@ -11,6 +11,10 @@ import BunkerDetail from "./pages/BunkerDetail";
 import PostEditor from "./components/PostEditor";
 import VoteButton from "./components/voteButton";
 import Article from "./pages/Article"
+import CommentField from "./components/CommentField";
+import CommentTest from "./components/CommentTest";
+import CommentContainer from "./components/CommentContainer";
+
 
 function App() {
   return (
@@ -29,6 +33,8 @@ function App() {
         <Route exact path="/upvote" component={VoteButton} />
         <Route exact path="/post" component={PostEditor} />
         <Route exact path="/article" component={Article} />
+        <Route exact path="/comments" component={CommentField} />
+        <Route exact path="/commenttest" component={CommentContainer} />
       </Switch>
     </Router>
   );

@@ -7,7 +7,8 @@ import { useHistory } from "react-router-dom";
 
 function PostEditor() {
   const [body, setBody] = useState("");
-  const [title, setTitle] = useState("")
+  const [title, setTitle] = useState("");
+  const [source, setSource] = useState("");
   let history = useHistory()
 
   const editTitle = e => {
@@ -17,13 +18,17 @@ function PostEditor() {
     console.log(html)
     setBody(html)
   }
-
+  const editSource = e => {
+    console.log(e)
+    setSource(e.target.value)
+  }
   const onSubmit = async (e) => {
       e.preventDefault();
       console.log(body);
       const newPost = {
         title,
-        body
+        source,
+        body,
       };
       try {
 
@@ -53,6 +58,8 @@ function PostEditor() {
     <form onSubmit={onSubmit}>
       <label>Title</label>
       <input onChange={editTitle}></input>
+      <label>Source</label>
+      <input onChange={editSource}></input>
       <ReactQuill
         placeholder="Post here"
         onChange={editBody}

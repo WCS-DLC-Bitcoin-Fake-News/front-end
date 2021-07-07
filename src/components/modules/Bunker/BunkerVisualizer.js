@@ -4,7 +4,6 @@ import { TwitterTweetEmbed } from 'react-twitter-embed';
 const BunkerVisualizer = ({source}) => {
     console.log(source)
     if(source.includes("twitter.com")) {
-        console.log("hello")
         let parts = source.split("/");
         let tweetId = parts[parts.length - 1];
         console.log(tweetId)

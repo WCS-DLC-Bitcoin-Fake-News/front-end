@@ -20,11 +20,11 @@ const Bunker = (props) => {
 
     const fetchBunker = async () => {
         try {
-            let { data } = await axios.get(`/bunkers/${id}`)
-            console.log(data.source) 
+            let { data } = await axios.get(`/bunkers/${id}`) 
             setSource(data.source);
             setTitle(data.title);
             setAuthor(data.author);
+            setArgument(data.body);
             
         }
         catch (error) {

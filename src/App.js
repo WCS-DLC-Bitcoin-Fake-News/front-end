@@ -7,7 +7,10 @@ import Contact from "./pages/Contact";
 import Help from "./pages/Help";
 import Signup from "./pages/Signup";
 import Signin from "./pages/Signin";
+import BunkerDetail from "./pages/BunkerDetail";
 import PostEditor from "./components/PostEditor";
+import VoteButton from "./components/voteButton";
+import Article from "./pages/Article"
 
 function App() {
   return (
@@ -22,6 +25,10 @@ function App() {
         <Route exact path="/post" component={PostEditor} />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/signin" component={Signin} />
+        <Route exact path="/bunkers/:id" component={BunkerDetail} />
+        <Route exact path="/upvote" component={VoteButton} />
+        <Route exact path="/post" component={PostEditor} />
+        <Route exact path="/article" component={Article} />
       </Switch>
     </Router>
   );

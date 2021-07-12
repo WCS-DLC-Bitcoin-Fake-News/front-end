@@ -1,12 +1,11 @@
-import NewestEntries from "../components/NewestEntries"
-
+import NewestEntries from "../components/NewestEntries";
 
 const Landing = () => {
-  return  (
+  return (
     <>
-  <div>This is homepage</div>
-  <NewestEntries />
-  </>
+      <div>This is homepage</div>
+      <NewestEntries />
+    </>
   );
 };
 export default Landing;

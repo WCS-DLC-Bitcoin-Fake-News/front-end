@@ -48,5 +48,6 @@ module.exports = {
       borderColor: ["responsive", "hover", "focus", "focus-within"],
     },
   },
+
   plugins: [require("@tailwindcss/forms")],
 };

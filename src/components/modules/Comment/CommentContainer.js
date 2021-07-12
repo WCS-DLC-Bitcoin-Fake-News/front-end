@@ -1,6 +1,8 @@
 import React from "react";
-import CommentContent from "./Comment";
+import CommentContent from "./CommentContent";
 import { Comment, Avatar, Form, Button, List, Input, Tooltip } from "antd";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 const { TextArea } = Input;
 
@@ -46,16 +48,38 @@ const CustomEditor = ({ children }) => (
 
 const CommentContainer = (props) => {
   let { id } = props;
+  const [comments, setComments] = useState([]);
+  const loadComments = async () => {
+    try {
+      const { data } = await axios.get(`/bunkers/${id}/comments`);
+      setComments([...data]);
+      console.log(data);
+    } catch (error) {
+      console.log(error.response.data);
+    }
+  };
+  useEffect(() => {
+    loadComments();
+  }, []);
+
   return (
     <>
       <CustomEditor />
 
-      <CommentContent id={id}>
-        <CommentContent>
-          <CommentContent />
-          <CommentContent />
-        </CommentContent>
-      </CommentContent>
+      {/* <CommentContent id={id}>
+        {[0, 0, 0, 0].map(() => (
+          <CommentContent>
+            {[0, 0, 0, 0].map(() => (
+              <CommentContent />
+            ))}
+          </CommentContent>
+        ))}
+      </CommentContent> */}
+
+      {comments.map((comment) => {
+        console.log(comment);
+        return <CommentContent />;
+      })}
     </>
   );
 };

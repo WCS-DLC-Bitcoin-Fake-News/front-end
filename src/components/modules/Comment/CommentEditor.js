@@ -33,7 +33,7 @@ const Editor = ({ onChange, onSubmit, submitting, value }) => (
   </>
 );
 
-class CommentTest extends React.Component {
+class CommentEditor extends React.Component {
   state = {
     comments: [
       {
@@ -141,4 +141,4 @@ class CommentTest extends React.Component {
   }
 }
 
-export default CommentTest;
+export default CommentEditor;

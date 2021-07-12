@@ -1,28 +1,11 @@
 import React from "react";
 import { Comment, Avatar } from "antd";
-import { useState, useEffect } from "react";
-import axios from "axios";
 
 const CommentContent = ({ children }, props) => {
   let { id } = props;
-  const [comments, setComments] = useState([]);
-  const loadComments = async () => {
-    try {
-      const { data } = await axios.get(`bunkers/${id}/comments`);
-      setComments([...data]);
-      console.log(data);
-    } catch (error) {
-      console.log(error.response.data);
-    }
-  };
-  useEffect(() => {
-    loadComments();
-  }, []);
+
   return (
     <>
-      {comments.map((comment) => {
-        console.log(comment);
-      })}
       <Comment
         actions={[<span key="comment-nested-reply-to">Reply to</span>]}
         author={<a>User1</a>}

@@ -1,6 +1,6 @@
 import Bunker from "../components/modules/Bunker/Bunker.js";
 import { useParams } from "react-router";
-import CommentContainer from "../components/CommentContainer.js";
+import CommentContainer from "../components/modules/Comment/CommentContainer";
 const BunkerDetail = () => {
   let { id } = useParams();
   // get params from url
@@ -12,3 +12,5 @@ const BunkerDetail = () => {
   );
 };
 export default BunkerDetail;
+
+

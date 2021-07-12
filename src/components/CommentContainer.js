@@ -44,12 +44,13 @@ const CustomEditor = ({ children }) => (
   />
 );
 
-const CommentContainer = () => {
+const CommentContainer = (props) => {
+  let { id } = props;
   return (
     <>
       <CustomEditor />
 
-      <CommentContent>
+      <CommentContent id={id}>
         <CommentContent>
           <CommentContent />
           <CommentContent />

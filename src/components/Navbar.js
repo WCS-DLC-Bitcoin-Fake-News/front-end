@@ -56,9 +56,11 @@ const Navbar = () => {
         </li>
       </ul>
       <ul className="w-40 flex items-center justify-between  ">
+      <Link to="signin">
         <button className="p-2	 hover:bg-blue-200 rounded-lg text-base w-23 h-11 text-secondary font-bold tracking-wide2">
           Sign In
         </button>
+        </Link>
         <Link to="signup">
           <button className="p-1 hover:bg-blue-900 rounded-lg text-base w-23 h-11 font-bold tracking-wide2 bg-primary text-white">
             Sign Up

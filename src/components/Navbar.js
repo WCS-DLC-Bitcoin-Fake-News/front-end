@@ -45,12 +45,12 @@ const Navbar = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/article" activeClassName="text-secondary">
+          <NavLink to="/article" activeClassName="text-secondary" className=" p-1	 hover:bg-blue-100 rounded-lg text-base">
             Article
           </NavLink>
         </li>
         <li>
-          <NavLink to="/upvote" activeClassName="text-secondary">
+          <NavLink to="/upvote" activeClassName="text-secondary" className=" p-1	 hover:bg-blue-100 rounded-lg text-base">
             Vote
           </NavLink>
         </li>

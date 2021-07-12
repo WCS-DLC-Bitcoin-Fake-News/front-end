@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 const Row = ({author, title, body, handleClick, createdAt, _id}) => {
-
+console.log(author)
   return(
       <tr onClick= { (e) => { handleClick(_id) } } class="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
       <td class="px-4 py-3">
@@ -56,7 +56,7 @@ const NewestEntries = () => {
     <div className="flex-col h-110 ">
       <div>
         <div className="ml-20 my-5  font-black text-2xl">
-          When it will be released?
+          This is our Feed
         </div>
       </div>
       <div className="md:mr-10 ">

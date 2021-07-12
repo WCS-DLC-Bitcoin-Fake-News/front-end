@@ -31,11 +31,22 @@ module.exports = {
         white: "#FFFFFF",
         signBtn: "#56BC8F",
         grayEntries:"#F4F5F4",
+        containerBlue: "#1F2937",
+        buttonRed: "#E01E49",
+        buttonRedDark: "#BE143C",
+      },
+      transformOrigin: {
+        0: "0%",
+      },
+      zIndex: {
+        "-1": "-1",
       },
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      borderColor: ["responsive", "hover", "focus", "focus-within"],
+    },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/forms")],
 };

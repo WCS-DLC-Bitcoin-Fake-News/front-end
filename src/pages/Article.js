@@ -1,9 +1,9 @@
-import PostForm from "../components/PostForm";
+import BunkerForm from "../components/BunkerForm";
 
 function Article() {
     return (
         <>
-        <PostForm/>
+        <BunkerForm/>
         </>
     )
 }

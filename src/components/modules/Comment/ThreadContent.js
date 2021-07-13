@@ -16,7 +16,7 @@ function ThreadContent(props) {
         }
         content={
           <p>
-            {thread.threads[0].body}
+            {thread.body}
           </p>
         }
       > 

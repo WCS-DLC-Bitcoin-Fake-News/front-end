@@ -1,5 +1,5 @@
 import React from "react";
-import {useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import { Comment, Avatar } from "antd";
 import axios from "axios";
 import ThreadContent from "./ThreadContent";
@@ -9,23 +9,25 @@ const CommentContent = (props) => {
   const [thread, setThread] = useState([]);
 
   const loadThreads = async (commentId) => {
-    console.log(commentId)
+    console.log(commentId);
     try {
-      const { data }  = await axios.get(`/bunkers/${id}/comments/${commentId}/threads`)
+      const { data } = await axios.get(
+        `/bunkers/${id}/comments/${commentId}/threads`
+      );
       console.log(data);
-      setThread([data]);
-      console.log(thread)
-      
+      setThread(data.threads);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   useEffect(() => {
-   if(comment.threads.length) {
-     loadThreads(comment._id)
-   }
-  },[]);
+    if (comment.threads.length) {
+      loadThreads(comment._id);
+    }
+  }, []);
+
+  console.log(thread);
 
   return (
     <>
@@ -38,19 +40,14 @@ const CommentContent = (props) => {
             alt="User1"
           />
         }
-        content={
-          <p>
-            {comment.body}
-          </p>
-        }
-      > 
-      {thread.map((comment) => {
-        return <ThreadContent thread={comment}/>
-      })}
+        content={<p>{comment.body}</p>}
+      >
+        {thread.map((comment) => {
+          return <ThreadContent thread={comment} />;
+        })}
       </Comment>
     </>
   );
 };
-
 
 export default CommentContent;

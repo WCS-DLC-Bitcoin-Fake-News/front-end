@@ -1,8 +1,9 @@
 import Bunker from "./Bunker"
 import { TwitterTweetEmbed } from 'react-twitter-embed';
+import PdfViewer from "../../PdfViewer";
 
-const BunkerVisualizer = ({source}) => {
-    console.log(source)
+const BunkerVisualizer = ({source, printedSource}) => {
+    console.log(source, printedSource)
     if(source.includes("twitter.com")) {
         let parts = source.split("/");
         let tweetId = parts[parts.length - 1];
@@ -14,7 +15,7 @@ const BunkerVisualizer = ({source}) => {
         />
     }
     else {
-        return <h1>loading</h1>
+        return printedSource.length && <PdfViewer fileName={printedSource} />
     }
  }
 

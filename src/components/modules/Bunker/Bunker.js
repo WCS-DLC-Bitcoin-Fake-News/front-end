@@ -14,6 +14,7 @@ const Bunker = (props) => {
     const [bunkerMetrics, setBunkerMetrics] = useState([])
     const [source, setSource] = useState("")
     const [date, setDate] = useState(0)
+    const [printedSource, setPrintedSource] = useState("")
 
     // have access to ID in the url 
     let {id} = useParams();
@@ -21,10 +22,12 @@ const Bunker = (props) => {
     const fetchBunker = async () => {
         try {
             let { data } = await axios.get(`/bunkers/${id}`) 
+            console.log(data)
             setSource(data.source);
             setTitle(data.title);
             setAuthor(data.author);
             setArgument(data.body);
+            setPrintedSource(data.printedSource);
             
         }
         catch (error) {
@@ -41,7 +44,7 @@ const Bunker = (props) => {
         <div className="flex justify-between m-6">
             <div className="flex flex-col h-full max-w-lg mx-auto px-4 bg-gray-800 rounded-lg">
                 <BunkerHeader author= {author} date={date} title={title} />
-                <BunkerContent tags= {tags} argument= {argument} source={source} />
+                <BunkerContent tags= {tags} argument= {argument} source={source} printedSource={printedSource} />
                 <BunkerFooter bunkerMetrics= {bunkerMetrics} />
             </div>
         </div>

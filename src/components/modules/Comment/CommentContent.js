@@ -1,14 +1,36 @@
 import React from "react";
+import {useState, useEffect} from "react";
 import { Comment, Avatar } from "antd";
+import axios from "axios";
 
-const CommentContent = ({ children }, props) => {
-  let { id } = props;
+const CommentContent = (props) => {
+  let { id, comment } = props;
+  const [thread, setThread] = useState([]);
+
+  const loadThreads = async (commentId) => {
+    console.log(commentId)
+    try {
+      const { data }  = await axios.get(`/bunkers/${id}/comments/${commentId}/threads`)
+      console.log(data);
+      setThread(data);
+      console.log(thread)
+      
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+   if(comment.threads.length) {
+     loadThreads(comment._id)
+   }
+  },[]);
 
   return (
     <>
       <Comment
         actions={[<span key="comment-nested-reply-to">Reply to</span>]}
-        author={<a>User1</a>}
+        author={<a>{comment.author.name}</a>}
         avatar={
           <Avatar
             src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
@@ -17,12 +39,10 @@ const CommentContent = ({ children }, props) => {
         }
         content={
           <p>
-            We supply a series of design principles, practical patterns and high
-            quality design resources (Sketch and Axure).
+            {comment.body}
           </p>
         }
-      >
-        {children}
+      > 
       </Comment>
     </>
   );

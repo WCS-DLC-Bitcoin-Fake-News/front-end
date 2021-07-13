@@ -2,6 +2,7 @@ import React from "react";
 import {useState, useEffect} from "react";
 import { Comment, Avatar } from "antd";
 import axios from "axios";
+import ThreadContent from "./ThreadContent";
 
 const CommentContent = (props) => {
   let { id, comment } = props;
@@ -12,7 +13,7 @@ const CommentContent = (props) => {
     try {
       const { data }  = await axios.get(`/bunkers/${id}/comments/${commentId}/threads`)
       console.log(data);
-      setThread(data);
+      setThread([data]);
       console.log(thread)
       
     } catch (error) {
@@ -43,9 +44,13 @@ const CommentContent = (props) => {
           </p>
         }
       > 
+      {thread.map((comment) => {
+        return <ThreadContent thread={comment}/>
+      })}
       </Comment>
     </>
   );
 };
+
 
 export default CommentContent;

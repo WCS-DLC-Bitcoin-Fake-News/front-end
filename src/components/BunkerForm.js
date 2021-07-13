@@ -3,12 +3,45 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 import ReactQuill from "react-quill";
 import "../../node_modules/react-quill/dist/quill.snow.css";
+import PdfViewer from "./PdfViewer";
 
-function PostForm() {
-  const [body, setBody] = useState("");
-  const [title, setTitle] = useState("");
+function BunkerForm() {
+  const [body, setBody] = useState(" ");
+  const [title, setTitle] = useState(" ");
   const [source, setSource] = useState("");
+  const [printedSource, setPrintedSource] = useState("");
+  const [id, setId] = useState("");
   let history = useHistory()
+
+  const createBunkerDraft = async (url) => {
+    const newPost = {
+      source: url
+    };
+    try {
+      // this const gets the 'token' and 'user'from localStorage. Check Signup.js to see how to access and save in localStorage.
+      const token = localStorage.getItem('token');
+      const user = JSON.parse(localStorage.getItem('user')); 
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+      };
+             
+      // const body = JSON.stringify(newPost);
+      const res = await axios.post(`/users/${user._id}/bunkers`, newPost, config);
+      console.log(res);
+      setPrintedSource(res.data.printedSource);
+      setId(res.data._id);
+
+
+      // history.push("/")
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  
 
   const editTitle = e => {
     setTitle(e.target.value)
@@ -18,8 +51,13 @@ function PostForm() {
     setBody(html)
   }
   const editSource = e => {
-    console.log(e)
-    setSource(e.target.value)
+    e.preventDefault();
+    const url = e.clipboardData.getData('text')
+    console.log(e.clipboardData.getData('text'));
+    setSource(url);
+    createBunkerDraft(url) ;
+   ;
+
   }
   const onSubmit = async (e) => {
       e.preventDefault();
@@ -43,7 +81,7 @@ function PostForm() {
         };
                
         // const body = JSON.stringify(newPost);
-        const res = await axios.post(`/users/${user._id}/bunkers`, newPost, config);
+        const res = await axios.put(`/users/${user._id}/bunkers/${id}`, newPost, config);
         history.push("/")
       } catch (error) {
         console.log(error);
@@ -70,26 +108,29 @@ function PostForm() {
           </div>
 
           <div class="relative z-0 w-full mb-5">
-            <input onChange={editSource}
+            <input onPaste={editSource}
               type="url"
               source="source"
-              placeholder=" "
+              placeholder=""
+              value={source}
               class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-gray-400 border-gray-200 text-gray-400"
             />
-            <label for="source" class="absolute duration-300 top-3 -z-1 origin-0 text-white">Enter URL</label>
+            <label for="source" class="absolute duration-300 top-3 -z-1 origin-0 text-white">Paste Source URL</label>
             <span class="text-sm text-red-600 hidden" id="error">URL is required</span>
           </div>
 
-          <div class="relative z-0 w-full mb-5">
-          {/* <label for="argument" class="absolute duration-300 top-3 -z-1 origin-0 text-white">Elaborate your argument</label> */}
+          {printedSource && <PdfViewer fileName={printedSource} />}
 
-          <ReactQuill
+          <div class="relative z-0 w-full mb-5 text-black bg-gray-400">
+          {/* <label for="argument" class="absolute duration-300 top-3 -z-1 origin-0 text-white">Elaborate your argument</label>  */}
+
+          <ReactQuill 
             placeholder="Elaborate your argument"
             onChange={editBody}
             // readOnly={true}
             value={body}
           />
-            <span class="text-sm text-red-600 hidden" id="error">An argument is required</span>
+            <span class="text-white text-sm text-red-600 hidden" id="error">An argument is required</span>
           </div>
 
           <fieldset class="relative z-0 w-full p-px mb-5">
@@ -164,4 +205,4 @@ function PostForm() {
   );
 };
 
-  export default PostForm;
+  export default BunkerForm;

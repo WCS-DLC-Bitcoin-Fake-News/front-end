@@ -13,6 +13,7 @@ const CommentContainer = (props) => {
   const loadComments = async () => {
     try {
       const { data } = await axios.get(`/bunkers/${id}/comments`);
+      console.log('couldt call')
       setComments([...data]);
     } catch (error) {
       console.log(error);
@@ -27,7 +28,7 @@ const CommentContainer = (props) => {
 
   return (
     <>
-      <CommentEditor/>
+      <CommentEditor id={id} loadComments={loadComments}/>
 
       {/* <CommentContent id={id}>
         {[0, 0, 0, 0].map(() => (
@@ -41,7 +42,7 @@ const CommentContainer = (props) => {
 
       {filtered.map((comment) => {
         return (
-        <CommentContent comment={comment}/>
+        <CommentContent comment={comment} loadComments={loadComments} id={id}/>
         
         );
       })}

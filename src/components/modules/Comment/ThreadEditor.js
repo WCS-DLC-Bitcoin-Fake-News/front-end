@@ -1,16 +1,15 @@
-import React from "react";
 import "antd/dist/antd.css";
 /* import "./index.css"; */
 import { Comment, Avatar, Form, Button, List, Input, Tooltip } from "antd";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import moment from "moment";
 
 const { TextArea } = Input;
 
-const CommentEditor = (props) => {
+const ThreadEditor = (props) => {
   const [commentValue, setCommentValue] = useState();
-  const { id, loadComments } = props;
+  const { id, commentId, loadThreads } = props;
   console.log(id);
   const submitComment = async (e, id) => {
     e.preventDefault();
@@ -18,6 +17,7 @@ const CommentEditor = (props) => {
       author: "60e47cbd69a94251c585baa4",
       body: commentValue,
       bunkerId: id,
+      commentId
     };
     try {
       // const token = localStorage.getItem('token');
@@ -30,15 +30,17 @@ const CommentEditor = (props) => {
       // };
 
       const postComment = await axios.post(
-        `/bunkers/${id}/comments`,
+        `/bunkers/${id}/comments/${commentId}/threads`,
         newComment /*  config */
       );
-      loadComments();
+      loadThreads(commentId);
       setCommentValue();
     } catch (error) {
       console.log(error);
     }
   };
+
+  
   return (
     <>
       <Comment
@@ -79,4 +81,4 @@ const CommentEditor = (props) => {
   );
 };
 
-export default CommentEditor;
+export default ThreadEditor;

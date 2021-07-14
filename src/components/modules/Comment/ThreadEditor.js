@@ -9,7 +9,7 @@ const { TextArea } = Input;
 
 const ThreadEditor = (props) => {
   const [commentValue, setCommentValue] = useState();
-  const { id, commentId, loadThreads } = props;
+  const { id, commentId, loadThreads, showEditor, setShowEditor } = props;
   console.log(id);
   const submitComment = async (e, id) => {
     e.preventDefault();
@@ -35,6 +35,7 @@ const ThreadEditor = (props) => {
       );
       loadThreads(commentId);
       setCommentValue();
+      setShowEditor(!showEditor)
     } catch (error) {
       console.log(error);
     }

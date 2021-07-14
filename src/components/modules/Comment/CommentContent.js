@@ -24,8 +24,6 @@ const CommentContent = (props) => {
     }
   };
 
-  
-
   useEffect(() => {
     if (comment.threads.length) {
       loadThreads(comment._id);
@@ -35,7 +33,7 @@ const CommentContent = (props) => {
   return (
     <>
       <Comment
-        actions={[<span onClick={() => setShowEditor(!showEditor)}key="comment-nested-reply-to">Reply to</span>]}
+        actions={[<span onClick={() => setShowEditor(!showEditor)} key="comment-nested-reply-to">Reply to</span>]}
         author={<a>{comment.author.name}</a>}
         avatar={
           <Avatar
@@ -45,9 +43,9 @@ const CommentContent = (props) => {
         }
         content={<p>{comment.body}</p>}
       >
-        {showEditor ? <ThreadEditor id={id} commentId={comment._id} loadThreads={loadThreads}/> : console.log()}
+        {showEditor ? <ThreadEditor id={id} commentId={comment._id} loadThreads={loadThreads} showEditor={showEditor} setShowEditor={setShowEditor}/> : console.log()}
         {thread.map((comment) => {
-          return <ThreadContent thread={comment} />;
+          return <ThreadContent thread={comment} id={id}/>;
         })}
       </Comment>
     </>

@@ -1,8 +1,5 @@
 import { useState } from "react";
 import axios from "axios";
-import { AiOutlineLogin } from "react-icons/ai";
-import { HiOutlineMail } from "react-icons/hi";
-import { RiLockPasswordLine } from "react-icons/ri";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import LandingBG from "../img/LandingBG2.jpg";

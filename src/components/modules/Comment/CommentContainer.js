@@ -13,6 +13,7 @@ const CommentContainer = (props) => {
   const loadComments = async () => {
     try {
       const { data } = await axios.get(`/bunkers/${id}/comments`);
+      console.log(data);
       setComments([...data]);
     } catch (error) {
       console.log(error);

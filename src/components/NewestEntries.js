@@ -1,16 +1,20 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect } from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-const Row = ({author, title, body, handleClick, createdAt, _id}) => {
-console.log(author)
-  return(
-      <tr onClick= { (e) => { handleClick(_id) } } class="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
+const Row = ({ author, title, body, handleClick, createdAt, _id }) => {
+  console.log(author);
+  return (
+    <tr
+      onClick={(e) => {
+        handleClick(_id);
+      }}
+      class="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400"
+    >
       <td class="px-4 py-3">
         <div>
           <p class="font-semibold">{title}</p>
-          <p class="text-xs text-gray-600 dark:text-gray-400">
-            <div dangerouslySetInnerHTML={{ __html: body }} />
-          </p>
+          <p class="text-xs text-gray-600 dark:text-gray-400">{body}</p>
         </div>
       </td>
       <td class="px-4 py-3 text-sm">{author.name}</td>
@@ -27,57 +31,73 @@ console.log(author)
         </td>
       </td>
     </tr>
-  )
-}
+  );
+};
 
 const NewestEntries = () => {
   let history = useHistory();
-  const [bunkers, setBunkers] = useState([])
+  const [bunkers, setBunkers] = useState([]);
+  let [skipNumber, setSkipNumber] = useState(0);
+  const [hasMore, setHasMore] = useState(true);
+  const fetchMoreData = () => {
+    setSkipNumber((skipNumber += 8));
+    setTimeout(async () => {
+      const { data } = await axios.get(`/bunkers?skip=${skipNumber}`);
+      if (data.length === 0) {
+        setHasMore(false);
+      }
+      setBunkers([...bunkers, ...data]);
+    }, 1500);
+  };
 
   const handleClick = (bunkerId) => {
-     console.log("i'm clicked")
-     history.push(`/bunkers/${bunkerId}`);
-  } 
+    history.push(`/bunkers/${bunkerId}`);
+  };
   const loadBunkers = async () => {
     try {
-      const { data } = await axios.get("/bunkers")
-      setBunkers([...data])    
+      const { data } = await axios.get("/bunkers");
+      setBunkers([...data]);
+    } catch (error) {
+      console.log(error);
     }
-    catch(error){
-      console.log(error)
-    }
-  }
-  
-  useEffect(() => {
-    loadBunkers()
-  }, [])
+  };
 
+  useEffect(() => {
+    loadBunkers();
+  }, []);
   return (
     <div className="flex-col h-110 ">
       <div>
-        <div className="ml-20 my-5  font-black text-2xl">
-          This is our Feed
-        </div>
+        <div className="ml-20 my-5  font-black text-2xl">This is our Feed</div>
       </div>
       <div className="md:mr-10 ">
         <div className="ml-14 my-5 md:max-w-full rounded-lg bg-gray-50 font-semibold text-lg">
           Newest Entries
         </div>
       </div>
-      <div class="mt-2 md:mx-10">
-        <div class="w-full overflow-hidden rounded-lg shadow-xs">
-          <div class="md:w-full overflow-x-auto">
-            <table class="w-full">
-              {/* <tr class="w-full text-l font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
-                Newest Entries
-              </tr> */}
-              <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-                {bunkers && bunkers.map((bunker) => <Row  handleClick={handleClick} {...bunker}/> )}
-              </tbody>
-            </table>
-          </div>
+
+      <InfiniteScroll
+        dataLength={bunkers.length}
+        next={fetchMoreData}
+        hasMore={hasMore}
+        loader={<h4>Loading...</h4>}
+        endMessage={
+          <p style={{ textAlign: "center" }}>
+            <b>Yay! You have seen it all</b>
+          </p>
+        }
+      >
+        <div className="mt-2 md:mx-10">
+          <table className="w-full">
+            <tbody className="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+              {bunkers &&
+                bunkers.map((bunker, idx) => (
+                  <Row key={idx} handleClick={handleClick} {...bunker} />
+                ))}
+            </tbody>
+          </table>
         </div>
-      </div>
+      </InfiniteScroll>
     </div>
   );
 };

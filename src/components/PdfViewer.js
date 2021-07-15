@@ -41,8 +41,10 @@ const pdfWidth = 480;
 
 const Container = styled.div`
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
-  width: ${pdfWidth}px;
+  width: 100%;
   margin-right: 50px;
 `;
 

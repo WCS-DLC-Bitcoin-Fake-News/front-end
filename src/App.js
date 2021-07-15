@@ -10,11 +10,10 @@ import Signin from "./pages/Signin";
 import BunkerDetail from "./pages/BunkerDetail";
 import PostForm from "./components/PostForm";
 import VoteButton from "./components/voteButton";
-import Article from "./pages/Article"
-import CommentField from "./components/CommentField";
-import CommentEditor from "./components/CommentEditor";
-import CommentContainer from "./components/CommentContainer";
-
+import Article from "./pages/Article";
+import CommentField from "./components/modules/Comment/CommentField";
+import CommentEditor from "./components/modules/Comment/CommentEditor";
+import CommentContainer from "./components/modules/Comment/CommentContainer";
 
 function App() {
   return (

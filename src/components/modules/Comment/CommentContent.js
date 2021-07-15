@@ -42,6 +42,7 @@ const CommentContent = (props) => {
         }
         content={<p>{comment.body}</p>}
       >
+        <p>{comment.createdAt}</p>
         {showEditor ? <ThreadEditor id={id} commentId={comment._id} loadThreads={loadThreads} showEditor={showEditor} setShowEditor={setShowEditor}/> : console.log()}
         {thread.map((comment) => {
           return <ThreadContent thread={comment} id={id}/>;

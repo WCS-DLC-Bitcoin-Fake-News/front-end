@@ -92,7 +92,7 @@ function BunkerForm() {
   return (
   
     <div class="min-h-screen bg-gray-100 p-0 sm:p-12">
-      <div class="mx-auto max-w-md px-6 py-12 bg-containerBlue border-0 shadow-lg sm:rounded-3xl">
+      <div class="mx-auto max-w-xl px-6 py-12 bg-containerBlue border-0 shadow-lg sm:rounded-3xl">
         <h1 class="text-2xl text-white font-bold mb-8">Build your Bunker</h1>
         <form id="form" onSubmit={onSubmit}>
           <div class="relative z-0 w-full mb-5">

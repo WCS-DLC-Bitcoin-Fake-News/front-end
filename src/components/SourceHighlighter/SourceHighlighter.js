@@ -1,6 +1,6 @@
 /* eslint import/no-webpack-loader-syntax: 0 */
 import React, { Component } from "react";
-
+import PDFWorker from "worker-loader!pdfjs-dist/lib/pdf.worker";
 import {
   PdfLoader,
   PdfHighlighter,
@@ -13,9 +13,10 @@ import {
 import testHighlights from "./test-highlights";
 import Spinner from "./Spinner";
 import Sidebar from "./Sidebar";
+//import  {PDFWorker}  from "pdfjs-dist";
 
 //import "./style/App.css";
-setPdfWorker();
+setPdfWorker(PDFWorker);
 
 const getNextId = () => Math.random().slice(2);
 const parseIdFromHash = () =>

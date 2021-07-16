@@ -20,7 +20,7 @@ import FakeEmbed from "./pages/FakeEmbed";
 function App() {
   return (
     <Router>
-      {/* <Navbar /> */}
+      <Navbar />
       <Switch>
         <Route exact path="/" component={Landing} />
         <Route exact path="/profile" component={Profile} />

@@ -8,12 +8,14 @@ import Help from "./pages/Help";
 import Signup from "./pages/Signup";
 import Signin from "./pages/Signin";
 import BunkerDetail from "./pages/BunkerDetail";
-import PostForm from "./components/PostForm";
+import BunkerForm from "./components/BunkerForm";
 import VoteButton from "./components/voteButton";
+import FakeEmbed from "./pages/FakeEmbed";
 import Article from "./pages/Article";
 import CommentField from "./components/modules/Comment/CommentField";
 import CommentEditor from "./components/modules/Comment/CommentEditor";
 import CommentContainer from "./components/modules/Comment/CommentContainer";
+
 
 function App() {
   return (
@@ -25,13 +27,16 @@ function App() {
         <Route exact path="/about" component={About} />
         <Route exact path="/contact" component={Contact} />
         <Route exact path="/help" component={Help} />
-        <Route exact path="/post" component={PostForm} />
+        <Route exact path="/post" component={BunkerForm} />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/signin" component={Signin} />
         <Route exact path="/comments" component={CommentContainer} />
         <Route exact path="/bunkers/:id" component={BunkerDetail} />
         <Route exact path="/upvote" component={VoteButton} />
         <Route exact path="/article" component={Article} />
+        <Route exact path="/comments" component={CommentField} />
+        <Route exact path="/commenttest" component={CommentContainer} />
+        <Route exact path="/fake/:id" component={FakeEmbed} />
       </Switch>
     </Router>
   );

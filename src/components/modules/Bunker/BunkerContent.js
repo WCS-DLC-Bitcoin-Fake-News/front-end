@@ -24,12 +24,12 @@ const ReadingTime = () => (
     </span>
 )
 
-const BunkerContent = ({ tags, argument, source }) => {
-    console.log(source)
+const BunkerContent = ({ tags, argument, source, printedSource}) => {
+    console.log(source, printedSource)
     return(
         <>
             {/* Custom visualizer */}
-            <BunkerVisualizer source={source}/>
+            <BunkerVisualizer source={source} printedSource={printedSource} />
 
             {/* Bunker tags */}
             <div className="flex flex-start mt-4 px-4">

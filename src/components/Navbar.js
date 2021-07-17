@@ -2,18 +2,46 @@ import { Link} from "react-router-dom";
 import React, { useState } from "react";
 import { Transition } from "@headlessui/react";
 import LOGO from "../img/Logo.svg";
-const Navbar = () => {
-  let isLoggedIn = localStorage.getItem("token");
+import { useHistory } from "react-router-dom";
+
+const LoginButtons = ({isLoggedIn}) => {
+  let history = useHistory();
+
   const handleDisconnect = (e) => {
     e.preventDefault();
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    history.push("/")
   };
+
+  return (
+    isLoggedIn ? 
+    ( <button onClick={handleDisconnect}>logout</button> ) 
+    : 
+    (
+      <div>
+        <Link to="signin">
+          <button className="mr-2 p-1 hover:bg-blue-200 rounded-lg text-lg w-22 h-11 text-gray-600	 font-bold tracking-wide2">
+            Sign In
+          </button>
+        </Link>
+        <Link to="signup">
+          <button className="ml-2 p-1 hover:bg-white hover:text-blue-800 rounded-lg text-lg w-22 h-11 font-bold tracking-wide2 bg-primary text-white">
+            Sign Up
+          </button>
+        </Link>
+      </div>
+    )
+  )
+}
+
+const Navbar = () => {
+  let isLoggedIn = localStorage.getItem("token");
+  
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-      // <div class="">
-  <div class="">
-      
+      <div class="">
           <div className="px-3 flex items-center h-16 w-full justify-between">
               <div className="flex-shrink-0 w-1/12">
                 <Link to="/">
@@ -77,18 +105,7 @@ const Navbar = () => {
                     Vote
                   </Link>
                   </div>
-                  <div>
-                    <Link to="signin">
-                      <button className="mr-2 p-1 hover:bg-blue-200 rounded-lg text-lg w-22 h-11 text-gray-600	 font-bold tracking-wide2">
-                        Sign In
-                      </button>
-                    </Link>
-                    <Link to="signup">
-                      <button className="ml-2 p-1 hover:bg-white hover:text-blue-800 rounded-lg text-lg w-22 h-11 font-bold tracking-wide2 bg-primary text-white">
-                        Sign Up
-                      </button>
-                    </Link>
-                  </div>
+                  <LoginButtons isLoggedIn={isLoggedIn} />
                 </div>
               </div>
             <div className="-mr-2 flex md:hidden">

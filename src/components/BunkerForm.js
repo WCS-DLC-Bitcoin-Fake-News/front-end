@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import ReactQuill from "react-quill";
 import "../../node_modules/react-quill/dist/quill.snow.css";
 import PdfViewer from "./PdfViewer";
+import BunkerVisualizer from "./modules/Bunker/BunkerVisualizer";
 
 function BunkerForm() {
   const [body, setBody] = useState(" ");
@@ -119,7 +120,7 @@ function BunkerForm() {
             <span class="text-sm text-red-600 hidden" id="error">URL is required</span>
           </div>
 
-          {printedSource && <PdfViewer fileName={printedSource} />}
+          {printedSource && <BunkerVisualizer printedSource={printedSource} />}
 
           <div class="relative z-0 w-full mb-5 text-black bg-gray-400">
           {/* <label for="argument" class="absolute duration-300 top-3 -z-1 origin-0 text-white">Elaborate your argument</label>  */}

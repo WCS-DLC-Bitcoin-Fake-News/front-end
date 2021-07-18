@@ -1,22 +1,17 @@
 import Bunker from "./Bunker"
-import { TwitterTweetEmbed } from 'react-twitter-embed';
 import PdfViewer from "../../PdfViewer";
 
 const BunkerVisualizer = ({source, printedSource}) => {
     console.log(source, printedSource)
-    if(source.includes("twitter.com")) {
-        let parts = source.split("/");
-        let tweetId = parts[parts.length - 1];
-        console.log(tweetId)
 
-        return <TwitterTweetEmbed
-        tweetId={tweetId}
-        placeholder={'loading'}
-        />
-    }
-    else {
-        return printedSource.length && <PdfViewer fileName={printedSource} />
-    }
+    !printedSource.length && <h1>Loadiing ?</h1>
+
+    return(
+        printedSource.includes(".png") 
+        ? <img src={`http://localhost:8000/public/${printedSource}`} alt={source}/> 
+        : <PdfViewer fileName={printedSource} />
+    )
+    
  }
 
-    export default BunkerVisualizer
+ export default BunkerVisualizer

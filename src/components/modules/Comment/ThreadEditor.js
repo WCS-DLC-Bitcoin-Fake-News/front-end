@@ -12,15 +12,16 @@ const ThreadEditor = (props) => {
   const { id, commentId, loadThreads, showEditor, setShowEditor } = props;
   const submitComment = async (e, id) => {
     e.preventDefault();
+    const user = JSON.parse(localStorage.getItem('user'));
     const newComment = {
-      author: "60e47cbd69a94251c585baa4",
+      author: user._id,
       body: commentValue,
       bunkerId: id,
       commentId
     };
     try {
       // const token = localStorage.getItem('token');
-      // const user = JSON.parse(localStorage.getItem('user'));
+      
       // const config = {
       //   headers: {
       //     "Content-Type": "application/json",

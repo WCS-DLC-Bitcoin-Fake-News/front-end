@@ -29,18 +29,7 @@ const CommentContainer = (props) => {
 
   return (
     <>
-      <CommentEditor id={id} loadComments={loadComments}/>
-
-      {/* <CommentContent id={id}>
-        {[0, 0, 0, 0].map(() => (
-          <CommentContent>
-            {[0, 0, 0, 0].map(() => (
-              <CommentContent />
-            ))}
-          </CommentContent>
-        ))}
-      </CommentContent> */}
-
+      <CommentEditor id={id} loadComments={loadComments}/> 
       {filtered.map((comment) => {
         return (
         <CommentContent comment={comment} loadComments={loadComments} id={id}/>

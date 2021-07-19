@@ -1,19 +1,22 @@
 import React from "react";
+import {Link} from 'react-router-dom';
 import "antd/dist/antd.css";
 /* import "./index.css"; */
 import { Comment, Avatar, Form, Button, List, Input, Tooltip } from "antd";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import moment from "moment";
+import UserContext from "../../../contexts/UserContext";
 
 const { TextArea } = Input;
 
 const CommentEditor = (props) => {
+  const { user, setUser, loggedUser } = useContext(UserContext);
   const [commentValue, setCommentValue] = useState();
   const { id, loadComments } = props;
   const submitComment = async (e, id) => {
     e.preventDefault();
-    const user = JSON.parse(localStorage.getItem('user'));
+    const user = JSON.parse(localStorage.getItem("user"));
     console.log(user);
     const newComment = {
       author: user._id,
@@ -62,16 +65,23 @@ const CommentEditor = (props) => {
               />
             </Form.Item>
             <Form.Item>
-              <Button
-                htmlType="submit"
-                loading={false}
-                onClick={(e) => {
-                  submitComment(e, id);
-                }}
-                type="primary"
-              >
-                Add Comment
-              </Button>
+              {user ? (
+                <Button
+                  htmlType="submit"
+                  loading={false}
+                  onClick={(e) => {
+                    submitComment(e, id);
+                  }}
+                  type="primary"
+                >
+                  Add Comment
+                </Button>
+              ) : (
+                <>
+                  <Link to="/signin"><Button>Sign in</Button></Link>
+                  <Link to="/signup"><button>Sign up</button></Link>
+                </>
+              )}
             </Form.Item>
           </>
         }

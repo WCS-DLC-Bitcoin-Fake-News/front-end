@@ -13,8 +13,10 @@ const CommentEditor = (props) => {
   const { id, loadComments } = props;
   const submitComment = async (e, id) => {
     e.preventDefault();
+    const user = JSON.parse(localStorage.getItem('user'));
+    console.log(user);
     const newComment = {
-      author: "60e47cbd69a94251c585baa4",
+      author: user._id,
       body: commentValue,
       bunkerId: id,
     };

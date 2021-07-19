@@ -29,7 +29,7 @@ const BunkerContent = ({ tags, argument, source, printedSource}) => {
     return(
         <>
             {/* Custom visualizer */}
-            <BunkerVisualizer source={source} printedSource={printedSource} />
+            {printedSource.length && <BunkerVisualizer source={source} printedSource={printedSource} />}
 
             {/* Bunker tags */}
             <div className="flex flex-start mt-4 px-4">

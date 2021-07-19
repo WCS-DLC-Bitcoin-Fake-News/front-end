@@ -68,8 +68,8 @@ const Title = styled.p`
   flex-wrap: wrap;
 `;
 
-const PdfViewer = ({ name, fileName, author }) => {
-  console.log(fileName)
+const PdfViewer = ({ name, printedSource, author }) => {
+  console.log(printedSource)
   const [pdf, setPdf] = useState(null);
   const [pageNumber, setPageNumber] = useState(null);
   const [numPages, setNumPages] = useState(null);
@@ -80,7 +80,7 @@ const PdfViewer = ({ name, fileName, author }) => {
   };
 
   useEffect(() => {
-    const url = `http://localhost:8000/public/${fileName}`;
+    const url = `http://localhost:8000/public/${printedSource}`;
     // const { token } = JSON.parse(localStorage.getItem("authToken"))
     axios({
       method: "get",

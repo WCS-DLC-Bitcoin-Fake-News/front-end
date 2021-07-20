@@ -8,8 +8,9 @@ import Help from "./pages/Help";
 import Signup from "./pages/Signup";
 import Signin from "./pages/Signin";
 import BunkerDetail from "./pages/BunkerDetail";
+import BunkerForm from "./components/BunkerForm";
+import Upvote from "./components/voteButton";
 import BunkerEditor from "./pages/BunkerEditor";
-import VoteButton from "./components/voteButton";
 import FakeEmbed from "./pages/FakeEmbed";
 import CommentField from "./components/modules/Comment/CommentField";
 import CommentContainer from "./components/modules/Comment/CommentContainer";
@@ -27,6 +28,7 @@ function App() {
   }, []);
 
   return (
+
     <UserContext.Provider value={{ user: user, setUser: setUser }}>
       <Router>
         <Navbar />
@@ -63,7 +65,7 @@ function App() {
             <BunkerDetail />
           </Route>
           <Route exact path="/upvote">
-            <VoteButton />
+            <Upvote />
           </Route>
           <Route exact path="/comments">
             <CommentField />

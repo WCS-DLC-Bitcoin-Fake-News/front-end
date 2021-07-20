@@ -1,6 +1,6 @@
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { useContext, useEffect, useState } from "react";
-import UserContext from "../../context/UserContext";
+import UserContext from "../../contexts/UserContext";
 import { fetchUser, fetchUserFollowers } from "../../services/FetchData";
 import Avatar from "../Avatar/Avatar";
 import FollowButton from "../FollowButton/FollowButton";

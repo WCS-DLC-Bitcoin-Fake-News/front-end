@@ -25,8 +25,12 @@ import Login from "./pages/login.jsx";
 import Signup from "./pages/signup.jsx";
 import "./styles/global.css"
 import "./styles/reset.css";
-
+import AppContext from "./pages/AppContext.jsx"
 import First from "./pages";
+
+import Aprofile from "./pages/Aprofile"
+import Atweet from "./pages/Aprofile/status/aTweet.jsx"
+
 function App() {
   const [user, setUser] = useState(null);
 
@@ -37,11 +41,8 @@ function App() {
   }, []);
 
   return (
-
-    <UserContext.Provider value={{ user: user, setUser: setUser }}>
+    <AppContext>
       <Router>
-        {/* <Navbar /> */}
-        <Layout>
           <Switch>
             <Route exact path="/">
               <First />
@@ -61,6 +62,14 @@ function App() {
             <Route exact path="/signup">
               <Signup />
             </Route>
+            <Route path="/AProfile" >
+              <Aprofile />
+            </Route>
+            <Route path="/ATweet" >
+              <Atweet />
+            </Route>
+
+
             <Route exact path="/profile">
               <Profile />
             </Route>
@@ -99,11 +108,10 @@ function App() {
               <FakeEmbed />
             </Route>
           </Switch>
-      </Layout >
-
         </Router>
+    </AppContext>
 
-    </UserContext.Provider>
+
   );
 }
 

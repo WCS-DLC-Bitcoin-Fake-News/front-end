@@ -1,4 +1,3 @@
-import Head from "next/head";
 import React, { useContext } from "react";
 import CommentInput from "../../../components/CommentInput/CommentInput";
 import Comments from "../../../components/Comments/Comments";
@@ -14,21 +13,20 @@ const Tweet = ({ tweet }) => {
 
   return (
     <div>
-      <Head>
-        <title>
-          {tweet.author.name} on Tweeter "{tweet.text}"
-        </title>
-      </Head>
+      <title>
+        John on Debunker "It is great"
+        {/* {tweet.author.name} on Debunker "{tweet.text}" */}
+      </title>
       <Layout>
         <div>
           <div className="flex flex-col lg:grid lg:grid-cols-3 lg:col-gap-5 my-5 lg:mx=24 xl:mx-48">
             <div className="col-span-2">
-              <Post tweet={tweet} />
-              {user && <CommentInput tweetID={tweet.id} />}
-              <Comments tweetID={tweet.id} />
+              {/* <Post tweet={tweet} /> */}
+              {/* {user && <CommentInput tweetID={tweet.id} />} */}
+              {/* <Comments tweetID={tweet.id} /> */}
             </div>
             <div className="hidden lg:block">
-              <Suggestions type="relavant" userID={tweet.authorId} />
+              {/* <Suggestions type="relavant" userID={tweet.authorId} /> */}
             </div>
           </div>
         </div>

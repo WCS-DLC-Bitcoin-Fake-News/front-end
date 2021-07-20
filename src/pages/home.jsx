@@ -82,6 +82,7 @@ const Home = () => {
   }, [user]);
 
   return (
+    <Layout >
     <div>
       {/* <Head>
         <title>Home | Tweeter</title>
@@ -124,6 +125,7 @@ const Home = () => {
           </div>
         </div>
     </div>
+    </Layout>
   );
 };
 

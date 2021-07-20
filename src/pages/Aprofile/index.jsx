@@ -1,7 +1,6 @@
-import Head from "next/head";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import Layout from "../..//layouts/index";
+import Layout from "../../layouts/index";
 import Banner from "../../components/Banner/Banner";
 import Filters from "../../components/Filters/Filters";
 import Post from "../../components/Post/Post";
@@ -19,13 +18,11 @@ const UserName = ({ fetchedUser, tweets }) => {
 
   return (
     <div>
-      <Head>
         <title>
           {userExits
             ? `${fetchedUser.name} (@${fetchedUser.username}) | Tweeter`
             : `USER NOT FOUND`}
         </title>
-      </Head>
 
       <Layout>
         {userExits ? (

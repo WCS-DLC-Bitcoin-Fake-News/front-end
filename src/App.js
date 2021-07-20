@@ -18,7 +18,7 @@ import Modal from "./Modal.js";
 import React, {useState} from "react";
 
 function App() {
-  const [showModal, setShowModal] = React.useState(true);
+  const [showModal, setShowModal] = React.useState(false);
 
   return (
     <Router>

@@ -30,20 +30,45 @@ function App() {
       <Router>
         <Navbar />
         <Switch>
-          <Route exact path="/" component={Landing} />
-          <Route exact path="/profile" component={Profile} />
-          <Route exact path="/about" component={About} />
-          <Route exact path="/contact" component={Contact} />
-          <Route exact path="/help" component={Help} />
-          <Route exact path="/post" component={BunkerEditor} />
-          <Route exact path="/signup" component={Signup} />
-          <Route exact path="/signin" component={Signin} />
-          <Route exact path="/comments" component={CommentContainer} />
-          <Route exact path="/bunkers/:id" component={BunkerDetail} />
-          <Route exact path="/upvote" component={VoteButton} />
-          <Route exact path="/comments" component={CommentField} />
-          <Route exact path="/commenttest" component={CommentContainer} />
-          <Route exact path="/fake/:id" component={FakeEmbed} />
+          <Route exact path="/">
+            <Landing />
+          </Route>
+          <Route exact path="/profile">
+            <Profile />
+          </Route>
+          <Route exact path="/about">
+            <About />
+          </Route>
+          <Route exact path="/contact">
+            <Contact />
+          </Route>
+          <Route exact path="/help">
+            <Help />
+          </Route>
+          <Route exact path="/post">
+            <BunkerEditor />
+          </Route>
+          <Route exact path="/signup">
+            <Signup />
+          </Route>
+          <Route exact path="/signin">
+            <Signin />
+          </Route>
+          <Route exact path="/comments">
+            <CommentContainer />
+          </Route>
+          <Route exact path="/bunkers/:id">
+            <BunkerDetail />
+          </Route>
+          <Route exact path="/upvote">
+            <VoteButton />
+          </Route>
+          <Route exact path="/comments">
+            <CommentField />
+          </Route>
+          <Route exact path="/fake/:id">
+            <FakeEmbed />
+          </Route>
         </Switch>
       </Router>
     </UserContext.Provider>

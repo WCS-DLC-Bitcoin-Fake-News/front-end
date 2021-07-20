@@ -14,11 +14,16 @@ import Article from "./pages/Article";
 import CommentField from "./components/modules/Comment/CommentField";
 import CommentEditor from "./components/modules/Comment/CommentEditor";
 import CommentContainer from "./components/modules/Comment/CommentContainer";
+import Modal from "./Modal.js";
+import React, {useState} from "react";
 
 function App() {
+  const [showModal, setShowModal] = React.useState(true);
+
   return (
     <Router>
       <Navbar />
+      <Modal showModal={showModal} setShowModal={setShowModal}/>
       <Switch>
         <Route exact path="/" component={Landing} />
         <Route exact path="/profile" component={Profile} />

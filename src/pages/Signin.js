@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import LandingBG from "../img/LandingBG2.jpg";
+import UserContext from "../contexts/UserContext";
 
 const Signin = () => {
+  const { user, setUser } = useContext(UserContext);
   let history = useHistory();
   const [formData, setFormData] = useState({
     email: "",
@@ -37,8 +39,11 @@ const Signin = () => {
       const res = await axios.post("/users/signin", body, config);
       if (res.data.token) {
         console.log(res.data.token);
-        localStorage.setItem("token", res.data.token);
-        localStorage.setItem("user", JSON.stringify(res.data.user));
+        localStorage.setItem(
+          "user",
+          JSON.stringify({ ...res.data.user, token: res.data.token })
+        );
+        setUser({ ...res.data.user, token: res.data.token });
         history.push("/profile");
       }
     } catch (error) {

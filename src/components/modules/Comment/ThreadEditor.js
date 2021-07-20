@@ -2,26 +2,29 @@ import "antd/dist/antd.css";
 /* import "./index.css"; */
 import { Comment, Avatar, Form, Button, List, Input, Tooltip } from "antd";
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import moment from "moment";
+import UserContext from "../../../contexts/UserContext";
+import {Link} from 'react-router-dom';
 
 const { TextArea } = Input;
 
 const ThreadEditor = (props) => {
+  const { user, setUser} = useContext(UserContext);
   const [commentValue, setCommentValue] = useState();
   const { id, commentId, loadThreads, showEditor, setShowEditor } = props;
   const submitComment = async (e, id) => {
     e.preventDefault();
-    const user = JSON.parse(localStorage.getItem('user'));
+    const user = JSON.parse(localStorage.getItem("user"));
     const newComment = {
       author: user._id,
       body: commentValue,
       bunkerId: id,
-      commentId
+      commentId,
     };
     try {
       // const token = localStorage.getItem('token');
-      
+
       // const config = {
       //   headers: {
       //     "Content-Type": "application/json",
@@ -35,13 +38,12 @@ const ThreadEditor = (props) => {
       );
       loadThreads(commentId);
       setCommentValue();
-      setShowEditor(!showEditor)
+      setShowEditor(!showEditor);
     } catch (error) {
       console.log(error);
     }
   };
 
-  
   return (
     <>
       <Comment
@@ -64,16 +66,23 @@ const ThreadEditor = (props) => {
               />
             </Form.Item>
             <Form.Item>
-              <Button
-                htmlType="submit"
-                loading={false}
-                onClick={(e) => {
-                  submitComment(e, id);
-                }}
-                type="primary"
-              >
-                Add Comment
-              </Button>
+              {user ? (
+                <Button
+                  htmlType="submit"
+                  loading={false}
+                  onClick={(e) => {
+                    submitComment(e, id);
+                  }}
+                  type="primary"
+                >
+                  Add Comment
+                </Button>
+              ) : (
+                <>
+                  <Link to="/signin"><Button>Sign in</Button></Link>
+                  <Link to="signup"><button>Sign up</button></Link>
+                </>
+              )}
             </Form.Item>
           </>
         }

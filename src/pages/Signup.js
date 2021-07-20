@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import LandingBG from "../img/LandingBG2.jpg";
+import UserContext from "../contexts/UserContext";
 
 const Signup = () => {
+  const { user, setUser } = useContext(UserContext);
   let history = useHistory();
   const [formData, setFormData] = useState({
     name: "",
@@ -39,8 +41,11 @@ const Signup = () => {
         console.log(res.data);
 
         // storing token and userId in the browser localStorage
-        localStorage.setItem("token", res.data.token);
-        localStorage.setItem("user", JSON.stringify(res.data.user));
+        localStorage.setItem(
+          "user",
+          JSON.stringify({ ...res.data.user, token: res.data.token })
+        );
+        setUser({ ...res.data.user, token: res.data.token });
         history.push("/");
       } catch (error) {
         console.log(error.response.data);

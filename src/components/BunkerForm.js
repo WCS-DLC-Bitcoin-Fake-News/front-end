@@ -3,7 +3,6 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 import ReactQuill from "react-quill";
 import "../../node_modules/react-quill/dist/quill.snow.css";
-import PdfViewer from "./PdfViewer";
 import BunkerVisualizer from "./modules/Bunker/BunkerVisualizer";
 
 function BunkerForm() {
@@ -62,7 +61,6 @@ function BunkerForm() {
   };
   const onSubmit = async (e) => {
     e.preventDefault();
-    console.log(body);
     const newPost = {
       title,
       source,
@@ -81,11 +79,11 @@ function BunkerForm() {
       };
 
       // const body = JSON.stringify(newPost);
-      const res = await axios.put(
+      /* const res = await axios.put(
         `/users/${user._id}/bunkers/${id}`,
         { ...newPost, published: true },
         config
-      );
+      ); */
       history.push("/");
     } catch (error) {
       console.log(error);

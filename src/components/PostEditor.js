@@ -79,6 +79,6 @@ function PostEditor() {
       </form>
     </>
   );
-  }
+}
 
 export default PostEditor;

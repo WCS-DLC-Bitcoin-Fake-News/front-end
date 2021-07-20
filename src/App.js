@@ -15,6 +15,7 @@ import CommentField from "./components/modules/Comment/CommentField";
 import CommentContainer from "./components/modules/Comment/CommentContainer";
 import UserContext from "./contexts/UserContext";
 import { useState, useEffect } from "react";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -45,9 +46,10 @@ function App() {
           <Route exact path="/help">
             <Help />
           </Route>
-          <Route exact path="/post">
+          {/* <Route exact path="/post">
             <BunkerEditor />
-          </Route>
+          </Route> */}
+          <ProtectedRoute path="/post" component={BunkerEditor}/>
           <Route exact path="/signup">
             <Signup />
           </Route>

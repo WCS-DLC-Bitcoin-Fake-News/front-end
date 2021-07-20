@@ -11,7 +11,6 @@ const LoginButtons = () => {
 
   const handleDisconnect = (e) => {
     e.preventDefault();
-    localStorage.removeItem("token");
     localStorage.removeItem("user");
     setUser(null);
     history.push("/");

@@ -1,5 +1,5 @@
 import React from "react";
-import {Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
 import "antd/dist/antd.css";
 /* import "./index.css"; */
 import { Comment, Avatar, Form, Button, List, Input, Tooltip } from "antd";
@@ -11,7 +11,7 @@ import UserContext from "../../../contexts/UserContext";
 const { TextArea } = Input;
 
 const CommentEditor = (props) => {
-  const { user, setUser, loggedUser } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const [commentValue, setCommentValue] = useState();
   const { id, loadComments } = props;
   const submitComment = async (e, id) => {
@@ -78,8 +78,12 @@ const CommentEditor = (props) => {
                 </Button>
               ) : (
                 <>
-                  <Link to="/signin"><Button>Sign in</Button></Link>
-                  <Link to="/signup"><button>Sign up</button></Link>
+                  <Link to="/signin">
+                    <Button>Sign in</Button>
+                  </Link>
+                  <Link to="/signup">
+                    <button>Sign up</button>
+                  </Link>
                 </>
               )}
             </Form.Item>

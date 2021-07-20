@@ -13,16 +13,20 @@ import VoteButton from "./components/voteButton";
 import FakeEmbed from "./pages/FakeEmbed";
 import CommentField from "./components/modules/Comment/CommentField";
 import CommentContainer from "./components/modules/Comment/CommentContainer";
-import UserContext from './contexts/UserContext'
-import {useState} from 'react';
-
+import UserContext from "./contexts/UserContext";
+import { useState, useEffect } from "react";
 
 function App() {
-  const loggedUser = localStorage.getItem('user');
   const [user, setUser] = useState(null);
 
+  useEffect(() => {
+    if (localStorage.getItem("user")) {
+      setUser(JSON.parse(localStorage.getItem("user")));
+    }
+  }, []);
+
   return (
-    <UserContext.Provider value={{user: user, setUser: setUser, loggedUser: loggedUser}}>
+    <UserContext.Provider value={{ user: user, setUser: setUser }}>
       <Router>
         <Navbar />
         <Switch>

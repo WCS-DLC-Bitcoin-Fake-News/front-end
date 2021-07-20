@@ -10,7 +10,7 @@ import {Link} from 'react-router-dom';
 const { TextArea } = Input;
 
 const ThreadEditor = (props) => {
-  const { user, setUser, loggedUser } = useContext(UserContext);
+  const { user, setUser} = useContext(UserContext);
   const [commentValue, setCommentValue] = useState();
   const { id, commentId, loadThreads, showEditor, setShowEditor } = props;
   const submitComment = async (e, id) => {

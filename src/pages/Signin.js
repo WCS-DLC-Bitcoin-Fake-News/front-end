@@ -6,7 +6,7 @@ import LandingBG from "../img/LandingBG2.jpg";
 import UserContext from "../contexts/UserContext";
 
 const Signin = () => {
-  const { user, setUser, loggedUser } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   let history = useHistory();
   const [formData, setFormData] = useState({
     email: "",
@@ -39,9 +39,11 @@ const Signin = () => {
       const res = await axios.post("/users/signin", body, config);
       if (res.data.token) {
         console.log(res.data.token);
-        localStorage.setItem("token", res.data.token);
-        localStorage.setItem("user", JSON.stringify(res.data.user));
-        setUser(res.data.user);
+        localStorage.setItem(
+          "user",
+          JSON.stringify({ ...res.data.user, token: res.data.token })
+        );
+        setUser({ ...res.data.user, token: res.data.token });
         history.push("/profile");
       }
     } catch (error) {

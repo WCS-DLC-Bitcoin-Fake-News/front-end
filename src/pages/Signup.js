@@ -39,8 +39,10 @@ const Signup = () => {
         const res = await axios.post("/users/signup", body, config);
 
         // storing token and userId in the browser localStorage
-        localStorage.setItem("token", res.data.token);
-        localStorage.setItem("user", JSON.stringify(res.data.user));
+        localStorage.setItem(
+          "user",
+          JSON.stringify({ ...res.data.user, token: res.data.token })
+        );
         setUser({ ...res.data.user, token: res.data.token });
         history.push("/");
       } catch (error) {

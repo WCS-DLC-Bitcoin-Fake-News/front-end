@@ -31,9 +31,11 @@ const Signin = () => {
       };
       const body = JSON.stringify(user);
       const res = await axios.post("/users/signin", body, config);
-      if (res.data.token) {
-        localStorage.setItem("token", res.data.token);
-        localStorage.setItem("user", JSON.stringify(res.data.user));
+      if (res.data.user) {
+        localStorage.setItem(
+          "user",
+          JSON.stringify({ ...res.data.user, token: res.data.token })
+        );
         setUser({ ...res.data.user, token: res.data.token });
         history.push("/profile");
       }

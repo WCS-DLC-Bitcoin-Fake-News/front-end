@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import ReactQuill from "react-quill";
 import "../../node_modules/react-quill/dist/quill.snow.css";
 import BunkerVisualizer from "./modules/Bunker/BunkerVisualizer";
+import UserContext from "../contexts/UserContext";
 
 function BunkerForm() {
   const [body, setBody] = useState(" ");
@@ -12,6 +13,7 @@ function BunkerForm() {
   const [printedSource, setPrintedSource] = useState("");
   const [id, setId] = useState("");
   let history = useHistory();
+  const { user, setUser } = useContext(UserContext);
 
   const createBunkerDraft = async (url) => {
     const newPost = {
@@ -19,13 +21,13 @@ function BunkerForm() {
     };
     try {
       // this const gets the 'token' and 'user'from localStorage. Check Signup.js to see how to access and save in localStorage.
-      const token = localStorage.getItem("token");
-      const user = JSON.parse(localStorage.getItem("user"));
+
+      // Get the user from your context
 
       const config = {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${user.token}`,
         },
       };
 
@@ -68,22 +70,20 @@ function BunkerForm() {
     };
     try {
       // this const gets the 'token' and 'user'from localStorage. Check Signup.js to see how to access and save in localStorage.
-      const token = localStorage.getItem("token");
-      const user = JSON.parse(localStorage.getItem("user"));
+      
 
       const config = {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${user.token}`,
         },
       };
 
-      // const body = JSON.stringify(newPost);
-      /* const res = await axios.put(
+      const res = await axios.put(
         `/users/${user._id}/bunkers/${id}`,
         { ...newPost, published: true },
         config
-      ); */
+      );
       history.push("/");
     } catch (error) {
       console.log(error);

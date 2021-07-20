@@ -10,35 +10,72 @@ import Signin from "./pages/Signin";
 import BunkerDetail from "./pages/BunkerDetail";
 import BunkerForm from "./components/BunkerForm";
 import Upvote from "./components/voteButton";
+import BunkerEditor from "./pages/BunkerEditor";
 import FakeEmbed from "./pages/FakeEmbed";
-import Article from "./pages/Article";
 import CommentField from "./components/modules/Comment/CommentField";
-import CommentEditor from "./components/modules/Comment/CommentEditor";
 import CommentContainer from "./components/modules/Comment/CommentContainer";
-
+import UserContext from "./contexts/UserContext";
+import { useState, useEffect } from "react";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    if (localStorage.getItem("user")) {
+      setUser(JSON.parse(localStorage.getItem("user")));
+    }
+  }, []);
+
   return (
-    <Router>
-      <Navbar />
-      <Switch>
-        <Route exact path="/" component={Landing} />
-        <Route exact path="/profile" component={Profile} />
-        <Route exact path="/about" component={About} />
-        <Route exact path="/contact" component={Contact} />
-        <Route exact path="/help" component={Help} />
-        <Route exact path="/post" component={BunkerForm} />
-        <Route exact path="/signup" component={Signup} />
-        <Route exact path="/signin" component={Signin} />
-        <Route exact path="/comments" component={CommentContainer} />
-        <Route exact path="/bunkers/:id" component={BunkerDetail} />
-        <Route exact path="/upvote" component={Upvote} />
-        <Route exact path="/article" component={Article} />
-        <Route exact path="/comments" component={CommentField} />
-        <Route exact path="/commenttest" component={CommentContainer} />
-        <Route exact path="/fake/:id" component={FakeEmbed} />
-      </Switch>
-    </Router>
+
+    <UserContext.Provider value={{ user: user, setUser: setUser }}>
+      <Router>
+        <Navbar />
+        <Switch>
+          <Route exact path="/">
+            <Landing />
+          </Route>
+          <Route exact path="/profile">
+            <Profile />
+          </Route>
+          <Route exact path="/about">
+            <About />
+          </Route>
+          <Route exact path="/contact">
+            <Contact />
+          </Route>
+          <Route exact path="/help">
+            <Help />
+          </Route>
+          {/* <Route exact path="/post">
+            <BunkerEditor />
+          </Route> */}
+          <ProtectedRoute path="/post" component={BunkerEditor}/>
+          <Route exact path="/signup">
+            <Signup />
+          </Route>
+          <Route exact path="/signin">
+            <Signin />
+          </Route>
+          <Route exact path="/comments">
+            <CommentContainer />
+          </Route>
+          <Route exact path="/bunkers/:id">
+            <BunkerDetail />
+          </Route>
+          <Route exact path="/upvote">
+            <Upvote />
+          </Route>
+          <Route exact path="/comments">
+            <CommentField />
+          </Route>
+          <Route exact path="/fake/:id">
+            <FakeEmbed />
+          </Route>
+        </Switch>
+      </Router>
+    </UserContext.Provider>
   );
 }
 

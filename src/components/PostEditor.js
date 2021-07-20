@@ -2,10 +2,12 @@ import { useState } from "react";
 import ReactQuill from "react-quill";
 import "../../node_modules/react-quill/dist/quill.snow.css";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
+import { useHistory, useContext } from "react-router-dom";
+import UserContext from "../contexts/UserContext";
 
 
 function PostEditor() {
+  const { user, setUser } = useContext(UserContext);
   const [body, setBody] = useState("");
   const [title, setTitle] = useState("");
   const [source, setSource] = useState("");
@@ -33,13 +35,12 @@ function PostEditor() {
       try {
 
         // this const gets the 'token' and 'user'from localStorage. Check Signup.js to see how to access and save in localStorage.
-        const token = localStorage.getItem('token');
-        const user = JSON.parse(localStorage.getItem('user')); 
+        
 
         const config = {
           headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`,
+            "Authorization": `Bearer ${user.token}`,
           },
         };
                

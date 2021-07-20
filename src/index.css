@@ -1,4 +1,4 @@
-@tailwind base;
+/* @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -23,4 +23,4 @@ select:focus ~ label {
   body {
     @apply font-mulish;
   }
-}
+} */

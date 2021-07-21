@@ -1,8 +1,8 @@
 // import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import BookmarksTweetsContext from "../contexts/BookmarksTweetsContext";
-import ExploreTweetsContext from "../contexts/ExploreTweetsContext";
-import HomeTweetsContext from "../contexts/HomeTweetsContext";
+import BookmarksBunkersContext from "../contexts/BookmarksBunkersContext";
+import ExploreBunkersContext from "../contexts/ExploreBunkersContext";
+import HomeBunkersContext from "../contexts/HomeBunkersContext";
 import UserContext from "../contexts/UserContext";
 import firebase from "../firebase/init";
 import "../styles/global.css";
@@ -13,9 +13,9 @@ function AppContext({ children }) {
   const protectedRoutes = ["/home", "/bookmarks"];
 
   const [user, setUser] = useState(null);
-  const [homeTweetsContext, setHomeTweetsContext] = useState(null);
-  const [exploreTweetsContext, setExploreTweetsContext] = useState(null);
-  const [bookmarksTweetsContext, setBookmarksTweetsContext] = useState(null);
+  const [homeBunkersContext, setHomeBunkersContext] = useState(null);
+  const [exploreBunkersContext, setExploreBunkersContext] = useState(null);
+  const [bookmarksBunkersContext, setBookmarksBunkersContext] = useState(null);
 
   // useEffect(() => {
   //   async function getCurrentUser(userID) {
@@ -33,18 +33,18 @@ function AppContext({ children }) {
 
   return (
     <>
-      <title>Tweeter</title>
+      <title>Bunkerer</title>
       <UserContext.Provider value={{ user, setUser }}>
-        <HomeTweetsContext.Provider
-          value={{ homeTweetsContext, setHomeTweetsContext }}>
-          <ExploreTweetsContext.Provider
-            value={{ exploreTweetsContext, setExploreTweetsContext }}>
-            <BookmarksTweetsContext.Provider
-              value={{ bookmarksTweetsContext, setBookmarksTweetsContext }}>
+        <HomeBunkersContext.Provider
+          value={{ homeBunkersContext, setHomeBunkersContext }}>
+          <ExploreBunkersContext.Provider
+            value={{ exploreBunkersContext, setExploreBunkersContext }}>
+            <BookmarksBunkersContext.Provider
+              value={{ bookmarksBunkersContext, setBookmarksBunkersContext }}>
               {children}
-            </BookmarksTweetsContext.Provider>
-          </ExploreTweetsContext.Provider>
-        </HomeTweetsContext.Provider>
+            </BookmarksBunkersContext.Provider>
+          </ExploreBunkersContext.Provider>
+        </HomeBunkersContext.Provider>
       </UserContext.Provider>
     </>
   );

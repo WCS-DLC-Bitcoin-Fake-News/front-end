@@ -11,7 +11,7 @@ import BunkerDetail from "./pages/BunkerDetail";
 import BunkerForm from "./components/BunkerForm";
 import Upvote from "./components/voteButton";
 import BunkerEditor from "./pages/BunkerEditor";
-import FakeEmbed from "./pages/FakeEmbed";
+// import FakeEmbed from "./pages/FakeEmbed";
 import CommentField from "./components/modules/Comment/CommentField";
 import CommentContainer from "./components/modules/Comment/CommentContainer";
 import UserContext from "./contexts/UserContext";
@@ -29,7 +29,7 @@ import AppContext from "./pages/AppContext.jsx"
 import First from "./pages";
 
 import Aprofile from "./pages/Aprofile"
-import Atweet from "./pages/Aprofile/status/aTweet.jsx"
+import Abunker from "./pages/Aprofile/status/aBunker.jsx"
 
 function App() {
   const [user, setUser] = useState(null);
@@ -42,75 +42,35 @@ function App() {
 
   return (
     <AppContext>
-      <Router>
-          <Switch>
-            <Route exact path="/">
-              <First />
-            </Route>
-            <Route exact path="/home">
-              <Home />
-            </Route>
-            <Route exact path="/explore">
-              <Explore />
-            </Route>
-            <Route exact path="/bookmarks">
-              <Bookmarks />
-            </Route>
-            <Route exact path="/login">
-              <Login />
-            </Route>
-            <Route exact path="/signup">
-              <Signup />
-            </Route>
-            <Route path="/AProfile" >
-              <Aprofile />
-            </Route>
-            <Route path="/ATweet" >
-              <Atweet />
-            </Route>
-
-
-            <Route exact path="/profile">
-              <Profile />
-            </Route>
-            <Route exact path="/about">
-              <About />
-            </Route>
-            <Route exact path="/contact">
-              <Contact />
-            </Route>
-            <Route exact path="/help">
-              <Help />
-            </Route>
-            {/* <Route exact path="/post">
-              <BunkerEditor />
-            </Route> */}
-            <ProtectedRoute path="/post" component={BunkerEditor}/>
-            <Route exact path="/signup">
-              <Signup />
-            </Route>
-            <Route exact path="/signin">
-              <Signin />
-            </Route>
-            <Route exact path="/comments">
-              <CommentContainer />
-            </Route>
-            <Route exact path="/bunkers/:id">
-              <BunkerDetail />
-            </Route>
-            <Route exact path="/upvote">
-              <Upvote />
-            </Route>
-            <Route exact path="/comments">
-              <CommentField />
-            </Route>
-            <Route exact path="/fake/:id">
-              <FakeEmbed />
-            </Route>
-          </Switch>
-        </Router>
+        <Router>
+            <Switch>
+              <Route exact path="/">
+                <First />
+              </Route>
+              <Route exact path="/home">
+                <Home />
+              </Route>
+              <Route exact path="/explore">
+                <Explore />
+              </Route>
+              <Route exact path="/bookmarks">
+                <Bookmarks />
+              </Route>
+              <Route exact path="/login">
+                <Login />
+              </Route>
+              <Route exact path="/signup">
+                <Signup />
+              </Route>
+              <Route path="/AProfile" >
+                <Aprofile />
+              </Route>
+              <Route path="/ABunker" >
+                <Abunker />
+              </Route>
+            </Switch>
+          </Router>
     </AppContext>
-
 
   );
 }

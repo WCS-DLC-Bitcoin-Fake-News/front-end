@@ -2,20 +2,20 @@ import firebase from "../firebase/init";
 
 const db = firebase.firestore();
 
-export const deleteTweet = (tweetID) => {
-  db.collection("tweets")
-    .doc(tweetID)
+export const deleteBunker = (bunkerID) => {
+  db.collection("bunkers")
+    .doc(bunkerID)
     .delete()
-    .then(() => console.log("Deleted Tweet"))
+    .then(() => console.log("Deleted Bunker"))
     .catch((e) => console.log(e));
 
   db.collection("likes")
-    .where("tweetID", "==", tweetID)
+    .where("bunkerID", "==", bunkerID)
     .get()
-    .then((tweetsSnapShot) => {
+    .then((bunkersSnapShot) => {
       const batch = firebase.firestore().batch();
-      tweetsSnapShot.forEach((tweetDocRef) => {
-        batch.delete(tweetDocRef.ref);
+      bunkersSnapShot.forEach((bunkerDocRef) => {
+        batch.delete(bunkerDocRef.ref);
       });
       batch
         .commit()
@@ -24,12 +24,12 @@ export const deleteTweet = (tweetID) => {
     });
 
   db.collection("saves")
-    .where("tweetID", "==", tweetID)
+    .where("bunkerID", "==", bunkerID)
     .get()
-    .then((tweetsSnapShot) => {
+    .then((bunkersSnapShot) => {
       const batch = firebase.firestore().batch();
-      tweetsSnapShot.forEach((tweetDocRef) => {
-        batch.delete(tweetDocRef.ref);
+      bunkersSnapShot.forEach((bunkerDocRef) => {
+        batch.delete(bunkerDocRef.ref);
       });
       batch
         .commit()

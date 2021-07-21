@@ -1,9 +1,9 @@
 import { useContext, useState } from "react";
 import UserContext from "../../context/UserContext";
-import postTweet from "../../services/PostTweet";
+import postBunker from "../../services/PostBunker";
 import Avatar from "../Avatar/Avatar";
 
-const CommentInput = ({ tweetID }) => {
+const CommentInput = ({ bunkerID }) => {
   const { user } = useContext(UserContext);
   const [comment, setComment] = useState("");
 
@@ -18,13 +18,13 @@ const CommentInput = ({ tweetID }) => {
             className="px-4"
             onSubmit={(e) => {
               e.preventDefault();
-              postTweet(user.uid, comment, null, tweetID);
+              postBunker(user.uid, comment, null, bunkerID);
               setComment("");
             }}>
             <input
               className="bg-gray-200 placeholder-gray-600  rounded-lg h-12 w-full font-noto text-sm font-medium"
               type="text"
-              placeholder="Tweet your Reply"
+              placeholder="Bunker your Reply"
               value={comment}
               onChange={(e) => setComment(e.target.value)}
             />

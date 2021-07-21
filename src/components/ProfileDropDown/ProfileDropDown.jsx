@@ -78,7 +78,7 @@ const ProfileDropDown = ({ user }) => {
                     if (!deletingAccount) {
                       e.stopPropagation();
                       const answer = alert(
-                        `Are you sure you want to delete your account?\nThis would delete your tweets,likes,saves`
+                        `Are you sure you want to delete your account?\nThis would delete your bunkers,likes,saves`
                       );
                       if (answer) {
                         setDeletingAccount(true);

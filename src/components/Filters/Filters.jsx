@@ -4,10 +4,10 @@ const Filters = () => {
       className="w-full bg-white rounded-lg p-5"
       style={{ height: "max-content" }}>
       <li className="font-poppins font-semibold text-base  py-4 list-none text-primary">
-        Tweets
+        Bunkers
       </li>
       <li className="font-poppins font-semibold text-base text-gray-600 py-4 list-none ">
-        Tweets & Replies
+        Bunkers & Replies
       </li>
       <li className="font-poppins font-semibold text-base text-gray-600 py-4 list-none ">
         Media

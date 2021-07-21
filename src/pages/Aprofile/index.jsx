@@ -7,7 +7,7 @@ import Post from "../../components/Post/Post";
 import UserInfo from "../../components/UserInfo/UserInfo";
 import fetchAllUserData from "../../services/FetchData";
 
-const UserName = ({ fetchedUser, tweets }) => {
+const UserName = ({ fetchedUser, bunkers }) => {
   const [userExits, setUserExits] = useState(false);
 
   useEffect(() => {
@@ -20,7 +20,7 @@ const UserName = ({ fetchedUser, tweets }) => {
     <div>
         <title>
           {userExits
-            ? `${fetchedUser.name} (@${fetchedUser.username}) | Tweeter`
+            ? `${fetchedUser.name} (@${fetchedUser.username}) | Bunkerer`
             : `USER NOT FOUND`}
         </title>
 
@@ -41,13 +41,13 @@ const UserName = ({ fetchedUser, tweets }) => {
                   <Filters />
                 </div>
                 <div className="col-span-2">
-                  {tweets.map((tweet) => {
+                  {bunkers.map((bunker) => {
                     return (
-                      <span key={tweet.id}>
+                      <span key={bunker.id}>
                         <Link
-                          href={`${tweet.author.username}/status/${tweet.id}`}>
+                          href={`${bunker.author.username}/status/${bunker.id}`}>
                           <div className="mb-5">
-                            <Post tweet={tweet} />
+                            <Post bunker={bunker} />
                           </div>
                         </Link>
                       </span>

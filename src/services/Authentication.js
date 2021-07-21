@@ -1,29 +1,25 @@
 import firebase from "../firebase/init";
-
+import axios from "axios";
 async function handleSignUp(email, password, username, name) {
   try {
-    const { user } = await firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password);
-    await firebase.firestore().collection("users").doc(user.uid).set({
-      username,
-      email: user.email,
-      profilePicture:
-        "https://firebasestorage.googleapis.com/v0/b/tweeter-45929.appspot.com/o/defaultAvatar.jpg?alt=media&token=072d3268-84f4-4016-b0f7-d440930347f2",
-      name,
-      bio: null,
-    });
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const body = JSON.stringify({name, email, password});
+    const res = await axios.post("/users/signup", body, config);
 
-    await firebase.firestore().collection("connections").add({
-      followerID: user.uid,
-      followeeID: user.uid,
-    });
-
-    window.location.replace("/home");
-    return user;
+    // storing token and userId in the browser localStorage
+    localStorage.setItem(
+      "user",
+      JSON.stringify({ ...res.data.user, token: res.data.token })
+    );
+    return res.data.user
+    // setUser({ ...res.data.user, token: res.data.token });
+    // history.push("/");
   } catch (error) {
-    console.error(error);
-    return error;
+    console.log(error.response.data);
   }
 }
 

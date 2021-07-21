@@ -32,44 +32,44 @@ export const fetchUser = async ({ username, userID }) => {
   }
 };
 
-export const fetchUserTweets = async (userID) => {
-  const tweetsQuerySnapShot = await db
-    .collection("tweets")
+export const fetchUserBunkers = async (userID) => {
+  const bunkersQuerySnapShot = await db
+    .collection("bunkers")
     .where("authorId", "==", userID)
-    .where("parentTweet", "==", null)
+    .where("parentBunker", "==", null)
     .get();
 
   const fetchedUser = await fetchUser({ userID });
 
-  // tweets = tweets Array of  Objects
-  const tweets = tweetsQuerySnapShot.docs.map((tweet) => {
-    const data = tweet.data();
+  // bunkers = bunkers Array of  Objects
+  const bunkers = bunkersQuerySnapShot.docs.map((bunker) => {
+    const data = bunker.data();
 
     return {
-      id: tweet.id,
+      id: bunker.id,
       ...data,
       author: fetchedUser,
       createdAt: data.createdAt.toDate().toString(),
     };
   });
-  // returns array of objects (tweets)
-  return tweets;
+  // returns array of objects (bunkers)
+  return bunkers;
 };
 
-export const fetchTweet = async (tweetID) => {
-  const tweet = await firebase
+export const fetchBunker = async (bunkerID) => {
+  const bunker = await firebase
     .firestore()
-    .collection("tweets")
-    .doc(tweetID)
+    .collection("bunkers")
+    .doc(bunkerID)
     .get();
 
-  if (!tweet.exists) return null;
-  const user = await fetchUser({ userID: tweet.data().authorId });
+  if (!bunker.exists) return null;
+  const user = await fetchUser({ userID: bunker.data().authorId });
   return {
-    ...tweet.data(),
+    ...bunker.data(),
     author: user,
-    id: tweetID,
-    createdAt: tweet.data().createdAt.toDate().toString(),
+    id: bunkerID,
+    createdAt: bunker.data().createdAt.toDate().toString(),
   };
 };
 
@@ -87,19 +87,19 @@ export const fetchUserFollowings = async (userID) => {
     .get();
 };
 
-export const fetchTweetLikes = (tweetID) => {
+export const fetchBunkerLikes = (bunkerID) => {
   return firebase
     .firestore()
     .collection("likes")
-    .where("tweetID", "==", tweetID)
+    .where("bunkerID", "==", bunkerID)
     .get();
 };
 
-export const fetchTweetSaves = (tweetID) => {
+export const fetchBunkerSaves = (bunkerID) => {
   return firebase
     .firestore()
     .collection("saves")
-    .where("tweetID", "==", tweetID)
+    .where("bunkerID", "==", bunkerID)
     .get();
 };
 
@@ -108,7 +108,7 @@ const fetchAllUserData = async (username) => {
   if (fetchedUser === null) {
     return null;
   }
-  const tweets = await fetchUserTweets(fetchedUser.uid);
+  const bunkers = await fetchUserBunkers(fetchedUser.uid);
   const followersCount = (await fetchUserFollowers(fetchedUser.uid)).size;
   const followingsCount = (await fetchUserFollowings(fetchedUser.uid)).size;
   fetchedUser = {
@@ -119,7 +119,7 @@ const fetchAllUserData = async (username) => {
 
   return {
     fetchedUser,
-    tweets,
+    bunkers,
   };
 };
 

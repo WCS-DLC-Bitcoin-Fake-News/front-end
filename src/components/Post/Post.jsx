@@ -8,13 +8,13 @@ import { Link } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import UserContext from "../../contexts/UserContext";
 import firebase from "../../firebase/init";
-import { deleteTweet } from "../../services/DeleteTweet";
-import { fetchTweetLikes, fetchTweetSaves } from "../../services/FetchData";
+import { deleteBunker } from "../../services/DeleteBunker";
+import { fetchBunkerLikes, fetchBunkerSaves } from "../../services/FetchData";
 import Avatar from "../Avatar/Avatar";
 
-const Post = ({ tweet }) => {
+const Post = ({ bunker }) => {
   const { user } = useContext(UserContext);
-  const [localTweet, setLocalTweet] = useState(tweet);
+  const [localBunker, setLocalBunker] = useState(bunker);
 
   const [likes, setLikes] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
@@ -26,23 +26,23 @@ const Post = ({ tweet }) => {
 
   const [comments, setComments] = useState(0);
 
-  const [myTweet, setMyTweet] = useState(false);
+  const [myBunker, setMyBunker] = useState(false);
 
-  const likeTweet = async () => {
+  const likeBunker = async () => {
     if (!user) {
       alert("You need to sign in for that");
       return;
     }
     const { id } = await firebase.firestore().collection("likes").add({
       userID: user.uid,
-      tweetID: tweet.id,
+      bunkerID: bunker.id,
     });
     setLikes((prev) => prev + 1);
     setLikeDocID(id);
     setIsLiked(true);
   };
 
-  const dislikeTweet = () => {
+  const dislikeBunker = () => {
     if (!user) {
       alert("You need to sign in for that");
       return;
@@ -52,13 +52,13 @@ const Post = ({ tweet }) => {
     setIsLiked(false);
   };
 
-  const saveTweets = () => {
+  const saveBunkers = () => {
     if (!user) {
       alert("You need to sign in for that");
       return;
     }
     const { id } = firebase.firestore().collection("saves").add({
-      tweetID: tweet.id,
+      bunkerID: bunker.id,
       userID: user.uid,
     });
     setSaves((prev) => prev + 1);
@@ -66,7 +66,7 @@ const Post = ({ tweet }) => {
     setIsSaved(true);
   };
 
-  const unsaveTweets = () => {
+  const unsaveBunkers = () => {
     if (!user) {
       alert("You need to sign in for that");
       return;
@@ -77,14 +77,14 @@ const Post = ({ tweet }) => {
   };
 
   useEffect(async () => {
-    setLikes((await fetchTweetLikes(localTweet.id)).size);
+    setLikes((await fetchBunkerLikes(localBunker.id)).size);
     if (user) {
       async function checkForLikes() {
         const docs = await firebase
           .firestore()
           .collection("likes")
           .where("userID", "==", user.uid)
-          .where("tweetID", "==", tweet.id)
+          .where("bunkerID", "==", bunker.id)
           .get();
         if (docs.size === 1) {
           setIsLiked(true);
@@ -98,7 +98,7 @@ const Post = ({ tweet }) => {
           .firestore()
           .collection("saves")
           .where("userID", "==", user.uid)
-          .where("tweetID", "==", tweet.id)
+          .where("bunkerID", "==", bunker.id)
           .get();
         if (docs.size === 1) {
           setIsSaved(true);
@@ -110,48 +110,48 @@ const Post = ({ tweet }) => {
       async function getCommentsCount() {
         const res = await firebase
           .firestore()
-          .collection("tweets")
-          .where("parentTweet", "==", tweet.id)
+          .collection("bunkers")
+          .where("parentBunker", "==", bunker.id)
           .get();
         setComments(res.size);
       }
       getCommentsCount();
-      if (user.uid === tweet.author.uid) {
-        setMyTweet(true);
+      if (user.uid === bunker.author.uid) {
+        setMyBunker(true);
       }
     }
-    setSaves((await fetchTweetSaves(localTweet.id)).size);
+    setSaves((await fetchBunkerSaves(localBunker.id)).size);
   }, []);
 
   return (
     <div className="p-5 bg-white rounded-lg hover:bg-gray-100 cursor-pointer">
       <div className="flex items-center content-evenly">
         <div className="w-16 h-16 overflow-hidden rounded-lg m-4">
-          <Avatar src={localTweet.author.profilePicture} />
+          <Avatar src={localBunker.author.profilePicture} />
         </div>
         <div className="w-full">
-          <Link href={`/${tweet.author.username}`}>
+          <Link href={`/${bunker.author.username}`}>
             <p className="font-poppins font-medium text-base my-1 hover:underline">
-              {localTweet.author.name}
+              {localBunker.author.name}
             </p>
           </Link>
           <p className="font-poppins text-sm font-medium my-1 text-gray-700  ">
-            @{localTweet.author.username}
+            @{localBunker.author.username}
           </p>
           <p className="font-noto text-gray-500 text-base my-1">
-            {localTweet.createdAt}
+            {localBunker.createdAt}
           </p>
         </div>
-        {myTweet && (
+        {myBunker && (
           <div
             className="w-16 h-16 flex flex-col justify-center items-center"
             onClick={(e) => {
               e.stopPropagation();
               const answer = alert(
-                "Are you sure you want to delete this tweet?"
+                "Are you sure you want to delete this bunker?"
               );
               if (answer) {
-                deleteTweet(tweet.id);
+                deleteBunker(bunker.id);
               }
             }}>
             <DeleteIcon htmlColor={"red"} fontSize="medium" />
@@ -160,22 +160,22 @@ const Post = ({ tweet }) => {
       </div>
       <span>
         <div className="font-noto text-base font-normal pt-4">
-          {localTweet.text}
+          {localBunker.text}
         </div>
-        {tweet.imgLink && (
+        {bunker.imgLink && (
           <div
             className="my-5 overflow-hidden rounded-lg"
             style={{
               height: "350px",
             }}>
             <a
-              href={localTweet.imgLink}
+              href={localBunker.imgLink}
               target="_blank"
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}>
               <img
                 className="w-full h-full object-cover"
-                src={localTweet.imgLink}
+                src={localBunker.imgLink}
                 alt="POST IMG HERE"
               />
             </a>
@@ -209,7 +209,7 @@ const Post = ({ tweet }) => {
             type="submit"
             onClick={(e) => {
               e.stopPropagation();
-              dislikeTweet();
+              dislikeBunker();
             }}>
             <span className="">
               <FavoriteIcon style={{ color: "#e53e3e" }} />
@@ -222,7 +222,7 @@ const Post = ({ tweet }) => {
             type="submit"
             onClick={(e) => {
               e.stopPropagation();
-              likeTweet();
+              likeBunker();
             }}>
             <span className="">
               <FavoriteBorderIcon style={{ color: "#828282" }} />
@@ -236,7 +236,7 @@ const Post = ({ tweet }) => {
             type="submit"
             onClick={(e) => {
               e.stopPropagation();
-              unsaveTweets();
+              unsaveBunkers();
             }}>
             <span className="">
               <BookmarkIcon style={{ color: "#2D9CDB" }} />
@@ -249,7 +249,7 @@ const Post = ({ tweet }) => {
             type="submit"
             onClick={(e) => {
               e.stopPropagation();
-              saveTweets();
+              saveBunkers();
             }}>
             <span className="">
               <BookmarkBorderIcon style={{ color: "#828282" }} />

@@ -3,11 +3,11 @@ import NavBar from "../components/NavBar/NavBar";
 
 const Layout = (props) => {
   return (
-    <>
+    <div className="bg-gray-400">
       <NavBar />
-      {props.children}
+        {props.children}
       <Footer />
-    </>
+    </div>
   );
 };
 

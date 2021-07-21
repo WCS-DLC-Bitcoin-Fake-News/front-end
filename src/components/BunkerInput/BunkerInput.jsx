@@ -3,22 +3,22 @@ import PhotoIcon from "@material-ui/icons/Photo";
 import React, { useContext, useState } from "react";
 import UserContext from "../../context/UserContext";
 import firebase from "../../firebase/init";
-import postTweet from "../../services/PostTweet";
+import postBunker from "../../services/PostBunker";
 import Avatar from "../Avatar/Avatar";
 
-const TweetInput = () => {
+const BunkerInput = () => {
   const { user } = useContext(UserContext);
-  const [tweet, setTweet] = useState("");
+  const [bunker, setBunker] = useState("");
   const [imgLink, setImgLink] = useState(null);
   const [file, setFile] = useState(null);
-  const [tweeting, setTweeting] = useState(false);
+  const [bunkering, setBunkering] = useState(false);
 
   const fileInputRef = React.createRef();
 
   const uploadFile = async () => {
-    const storageRef = firebase.storage().ref("tweets/" + file.name);
+    const storageRef = firebase.storage().ref("bunkers/" + file.name);
     const task = await storageRef.put(file);
-    const link = await storageRef.getDownloadURL("tweets/" + file.name);
+    const link = await storageRef.getDownloadURL("bunkers/" + file.name);
     return link;
   };
 
@@ -35,27 +35,27 @@ const TweetInput = () => {
               <form
                 onSubmit={async (e) => {
                   e.preventDefault();
-                  async function postTweetandUploadFile() {
-                    setTweeting(true);
+                  async function postBunkerandUploadFile() {
+                    setBunkering(true);
                     let imgLink = null;
                     if (file) {
                       imgLink = await uploadFile();
                     }
-                    await postTweet(user.uid, tweet.trim(), imgLink);
-                    setTweeting(false);
+                    await postBunker(user.uid, bunker.trim(), imgLink);
+                    setBunkering(false);
                     setFile(null);
-                    setTweet("");
+                    setBunker("");
                     setImgLink(null);
                   }
-                  postTweetandUploadFile();
+                  postBunkerandUploadFile();
                 }}>
                 <textarea
                   className="w-full h-16 font-noto font-medium text-base text-gray-500"
-                  name="tweet-input"
+                  name="bunker-input"
                   placeholder="What's Happening?"
                   type="text"
-                  value={tweet}
-                  onChange={(e) => setTweet(e.target.value)}
+                  value={bunker}
+                  onChange={(e) => setBunker(e.target.value)}
                   required></textarea>
                 <div className="flex items-center mt-3">
                   <div className="mx-2">
@@ -76,13 +76,13 @@ const TweetInput = () => {
                   <div className="mr-0 ml-auto">
                     <button
                       className={`bottom-0 relative text-white px-8 py-4 rounded-md ${
-                        tweeting
+                        bunkering
                           ? "bg-blue-300 cursor-not-allowed"
                           : "bg-primary"
                       }`}
                       type="submit">
-                      {tweeting ? "Tweeting...." : "Tweet"}
-                      {tweeting && (
+                      {bunkering ? "Bunkering...." : "Bunker"}
+                      {bunkering && (
                         <span
                           style={{
                             position: "absolute",
@@ -105,4 +105,4 @@ const TweetInput = () => {
   );
 };
 
-export default TweetInput;
+export default BunkerInput;

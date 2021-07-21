@@ -4,26 +4,26 @@ import { Link } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import Filters from "../components/Filters/Filters";
 import Post from "../components/Post/Post";
-import BookmarksTweetsContext from "../contexts/BookmarksTweetsContext";
+import BookmarksBunkersContext from "../contexts/BookmarksBunkersContext";
 import UserContext from "../contexts/UserContext";
 import firebase from "../firebase/init";
 import Layout from "../layouts";
-import { fetchTweet } from "../services/FetchData";
+import { fetchBunker } from "../services/FetchData";
 
 const Bookmarks = () => {
   const { user } = useContext(UserContext);
-  const [bookmarkTweets, setBookmarkTweets] = useState([]);
+  const [bookmarkBunkers, setBookmarkBunkers] = useState([]);
   const [loading, setIsLoading] = useState(true);
   const [isEmpty, setIsEmpty] = useState(false);
-  const { bookmarksTweetsContext, setBookmarksTweetsContext } = useContext(
-    BookmarksTweetsContext
+  const { bookmarksBunkersContext, setBookmarksBunkersContext } = useContext(
+    BookmarksBunkersContext
   );
 
   useEffect(() => {
     if (false) {
-      if (!bookmarksTweetsContext) {
-        async function getSavedTweets() {
-          const localBMTweets = [];
+      if (!bookmarksBunkersContext) {
+        async function getSavedBunkers() {
+          const localBMBunkers = [];
           const savesSnapShot = await firebase
             .firestore()
             .collection("saves")
@@ -32,24 +32,24 @@ const Bookmarks = () => {
 
           if (savesSnapShot.empty) {
             setIsEmpty(true);
-            setBookmarkTweets([]);
+            setBookmarkBunkers([]);
             setIsLoading(false);
           } else {
             for (let i = 0; i < savesSnapShot.size; i++) {
-              const tweet = await fetchTweet(
-                savesSnapShot.docs[i].data().tweetID
+              const bunker = await fetchBunker(
+                savesSnapShot.docs[i].data().bunkerID
               );
-              localBMTweets.push(tweet);
+              localBMBunkers.push(bunker);
             }
-            setBookmarkTweets(localBMTweets);
-            setBookmarksTweetsContext(localBMTweets);
+            setBookmarkBunkers(localBMBunkers);
+            setBookmarksBunkersContext(localBMBunkers);
             setIsEmpty(false);
             setIsLoading(false);
           }
         }
-        getSavedTweets(user.uid);
+        getSavedBunkers(user.uid);
       } else {
-        setBookmarkTweets(bookmarksTweetsContext);
+        setBookmarkBunkers(bookmarksBunkersContext);
         setIsEmpty(false);
         setIsLoading(false);
       }
@@ -59,7 +59,7 @@ const Bookmarks = () => {
   return (
     <div>
       {/* <Head>
-        <title>Bookmarks | Tweeter</title>
+        <title>Bookmarks | Bunkerer</title>
       </Head> */}
       <Layout>
         <div className="mx-4 sm:mx-12 md:mx-24 lg:mx-24 mt-5">
@@ -76,12 +76,12 @@ const Bookmarks = () => {
                 </div>
               )}
               {isEmpty ? (
-                <h1>You have no Saved Tweets</h1>
+                <h1>You have no Saved Bunkers</h1>
               ) : (
-                bookmarkTweets.map((tweet) => (
-                  <Link href={`${tweet.author.username}/status/${tweet.id}`}>
+                bookmarkBunkers.map((bunker) => (
+                  <Link href={`${bunker.author.username}/status/${bunker.id}`}>
                     <div className="mb-5">
-                      <Post tweet={tweet} />
+                      <Post bunker={bunker} />
                     </div>
                   </Link>
                 ))

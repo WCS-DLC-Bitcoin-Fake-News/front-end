@@ -3,7 +3,7 @@ import firebase from "../../firebase/init";
 import { fetchUser } from "../../services/FetchData";
 import Avatar from "../Avatar/Avatar";
 
-const Comments = ({ tweetID }) => {
+const Comments = ({ bunkerID }) => {
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
@@ -11,23 +11,23 @@ const Comments = ({ tweetID }) => {
       try {
         firebase
           .firestore()
-          .collection("tweets")
-          .where("parentTweet", "==", tweetID)
-          .onSnapshot(async (tweetsRef) => {
+          .collection("bunkers")
+          .where("parentBunker", "==", bunkerID)
+          .onSnapshot(async (bunkersRef) => {
             const localComments = [];
 
-            for (let i = 0; i < tweetsRef.size; i++) {
-              const tweet = tweetsRef.docs[i].data({
+            for (let i = 0; i < bunkersRef.size; i++) {
+              const bunker = bunkersRef.docs[i].data({
                 serverTimestamps: "estimate",
               });
-              const id = tweetsRef.docs[i].id;
+              const id = bunkersRef.docs[i].id;
               const userInfo = await fetchUser({
-                userID: tweet.authorId,
+                userID: bunker.authorId,
               });
               localComments.push({
-                ...tweet,
+                ...bunker,
                 id,
-                createdAt: tweet.createdAt.toDate().toString(),
+                createdAt: bunker.createdAt.toDate().toString(),
                 author: userInfo,
               });
             }

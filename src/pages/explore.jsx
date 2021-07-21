@@ -4,51 +4,51 @@ import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import ExploreFilters from "../components/ExploreFIlters/ExploreFilters";
 import Post from "../components/Post/Post";
-import ExploreTweetsContext from "../contexts/ExploreTweetsContext";
+import ExploreBunkersContext from "../contexts/ExploreBunkersContext";
 import firebase from "../firebase/init";
 import Layout from "../layouts";
 import { fetchUser } from "../services/FetchData";
 
 const Explore = () => {
-  const [exploreTweets, setExploreTweets] = useState([]);
-  const { exploreTweetsContext, setExploreTweetsContext } = React.useContext(
-    ExploreTweetsContext
+  const [exploreBunkers, setExploreBunkers] = useState([]);
+  const { exploreBunkersContext, setExploreBunkersContext } = React.useContext(
+    ExploreBunkersContext
   );
 
   useEffect(async () => {
-    if (!exploreTweetsContext) {
+    if (!exploreBunkersContext) {
       firebase
         .firestore()
-        .collection("tweets")
+        .collection("bunkers")
         .limit(5)
-        .onSnapshot(async (tweetRef) => {
-          const exploreUserTweets = [];
+        .onSnapshot(async (bunkerRef) => {
+          const exploreUserBunkers = [];
 
-          for (let i = 0; i < tweetRef.size; i++) {
+          for (let i = 0; i < bunkerRef.size; i++) {
             const userInfo = await fetchUser({
-              userID: tweetRef.docs[i].data().authorId,
+              userID: bunkerRef.docs[i].data().authorId,
             });
-            let data = tweetRef.docs[i].data();
+            let data = bunkerRef.docs[i].data();
 
-            exploreUserTweets.push({
+            exploreUserBunkers.push({
               ...data,
               createdAt: data.createdAt.toDate().toString(),
-              id: tweetRef.docs[i].id,
+              id: bunkerRef.docs[i].id,
               author: userInfo,
             });
           }
-          setExploreTweets(exploreUserTweets);
-          setExploreTweetsContext(exploreUserTweets);
+          setExploreBunkers(exploreUserBunkers);
+          setExploreBunkersContext(exploreUserBunkers);
         });
     } else {
-      setExploreTweets(exploreTweetsContext);
+      setExploreBunkers(exploreBunkersContext);
     }
   }, []);
 
   return (
     <div>
       {/* <Head>
-        <title>Explore | Tweeter</title>
+        <title>Explore | Bunkerer</title>
       </Head> */}
       <Layout>
         <div className="mx-4 sm:mx-12 md:mx-24 lg:mx-48 mt-5">
@@ -59,12 +59,12 @@ const Explore = () => {
               </div>
             </div>
             <div className="lg:col-span-2">
-              {exploreTweets && exploreTweets.length > 0 ? (
-                exploreTweets.map((tweet) => (
-                  <span key={tweet.id}>
-                    <Link href={`${tweet.author.username}/status/${tweet.id}`}>
+              {exploreBunkers && exploreBunkers.length > 0 ? (
+                exploreBunkers.map((bunker) => (
+                  <span key={bunker.id}>
+                    <Link href={`${bunker.author.username}/status/${bunker.id}`}>
                       <div className="mb-5">
-                        <Post tweet={tweet} />
+                        <Post bunker={bunker} />
                       </div>
                     </Link>
                   </span>

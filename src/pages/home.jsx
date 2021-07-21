@@ -6,8 +6,8 @@ import { useContext, useEffect, useState } from "react";
 import Post from "../components/Post/Post";
 import Suggestions from "../components/Suggestions/Suggestions";
 import Trends from "../components/Trends/Trends";
-import TweetInput from "../components/TweetInput/TweetInput";
-import HomeTweetsContext from "../contexts/HomeTweetsContext";
+import BunkerInput from "../components/BunkerInput/BunkerInput";
+import HomeBunkersContext from "../contexts/HomeBunkersContext";
 import UserContext from "../contexts/UserContext";
 import firebase from "../firebase/init";
 import Layout from "../layouts";
@@ -15,18 +15,18 @@ import { fetchUser } from "../services/FetchData";
 
 const Home = () => {
   const { user } = useContext(UserContext);
-  const [homeTweets, setHomeTweets] = useState([]);
+  const [homeBunkers, setHomeBunkers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isEmpty, setIsEmpty] = useState(false);
 
-  const { homeTweetsContext, setHomeTweetsContext } = useContext(
-    HomeTweetsContext
+  const { homeBunkersContext, setHomeBunkersContext } = useContext(
+    HomeBunkersContext
   );
 
   useEffect(async () => {
     try {
       if (false) {
-        if (!homeTweetsContext) {
+        if (!homeBunkersContext) {
           setLoading(true);
           const connectionsRef = await firebase
             .firestore()
@@ -36,7 +36,7 @@ const Home = () => {
 
           if (connectionsRef.empty) {
             setIsEmpty(true);
-            setHomeTweets([]);
+            setHomeBunkers([]);
             setLoading(false);
           } else {
             const followerIDs = connectionsRef.docs.map((connection) => {
@@ -46,34 +46,34 @@ const Home = () => {
 
             firebase
               .firestore()
-              .collection("tweets")
+              .collection("bunkers")
               .where("authorId", "in", followerIDs)
-              .where("parentTweet", "==", null)
+              .where("parentBunker", "==", null)
               .orderBy("createdAt", "desc")
-              .onSnapshot(async (tweetRef) => {
-                const homeUserTweets = [];
+              .onSnapshot(async (bunkerRef) => {
+                const homeUserBunkers = [];
 
-                for (let i = 0; i < tweetRef.size; i++) {
+                for (let i = 0; i < bunkerRef.size; i++) {
                   const userInfo = await fetchUser({
-                    userID: tweetRef.docs[i].data().authorId,
+                    userID: bunkerRef.docs[i].data().authorId,
                   });
-                  let data = tweetRef.docs[i].data();
+                  let data = bunkerRef.docs[i].data();
 
-                  homeUserTweets.push({
+                  homeUserBunkers.push({
                     ...data,
                     createdAt: data.createdAt.toDate().toString(),
-                    id: tweetRef.docs[i].id,
+                    id: bunkerRef.docs[i].id,
                     author: userInfo,
                   });
                 }
-                setHomeTweets(homeUserTweets);
+                setHomeBunkers(homeUserBunkers);
                 setLoading(false);
-                setHomeTweetsContext(homeUserTweets);
+                setHomeBunkersContext(homeUserBunkers);
               });
           }
         } else {
           setLoading(false);
-          setHomeTweets(homeTweetsContext);
+          setHomeBunkers(homeBunkersContext);
         }
       }
     } catch (err) {
@@ -82,17 +82,14 @@ const Home = () => {
   }, [user]);
 
   return (
-    <Layout >
-    <div>
-      {/* <Head>
-        <title>Home | Tweeter</title>
-      </Head> */}
+    <Layout>
+       
 
         <div className="mx-4 sm:mx-12 md:mx-24 lg:mx-24 xl:mx-24 mt-5">
           <div className="flex flex-col lg:grid lg:grid-cols-3 lg:col-gap-5">
             <div className="lg:col-span-2">
               <div className="mb-5">
-                <TweetInput />
+                <BunkerInput />
               </div>
               {loading && (
                 <div className="flex justify-center">
@@ -103,11 +100,11 @@ const Home = () => {
               {isEmpty ? (
                 <h1>You are following no one</h1>
               ) : (
-                homeTweets.map((tweet) => (
-                  <span key={tweet.id}>
-                    <Link to={`${tweet.author.username}/status/${tweet.id}`}>
+                homeBunkers.map((bunker) => (
+                  <span key={bunker.id}>
+                    <Link to={`${bunker.author.username}/status/${bunker.id}`}>
                       <div className="mb-5">
-                        <Post tweet={tweet} />
+                        <Post bunker={bunker} />
                       </div>
                     </Link>
                   </span>
@@ -124,8 +121,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-    </div>
-    </Layout>
+        </Layout>
   );
 };
 

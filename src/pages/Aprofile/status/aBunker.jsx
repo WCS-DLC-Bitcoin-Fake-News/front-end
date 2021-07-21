@@ -8,25 +8,25 @@ import firebase from "../../../firebase/init";
 import Layout from "../../../layouts";
 import { fetchUser } from "../../../services/FetchData";
 
-const Tweet = ({ tweet }) => {
+const Bunker = ({ bunker }) => {
   const { user } = useContext(UserContext);
 
   return (
     <div>
       <title>
         John on Debunker "It is great"
-        {/* {tweet.author.name} on Debunker "{tweet.text}" */}
+        {/* {bunker.author.name} on Debunker "{bunker.text}" */}
       </title>
       <Layout>
         <div>
           <div className="flex flex-col lg:grid lg:grid-cols-3 lg:col-gap-5 my-5 lg:mx=24 xl:mx-48">
             <div className="col-span-2">
-              {/* <Post tweet={tweet} /> */}
-              {/* {user && <CommentInput tweetID={tweet.id} />} */}
-              {/* <Comments tweetID={tweet.id} /> */}
+              {/* <Post bunker={bunker} /> */}
+              {/* {user && <CommentInput bunkerID={bunker.id} />} */}
+              {/* <Comments bunkerID={bunker.id} /> */}
             </div>
             <div className="hidden lg:block">
-              {/* <Suggestions type="relavant" userID={tweet.authorId} /> */}
+              {/* <Suggestions type="relavant" userID={bunker.authorId} /> */}
             </div>
           </div>
         </div>
@@ -36,21 +36,21 @@ const Tweet = ({ tweet }) => {
 };
 
 export async function getServerSideProps(context) {
-  const tweetID = context.params.tweetId;
+  const bunkerID = context.params.bunkerId;
   const res = await firebase
     .firestore()
-    .collection("tweets")
-    .doc(tweetID)
+    .collection("bunkers")
+    .doc(bunkerID)
     .get();
-  const tweet = res.data();
+  const bunker = res.data();
   const id = res.id;
-  const user = await fetchUser({ userID: tweet.authorId });
+  const user = await fetchUser({ userID: bunker.authorId });
 
   return {
     props: {
-      tweet: {
-        ...tweet,
-        createdAt: tweet.createdAt.toDate().toString(),
+      bunker: {
+        ...bunker,
+        createdAt: bunker.createdAt.toDate().toString(),
         id,
         author: user,
       },
@@ -58,4 +58,4 @@ export async function getServerSideProps(context) {
   };
 }
 
-export default Tweet;
+export default Bunker;

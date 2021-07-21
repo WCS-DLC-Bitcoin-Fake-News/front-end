@@ -4,7 +4,7 @@ import HomeIcon from "@material-ui/icons/Home";
 import {NavLink} from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import React, { useContext } from "react";
-import UserContext from "../../contexts/UserContext";
+import UserContext from "../../context/UserContext";
 import ProfileDropDown from "../ProfileDropDown/ProfileDropDown";
 
 const NavBar = () => {
@@ -17,7 +17,7 @@ const NavBar = () => {
         <NavLink to="/home">
           <img
             className="cursor-pointer ml-4"
-            src="/images/logos/tweeter.svg"
+            src="/images/logos/bunker.svg"
             alt="logo"
           />
         </NavLink>

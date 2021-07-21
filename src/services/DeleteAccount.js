@@ -1,5 +1,5 @@
 import firebase from "../firebase/init";
-import { deleteTweet } from "./DeleteTweet";
+import { deleteBunker } from "./DeleteBunker";
 
 const db = firebase.firestore();
 
@@ -13,14 +13,14 @@ export const deleteAccount = async (userID) => {
     .then(console.log("Deleted User Doc"))
     .catch((e) => console.log(e));
 
-  // Get all tweets that has authorID = user.uid in "tweets" collection
-  const tweetsSnapShot = await db
-    .collection("tweets")
+  // Get all bunkers that has authorID = user.uid in "bunkers" collection
+  const bunkersSnapShot = await db
+    .collection("bunkers")
     .where("authorId", "==", userID)
     .get();
-  tweetsSnapShot.forEach((tweetsDoc) => {
-    // Delete those tweets
-    deleteTweet(tweetsDoc.id);
+  bunkersSnapShot.forEach((bunkersDoc) => {
+    // Delete those bunkers
+    deleteBunker(bunkersDoc.id);
   });
 
   // Delete all connections

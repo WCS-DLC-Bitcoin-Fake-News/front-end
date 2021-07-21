@@ -3039,7 +3039,7 @@
   "resolved" "https://registry.npmjs.org/bcrypt-pbkdf/-/bcrypt-pbkdf-1.0.2.tgz"
   "version" "1.0.2"
   dependencies:
-    "tweetnacl" "^0.14.3"
+    "bunkernacl" "^0.14.3"
 
 "bfj@^7.0.2":
   "integrity" "sha512-+e/UqUzwmzJamNF50tBV6tZPTORow7gQ96iFow+8b562OdMpEK0BcJEq2OSPEDmAbSMBQ7PKZ87ubFkgxpYWgw=="
@@ -11909,7 +11909,7 @@
     "getpass" "^0.1.1"
     "jsbn" "~0.1.0"
     "safer-buffer" "^2.0.2"
-    "tweetnacl" "~0.14.0"
+    "bunkernacl" "~0.14.0"
 
 "ssri@^6.0.1":
   "integrity" "sha512-3Wge10hNcT1Kur4PDFwEieXSCMCJs/7WvSACcrMYrNp+b8kDL1/0wJch5Ni2WrtwEa2IO8OsVfeKIciKCDx/QA=="
@@ -12617,9 +12617,9 @@
   dependencies:
     "safe-buffer" "^5.0.1"
 
-"tweetnacl@^0.14.3", "tweetnacl@~0.14.0":
+"bunkernacl@^0.14.3", "bunkernacl@~0.14.0":
   "integrity" "sha1-WuaBd/GS1EViadEIr6k/+HQ/T2Q="
-  "resolved" "https://registry.npmjs.org/tweetnacl/-/tweetnacl-0.14.5.tgz"
+  "resolved" "https://registry.npmjs.org/bunkernacl/-/bunkernacl-0.14.5.tgz"
   "version" "0.14.5"
 
 "type-check@^0.4.0":

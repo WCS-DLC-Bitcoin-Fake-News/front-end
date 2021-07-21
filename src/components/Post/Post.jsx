@@ -7,9 +7,8 @@ import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import { Link } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import UserContext from "../../contexts/UserContext";
-import firebase from "../../firebase/init";
-import { deleteBunker } from "../../services/DeleteBunker";
-import { fetchBunkerLikes, fetchBunkerSaves } from "../../services/FetchData";
+import { deleteBunker } from "../../Api/DeleteBunker";
+import { fetchBunkerLikes, fetchBunkerSaves } from "../../Api/FetchData";
 import Avatar from "../Avatar/Avatar";
 
 const Post = ({ bunker }) => {
@@ -33,12 +32,14 @@ const Post = ({ bunker }) => {
       alert("You need to sign in for that");
       return;
     }
-    const { id } = await firebase.firestore().collection("likes").add({
-      userID: user.uid,
-      bunkerID: bunker.id,
-    });
+    // const { id } = await firebase.firestore().collection("likes").add({
+    //   userID: user.uid,
+    //   bunkerID: bunker.id,
+    // });
+    // axios col to upVote
+
     setLikes((prev) => prev + 1);
-    setLikeDocID(id);
+    // setLikeDocID(id);
     setIsLiked(true);
   };
 
@@ -47,7 +48,7 @@ const Post = ({ bunker }) => {
       alert("You need to sign in for that");
       return;
     }
-    firebase.firestore().collection("likes").doc(likeDocID).delete();
+    // axios col to downVote
     setLikes((prev) => prev - 1);
     setIsLiked(false);
   };
@@ -57,12 +58,13 @@ const Post = ({ bunker }) => {
       alert("You need to sign in for that");
       return;
     }
-    const { id } = firebase.firestore().collection("saves").add({
-      bunkerID: bunker.id,
-      userID: user.uid,
-    });
+    // axios call to bookmarks a bunker
+    // const { id } = firebase.firestore().collection("saves").add({
+    //   bunkerID: bunker.id,
+    //   userID: user.uid,
+    // });
     setSaves((prev) => prev + 1);
-    setSaveDocID(id);
+    // setSaveDocID(id);
     setIsSaved(true);
   };
 
@@ -71,56 +73,57 @@ const Post = ({ bunker }) => {
       alert("You need to sign in for that");
       return;
     }
-    firebase.firestore().collection("saves").doc(saveDocID).delete();
+    // axios call
+    // firebase.firestore().collection("saves").doc(saveDocID).delete();
     setSaves((prev) => prev - 1);
     setIsSaved(false);
   };
 
   useEffect(async () => {
-    setLikes((await fetchBunkerLikes(localBunker.id)).size);
+    // setLikes((await fetchBunkerLikes(localBunker.id)).size);
     if (user) {
       async function checkForLikes() {
-        const docs = await firebase
-          .firestore()
-          .collection("likes")
-          .where("userID", "==", user.uid)
-          .where("bunkerID", "==", bunker.id)
-          .get();
-        if (docs.size === 1) {
-          setIsLiked(true);
-          setLikeDocID(docs.docs[0].id);
-        }
+        // const docs = await firebase
+        //   .firestore()
+        //   .collection("likes")
+        //   .where("userID", "==", user.uid)
+        //   .where("bunkerID", "==", bunker.id)
+        //   .get();
+        // if (docs.size === 1) {
+        //   setIsLiked(true);
+        //   setLikeDocID(docs.docs[0].id);
+        // }
       }
       checkForLikes();
 
       async function checkForSaves() {
-        const docs = await firebase
-          .firestore()
-          .collection("saves")
-          .where("userID", "==", user.uid)
-          .where("bunkerID", "==", bunker.id)
-          .get();
-        if (docs.size === 1) {
-          setIsSaved(true);
-          setSaveDocID(docs.docs[0].id);
-        }
+        // const docs = await firebase
+        //   .firestore()
+        //   .collection("saves")
+        //   .where("userID", "==", user.uid)
+        //   .where("bunkerID", "==", bunker.id)
+        //   .get();
+        // if (docs.size === 1) {
+        //   setIsSaved(true);
+        //   setSaveDocID(docs.docs[0].id);
+        // }
       }
       checkForSaves();
 
       async function getCommentsCount() {
-        const res = await firebase
-          .firestore()
-          .collection("bunkers")
-          .where("parentBunker", "==", bunker.id)
-          .get();
-        setComments(res.size);
+        // const res = await firebase
+        //   .firestore()
+        //   .collection("bunkers")
+        //   .where("parentBunker", "==", bunker.id)
+        //   .get();
+        // setComments(res.size);
       }
       getCommentsCount();
       if (user.uid === bunker.author.uid) {
         setMyBunker(true);
       }
     }
-    setSaves((await fetchBunkerSaves(localBunker.id)).size);
+    // setSaves((await fetchBunkerSaves(localBunker.id)).size);
   }, []);
 
   return (

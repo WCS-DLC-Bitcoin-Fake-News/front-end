@@ -1,25 +1,25 @@
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { useContext, useEffect, useState } from "react";
 import UserContext from "../../contexts/UserContext";
-import { fetchUser, fetchUserFollowers } from "../../services/FetchData";
+import { fetchUser, fetchUserFollowers } from "../../Api/FetchData";
 import Avatar from "../Avatar/Avatar";
 import FollowButton from "../FollowButton/FollowButton";
 
 const Suggestions = ({ type, userID }) => {
-  const [user, setUser] = useState(null);
+  // const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const { user: authUser } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
 
   useEffect(async () => {
-    if (authUser) {
-      const localUser = await fetchUser({
-        userID,
-      });
-      const followersCount = await fetchUserFollowers(localUser.uid);
+    if (user) {
+      const localUser = await fetchUser(
+        user._id,
+      );
+      const followersCount = await fetchUserFollowers(user._id);
       setUser({ ...localUser, followersCount: followersCount.size });
       setLoading(false);
     }
-  }, [authUser]);
+  }, [user]);
 
   return (
     <div className="bg-white w-full p-5 rounded-lg">

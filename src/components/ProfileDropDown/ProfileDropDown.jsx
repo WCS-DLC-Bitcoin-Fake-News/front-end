@@ -6,8 +6,8 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import {Link} from "react-router-dom";
 
 import React, { useState } from "react";
-import { handleSignOut } from "../../services/Authentication";
-import { deleteAccount } from "../../services/DeleteAccount";
+import { handleSignOut } from "../../Api/Authentication";
+import { deleteAccount } from "../../Api/DeleteAccount";
 import Avatar from "../Avatar/Avatar";
 
 const ProfileDropDown = ({ user }) => {

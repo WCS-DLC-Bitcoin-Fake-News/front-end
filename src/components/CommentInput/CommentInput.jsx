@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
-import UserContext from "../../context/UserContext";
-import postBunker from "../../services/PostBunker";
+import UserContext from "../../contexts/UserContext";
+import postBunker from "../../Api/PostBunker";
 import Avatar from "../Avatar/Avatar";
 
 const CommentInput = ({ bunkerID }) => {

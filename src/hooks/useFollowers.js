@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import UserContext from "../context/UserContext";
-import { fetchUser, fetchUserFollowers } from "../services/FetchData";
+import UserContext from "../contexts/UserContext";
+import { fetchUser, fetchUserFollowers } from "../Api/FetchData";
 
 export function useFollowers(userId, authUserID) {
   const { user } = useContext(UserContext);

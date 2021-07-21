@@ -1,6 +1,6 @@
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import { useContext, useState } from "react";
-import UserContext from "../../context/UserContext";
+import UserContext from "../../contexts/UserContext";
 import { useFollowers } from "../../hooks/useFollowers";
 import { useFollowings } from "../../hooks/useFollowings";
 import Avatar from "../Avatar/Avatar";

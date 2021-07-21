@@ -5,22 +5,40 @@ import Banner from "../../components/Banner/Banner";
 import Filters from "../../components/Filters/Filters";
 import Post from "../../components/Post/Post";
 import UserInfo from "../../components/UserInfo/UserInfo";
-import fetchAllUserData from "../../services/FetchData";
+import fetchAllUserData from "../../Api/FetchData";
+import {useParams} from "react-router-dom"
+// import fetchAllUserData from "../../Api/FetchData";
 
-const UserName = ({ fetchedUser, bunkers }) => {
+const UserName = () => {
+  console.log("going here in UserName")
+
   const [userExits, setUserExits] = useState(false);
+  const [ userWithBunkers, setUserWithBunker ] = useState({})
+  // const { bunkers } = userWithBunkers
 
-  useEffect(() => {
-    if (fetchedUser) {
-      setUserExits(true);
+  const { userId, bunkerId  } = useParams();
+ // const [bunker, setBunker] = useState({})
+
+  useEffect(async () => {
+    try {
+      const userWithData = await fetchAllUserData(userId);
+      console.log("goo")
+      console.log(userWithData);
+      
+      setUserExits(true,setUserWithBunker(userWithData) );
+    } catch(error) {
+      console.error(error)
+      return error
+
     }
+    
   }, []);
 
   return (
     <div>
         <title>
           {userExits
-            ? `${fetchedUser.name} (@${fetchedUser.username}) | Bunkerer`
+            ? `${userWithBunkers.name} (@${userWithBunkers.username}) | Bunkerer`
             : `USER NOT FOUND`}
         </title>
 
@@ -33,7 +51,7 @@ const UserName = ({ fetchedUser, bunkers }) => {
               style={{
                 top: "-100px",
               }}>
-              <UserInfo fetchedUser={fetchedUser} />
+              <UserInfo fetchedUser={userWithBunkers} />
             </div>
             <div className="mx-4 sm:mx-12 md:mx-24 m-auto">
               <div className="flex flex-col lg:grid lg:grid-cols-3 lg:col-gap-5">
@@ -41,11 +59,11 @@ const UserName = ({ fetchedUser, bunkers }) => {
                   <Filters />
                 </div>
                 <div className="col-span-2">
-                  {bunkers.map((bunker) => {
+                  {userWithBunkers.bunkers.length && userWithBunkers.bunkers.map((bunker) => {
                     return (
                       <span key={bunker.id}>
                         <Link
-                          href={`${bunker.author.username}/status/${bunker.id}`}>
+                          to={`${bunker.author.username}/status/${bunker.id}`}>
                           <div className="mb-5">
                             <Post bunker={bunker} />
                           </div>

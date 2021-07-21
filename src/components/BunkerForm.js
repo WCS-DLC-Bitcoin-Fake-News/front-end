@@ -16,6 +16,7 @@ function BunkerForm() {
   const { user, setUser } = useContext(UserContext);
 
   const createBunkerDraft = async (url) => {
+    console.log(user)
     const newPost = {
       source: url,
     };

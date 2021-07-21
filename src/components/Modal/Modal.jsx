@@ -1,7 +1,7 @@
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
-import UserContext from "../../context/UserContext";
+import UserContext from "../../contexts/UserContext";
 import Avatar from "../Avatar/Avatar";
 import FollowButton from "../FollowButton/FollowButton";
 

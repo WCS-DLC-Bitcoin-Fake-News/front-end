@@ -1,15 +1,46 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import CommentInput from "../../../components/CommentInput/CommentInput";
 import Comments from "../../../components/Comments/Comments";
 import Post from "../../../components/Post/Post";
 import Suggestions from "../../../components/Suggestions/Suggestions";
-import UserContext from "../../../context/UserContext";
-import firebase from "../../../firebase/init";
+import UserContext from "../../../contexts/UserContext";
+// import firebase from "../../../firebase/init";
 import Layout from "../../../layouts";
-import { fetchUser } from "../../../services/FetchData";
+import { fetchUser } from "../../../Api/FetchData";
 
-const Bunker = ({ bunker }) => {
+const Bunker = () => {
+  console.log("going here in Bunker")
+  const [ bunker, setBunker ] = useState({})
+
   const { user } = useContext(UserContext);
+
+  useEffect(() => {
+    
+  }, [])
+
+  // function handleUserLoad(context) {
+  //   const bunkerID = context.params.bunkerId;
+  //   const res = await firebase
+  //     .firestore()
+  //     .collection("bunkers")
+  //     .doc(bunkerID)
+  //     .get();
+  //   const bunker = res.data();
+  //   const id = res.id;
+  //   const user = await fetchUser({ userID: bunker.authorId });
+  
+  //   return {
+  //     props: {
+  //       bunker: {
+  //         ...bunker,
+  //         createdAt: bunker.createdAt.toDate().toString(),
+  //         id,
+  //         author: user,
+  //       },
+  //     },
+  //   };
+  // }
+
 
   return (
     <div>
@@ -35,27 +66,6 @@ const Bunker = ({ bunker }) => {
   );
 };
 
-export async function getServerSideProps(context) {
-  const bunkerID = context.params.bunkerId;
-  const res = await firebase
-    .firestore()
-    .collection("bunkers")
-    .doc(bunkerID)
-    .get();
-  const bunker = res.data();
-  const id = res.id;
-  const user = await fetchUser({ userID: bunker.authorId });
 
-  return {
-    props: {
-      bunker: {
-        ...bunker,
-        createdAt: bunker.createdAt.toDate().toString(),
-        id,
-        author: user,
-      },
-    },
-  };
-}
 
 export default Bunker;

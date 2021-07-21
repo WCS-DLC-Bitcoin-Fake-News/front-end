@@ -6,9 +6,9 @@ import Filters from "../components/Filters/Filters";
 import Post from "../components/Post/Post";
 import BookmarksBunkersContext from "../contexts/BookmarksBunkersContext";
 import UserContext from "../contexts/UserContext";
-import firebase from "../firebase/init";
+// import firebase from "../firebase/init";
 import Layout from "../layouts";
-import { fetchBunker } from "../services/FetchData";
+import { fetchBunker } from "../Api/FetchData";
 
 const Bookmarks = () => {
   const { user } = useContext(UserContext);
@@ -24,28 +24,28 @@ const Bookmarks = () => {
       if (!bookmarksBunkersContext) {
         async function getSavedBunkers() {
           const localBMBunkers = [];
-          const savesSnapShot = await firebase
-            .firestore()
-            .collection("saves")
-            .where("userID", "==", user.uid)
-            .get();
+          // const savesSnapShot = await firebase
+          //   .firestore()
+          //   .collection("saves")
+          //   .where("userID", "==", user.uid)
+          //   .get();
 
-          if (savesSnapShot.empty) {
-            setIsEmpty(true);
-            setBookmarkBunkers([]);
-            setIsLoading(false);
-          } else {
-            for (let i = 0; i < savesSnapShot.size; i++) {
-              const bunker = await fetchBunker(
-                savesSnapShot.docs[i].data().bunkerID
-              );
-              localBMBunkers.push(bunker);
-            }
-            setBookmarkBunkers(localBMBunkers);
-            setBookmarksBunkersContext(localBMBunkers);
-            setIsEmpty(false);
-            setIsLoading(false);
-          }
+          // if (savesSnapShot.empty) {
+          //   setIsEmpty(true);
+          //   setBookmarkBunkers([]);
+          //   setIsLoading(false);
+          // } else {
+          //   for (let i = 0; i < savesSnapShot.size; i++) {
+          //     const bunker = await fetchBunker(
+          //       savesSnapShot.docs[i].data().bunkerID
+          //     );
+          //     localBMBunkers.push(bunker);
+          //   }
+          //   setBookmarkBunkers(localBMBunkers);
+          //   setBookmarksBunkersContext(localBMBunkers);
+          //   setIsEmpty(false);
+          //   setIsLoading(false);
+          // }
         }
         getSavedBunkers(user.uid);
       } else {

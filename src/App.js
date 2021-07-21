@@ -68,6 +68,12 @@ function App() {
               <Route path="/ABunker" >
                 <Abunker />
               </Route>
+              <Route path="/article" >
+                <BunkerForm />
+              </Route>
+              <Route path="/:userId/status/:bunkerId" >
+                <Aprofile />
+              </Route>
             </Switch>
           </Router>
     </AppContext>

@@ -4,13 +4,12 @@ import BookmarksBunkersContext from "../contexts/BookmarksBunkersContext";
 import ExploreBunkersContext from "../contexts/ExploreBunkersContext";
 import HomeBunkersContext from "../contexts/HomeBunkersContext";
 import UserContext from "../contexts/UserContext";
-import firebase from "../firebase/init";
+// import firebase from "../firebase/init";
 import "../styles/global.css";
 import "../styles/reset.css";
-const db = firebase.firestore();
+// const db = firebase.firestore();
 
 function AppContext({ children }) {
-  const protectedRoutes = ["/home", "/bookmarks"];
 
   const [user, setUser] = useState(null);
   const [homeBunkersContext, setHomeBunkersContext] = useState(null);
@@ -30,6 +29,13 @@ function AppContext({ children }) {
   //     }
   //   });
   // }, []);
+  
+  useEffect(() => {
+    if (localStorage.getItem("user")) {
+      setUser(JSON.parse(localStorage.getItem("user")));
+    }
+  }, []);
+
 
   return (
     <>

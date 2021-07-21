@@ -1,10 +1,17 @@
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import shortID from "shortid";
-import { handleSignIn, handleSignUp } from "../../services/Authentication";
+import { handleSignIn, handleSignUp } from "../../Api/Authentication";
+import axios from "axios";
+import UserContext from "../../contexts/UserContext";
+import { useHistory } from "react-router-dom";
 
 const AuthForm = ({ type }) => {
+  const history = useHistory()
+  console.log(type)
+  const { user, setUser } = useContext(UserContext);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
@@ -207,16 +214,24 @@ const AuthForm = ({ type }) => {
           <div className="flex flex-row items-center flex-wrap">
             <button
               onClick={async (e) => {
+                console.log("here")
+                console.log(email, password, name)
                 e.preventDefault();
                 setAuthLoading(true);
-                const { message } = await handleSignUp(
-                  email,
-                  password,
-                  username + shortID.generate(),
-                  name
-                );
-                setAuthErrMsg(message);
-                setAuthLoading(false);
+                try {
+                  const logged = await handleSignUp(
+                    email,
+                    password,
+                    name
+                  );
+                  setUser(logged);
+                  setAuthLoading(false);
+                  history.push("/home");
+
+                } catch (error) {
+                  setAuthErrMsg(error.toString());
+                }
+         
               }}
               className={`relative text-white font-bold py-4 px-8 rounded focus:outline-none focus:shadow-outline ${
                 authLoading ? "cursor-not-allowed bg-blue-300" : "bg-primary"

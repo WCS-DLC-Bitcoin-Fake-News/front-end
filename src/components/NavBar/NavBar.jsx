@@ -4,7 +4,7 @@ import HomeIcon from "@material-ui/icons/Home";
 import {NavLink} from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import React, { useContext } from "react";
-import UserContext from "../../context/UserContext";
+import UserContext from "../../contexts/UserContext";
 import ProfileDropDown from "../ProfileDropDown/ProfileDropDown";
 
 const NavBar = () => {

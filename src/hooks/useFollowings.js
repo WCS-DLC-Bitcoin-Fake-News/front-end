@@ -1,5 +1,5 @@
 import React from "react";
-import { fetchUser, fetchUserFollowings } from "../services/FetchData";
+import { fetchUser, fetchUserFollowings } from "../Api/FetchData";
 
 export function useFollowings(userId) {
   const [followings, setFollowings] = React.useState([]);

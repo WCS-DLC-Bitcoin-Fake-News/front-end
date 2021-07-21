@@ -5,9 +5,9 @@ import React, { useEffect, useState } from "react";
 import ExploreFilters from "../components/ExploreFIlters/ExploreFilters";
 import Post from "../components/Post/Post";
 import ExploreBunkersContext from "../contexts/ExploreBunkersContext";
-import firebase from "../firebase/init";
+// import firebase from "../firebase/init";
 import Layout from "../layouts";
-import { fetchUser } from "../services/FetchData";
+import { fetchUser } from "../Api/FetchData";
 
 const Explore = () => {
   const [exploreBunkers, setExploreBunkers] = useState([]);
@@ -17,29 +17,29 @@ const Explore = () => {
 
   useEffect(async () => {
     if (!exploreBunkersContext) {
-      firebase
-        .firestore()
-        .collection("bunkers")
-        .limit(5)
-        .onSnapshot(async (bunkerRef) => {
-          const exploreUserBunkers = [];
+      // firebase
+      //   .firestore()
+      //   .collection("bunkers")
+      //   .limit(5)
+      //   .onSnapshot(async (bunkerRef) => {
+      //     const exploreUserBunkers = [];
 
-          for (let i = 0; i < bunkerRef.size; i++) {
-            const userInfo = await fetchUser({
-              userID: bunkerRef.docs[i].data().authorId,
-            });
-            let data = bunkerRef.docs[i].data();
+      //     for (let i = 0; i < bunkerRef.size; i++) {
+      //       const userInfo = await fetchUser({
+      //         userID: bunkerRef.docs[i].data().authorId,
+      //       });
+      //       let data = bunkerRef.docs[i].data();
 
-            exploreUserBunkers.push({
-              ...data,
-              createdAt: data.createdAt.toDate().toString(),
-              id: bunkerRef.docs[i].id,
-              author: userInfo,
-            });
-          }
-          setExploreBunkers(exploreUserBunkers);
-          setExploreBunkersContext(exploreUserBunkers);
-        });
+      //       exploreUserBunkers.push({
+      //         ...data,
+      //         createdAt: data.createdAt.toDate().toString(),
+      //         id: bunkerRef.docs[i].id,
+      //         author: userInfo,
+      //       });
+      //     }
+      //     setExploreBunkers(exploreUserBunkers);
+      //     setExploreBunkersContext(exploreUserBunkers);
+      //   });
     } else {
       setExploreBunkers(exploreBunkersContext);
     }

@@ -1,9 +1,9 @@
 import CircularProgress from "@material-ui/core/CircularProgress";
 import PhotoIcon from "@material-ui/icons/Photo";
 import React, { useContext, useState } from "react";
-import UserContext from "../../context/UserContext";
-import firebase from "../../firebase/init";
-import postBunker from "../../services/PostBunker";
+import UserContext from "../../contexts/UserContext";
+// import firebase from "../../firebase/init";
+import postBunker from "../../Api/PostBunker";
 import Avatar from "../Avatar/Avatar";
 
 const BunkerInput = () => {
@@ -16,9 +16,10 @@ const BunkerInput = () => {
   const fileInputRef = React.createRef();
 
   const uploadFile = async () => {
-    const storageRef = firebase.storage().ref("bunkers/" + file.name);
-    const task = await storageRef.put(file);
-    const link = await storageRef.getDownloadURL("bunkers/" + file.name);
+    const link = ""
+    // const storageRef = firebase.storage().ref("bunkers/" + file.name);
+    // const task = await storageRef.put(file);
+    // const link = await storageRef.getDownloadURL("bunkers/" + file.name);
     return link;
   };
 

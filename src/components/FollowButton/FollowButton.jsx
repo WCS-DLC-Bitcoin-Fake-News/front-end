@@ -1,7 +1,7 @@
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import React, { useContext, useEffect, useState } from "react";
-import UserContext from "../../context/UserContext";
-import firebase from "../../firebase/init";
+import UserContext from "../../contexts/UserContext";
+// import firebase from "../../firebase/init";
 
 const FollowButton = ({ userID }) => {
   const { user } = useContext(UserContext);
@@ -13,10 +13,11 @@ const FollowButton = ({ userID }) => {
       alert("You need to sign in for that");
       return;
     }
-    const { id } = firebase.firestore().collection("connections").add({
-      followerID: user.uid,
-      followeeID: userID,
-    });
+    const id = 0
+    // const { id } = firebase.firestore().collection("connections").add({
+    //   followerID: user.uid,
+    //   followeeID: userID,
+    // });
     setFollowingDocID(id);
     setIsFollowing(true);
   };
@@ -26,30 +27,30 @@ const FollowButton = ({ userID }) => {
       alert("You need to sign in for that");
       return;
     }
-    firebase
-      .firestore()
-      .collection("connections")
-      .doc(connectionDocID)
-      .delete();
+    // firebase
+    //   .firestore()
+    //   .collection("connections")
+    //   .doc(connectionDocID)
+    //   .delete();
     setIsFollowing(false);
   };
 
   useEffect(() => {
     if (user) {
       async function checkFollowing() {
-        const result = await firebase
-          .firestore()
-          .collection("connections")
-          .where("followeeID", "==", userID)
-          .where("followerID", "==", user.uid)
-          .get();
-        if (result.size === 1) {
-          setIsFollowing(true);
-          setFollowingDocID(result.docs[0].id);
+        // const result = await firebase
+        //   .firestore()
+        //   .collection("connections")
+        //   .where("followeeID", "==", userID)
+        //   .where("followerID", "==", user.uid)
+        //   .get();
+        // if (result.size === 1) {
+        //   setIsFollowing(true);
+        //   setFollowingDocID(result.docs[0].id);
         }
       }
-      checkFollowing();
-    }
+      // checkFollowing();
+    // }
   }, [user]);
 
   return (

@@ -21,7 +21,7 @@ const Bunker = (props) => {
   const fetchBunker = async () => {
     try {
       let { data } = await axios.get(`/bunkers/${id}`);
-      console.log(data);
+
       setSource(data.source);
       setTitle(data.title);
       setAuthor(data.author);

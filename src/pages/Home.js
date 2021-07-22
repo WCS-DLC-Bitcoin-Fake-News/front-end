@@ -1,5 +1,4 @@
 import CircularProgress from "@material-ui/core/CircularProgress";
-// import Head from "next/head";
 import { Link } from "react-router-dom";
 
 import { useContext, useEffect, useState } from "react";
@@ -9,7 +8,6 @@ import Trends from "../components/Trends/Trends";
 import BunkerInput from "../components/BunkerInput/BunkerInput";
 import HomeBunkersContext from "../contexts/HomeBunkersContext";
 import UserContext from "../contexts/UserContext";
-// import firebase from "../firebase/init";
 import Layout from "../layouts";
 import { fetchUser, fetchPublishedBunkers } from "../Api/FetchData";
 
@@ -25,73 +23,27 @@ const Home = () => {
 
   useEffect(async () => {
     try {
-     
-        console.log("is user")
-        if (!homeBunkersContext) {
-            setLoading(true);
-          // const connectionsRef = await firebase
-          //   .firestore()
-          //   .collection("connections")
-          //   .where("followerID", "==", user.uid)
-          //   .get();
-
-          // if (false) {
-            setIsEmpty(true);
-            setHomeBunkers([]);
-            // setLoading(false);
-          // } else {
-            console.log("Going here")
-
-            // const followerIDs = connectionsRef.docs.map((connection) => {
-            //   const floID = connection.data().followeeID;
-            //   return floID;
-            // });
-
-            // firebase
-            //   .firestore()
-            //   .collection("bunkers")
-            //   .where("authorId", "in", followerIDs)
-            //   .where("parentBunker", "==", null)
-            //   .orderBy("createdAt", "desc")
-            //   .onSnapshot(async (bunkerRef) => {
-            //     const homeUserBunkers = [];
-
-            //     for (let i = 0; i < bunkerRef.size; i++) {
-            //       const userInfo = await fetchUser({
-            //         userID: bunkerRef.docs[i].data().authorId,
-            //       });
-            //       let data = bunkerRef.docs[i].data();
-
-            //       homeUserBunkers.push({
-            //         ...data,
-            //         createdAt: data.createdAt.toDate().toString(),
-            //         id: bunkerRef.docs[i].id,
-            //         author: userInfo,
-            //       });
-            //     }
-                const bunkers = await fetchPublishedBunkers()
-                setHomeBunkersContext(bunkers);
-
-                setHomeBunkers(bunkers);
-                setLoading(false);
-                setIsEmpty(false);
-              // });
-          // }
-        } else {
-          console.log("there is a context")
+      if (!homeBunkersContext) {
+          setLoading(true);
+          setIsEmpty(true);
+          setHomeBunkers([]);
+          const bunkers = await fetchPublishedBunkers()
+          setHomeBunkersContext(bunkers);
+          setHomeBunkers(bunkers);
           setLoading(false);
-          setHomeBunkers(homeBunkersContext);
-        }
-      
+          setIsEmpty(false);
+      } else {
+        console.log("there is a context")
+        setLoading(false);
+        setHomeBunkers(homeBunkersContext);
+      }
     } catch (err) {
       console.log(err);
     }
   }, [user]);
 
   return (
-    <Layout>
-       
-
+      <Layout>
         <div className="mx-4 sm:mx-12 md:mx-24 lg:mx-24 xl:mx-24 mt-5">
           <div className="flex flex-col lg:grid lg:grid-cols-3 lg:col-gap-5">
             <div className="lg:col-span-2">
@@ -103,7 +55,6 @@ const Home = () => {
                   <CircularProgress />
                 </div>
               )}
-
               {isEmpty ? (
                 <h1>You are following no one</h1>
               ) : (
@@ -128,7 +79,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-        </Layout>
+      </Layout>
   );
 };
 

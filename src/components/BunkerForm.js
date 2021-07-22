@@ -22,7 +22,6 @@ function BunkerForm() {
     };
     try {
       // this const gets the 'token' and 'user'from localStorage. Check Signup.js to see how to access and save in localStorage.
-
       // Get the user from your context
 
       const config = {
@@ -32,17 +31,16 @@ function BunkerForm() {
         },
       };
 
-      // const body = JSON.stringify(newPost);
       const res = await axios.post(
         `/users/${user._id}/bunkers`,
         newPost,
         config
       );
+
       console.log(res);
       setPrintedSource(res.data.printedSource);
       setId(res.data._id);
 
-      // history.push("/")
     } catch (error) {
       console.log(error);
     }

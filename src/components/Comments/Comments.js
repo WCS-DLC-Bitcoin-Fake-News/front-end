@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-// import firebase from "../../firebase/init";
 import { fetchUser } from "../../Api/FetchData";
 import Avatar from "../Avatar/Avatar";
 
@@ -10,30 +9,9 @@ const Comments = ({ bunkerID }) => {
     const getComments = async () => {
       try {
         const localComments = []
-        // firebase
-        //   .firestore()
-        //   .collection("bunkers")
-        //   .where("parentBunker", "==", bunkerID)
-        //   .onSnapshot(async (bunkersRef) => {
-        //     const localComments = [];
-
-        //     for (let i = 0; i < bunkersRef.size; i++) {
-        //       const bunker = bunkersRef.docs[i].data({
-        //         serverTimestamps: "estimate",
-        //       });
-        //       const id = bunkersRef.docs[i].id;
-        //       const userInfo = await fetchUser({
-        //         userID: bunker.authorId,
-        //       });
-        //       localComments.push({
-        //         ...bunker,
-        //         id,
-        //         createdAt: bunker.createdAt.toDate().toString(),
-        //         author: userInfo,
-        //       });
-        //     }
-            setComments(localComments);
-          // });
+        // axios call to get comments by bunkerId
+        setComments(localComments);
+   
       } catch (err) {
         console.log(err);
       }

@@ -14,10 +14,8 @@ const FollowButton = ({ userID }) => {
       return;
     }
     const id = 0
-    // const { id } = firebase.firestore().collection("connections").add({
-    //   followerID: user.uid,
-    //   followeeID: userID,
-    // });
+  
+    // axios call to set following
     setFollowingDocID(id);
     setIsFollowing(true);
   };
@@ -27,30 +25,19 @@ const FollowButton = ({ userID }) => {
       alert("You need to sign in for that");
       return;
     }
-    // firebase
-    //   .firestore()
-    //   .collection("connections")
-    //   .doc(connectionDocID)
-    //   .delete();
+    
+    // axios call to stop following
+
     setIsFollowing(false);
   };
 
   useEffect(() => {
     if (user) {
       async function checkFollowing() {
-        // const result = await firebase
-        //   .firestore()
-        //   .collection("connections")
-        //   .where("followeeID", "==", userID)
-        //   .where("followerID", "==", user.uid)
-        //   .get();
-        // if (result.size === 1) {
-        //   setIsFollowing(true);
-        //   setFollowingDocID(result.docs[0].id);
-        }
+        // axios call to check if already followed
       }
       // checkFollowing();
-    // }
+      }
   }, [user]);
 
   return (

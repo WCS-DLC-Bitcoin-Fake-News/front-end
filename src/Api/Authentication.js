@@ -1,6 +1,4 @@
-// import firebase from "../firebase/init";
 import axios from "axios";
-
 
 async function handleSignUp(email, password, name) {
   console.log(name, email, password)
@@ -19,8 +17,7 @@ async function handleSignUp(email, password, name) {
       JSON.stringify({ ...res.data.user, token: res.data.token })
     );
     return { ...res.data.user, token: res.data.token }
-    // setUser({ ...res.data.user, token: res.data.token });
-    // history.push("/");
+
   } catch (error) {
     return error;
     console.error(error);
@@ -28,7 +25,6 @@ async function handleSignUp(email, password, name) {
 }
 
 async function handleSignIn(email, password) {
-  // e.preventDefault();
   const user = {
     email,
     password
@@ -47,8 +43,6 @@ async function handleSignIn(email, password) {
         "user",
         JSON.stringify({ ...res.data.user, token: res.data.token })
       );
-      // setUser({ ...res.data.user, token: res.data.token });
-      // history.push("/profile");
       return res.data.user
     }
   } catch (error) {
@@ -61,7 +55,6 @@ async function handleSignOut() {
   try {
     localStorage.removeItem("user")
       
-    // await firebase.auth().signOut();
     
     return true;
   } catch (error) {

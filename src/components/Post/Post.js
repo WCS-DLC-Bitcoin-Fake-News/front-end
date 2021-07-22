@@ -32,10 +32,6 @@ const Post = ({ bunker }) => {
       alert("You need to sign in for that");
       return;
     }
-    // const { id } = await firebase.firestore().collection("likes").add({
-    //   userID: user.uid,
-    //   bunkerID: bunker.id,
-    // });
     // axios col to upVote
 
     setLikes((prev) => prev + 1);
@@ -59,10 +55,7 @@ const Post = ({ bunker }) => {
       return;
     }
     // axios call to bookmarks a bunker
-    // const { id } = firebase.firestore().collection("saves").add({
-    //   bunkerID: bunker.id,
-    //   userID: user.uid,
-    // });
+
     setSaves((prev) => prev + 1);
     // setSaveDocID(id);
     setIsSaved(true);
@@ -73,8 +66,7 @@ const Post = ({ bunker }) => {
       alert("You need to sign in for that");
       return;
     }
-    // axios call
-    // firebase.firestore().collection("saves").doc(saveDocID).delete();
+    // axios call to unbookmark a bunker
     setSaves((prev) => prev - 1);
     setIsSaved(false);
   };
@@ -82,48 +74,28 @@ const Post = ({ bunker }) => {
   useEffect(async () => {
     // setLikes((await fetchBunkerLikes(localBunker.id)).size);
     if (user) {
-      async function checkForLikes() {
-        // const docs = await firebase
-        //   .firestore()
-        //   .collection("likes")
-        //   .where("userID", "==", user.uid)
-        //   .where("bunkerID", "==", bunker.id)
-        //   .get();
-        // if (docs.size === 1) {
-        //   setIsLiked(true);
-        //   setLikeDocID(docs.docs[0].id);
-        // }
+      async function checkForLikes(bunkerId) {
+  
       }
       checkForLikes();
 
       async function checkForSaves() {
-        // const docs = await firebase
-        //   .firestore()
-        //   .collection("saves")
-        //   .where("userID", "==", user.uid)
-        //   .where("bunkerID", "==", bunker.id)
-        //   .get();
-        // if (docs.size === 1) {
-        //   setIsSaved(true);
-        //   setSaveDocID(docs.docs[0].id);
-        // }
+      // axios call to count how many bookmarks on a bunker
+
+        
       }
       checkForSaves();
 
       async function getCommentsCount() {
-        // const res = await firebase
-        //   .firestore()
-        //   .collection("bunkers")
-        //   .where("parentBunker", "==", bunker.id)
-        //   .get();
-        // setComments(res.size);
+        // axios call to get the number of comments
+       
       }
       getCommentsCount();
-      if (user.uid === bunker.author.uid) {
-        setMyBunker(true);
-      }
+      // if (user.uid === bunker.author.uid) {
+      //   setMyBunker(true);
+      // }
     }
-    // setSaves((await fetchBunkerSaves(localBunker.id)).size);
+    // setSaves((await fetchBunkerSaves(localBunker.id)).length);
   }, []);
 
   return (

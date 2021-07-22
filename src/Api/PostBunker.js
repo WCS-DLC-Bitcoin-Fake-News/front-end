@@ -1,5 +1,3 @@
-// import firebase from "../firebase/init";
-
 const postBunker = async (
   authorId,
   text,
@@ -7,13 +5,9 @@ const postBunker = async (
   parentBunker = null
 ) => {
   console.log(authorId, text, imgLink, parentBunker);
-  // await firebase.firestore().collection("bunkers").add({
-  //   authorId,
-  //   text,
-  //   parentBunker,
-  //   imgLink,
-  //   createdAt: firebase.firestore.Timestamp.now(),
-  // });
+
+  // axios post a bunker from here
+ 
 };
 
 export default postBunker;

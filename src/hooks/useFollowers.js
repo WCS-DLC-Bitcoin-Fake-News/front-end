@@ -11,18 +11,12 @@ export function useFollowers(userId, authUserID) {
     const data = [];
     setIsFollowersLoading(true);
     if (user) {
-      const followersSnapShot = await fetchUserFollowers(userId, authUserID);
-      for (let i = 0; i < followersSnapShot.size; i++) {
-        data.push(
-          await fetchUser({
-            userID: followersSnapShot.docs[i].data().followerID,
-          })
-        );
-      }
+      // axios call to get followers
     }
     setFollowers(data);
     setIsFollowersLoading(false);
   };
 
   return { followers, isFollowersLoading, getFollowers };
+  
 }

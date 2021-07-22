@@ -9,13 +9,7 @@ export function useFollowings(userId) {
     const data = [];
     setIsFollowingsLoading(true);
     const followersSnapShot = await fetchUserFollowings(userId);
-    for (let i = 0; i < followersSnapShot.size; i++) {
-      data.push(
-        await fetchUser({
-          userID: followersSnapShot.docs[i].data().followeeID,
-        })
-      );
-    }
+    // axios call to get folowings
     setFollowings(data);
     setIsFollowingsLoading(false);
   };

@@ -24,28 +24,7 @@ const Bookmarks = () => {
       if (!bookmarksBunkersContext) {
         async function getSavedBunkers() {
           const localBMBunkers = [];
-          // const savesSnapShot = await firebase
-          //   .firestore()
-          //   .collection("saves")
-          //   .where("userID", "==", user.uid)
-          //   .get();
-
-          // if (savesSnapShot.empty) {
-          //   setIsEmpty(true);
-          //   setBookmarkBunkers([]);
-          //   setIsLoading(false);
-          // } else {
-          //   for (let i = 0; i < savesSnapShot.size; i++) {
-          //     const bunker = await fetchBunker(
-          //       savesSnapShot.docs[i].data().bunkerID
-          //     );
-          //     localBMBunkers.push(bunker);
-          //   }
-          //   setBookmarkBunkers(localBMBunkers);
-          //   setBookmarksBunkersContext(localBMBunkers);
-          //   setIsEmpty(false);
-          //   setIsLoading(false);
-          // }
+          // axios call to get saved bunkers
         }
         getSavedBunkers(user.uid);
       } else {
@@ -58,9 +37,6 @@ const Bookmarks = () => {
 
   return (
     <div>
-      {/* <Head>
-        <title>Bookmarks | Bunkerer</title>
-      </Head> */}
       <Layout>
         <div className="mx-4 sm:mx-12 md:mx-24 lg:mx-24 mt-5">
           <div className="flex flex-col lg:grid lg:grid-cols-3 lg:col-gap-5">

@@ -15,20 +15,6 @@ function AppContext({ children }) {
   const [homeBunkersContext, setHomeBunkersContext] = useState(null);
   const [exploreBunkersContext, setExploreBunkersContext] = useState(null);
   const [bookmarksBunkersContext, setBookmarksBunkersContext] = useState(null);
-
-  // useEffect(() => {
-  //   async function getCurrentUser(userID) {
-  //     const user = await db.collection("users").doc(userID).get();
-  //     setUser({ ...user.data(), uid: userID });
-  //   }
-
-  //   firebase.auth().onAuthStateChanged((loggedUser) => {
-  //     if (!loggedUser) {
-       
-  //     } else {
-  //     }
-  //   });
-  // }, []);
   
   useEffect(() => {
     if (localStorage.getItem("user")) {

@@ -1,11 +1,11 @@
+import React, { useState } from "react";
+
 import CircularProgress from "@material-ui/core/CircularProgress";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import DeleteIcon from "@material-ui/icons/Delete";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-// import { Link } from "react-router-dom";
 import {Link, useHistory} from "react-router-dom";
 
-import React, { useState } from "react";
 import { handleSignOut } from "../../Api/Authentication";
 import { deleteAccount } from "../../Api/DeleteAccount";
 import Avatar from "../Avatar/Avatar";
@@ -111,8 +111,6 @@ const ProfileDropDown = ({ user }) => {
                   onClick={() => {
                     handleSignOut()
                     history.push("/")
-
-                    
                   }}>
                   <span className="pr-4">
                     <ExitToAppIcon htmlColor="#c53030" />

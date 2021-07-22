@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Landing from "./pages/Landing";
@@ -5,31 +6,26 @@ import Profile from "./pages/Profile";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Help from "./pages/Help";
-// import Signup from "./pages/Signup";
 import Signin from "./pages/Signin";
 import BunkerDetail from "./pages/BunkerDetail";
 import BunkerForm from "./components/BunkerForm";
 import Upvote from "./components/voteButton";
 import BunkerEditor from "./pages/BunkerEditor";
-// import FakeEmbed from "./pages/FakeEmbed";
-import CommentField from "./components/modules/Comment/CommentField";
-import CommentContainer from "./components/modules/Comment/CommentContainer";
+// import CommentField from "./components/modules/Comment/CommentField";
+// import CommentContainer from "./components/modules/Comment/CommentContainer";
 import UserContext from "./contexts/UserContext";
-import { useState, useEffect } from "react";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Layout from "./layouts"
-import Home from "./pages/home.jsx";
-import Explore from "./pages/explore.jsx";
-import Bookmarks from "./pages/bookmarks.jsx";
-import Login from "./pages/login.jsx";
-import Signup from "./pages/signup.jsx";
-import "./styles/global.css"
-import "./styles/reset.css";
-import AppContext from "./pages/AppContext.jsx"
-import First from "./pages";
+import Home from "./pages/Home";
+import Explore from "./pages/Explore";
+import Bookmarks from "./pages/Bookmarks";
+// import Signin from "./pages/login.js";
+import Signup from "./pages/Signup";
+import AppContext from "./pages/AppContext"
+import Init from "./pages";
 
 import Aprofile from "./pages/Aprofile"
-import Abunker from "./pages/Aprofile/status/aBunker.jsx"
+import Abunker from "./pages/Aprofile/status/aBunker.js"
 
 function App() {
   const [user, setUser] = useState(null);
@@ -45,7 +41,7 @@ function App() {
         <Router>
             <Switch>
               <Route exact path="/">
-                <First />
+                <Init />
               </Route>
               <Route exact path="/home">
                 <Home />
@@ -56,8 +52,8 @@ function App() {
               <Route exact path="/bookmarks">
                 <Bookmarks />
               </Route>
-              <Route exact path="/login">
-                <Login />
+              <Route exact path="/signin">
+                <Signin />
               </Route>
               <Route exact path="/signup">
                 <Signup />
@@ -68,16 +64,15 @@ function App() {
               <Route path="/ABunker" >
                 <Abunker />
               </Route>
-              <Route path="/article" >
+              <Route path="/debunk/:url" >
                 <BunkerForm />
               </Route>
               <Route path="/:userId/status/:bunkerId" >
-                <Aprofile />
+                <BunkerEditor />
               </Route>
             </Switch>
           </Router>
     </AppContext>
-
   );
 }
 

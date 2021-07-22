@@ -17,7 +17,7 @@ const NavBar = () => {
         <NavLink to="/home">
           <img
             className="cursor-pointer ml-4"
-            src="/images/logos/bunker.svg"
+            src="/images/logos/bunker.png"
             alt="logo"
           />
         </NavLink>

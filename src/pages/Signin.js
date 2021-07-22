@@ -10,7 +10,7 @@ const SignIn = () => {
           <Link to="/">
             <img
               className="cursor-pointer"
-              src="/images/logos/bunker-light.svg"
+              src="/images/logos/bunker.png"
               alt="logo"
             />
           </Link>

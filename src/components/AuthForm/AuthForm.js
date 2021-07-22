@@ -252,7 +252,7 @@ const AuthForm = ({ type }) => {
               )}
             </button>
             <div className="py-4 mr-0 ml-auto">
-              <Link to="/login">
+              <Link to="/signin">
                 <a className="font-noto text-white font-semibold">
                   Already have an account? Sign In
                 </a>

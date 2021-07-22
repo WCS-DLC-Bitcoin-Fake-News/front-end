@@ -49,7 +49,7 @@ function App() {
               <Route exact path="/bookmarks">
                 <Bookmarks />
               </Route>
-              <Route path="/debunk/:url" >
+              <Route path="/debunk/:bunkerId" >
                 <BunkerEditor />
               </Route>
               <Route path="/:userId/status/:bunkerId" >

@@ -43,7 +43,9 @@ export const fetchUserFollowers = async (userID) => {
 
 
   try {
-    const { data } = await axios.get(`/users`);
+    const data = []
+
+    // const { data } = await axios.get(`/users`);
     console.log(data)
     return data;
   } catch (error) {
@@ -56,7 +58,8 @@ export const fetchUserFollowers = async (userID) => {
 export const fetchUserFollowings = async (userID) => {
 
   try {
-    const { data } = await axios.get(`/users`);
+    const data = []
+    // const { data } = await axios.get(`/users`);
     console.log(data)
     return data;
   } catch (error) {

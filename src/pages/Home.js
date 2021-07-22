@@ -24,6 +24,7 @@ const Home = () => {
   useEffect(async () => {
     try {
       if (!homeBunkersContext) {
+          console.log("there is not")
           setLoading(true);
           setIsEmpty(true);
           setHomeBunkers([]);

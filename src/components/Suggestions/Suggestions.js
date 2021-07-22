@@ -12,11 +12,11 @@ const Suggestions = ({ type, userID }) => {
 
   useEffect(async () => {
     if (user) {
-      const localUser = await fetchUser(
-        user._id,
-      );
-      const followersCount = await fetchUserFollowers(user._id);
-      setUser({ ...localUser, followersCount: 10 });
+      // const localUser = await fetchUser(
+      //   user._id,
+      // );
+      // const followersCount = await fetchUserFollowers(user._id);
+      // setUser({ ...user, followersCount: 10 });
       setLoading(false);
     }
   }, [user]);
@@ -47,7 +47,7 @@ const Suggestions = ({ type, userID }) => {
             <div className="flex flex-col">
               <p className="font-poppins font-medium">{user.name}</p>
               <p className="font-noto font-medium text-sm text-gray-600">
-                {user.followersCount} Followers
+                {10} Followers
               </p>
             </div>
             <div className="mr-0 ml-auto">

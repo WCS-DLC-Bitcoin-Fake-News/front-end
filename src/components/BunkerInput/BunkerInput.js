@@ -1,9 +1,11 @@
+import React, { useContext, useState, useEffect } from "react";
+
 import CircularProgress from "@material-ui/core/CircularProgress";
 import PhotoIcon from "@material-ui/icons/Photo";
-import React, { useContext, useState } from "react";
 import UserContext from "../../contexts/UserContext";
 import postBunker from "../../Api/PostBunker";
 import Avatar from "../Avatar/Avatar";
+import { useHistory } from "react-router-dom";
 
 const BunkerInput = () => {
   const { user } = useContext(UserContext);
@@ -11,6 +13,8 @@ const BunkerInput = () => {
   const [imgLink, setImgLink] = useState(null);
   const [file, setFile] = useState(null);
   const [bunkering, setBunkering] = useState(false);
+
+  const history = useHistory();
 
   const fileInputRef = React.createRef();
 
@@ -38,18 +42,20 @@ const BunkerInput = () => {
                     if (file) {
                       imgLink = await uploadFile();
                     }
-                    await postBunker(user.uid, bunker.trim(), imgLink);
+                    let draftId = await postBunker(user, bunker, imgLink);
+                    console.log("yo", draftId)
                     setBunkering(false);
                     setFile(null);
                     setBunker("");
                     setImgLink(null);
+                    history.push(`/debunk/${draftId}`)
                   }
                   postBunkerandUploadFile();
                 }}>
                 <textarea
                   className="w-full h-16 font-noto font-medium text-base text-gray-500"
                   name="bunker-input"
-                  placeholder="What's Happening?"
+                  placeholder="Give a link and bunk a fake"
                   type="text"
                   value={bunker}
                   onChange={(e) => setBunker(e.target.value)}

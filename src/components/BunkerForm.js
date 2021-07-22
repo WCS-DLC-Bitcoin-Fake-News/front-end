@@ -1,22 +1,25 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import ReactQuill from "react-quill";
 import "../../node_modules/react-quill/dist/quill.snow.css";
 import BunkerVisualizer from "./modules/Bunker/BunkerVisualizer";
 import UserContext from "../contexts/UserContext";
-
+import { fetchBunker } from "./../Api/FetchData"
 function BunkerForm() {
+  const { user } = useContext(UserContext);
+  const { bunkerId } = useParams();
+
   const [body, setBody] = useState(" ");
   const [title, setTitle] = useState(" ");
   const [source, setSource] = useState("");
   const [printedSource, setPrintedSource] = useState("");
   const [id, setId] = useState("");
   let history = useHistory();
-  const { user, setUser } = useContext(UserContext);
 
   const createBunkerDraft = async (url) => {
     console.log(user)
+
     const newPost = {
       source: url,
     };
@@ -46,6 +49,12 @@ function BunkerForm() {
     }
   };
 
+  useEffect(async () => {
+      const data = await fetchBunker(bunkerId)
+      setPrintedSource(data.printedSource);
+      setId(data._id);
+  }, [])
+
   const editTitle = (e) => {
     setTitle(e.target.value);
   };
@@ -58,7 +67,7 @@ function BunkerForm() {
     const url = e.clipboardData.getData("text");
     console.log(e.clipboardData.getData("text"));
     setSource(url);
-    createBunkerDraft(url);
+    // createBunkerDraft(url);
   };
   const onSubmit = async (e) => {
     e.preventDefault();

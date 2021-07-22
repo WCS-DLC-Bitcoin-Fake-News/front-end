@@ -18,19 +18,21 @@ import Modal from "./Modal.js";
 import React, {useState} from "react";
 
 function App() {
-  const [showModal, setShowModal] = React.useState(false);
-
+  const [show, setShow] = useState(false);
   return (
     <Router>
       <Navbar />
-      <Modal showModal={showModal} setShowModal={setShowModal}/>
+      {/* <button onClick={() => setShow(true)}>Show Modal</button> */}
+      {/* <Modal onClose={() => setShow(false)} show={show}>
+      <PostForm/>
+      </Modal> */}
       <Switch>
         <Route exact path="/" component={Landing} />
         <Route exact path="/profile" component={Profile} />
         <Route exact path="/about" component={About} />
         <Route exact path="/contact" component={Contact} />
         <Route exact path="/help" component={Help} />
-        <Route exact path="/post" component={PostForm} />
+        {/* <Route exact path="/post" component={PostForm} /> */}
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/signin" component={Signin} />
         <Route exact path="/comments" component={CommentContainer} />

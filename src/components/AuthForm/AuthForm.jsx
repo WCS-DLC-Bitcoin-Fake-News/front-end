@@ -28,6 +28,7 @@ const AuthForm = ({ type }) => {
           const { message } = await handleSignIn(email, password);
           setAuthErrMsg(message);
           setAuthLoading(false);
+          history.push("/home")
         }}>
         <div className="mb-4 bg-blue-900">
           <label

@@ -3,7 +3,7 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import DeleteIcon from "@material-ui/icons/Delete";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 // import { Link } from "react-router-dom";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 
 import React, { useState } from "react";
 import { handleSignOut } from "../../Api/Authentication";
@@ -13,6 +13,7 @@ import Avatar from "../Avatar/Avatar";
 const ProfileDropDown = ({ user }) => {
   const [dropdown, setDropdown] = useState(false);
   const [deletingAccount, setDeletingAccount] = useState(false);
+  const history = useHistory()
   return (
     <div>
       <div className="flex flex-row items-center mr-4">
@@ -107,7 +108,12 @@ const ProfileDropDown = ({ user }) => {
                   type="submit"
                   className="block w-full text-left px-4 py-2 text-sm text-red-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
                   role="menuitem"
-                  onClick={() => handleSignOut()}>
+                  onClick={() => {
+                    handleSignOut()
+                    history.push("/")
+
+                    
+                  }}>
                   <span className="pr-4">
                     <ExitToAppIcon htmlColor="#c53030" />
                   </span>

@@ -6,8 +6,8 @@ module.exports = {
     },
     extend: {
       colors: {
-        primary: "#2F80ED",
-        secondary: "#828282",
+        primary: "red",
+        secondary: "gray",
       },
       // backgroundImage: (theme) => ({
       //   banner: "url('/images/banner.jpg')",

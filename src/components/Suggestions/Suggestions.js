@@ -25,11 +25,11 @@ const Suggestions = ({ type, userID }) => {
     <div className="bg-white w-full p-5 rounded-lg">
       {type === "relavant" ? (
         <p className="font-poppins font-semibold text-base mb-3">
-          Relavant People
+          Relevant Bunkers
         </p>
       ) : (
         <p className="font-poppins font-semibold text-base mb-3">
-          Who to Follow
+          Recent Winners
         </p>
       )}
       <hr />

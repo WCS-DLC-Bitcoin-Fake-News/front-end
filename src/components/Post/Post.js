@@ -10,8 +10,9 @@ import UserContext from "../../contexts/UserContext";
 import { deleteBunker } from "../../Api/DeleteBunker";
 import { fetchBunkerLikes, fetchBunkerSaves } from "../../Api/FetchData";
 import Avatar from "../Avatar/Avatar";
-
-const Post = ({ bunker }) => {
+import BunkerVisualizer from "../modules/Bunker/BunkerVisualizer";
+const Post = ( { bunker } ) => {
+  console.log("bunker?", bunker)
   const { user } = useContext(UserContext);
   const [localBunker, setLocalBunker] = useState(bunker);
 
@@ -135,7 +136,9 @@ const Post = ({ bunker }) => {
       </div>
       <span>
         <div className="font-noto text-base font-normal pt-4">
-          {localBunker.text}
+          {localBunker.body}
+          {localBunker.printedSource.length && <BunkerVisualizer source={localBunker.source} printedSource={localBunker.printedSource} />}
+
         </div>
         {bunker.imgLink && (
           <div

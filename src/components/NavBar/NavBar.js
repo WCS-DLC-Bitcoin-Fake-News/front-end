@@ -12,7 +12,7 @@ const NavBar = () => {
   const router = useHistory();
 
   return (
-    <div className="font-poppins bg-white">
+    <div className="opacity-80 font-poppins nm-flat-white">
       <nav className="justify-between h-16 flex flex-row lg:justify-between items-center">
         <NavLink to="/home">
           <img

@@ -11,7 +11,7 @@ const Home = () => {
             </h1>
           </div>
         </div>
-        <div className="lg:w-2/4 bg-gray-300 py-6">
+        <div className="lg:w-2/4 nm-inset-gray-300 py-6">
           <div className="mx-6">
             <div className="my-4">
               <img src="/images/logos/bunker.png" alt="logo" />

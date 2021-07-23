@@ -21,7 +21,7 @@ const ProfileDropDown = ({ user }) => {
           <div>
             <button
               type="button"
-              className="inline-flex justify-center w-full rounded-md border  shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 "
+              className="inline-flex justify-center w-full rounded-full shadow-sm px-4 py-2 nm-convex-white border border-yellowBunker  text-sm font-medium text-gray-700 hover:bg-gray-50 "
               id="options-menu"
               aria-haspopup="true"
               aria-expanded="true"

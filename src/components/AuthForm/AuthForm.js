@@ -30,7 +30,7 @@ const AuthForm = ({ type }) => {
           setAuthLoading(false);
           history.push("/home")
         }}>
-        <div className="mb-4 bg-gray-300">
+        <div className="mb-4">
           <label
             className="block text-black text-sm font-bold p-4"
             htmlFor="Email">
@@ -51,7 +51,7 @@ const AuthForm = ({ type }) => {
           </label>
         </div>
         <div className="mb-6">
-          <div className="mb-4 bg-gray-300">
+          <div className="mb-4">
             <label
               className="block text-black text-sm font-bold p-4"
               htmlFor="password">
@@ -82,7 +82,7 @@ const AuthForm = ({ type }) => {
         <div className="flex flex-row flex-wrap items-center">
           <button
             className={`relative text-black font-bold py-4 px-8 rounded focus:outline-none focus:shadow-outline ${
-              authLoading ? "cursor-not-allowed bg-#CCDE04" : "bg-yellowBunker"
+              authLoading ? "cursor-not-allowed bg-#CCDE04" : "nm-flat-yellowBunker-sm"
             } `}
             type="submit">
             Sign In

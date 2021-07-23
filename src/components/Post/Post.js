@@ -2,6 +2,8 @@ import BookmarkIcon from "@material-ui/icons/Bookmark";
 import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
 import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
 import DeleteIcon from "@material-ui/icons/Delete";
+import ThumbUpIcon from "@material-ui/icons/ThumbUp";
+import ThumbDownIcon from "@material-ui/icons/ThumbDown";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import { Link } from "react-router-dom";
@@ -11,6 +13,7 @@ import { deleteBunker } from "../../Api/DeleteBunker";
 import { fetchBunkerLikes, fetchBunkerSaves } from "../../Api/FetchData";
 import Avatar from "../Avatar/Avatar";
 import BunkerVisualizer from "../modules/Bunker/BunkerVisualizer";
+import axios from "axios";
 const Post = ( { bunker } ) => {
   console.log("bunker?", bunker)
   const { user } = useContext(UserContext);
@@ -29,11 +32,25 @@ const Post = ( { bunker } ) => {
   const [myBunker, setMyBunker] = useState(false);
 
   const likeBunker = async () => {
+    console.log(" iam in like bunker ")
+    console.log(bunker)
+    const upvote = {
+      pro : true,
+      author: bunker.author
+    }
+  
     if (!user) {
       alert("You need to sign in for that");
       return;
     }
     // axios col to upVote
+
+    const res = await axios.post(
+      `/bunkers/${bunker.id}/votes`,
+      upvote,
+    );
+
+    return res.data;
 
     setLikes((prev) => prev + 1);
     // setLikeDocID(id);
@@ -41,6 +58,8 @@ const Post = ( { bunker } ) => {
   };
 
   const dislikeBunker = () => {
+    console.log(" iam in dislike bunker ")
+    debugger;
     if (!user) {
       alert("You need to sign in for that");
       return;
@@ -100,7 +119,7 @@ const Post = ( { bunker } ) => {
   }, []);
 
   return (
-    <div className="p-5 bg-white rounded-lg hover:bg-gray-100 cursor-pointer">
+    <div className="p-5 nm-flat-white rounded-lg hover:bg-gray-100 cursor-pointer">
       <div className="flex items-center content-evenly">
         <div className="w-16 h-16 overflow-hidden rounded-lg m-4">
           <Avatar src={localBunker.author.profilePicture} />
@@ -164,7 +183,10 @@ const Post = ( { bunker } ) => {
             {comments} Comments
           </p>
           <p className="mx-1 text-gray-500 font-noto font-medium">
-            {likes} Likes
+            {likes} Upvote
+          </p>
+          <p className="mx-1 text-gray-500 font-noto font-medium">
+            {likes} Downvote
           </p>
           <p className="mx-1 text-gray-500 font-noto font-medium">
             {saves} Saved
@@ -181,21 +203,7 @@ const Post = ( { bunker } ) => {
           </span>
           <span className="hidden lg:block">Comments</span>
         </button>
-        {isLiked ? (
-          <button
-            className="flex-1 mx-4 font-noto font-medium text-red-600 rounded-lg hover:bg-gray-400 cursor-pointer py-6"
-            type="submit"
-            onClick={(e) => {
-              e.stopPropagation();
-              dislikeBunker();
-            }}>
-            <span className="">
-              <FavoriteIcon style={{ color: "#e53e3e" }} />
-            </span>
-            <span className="hidden lg:block">Liked</span>
-          </button>
-        ) : (
-          <button
+        <button
             className="flex-1 mx-4 font-noto font-medium rounded-lg hover:bg-gray-400 cursor-pointer py-6"
             type="submit"
             onClick={(e) => {
@@ -203,11 +211,22 @@ const Post = ( { bunker } ) => {
               likeBunker();
             }}>
             <span className="">
-              <FavoriteBorderIcon style={{ color: "#828282" }} />
+              <ThumbUpIcon style={{ color: "#828282" }} />
             </span>
-            <span className="hidden lg:block">Likes</span>
+            <span className="hidden lg:block">Upvote</span>
           </button>
-        )}
+          <button
+            className="flex-1 mx-4 font-noto font-medium rounded-lg hover:bg-gray-400 cursor-pointer py-6"
+            type="submit"
+            onClick={(e) => {
+              e.stopPropagation();
+              dislikeBunker();
+            }}>
+            <span className="">
+              <ThumbDownIcon style={{ color: "#828282" }} />
+            </span>
+            <span className="hidden lg:block">Downvote</span>
+          </button>
         {isSaved ? (
           <button
             className="flex-1 mx-4 font-noto font-medium rounded-lg text-blue-600 hover:bg-gray-400 cursor-pointer py-6"

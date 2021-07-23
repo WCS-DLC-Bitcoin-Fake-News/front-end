@@ -22,7 +22,7 @@ const Suggestions = ({ type, userID }) => {
   }, [user]);
 
   return (
-    <div className="bg-white w-full p-5 rounded-lg">
+    <div className="nm-flat-white w-full p-5 rounded-lg">
       {type === "relavant" ? (
         <p className="font-poppins font-semibold text-base mb-3">
           Relevant Bunkers

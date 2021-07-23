@@ -2,7 +2,7 @@ const Trends = () => {
   // axios call to get trends and map results
   return (
     <div
-      className="bg-white w-full p-5 rounded-lg"
+      className="nm-flat-white w-full p-5 rounded-lg"
       style={{ height: "max-content" }}>
       <p className="font-poppins font-semibold text-base mb-3">Trends</p>
       <hr />

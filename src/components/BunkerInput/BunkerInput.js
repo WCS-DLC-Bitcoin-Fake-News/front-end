@@ -24,7 +24,7 @@ const BunkerInput = () => {
   };
 
   return (
-    <div className=" bg-white rounded-lg h-auto overflow-hidden ">
+    <div className="nm-flat-white rounded-lg h-auto overflow-hidden ">
       <div className="p-5">
         <div className="flex flex-row my-5">
           <div className="w-20 h-20 rounded-lg overflow-hidden">
@@ -53,9 +53,9 @@ const BunkerInput = () => {
                   postBunkerandUploadFile();
                 }}>
                 <textarea
-                  className="w-full h-16 font-noto font-medium border-2 border-gray-200 rounded-lg text-base text-gray-500"
+                  className="nm-inset-white w-full h-16 font-noto font-medium border-2 border-gray-200 rounded-lg text-base text-gray-500"
                   name="bunker-input"
-                  placeholder="Paste a link to Debunk"
+                  placeholder="  Drop a link to Debunk"
                   type="text"
                   value={bunker}
                   onChange={(e) => setBunker(e.target.value)}
@@ -78,10 +78,10 @@ const BunkerInput = () => {
                   </div> */}
                   <div className="mr-0 ml-auto">
                     <button
-                      className={`bottom-0 relative text-white px-8 py-4 rounded-md ${
+                      className={`bottom-0 relative text-white px-8 py-4 rounded-full ${
                         bunkering
-                          ? "bg-blue-300 cursor-not-allowed"
-                          : "bg-primary"
+                          ? "nm-inset-yellowBunker cursor-not-allowed"
+                          : "nm-concave-yellowBunker-sm"
                       }`}
                       type="submit">
                       {bunkering ? "Bunkering...." : "Bunker"}

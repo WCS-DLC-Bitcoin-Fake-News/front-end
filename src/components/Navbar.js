@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import React, { useState, useContext } from "react";
 import { Transition } from "@headlessui/react";
 import LOGO from "../img/Logo.svg";
@@ -11,7 +11,6 @@ const LoginButtons = () => {
 
   const handleDisconnect = (e) => {
     e.preventDefault();
-    localStorage.removeItem("token");
     localStorage.removeItem("user");
     setUser(null);
     history.push("/");
@@ -39,7 +38,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div class="">
+    <div>
       <div className="px-3 flex items-center h-16 w-full justify-between">
         <div className="flex-shrink-0 w-1/12">
           <Link to="/">
@@ -47,7 +46,6 @@ const Navbar = () => {
               style={{ width: "65px", opacity: 0.85 }}
               alt="Logo"
               src={LOGO}
-              onclick="window.open(this.src)"
             />
           </Link>
         </div>
@@ -55,45 +53,45 @@ const Navbar = () => {
         <div className="hidden md:block w-11/12">
           <div className="mx-10 flex items-baseline space-x-8 justify-between ">
             <div>
-              <Link
+              <NavLink
                 to="/about"
                 activeClassName="text-secondary "
                 className=" p-1	text-gray-600	 hover:bg-blue-100 dark:hover:bg-blue-900 rounded-lg text-lg"
               >
                 About
-              </Link>
+              </NavLink>
 
-              <Link
+              <NavLink
                 to="/contact"
                 activeClassName="text-secondary"
                 className=" p-1 text-gray-600	 hover:bg-blue-100 dark:hover:bg-blue-900 rounded-lg text-lg"
               >
                 Contact
-              </Link>
+              </NavLink>
 
-              <Link
+              <NavLink
                 to="/help"
                 activeClassName="text-secondary"
                 className=" p-1	text-gray-600	 hover:bg-blue-100 rounded-lg text-lg"
               >
                 Help
-              </Link>
+              </NavLink>
 
-              <Link
+              <NavLink
                 to="/post"
                 activeClassName="text-secondary"
                 className=" p-1	text-gray-600	 hover:bg-blue-100 rounded-lg text-lg"
               >
                 Post
-              </Link>
+              </NavLink>
 
-              <Link
+              <NavLink
                 to="/upvote"
                 activeClassName="text-secondary"
                 className=" p-1	text-gray-600	 hover:bg-blue-100 rounded-lg text-lg"
               >
                 Vote
-              </Link>
+              </NavLink>
             </div>
             <LoginButtons />
           </div>

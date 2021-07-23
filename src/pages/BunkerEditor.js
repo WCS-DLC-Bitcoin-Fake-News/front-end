@@ -1,18 +1,12 @@
 import React, { useContext } from "react";
 import BunkerForm from "../components/BunkerForm";
 import UserContext from "../contexts/UserContext";
+import { withRouter } from "react-router-dom";
+import Layout from "./../layouts"
 
 function BunkerEditor() {
-  const { user, setUser } = useContext(UserContext);
-  return (
-    <>
-      {user ? (
-        <BunkerForm></BunkerForm>
-      ) : (
-        <p>you need to be signed in to post </p>
-      )}
-    </>
-  );
+  const { user } = useContext(UserContext);
+  return ( <Layout><BunkerForm /> </Layout>);
 }
 
-export default BunkerEditor;
+export default withRouter(BunkerEditor);

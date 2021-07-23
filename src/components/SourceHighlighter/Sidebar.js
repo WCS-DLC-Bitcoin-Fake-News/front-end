@@ -4,6 +4,7 @@ import type { T_Highlight } from "react-pdf-highlighter/src/types";
 const updateHash = highlight => {
   document.location.hash = `highlight-${highlight.id}`;
 };
+
 function Sidebar({ highlights, toggleDocument, resetHighlights }) {
   return (
     <div className="sidebar" style={{ width: "25vw" }}>

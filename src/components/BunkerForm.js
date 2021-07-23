@@ -92,7 +92,7 @@ function BunkerForm() {
         { ...newPost, published: true },
         config
       );
-      history.push("/");
+      history.push("/home");
     } catch (error) {
       console.log(error);
     }

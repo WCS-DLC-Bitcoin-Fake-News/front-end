@@ -6,6 +6,7 @@ module.exports = {
     },
     extend: {
       colors: {
+        yellowBunker: "#E4F705",
         primary: "red",
         secondary: "gray",
       },

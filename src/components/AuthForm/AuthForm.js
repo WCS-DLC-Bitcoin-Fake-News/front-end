@@ -30,17 +30,17 @@ const AuthForm = ({ type }) => {
           setAuthLoading(false);
           history.push("/home")
         }}>
-        <div className="mb-4 bg-blue-900">
+        <div className="mb-4 bg-gray-300">
           <label
-            className="block text-primary text-sm font-bold p-4"
+            className="block text-black text-sm font-bold p-4"
             htmlFor="Email">
             Email
             <input
               className="
-            bg-blue-900
+            bg-white
             py-4
             font-poppins
-            shadow appearance-none rounded w-full text-white placeholder-blue-300 leading-tight"
+            shadow appearance-none rounded w-full text-black placeholder-gray-200 leading-tight"
               id="email"
               type="email"
               placeholder="Email"
@@ -51,17 +51,17 @@ const AuthForm = ({ type }) => {
           </label>
         </div>
         <div className="mb-6">
-          <div className="mb-4 bg-blue-900">
+          <div className="mb-4 bg-gray-300">
             <label
-              className="block text-primary text-sm font-bold p-4"
+              className="block text-black text-sm font-bold p-4"
               htmlFor="password">
               Password
               <input
                 className="
-            bg-blue-900
+            bg-white
             py-4
             font-poppins
-            shadow appearance-none rounded w-full text-white placeholder-blue-300 leading-tight"
+            shadow appearance-none rounded w-full text-black placeholder-gray-200 leading-tight"
                 id="password"
                 type="password"
                 placeholder="********"
@@ -81,8 +81,8 @@ const AuthForm = ({ type }) => {
         </div>
         <div className="flex flex-row flex-wrap items-center">
           <button
-            className={`relative text-white font-bold py-4 px-8 rounded focus:outline-none focus:shadow-outline ${
-              authLoading ? "cursor-not-allowed bg-blue-300" : "bg-primary"
+            className={`relative text-black font-bold py-4 px-8 rounded focus:outline-none focus:shadow-outline ${
+              authLoading ? "cursor-not-allowed bg-#CCDE04" : "bg-yellowBunker"
             } `}
             type="submit">
             Sign In

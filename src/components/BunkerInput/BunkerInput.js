@@ -28,7 +28,7 @@ const BunkerInput = () => {
       <div className="p-5">
         <div className="flex flex-row my-5">
           <div className="w-20 h-20 rounded-lg overflow-hidden">
-            {user && <Avatar src={user.profilePicture} />}
+            {user && <Avatar  />}
           </div>
 
           <div className="w-full mx-5">
@@ -53,29 +53,29 @@ const BunkerInput = () => {
                   postBunkerandUploadFile();
                 }}>
                 <textarea
-                  className="w-full h-16 font-noto font-medium text-base text-gray-500"
+                  className="w-full h-16 font-noto font-medium border-2 border-gray-200 rounded-lg text-base text-gray-500"
                   name="bunker-input"
-                  placeholder="Give a link and bunk a fake"
+                  placeholder="Paste a link to Debunk"
                   type="text"
                   value={bunker}
                   onChange={(e) => setBunker(e.target.value)}
                   required></textarea>
                 <div className="flex items-center mt-3">
-                  <div className="mx-2">
+                  {/* <div className="mx-2">
                     <input
                       type="file"
                       hidden
                       onChange={(e) => setFile(e.target.files[0])}
                       ref={fileInputRef}
                     />
-                    <span className="hover:bg-gray-200 p-2 cursor-pointer">
+                    <span className="hover:bg-black-200 p-2 cursor-pointer">
                       <PhotoIcon
                         onClick={() => fileInputRef.current.click()}
                         style={{ color: "#3182ce" }}
                       />
-                    </span>
+                    </span> 
                       {file && file.name}
-                  </div>
+                  </div> */}
                   <div className="mr-0 ml-auto">
                     <button
                       className={`bottom-0 relative text-white px-8 py-4 rounded-md ${

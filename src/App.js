@@ -1,22 +1,22 @@
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import Landing from "./pages/Landing";
-import Profile from "./pages/Profile";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
-import Help from "./pages/Help";
-import Signup from "./pages/Signup";
-import Signin from "./pages/Signin";
-import BunkerDetail from "./pages/BunkerDetail";
-import BunkerForm from "./components/BunkerForm";
-import Upvote from "./components/voteButton";
-import BunkerEditor from "./pages/BunkerEditor";
-import FakeEmbed from "./pages/FakeEmbed";
-import CommentField from "./components/modules/Comment/CommentField";
-import CommentContainer from "./components/modules/Comment/CommentContainer";
-import UserContext from "./contexts/UserContext";
 import { useState, useEffect } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import UserContext from "./contexts/UserContext";
 import ProtectedRoute from "./components/ProtectedRoute";
+
+import Init from "./pages";
+import Landing from "./pages/Landing";
+import Manifesto from "./pages/Manifesto";
+import Signin from "./pages/Signin";
+import BunkerEditor from "./pages/BunkerEditor";
+import Layout from "./layouts"
+import Home from "./pages/Home";
+import Explore from "./pages/Explore";
+import Bookmarks from "./pages/Bookmarks";
+import Signup from "./pages/Signup";
+import AppContext from "./pages/AppContext"
+
+import Aprofile from "./pages/Aprofile"
+import Abunker from "./pages/Aprofile/status/aBunker.js"
 
 function App() {
   const [user, setUser] = useState(null);
@@ -28,54 +28,39 @@ function App() {
   }, []);
 
   return (
-
-    <UserContext.Provider value={{ user: user, setUser: setUser }}>
-      <Router>
-        <Navbar />
-        <Switch>
-          <Route exact path="/">
-            <Landing />
-          </Route>
-          <Route exact path="/profile">
-            <Profile />
-          </Route>
-          <Route exact path="/about">
-            <About />
-          </Route>
-          <Route exact path="/contact">
-            <Contact />
-          </Route>
-          <Route exact path="/help">
-            <Help />
-          </Route>
-          {/* <Route exact path="/post">
-            <BunkerEditor />
-          </Route> */}
-          <ProtectedRoute path="/post" component={BunkerEditor}/>
-          <Route exact path="/signup">
-            <Signup />
-          </Route>
-          <Route exact path="/signin">
-            <Signin />
-          </Route>
-          <Route exact path="/comments">
-            <CommentContainer />
-          </Route>
-          <Route exact path="/bunkers/:id">
-            <BunkerDetail />
-          </Route>
-          <Route exact path="/upvote">
-            <Upvote />
-          </Route>
-          <Route exact path="/comments">
-            <CommentField />
-          </Route>
-          <Route exact path="/fake/:id">
-            <FakeEmbed />
-          </Route>
-        </Switch>
-      </Router>
-    </UserContext.Provider>
+    <AppContext>
+        <Router>
+            <Switch>
+              <Route exact path="/">
+                <Init />
+              </Route>
+              <Route exact path="/signin">
+                <Signin />
+              </Route>
+              <Route exact path="/signup">
+                <Signup />
+              </Route>
+              <Route exact path="/home">
+                <Home />
+              </Route>
+              <Route exact path="/explore">
+                <Explore />
+              </Route>
+              <Route exact path="/bookmarks">
+                <Bookmarks />
+              </Route>
+              <Route path="/debunk/:bunkerId" >
+                <BunkerEditor />
+              </Route>
+              <Route path="/:userId/status/:bunkerId" >
+                <Aprofile />
+              </Route>
+              <Route path="/manifesto" >
+                <Manifesto />
+              </Route>
+            </Switch>
+          </Router>
+    </AppContext>
   );
 }
 

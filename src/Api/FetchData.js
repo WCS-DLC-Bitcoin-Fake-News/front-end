@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export const fetchUser = async ( userID ) => {
+  debugger
   try {
     const { data } = await axios.get(`/users/${userID}`);
     console.log(data)
@@ -105,7 +106,7 @@ export const fetchBunkerSaves = async (bunkerID) => {
 
 };
 
-const fetchAllUserData = async (userId) => {
+const fetchAllUserData = async (userId, bunkerId) => {
   console.log("fetching All User Data, bunkers and more");
 
   try {

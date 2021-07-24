@@ -16,7 +16,10 @@ async function handleSignUp(email, password, name) {
       "user",
       JSON.stringify({ ...res.data.user, token: res.data.token })
     );
-    return { ...res.data.user, token: res.data.token }
+    return { 
+      ...res.data.user, 
+      token: res.data.token 
+    }
 
   } catch (error) {
     return error;

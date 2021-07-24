@@ -28,7 +28,6 @@ const Post = ( { bunker } ) => {
   const [saveDocID, setSaveDocID] = useState("");
 
   const [comments, setComments] = useState(0);
-
   const [myBunker, setMyBunker] = useState(false);
 
   const likeBunker = async () => {
@@ -122,7 +121,7 @@ const Post = ( { bunker } ) => {
     <div className="p-5 nm-flat-white rounded-lg hover:bg-gray-100 cursor-pointer">
       <div className="flex items-center content-evenly">
         <div className="w-16 h-16 overflow-hidden rounded-lg m-4">
-          <Avatar src={localBunker.author.profilePicture} />
+          <Avatar src={localBunker.author.name} />
         </div>
         <div className="w-full">
           <Link href={`/${bunker.author.username}`}>

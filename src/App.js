@@ -52,8 +52,15 @@ function App() {
               <Route path="/debunk/:bunkerId" >
                 <BunkerEditor />
               </Route>
+
+              <Route path="/:userId/profile" >
+                <Aprofile />
+                {/* <Abunker />  */}
+              </Route>
+
               <Route path="/:userId/status/:bunkerId" >
                 <Aprofile />
+                {/* <Abunker />  */}
               </Route>
               <Route path="/manifesto" >
                 <Manifesto />

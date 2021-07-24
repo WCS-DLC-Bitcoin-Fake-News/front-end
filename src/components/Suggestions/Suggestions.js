@@ -42,7 +42,7 @@ const Suggestions = ({ type, userID }) => {
         <div>
           <div className="flex flex-row my-4">
             <div className="w-12 h-12 mr-4">
-              <Avatar src={user.profilePicture} />
+              <Avatar src={user.name} />
             </div>
             <div className="flex flex-col">
               <p className="font-poppins font-medium">{user.name}</p>

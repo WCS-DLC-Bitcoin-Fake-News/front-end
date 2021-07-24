@@ -28,7 +28,7 @@ const ProfileDropDown = ({ user }) => {
               onClick={() => setDropdown(!dropdown)}>
               {user && (
                 <span className="w-8 h-8 overflow-hidden rounded-lg">
-                  <Avatar src={user.profilePicture} />
+                  <Avatar src={user.name} />
                 </span>
               )}
               <span className="hidden md:flex md:flex-col justify-center pl-2">
@@ -56,7 +56,7 @@ const ProfileDropDown = ({ user }) => {
                 role="menu"
                 aria-orientation="vertical"
                 aria-labelledby="options-menu">
-                <Link href={`/${user.username}`}>
+                <Link to={`/${user._id}/profile`}>
                   <a
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                     role="menuitem">

@@ -1,5 +1,8 @@
 module.exports = {
-  plugins: [require('tailwindcss-neumorphism')],
+  plugins: [
+    require('tailwindcss-neumorphism'),
+    require("@tailwindcss/forms")
+  ],
   theme: {
     fontFamily: {
       poppins: ["Poppins"],
@@ -14,12 +17,17 @@ module.exports = {
         primary: "",
         secondary: "gray",
       },
-     
-
-      // backgroundImage: (theme) => ({
-      //   banner: "url('/images/banner.jpg')",
-      //   logo:"url('/images/logos/tweeter-small.svg')"
-      // }),
+      transformOrigin: {
+        0: "0%",
+      },
+      zIndex: {
+        "-1": "-1",
+      },
+    },
+  },
+  variants: {
+    extend: {
+      borderColor: ["responsive", "hover", "focus", "focus-within"],
     },
   },
 };

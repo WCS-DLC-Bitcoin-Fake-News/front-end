@@ -4,6 +4,9 @@ module.exports = {
     fontFamily: {
       poppins: ["Poppins"],
       noto: ["Noto Sans"],
+      cabin: ["Cabin"],
+      raleway: ["Raleway"],
+      montserrat: ["Montserrat"],
     },
     extend: {
       colors: {

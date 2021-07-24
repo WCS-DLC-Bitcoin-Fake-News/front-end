@@ -44,32 +44,25 @@ const Suggestions = ({ type, userID }) => {
             <div className="w-12 h-12 mr-4">
               <Avatar src={user.name} />
             </div>
-            <div className="flex flex-col">
-              <p className="font-poppins font-medium">{user.name}</p>
-              <p className="font-noto font-medium text-sm text-gray-600">
-                {10} Followers
-              </p>
-            </div>
             <div className="mr-0 ml-auto">
               <FollowButton userID={user.uid} />
             </div>
           </div>
           <div>
-            <p className="font-noto font-medium text-gray-600 my-4">
+            <p className="font-raleway font-semibold text-gray-600 my-4">
               {user.bio}
             </p>
           </div>
-          <div
-            className="overflow-hidden rounded-lg"
-            style={{
-              height: "100px",
-              maxHeight: "300px",
-            }}>
-            <img
-              className="w-full"
-              src="https://images.unsplash.com/photo-1522439748419-3cd697a86028?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
-              alt="banner"
-            />
+          <div>
+          <p className="py-2 font-raleway font-semibold">Apple will buy 1.5B in BTC by 22/07</p>
+          </div>
+          <div classname="flex justify-between">
+            <div className="font-raleway font-medium text-gray-600">Final Stake - 1004</div>
+            <div className="font-raleway font-medium text-gray-600">Ended 23/07</div>
+          </div>
+          <div>
+            <label className="py-2 font-raleway font-semibold" for="votes bar">Final Votes</label>
+            <progress className="nm-inset-white w-full p-5 rounded-full" id="votes bar" max="100" value="70"> 70% </progress>
           </div>
         </div>
       )}

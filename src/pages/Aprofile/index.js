@@ -71,7 +71,7 @@ const UserName = () => {
                         </Link>
                       </span>
                     );
-                  })}
+                  }).reverse()}
                 </div>
               </div>
             </div>

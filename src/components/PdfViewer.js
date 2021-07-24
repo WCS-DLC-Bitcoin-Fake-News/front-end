@@ -38,7 +38,7 @@ const colors = {
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
-const pdfWidth = 480;
+const pdfWidth = 880;
 
 const Container = styled.div`
   display: flex;
@@ -52,7 +52,7 @@ const Container = styled.div`
 const DocumentContainer = styled.div`
   border: none;
   min-height: 270px; 
-  width: ${pdfWidth + 10}px;
+  width: ${props => props.isThumb ? "300px" : "900px"};
   padding: 5px;
 `;
 
@@ -68,7 +68,7 @@ const Title = styled.p`
   flex-wrap: wrap;
 `;
 
-const PdfViewer = ({ name, printedSource, author }) => {
+const PdfViewer = ({ name, printedSource, author, isThumb }) => {
   console.log(printedSource)
   const [pdf, setPdf] = useState(null);
   const [pageNumber, setPageNumber] = useState(null);
@@ -97,11 +97,11 @@ const PdfViewer = ({ name, printedSource, author }) => {
 
   return (
     <Container>
-      <DocumentContainer>
+      <DocumentContainer isThumb={isThumb} >
         {pdf !== null && (
           <>
             <Document file={pdf} onLoadSuccess={onDocumentLoadSuccess}>
-              <Page pageNumber={pageNumber} width={pdfWidth} />
+              <Page pageNumber={pageNumber}  width={pdfWidth} />
             </Document>
             <p>Page {pageNumber} of {numPages}</p>
           </>

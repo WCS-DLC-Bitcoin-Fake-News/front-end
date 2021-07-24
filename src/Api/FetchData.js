@@ -28,7 +28,6 @@ export const fetchUserBunkers = async (userID) => {
 };
 
 export const fetchBunker = async (bunkerID) => {
-  const bunker = {}
 
   try {
     const { data } = await axios.get(`/bunkers/${bunkerID}`);

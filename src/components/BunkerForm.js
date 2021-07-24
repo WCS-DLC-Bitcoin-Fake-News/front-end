@@ -9,6 +9,7 @@ import { fetchBunker } from "./../Api/FetchData"
 function BunkerForm() {
   const { user } = useContext(UserContext);
   const { bunkerId } = useParams();
+  console.log('user context in the form', user)
 
   const [body, setBody] = useState(" ");
   const [title, setTitle] = useState(" ");
@@ -92,7 +93,7 @@ function BunkerForm() {
         { ...newPost, published: true },
         config
       );
-      history.push("/home");
+      history.push(`/${user._id}/profile`);
     } catch (error) {
       console.log(error);
     }

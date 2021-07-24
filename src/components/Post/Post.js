@@ -14,10 +14,10 @@ import { fetchBunkerLikes, fetchBunkerSaves } from "../../Api/FetchData";
 import Avatar from "../Avatar/Avatar";
 import BunkerVisualizer from "../modules/Bunker/BunkerVisualizer";
 import axios from "axios";
-const Post = ( { bunker } ) => {
+const Post = ( { bunker, isThumb } ) => {
   console.log("bunker?", bunker)
   const { user } = useContext(UserContext);
-  const [localBunker, setLocalBunker] = useState(bunker);
+  // const [bunker, setLocalBunker] = useState(bunker);
 
   const [likes, setLikes] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
@@ -91,7 +91,7 @@ const Post = ( { bunker } ) => {
   };
 
   useEffect(async () => {
-    // setLikes((await fetchBunkerLikes(localBunker.id)).size);
+    // setLikes((await fetchBunkerLikes(bunker.id)).size);
     if (user) {
       async function checkForLikes(bunkerId) {
   
@@ -114,28 +114,29 @@ const Post = ( { bunker } ) => {
       //   setMyBunker(true);
       // }
     }
-    // setSaves((await fetchBunkerSaves(localBunker.id)).length);
+    // setSaves((await fetchBunkerSaves(bunker.id)).length);
   }, []);
 
   return (
     <div className="p-5 nm-flat-white rounded-lg hover:bg-gray-100 cursor-pointer">
       <div className="flex items-center content-evenly">
         <div className="w-16 h-16 overflow-hidden rounded-lg m-4">
-          <Avatar src={localBunker.author.name} />
+          <Avatar src={bunker.author.name} />
         </div>
         <div className="w-full">
           <Link href={`/${bunker.author.username}`}>
             <p className="font-poppins font-medium text-base my-1 hover:underline">
-              {localBunker.author.name}
+              {bunker.author.name}
             </p>
           </Link>
           <p className="font-poppins text-sm font-medium my-1 text-gray-700  ">
-            @{localBunker.author.username}
+            @{bunker.author.username}
           </p>
           <p className="font-noto text-gray-500 text-base my-1">
-            {localBunker.createdAt}
+            {bunker.createdAt}
           </p>
         </div>
+
         {myBunker && (
           <div
             className="w-16 h-16 flex flex-col justify-center items-center"
@@ -154,26 +155,29 @@ const Post = ( { bunker } ) => {
       </div>
       <span>
         <div className="font-noto text-base font-normal pt-4">
-          {localBunker.body}
-          {localBunker.printedSource.length && <BunkerVisualizer source={localBunker.source} printedSource={localBunker.printedSource} />}
 
         </div>
-        {bunker.imgLink && (
+        {bunker.printedSource && (
           <div
             className="my-5 overflow-hidden rounded-lg"
-            style={{
+            style={isThumb && ({
               height: "350px",
-            }}>
+            })}>
+         
             <a
-              href={localBunker.imgLink}
+              href={bunker.imgLink}
               target="_blank"
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}>
-              <img
+                {bunker.title}
+                <div dangerouslySetInnerHTML={{__html: bunker.body}}></div>
+                {bunker.printedSource.length && <BunkerVisualizer isThumb={isThumb} source={bunker.source} printedSource={bunker.printedSource} />}
+              {/* <img
                 className="w-full h-full object-cover"
-                src={localBunker.imgLink}
+                src={bunker.imgLink}
                 alt="POST IMG HERE"
-              />
+              /> */}
+
             </a>
           </div>
         )}

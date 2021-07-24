@@ -32,21 +32,21 @@ function App() {
         <Router>
             <Switch>
               <Route exact path="/">
-                <Init />
+                <Home />
               </Route>
               <Route exact path="/signin">
-                <Signin />
+                <Init />
               </Route>
               <Route exact path="/signup">
                 <Signup />
-              </Route>
+              </Route>π
               <Route exact path="/home">
                 <Home />
               </Route>
               <Route exact path="/explore">
                 <Explore />
               </Route>
-              <Route exact path="/bookmarks">
+              <Route exact path="/bunkers/:bunkerId">
                 <Bookmarks />
               </Route>
               <Route path="/debunk/:bunkerId" >

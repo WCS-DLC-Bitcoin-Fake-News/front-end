@@ -4,16 +4,16 @@ const ExploreFilters = () => {
       className="w-full bg-white rounded-lg p-5"
       style={{ height: "max-content" }}>
       <li className="font-poppins font-semibold text-base  py-4 list-none text-primary">
-        Top
+        High Stakes
       </li>
       <li className="font-poppins font-semibold text-base text-gray-600 py-4 list-none ">
         Latest
       </li>
       <li className="font-poppins font-semibold text-base text-gray-600 py-4 list-none ">
-        People
+        Expire Soon
       </li>
       <li className="font-poppins font-semibold text-base text-gray-600 py-4 list-none ">
-        Media
+        Most argumented
       </li>
     </div>
   );

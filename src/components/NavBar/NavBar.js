@@ -12,7 +12,7 @@ const NavBar = () => {
   const router = useHistory();
 
   return (
-    <div className="opacity-80 font-poppins nm-flat-white">
+    <div className="font-poppins bg-white">
       <nav className="justify-between h-16 flex flex-row lg:justify-between items-center">
         <NavLink to="/home">
           <img
@@ -28,7 +28,7 @@ const NavBar = () => {
               <li
                 activeClassname={"text-primary font-semibold"}
                 className={`list-none inline-block mx-20 cursor-pointer`}>
-                Home
+                Debunk
               </li>
             </NavLink>
           )}
@@ -36,10 +36,10 @@ const NavBar = () => {
             <li
               activeClassname={"text-primary font-semibold"}
               className={`list-none inline-block mx-20 cursor-pointer`}>
-              Explore
+              Investigate
             </li>
           </NavLink>
-          {user && (
+          {/* {user && (
             <NavLink to="/bookmarks">
               <li
                 activeClassname={"text-primary font-semibold"}
@@ -47,7 +47,7 @@ const NavBar = () => {
                 Bookmarks
               </li>
             </NavLink>
-          )}
+          )} */}
         </div>
 
         <div className="bg-white w-full lg:hidden flex justify-between items-center fixed bottom-0 h-16 px-4">
@@ -57,7 +57,6 @@ const NavBar = () => {
                 <span>
                   <HomeIcon
                     activeClassname={"text-primary font-semibold"}
-
                     fontSize="large"
                     style={{
                       color: true === "/home" ? "#2F80ED" : "#828282",
@@ -80,7 +79,7 @@ const NavBar = () => {
             </NavLink>
           </div>
           <div>
-            {user && (
+            {/* {user && (
               <NavLink to="/bookmarks">
                 <span>
                   <BookmarkIcon
@@ -92,7 +91,7 @@ const NavBar = () => {
                   />
                 </span>
               </NavLink>
-            )}
+            )} */}
           </div>
         </div>
         <div>{user && <ProfileDropDown user={user} />}</div>

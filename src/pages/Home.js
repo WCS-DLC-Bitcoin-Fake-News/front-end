@@ -21,7 +21,7 @@ const Home = () => {
     HomeBunkersContext
   );
 
-  useEffect(async () => {
+  useEffect(async () => { 
     try {
       if (!homeBunkersContext) {
           console.log("there is not")
@@ -61,9 +61,9 @@ const Home = () => {
               ) : (
                 homeBunkers.length && homeBunkers.map((bunker) => (
                   <span key={bunker.id}>
-                    <Link to={`${bunker.author}/status/${bunker._id}`}>
+                    <Link to={`/bunkers/${bunker._id}`}>
                       <div className="mb-5">
-                        <Post bunker={bunker} />
+                        <Post isThumb={true} bunker={bunker} />
                       </div>
                     </Link>
                   </span>

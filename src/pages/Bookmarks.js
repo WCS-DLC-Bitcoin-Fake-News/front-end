@@ -9,31 +9,27 @@ import UserContext from "../contexts/UserContext";
 // import firebase from "../firebase/init";
 import Layout from "../layouts";
 import { fetchBunker } from "../Api/FetchData";
+import { useParams } from "react-router-dom";
 
 const Bookmarks = () => {
   const { user } = useContext(UserContext);
-  const [bookmarkBunkers, setBookmarkBunkers] = useState([]);
+  const [bunker, setBunker] = useState({});
   const [loading, setIsLoading] = useState(true);
   const [isEmpty, setIsEmpty] = useState(false);
-  const { bookmarksBunkersContext, setBookmarksBunkersContext } = useContext(
-    BookmarksBunkersContext
-  );
+  // const { bookmarksBunkersContext, setBookmarksBunkersContext } = useContext(
+  //   BookmarksBunkersContext
+  // );
+  const { bunkerId } = useParams();
 
-  useEffect(() => {
-    if (false) {
-      if (!bookmarksBunkersContext) {
-        async function getSavedBunkers() {
-          const localBMBunkers = [];
-          // axios call to get saved bunkers
-        }
-        getSavedBunkers(user.uid);
-      } else {
-        setBookmarkBunkers(bookmarksBunkersContext);
-        setIsEmpty(false);
-        setIsLoading(false);
-      }
-    }
-  }, [user]);
+  useEffect(async () => {
+      setIsLoading(true)
+      setIsEmpty(true);
+      const data = await fetchBunker(bunkerId)
+      setBunker(data)
+      setIsEmpty(false);
+      setIsLoading(false);
+    
+  }, [ bunkerId ]);
 
   return (
     <div>
@@ -54,14 +50,12 @@ const Bookmarks = () => {
               {isEmpty ? (
                 <h1>You have no Saved Bunkers</h1>
               ) : (
-                bookmarkBunkers.map((bunker) => (
-                  <Link href={`${bunker.author.username}/status/${bunker.id}`}>
+              
                     <div className="mb-5">
-                      <Post bunker={bunker} />
+                     { bunker._id &&  <Post bunker={bunker} /> }
                     </div>
-                  </Link>
-                ))
-              )}
+                )
+              }
             </div>
           </div>
         </div>

@@ -12,7 +12,7 @@ const NavBar = () => {
   const router = useHistory();
 
   return (
-    <div className="font-poppins bg-white">
+    <div className="opacity-80 font-montserrat font-bold nm-flat-white">
       <nav className="justify-between h-16 flex flex-row lg:justify-between items-center">
         <NavLink to="/home">
           <img
@@ -26,7 +26,7 @@ const NavBar = () => {
           {user && (
             <NavLink to="/home">
               <li
-                activeClassname={"text-primary font-semibold"}
+                activeClassname={"font-montserrat font-bold text-lg"}
                 className={`list-none inline-block mx-20 cursor-pointer`}>
                 Debunk
               </li>
@@ -34,7 +34,7 @@ const NavBar = () => {
           )}
           <NavLink to="/explore">
             <li
-              activeClassname={"text-primary font-semibold"}
+              activeClassname={"font-montserrat font-bold text-lg"}
               className={`list-none inline-block mx-20 cursor-pointer`}>
               Investigate
             </li>
@@ -42,7 +42,7 @@ const NavBar = () => {
           {/* {user && (
             <NavLink to="/bookmarks">
               <li
-                activeClassname={"text-primary font-semibold"}
+                activeClassname={"font-montserrat font-bold text-lg"}
                 className={`list-none inline-block mx-20 cursor-pointer`}>
                 Bookmarks
               </li>
@@ -56,7 +56,8 @@ const NavBar = () => {
               <NavLink to="/home">
                 <span>
                   <HomeIcon
-                    activeClassname={"text-primary font-semibold"}
+                    activeClassname={"font-montserrat font-bold text-lg"}
+
                     fontSize="large"
                     style={{
                       color: true === "/home" ? "#2F80ED" : "#828282",

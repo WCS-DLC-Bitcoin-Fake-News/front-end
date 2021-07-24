@@ -23,13 +23,13 @@ const Suggestions = ({ type, userID }) => {
 
   return (
     <div className="nm-flat-white w-full p-5 rounded-lg">
-      {type === "relavant" ? (
-        <p className="font-poppins font-semibold text-base mb-3">
-          Relevant Bunkers
+      {type === "relevant" ? (
+        <p className="font-montserrat font-bold text-lg mb-3">
+          Relevant Bunkers 
         </p>
       ) : (
-        <p className="font-poppins font-semibold text-base mb-3">
-          Recent Winners
+        <p className="font-montserrat font-bold text-lg mb-3">
+          Just Debunked ✅ 
         </p>
       )}
       <hr />

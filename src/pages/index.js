@@ -6,7 +6,7 @@ const Home = () => {
       <div className="flex flex-col-reverse lg:flex-row lg:justify-center bg-gray-100 h-screen">
         <div className="lg:w-2/4 w-full h-full">
           <div className="w-full h-full bg-logo bg-no-repeat bg-cover bg-top flex flex-col justify-center">
-            <h1 className="text-black font-poppins font-semibold mx-auto">
+            <h1 className="text-black font-Cabin-400 font-bold mx-auto">
               Debunk Fake News!
             </h1>
           </div>

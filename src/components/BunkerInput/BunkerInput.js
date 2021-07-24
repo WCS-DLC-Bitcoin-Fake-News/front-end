@@ -81,7 +81,7 @@ const BunkerInput = () => {
                       className={`bottom-0 relative text-white px-8 py-4 rounded-full ${
                         bunkering
                           ? "nm-inset-yellowBunker cursor-not-allowed"
-                          : "nm-concave-yellowBunker-sm"
+                          : "nm-convex-yellowBunker-sm"
                       }`}
                       type="submit">
                       {bunkering ? "Bunkering...." : "Bunker"}

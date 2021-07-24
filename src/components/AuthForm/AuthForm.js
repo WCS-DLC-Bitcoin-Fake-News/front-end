@@ -32,15 +32,15 @@ const AuthForm = ({ type }) => {
         }}>
         <div className="mb-4 bg-blue-900">
           <label
-            className="block text-primary text-sm font-bold p-4"
+            className="block text-black text-sm font-Cabin font-bold p-4"
             htmlFor="Email">
             Email
             <input
               className="
             bg-blue-900
             py-4
-            font-poppins
-            shadow appearance-none rounded w-full text-white placeholder-blue-300 leading-tight"
+            font-Raleway
+            shadow appearance-none rounded w-full text-black placeholder-gray-200 leading-tight"
               id="email"
               type="email"
               placeholder="Email"
@@ -53,7 +53,7 @@ const AuthForm = ({ type }) => {
         <div className="mb-6">
           <div className="mb-4 bg-blue-900">
             <label
-              className="block text-primary text-sm font-bold p-4"
+              className="block text-black text-sm font-Cabin font-bold p-4"
               htmlFor="password">
               Password
               <input
@@ -81,8 +81,8 @@ const AuthForm = ({ type }) => {
         </div>
         <div className="flex flex-row flex-wrap items-center">
           <button
-            className={`relative text-white font-bold py-4 px-8 rounded focus:outline-none focus:shadow-outline ${
-              authLoading ? "cursor-not-allowed bg-blue-300" : "bg-primary"
+            className={`relative text-black font-Cabin font-bold py-4 px-8 rounded-full ml-4 focus:outline-none focus:shadow-outline ${
+              authLoading ? "cursor-not-allowed bg-#CCDE04" : "nm-flat-yellowBunker-sm"
             } `}
             type="submit">
             Sign In

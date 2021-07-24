@@ -62,9 +62,9 @@ const UserName = () => {
                 <div className="col-span-2">
                   {userWithBunkers.bunkers && userWithBunkers.bunkers.map((bunker) => {
                     return (
-                      <span key={bunker.id}>
+                      <span key={bunker._id}>
                         <Link
-                          to={`${bunker.author.username}/status/${bunker.id}`}>
+                          to={`/bunkers/${bunker._id}`}>
                           <div className="mb-5">
                             <Post bunker={bunker} />
                           </div>

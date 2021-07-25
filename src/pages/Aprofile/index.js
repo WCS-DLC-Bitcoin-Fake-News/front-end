@@ -64,7 +64,7 @@ const UserName = () => {
                     return (
                       <span key={bunker.id}>
                         <Link
-                          to={`${bunker.author.username}/status/${bunker.id}`}>
+                          to={`/bunkers/${bunker.id}`}>
                           <div className="mb-5">
                             <Post bunker={bunker} />
                           </div>

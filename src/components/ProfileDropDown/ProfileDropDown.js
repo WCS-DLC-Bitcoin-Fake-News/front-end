@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import CircularProgress from "@material-ui/core/CircularProgress";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
@@ -9,10 +9,17 @@ import {Link, useHistory} from "react-router-dom";
 import { handleSignOut } from "../../Api/Authentication";
 import { deleteAccount } from "../../Api/DeleteAccount";
 import Avatar from "../Avatar/Avatar";
+import useLocalStorage from "./../../hooks/useLocalStorage";
+import UserContext from "./../../contexts/UserContext"
 
-const ProfileDropDown = ({ user }) => {
+
+const ProfileDropDown = () => {
+  const { user, setUser } = useContext(UserContext)
+
   const [dropdown, setDropdown] = useState(false);
   const [deletingAccount, setDeletingAccount] = useState(false);
+  const [localUser, setLocalUser] = useLocalStorage("user");
+
   const history = useHistory()
   return (
     <div>
@@ -109,7 +116,7 @@ const ProfileDropDown = ({ user }) => {
                   className="block w-full text-left px-4 py-2 text-sm text-red-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
                   role="menuitem"
                   onClick={() => {
-                    handleSignOut()
+                    handleSignOut(() => setUser(null))
                     history.push("/")
                   }}>
                   <span className="pr-4">

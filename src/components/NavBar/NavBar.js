@@ -14,7 +14,7 @@ const NavBar = () => {
   return (
     <div className="opacity-80 font-montserrat font-bold nm-flat-white">
       <nav className="justify-between h-16 flex flex-row lg:justify-between items-center">
-        <NavLink to="/home">
+        <NavLink to="/">
           <img
             className="cursor-pointer ml-4"
             src="/images/logos/bunker.png"
@@ -24,7 +24,7 @@ const NavBar = () => {
 
         <div className="hidden lg:block menu">
           {user && (
-            <NavLink to="/home">
+            <NavLink to="/">
               <li
                 activeClassname={"font-montserrat font-bold text-lg"}
                 className={`list-none inline-block mx-20 cursor-pointer`}>
@@ -32,7 +32,7 @@ const NavBar = () => {
               </li>
             </NavLink>
           )}
-          <NavLink to="/explore">
+          <NavLink to="/">
             <li
               activeClassname={"font-montserrat font-bold text-lg"}
               className={`list-none inline-block mx-20 cursor-pointer`}>
@@ -53,11 +53,12 @@ const NavBar = () => {
         <div className="bg-white w-full lg:hidden flex justify-between items-center fixed bottom-0 h-16 px-4">
           <div>
             {user && (
-              <NavLink to="/home">
+              <NavLink 
+               activeClassname={"font-montserrat font-bold text-lg"}
+              
+              to="/">
                 <span>
                   <HomeIcon
-                    activeClassname={"font-montserrat font-bold text-lg"}
-
                     fontSize="large"
                     style={{
                       color: true === "/home" ? "#2F80ED" : "#828282",
@@ -68,7 +69,9 @@ const NavBar = () => {
             )}
           </div>
           <div>
-            <NavLink to="/explore">
+            <NavLink 
+              activeClassname={"font-montserrat font-bold text-lg"}
+            to="/explore">
               <span>
                 <ExploreIcon
                   fontSize="large"

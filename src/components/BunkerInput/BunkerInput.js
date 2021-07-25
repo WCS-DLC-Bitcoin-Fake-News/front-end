@@ -84,7 +84,7 @@ const BunkerInput = () => {
                           : "nm-convex-yellowBunker-sm"
                       }`}
                       type="submit">
-                      {bunkering ? "Bunkering...." : "Bunker"}
+                      {bunkering ? "Bunkering...." : "Debunk"}
                       {bunkering && (
                         <span
                           style={{

@@ -66,7 +66,7 @@ const UserName = () => {
                         <Link
                           to={`/bunkers/${bunker._id}`}>
                           <div className="mb-5">
-                            <Post bunker={bunker} />
+                            <Post isThumb={true} bunker={bunker} />
                           </div>
                         </Link>
                       </span>

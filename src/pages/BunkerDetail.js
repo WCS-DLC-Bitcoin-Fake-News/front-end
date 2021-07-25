@@ -8,6 +8,7 @@ const BunkerDetail = () => {
   return (
     <>
       <Bunker id={id} />
+      <span></span>
       <CommentContainer id={id} />
     </>
   );

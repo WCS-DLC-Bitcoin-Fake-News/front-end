@@ -1,9 +1,11 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Comment, Avatar } from "antd";
+import { Comment } from "antd";
 import axios from "axios";
 import ThreadContent from "./ThreadContent";
 import ThreadEditor from "./ThreadEditor"
+import PostButtons from "../../Post/PostButtons";
+import Avatar from "./../../Avatar/Avatar"
 
 const CommentContent = (props) => {
   let { id, comment, loadComments } = props;
@@ -30,15 +32,26 @@ const CommentContent = (props) => {
   }, []);
 
   return (
-    <>
+    <div className="flex flex-row items-center">
       <Comment
-        actions={[<span onClick={() => setShowEditor(!showEditor)} key="comment-nested-reply-to">Reply to</span>]}
+        actions={[
+          <PostButtons 
+            bunker={() => setShowEditor(!showEditor)}
+            likeBunker={() => setShowEditor(!showEditor)} 
+            dislikeBunker={() => setShowEditor(!showEditor)} 
+            saveBunkers={() => setShowEditor(!showEditor)} 
+            unsaveBunkers={() => setShowEditor(!showEditor)} 
+            isSaved={false}  
+        />
+        ]}
         author={<a>{comment.author.name}</a>}
         avatar={
-          <Avatar
-            src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-            alt="User1"
-          />
+          <div className="w-12 h-12 overflow-hidden rounded-lg m-4">
+            <Avatar
+                src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                alt="User1"
+              />
+          </div>
         }
         content={<p>{comment.body}</p>}
       >
@@ -48,7 +61,7 @@ const CommentContent = (props) => {
           return <ThreadContent thread={comment} id={id}/>;
         })}
       </Comment>
-    </>
+    </div>
   );
 };
 

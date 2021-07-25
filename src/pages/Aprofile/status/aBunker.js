@@ -14,7 +14,6 @@ const Bunker = () => {
   console.log("going here in Bunker");
   const [ bunker, setBunker ] = useState({})
   const { bunkerId } = useParams()
-  // debugger
   const { user } = useContext(UserContext);
   console.log(user)
     

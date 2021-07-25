@@ -79,8 +79,7 @@ function BunkerForm() {
     };
     try {
       // this const gets the 'token' and 'user'from localStorage. Check Signup.js to see how to access and save in localStorage.
-      
-
+    
       const config = {
         headers: {
           "Content-Type": "application/json",
@@ -125,7 +124,7 @@ function BunkerForm() {
             </span>
           </div>
           <div className="nm-flat-white rounded-lg">
-          {printedSource && <BunkerVisualizer printedSource={printedSource} />}
+              {printedSource && <BunkerVisualizer printedSource={printedSource} />}
           </div>
           <div class="nm-flat-gray-100 h-auto rounded-lg relative z-0 w-full mb-5 text-black">
             {/* <label for="argument" class="absolute duration-300 top-3 -z-1 origin-0 text-black">Elaborate your argument</label>  */}

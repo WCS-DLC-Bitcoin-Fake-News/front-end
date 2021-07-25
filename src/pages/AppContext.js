@@ -8,20 +8,15 @@ import UserContext from "../contexts/UserContext";
 import "../styles/global.css";
 import "../styles/reset.css";
 // const db = firebase.firestore();
-
+import useLocalStorage from "./../hooks/useLocalStorage"
 function AppContext({ children }) {
 
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useLocalStorage("user");
   const [homeBunkersContext, setHomeBunkersContext] = useState(null);
   const [exploreBunkersContext, setExploreBunkersContext] = useState(null);
   const [bookmarksBunkersContext, setBookmarksBunkersContext] = useState(null);
   
-  useEffect(() => {
-    if (localStorage.getItem("user")) {
-      setUser(JSON.parse(localStorage.getItem("user")));
-    }
-  }, []);
-
+  useEffect(() => console.log("Update on user storage", user), [user])
 
   return (
     <>

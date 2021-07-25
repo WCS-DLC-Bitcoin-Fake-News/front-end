@@ -4,6 +4,7 @@ import postBunker from "../../Api/PostBunker";
 import Avatar from "../Avatar/Avatar";
 
 const CommentInput = ({ bunkerID }) => {
+  console.log("In Comment Input ?")
   const { user } = useContext(UserContext);
   const [comment, setComment] = useState("");
 

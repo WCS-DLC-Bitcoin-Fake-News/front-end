@@ -6,11 +6,12 @@ import { handleSignIn, handleSignUp } from "../../Api/Authentication";
 import axios from "axios";
 import UserContext from "../../contexts/UserContext";
 import { useHistory } from "react-router-dom";
-
+import useLocalStorage from "../../hooks/useLocalStorage";
 const AuthForm = ({ type }) => {
   const history = useHistory()
   console.log(type)
   const { user, setUser } = useContext(UserContext);
+  const [localUser, setLocalUser] = useLocalStorage("user");
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,12 +24,22 @@ const AuthForm = ({ type }) => {
     <div>
       <form
         onSubmit={async (e) => {
-          e.preventDefault();
-          setAuthLoading(true);
-          const { message } = await handleSignIn(email, password);
-          setAuthErrMsg(message);
-          setAuthLoading(false);
-          history.push("/home")
+          try {
+            e.preventDefault();
+            setAuthLoading(true);
+            const logged = await handleSignIn(email, password);
+            setUser(logged);
+            setAuthLoading(false);
+            history.push("/");
+
+          } catch (error) {
+            console.log("Catched ?")
+            console.log(error.toString())
+            setAuthLoading(false);
+            setAuthErrMsg(error.toString());
+
+          }
+        
         }}>
         <div className="mb-4 bg-blue-900">
           <label
@@ -227,7 +238,8 @@ const AuthForm = ({ type }) => {
                   );
                   setUser(logged);
                   setAuthLoading(false);
-                  history.push("/home");
+                  // setLocalUser(logged)
+                  history.push("/");
 
                 } catch (error) {
                   setAuthErrMsg(error.toString());

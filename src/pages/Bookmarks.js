@@ -10,12 +10,15 @@ import UserContext from "../contexts/UserContext";
 import Layout from "../layouts";
 import { fetchBunker } from "../Api/FetchData";
 import { useParams } from "react-router-dom";
+import CommentContainer from "./../components/modules/Comment/CommentContainer";
 
 const Bookmarks = () => {
   const { user } = useContext(UserContext);
   const [bunker, setBunker] = useState({});
   const [loading, setIsLoading] = useState(true);
   const [isEmpty, setIsEmpty] = useState(false);
+  // const [showEditor, setShowEditor] = useState(false);
+
   // const { bookmarksBunkersContext, setBookmarksBunkersContext } = useContext(
   //   BookmarksBunkersContext
   // );
@@ -51,8 +54,10 @@ const Bookmarks = () => {
                 <h1>You have no Saved Bunkers</h1>
               ) : (
               
-                    <div className="mb-5">
-                     { bunker._id &&  <Post bunker={bunker} /> }
+                    <div className="space-y-6 ">
+                     { bunker._id &&  <><Post bunker={bunker} /> <CommentContainer id={bunker._id} />
+                    
+                      </>}
                     </div>
                 )
               }

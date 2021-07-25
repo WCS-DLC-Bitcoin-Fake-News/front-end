@@ -30,7 +30,19 @@ function App() {
               <PrivateRoute exact path="/">
                 <Home />
               </PrivateRoute>
+              <PrivateRoute restricted={true} path="/explore">
+                <Explore />
+              </PrivateRoute>
+              <PrivateRoute restricted={true} path="/debunk/:bunkerId" >
+                <BunkerEditor />
+              </PrivateRoute>
+              <PrivateRoute restricted={true} path="/:userId/profile" >
+                <Aprofile />
+              </PrivateRoute>
 
+
+              {/* Public Routes */}
+              {/* Restricted, for logged user */}
               <PublicRoute restricted={true} path="/signin">
                 <Init />
               </PublicRoute>
@@ -38,26 +50,10 @@ function App() {
               <PublicRoute restricted={true} path="/signup">
                 <Signup />
               </PublicRoute>
-
-              <PrivateRoute restricted={true} path="/explore">
-                <Explore />
-              </PrivateRoute>
-
-              {/* Public Routes */}
-              {/* Restricted, for logged user */}
-
-  
-              <PrivateRoute restricted={true} path="/debunk/:bunkerId" >
-                <BunkerEditor />
-              </PrivateRoute>
-
-              <PrivateRoute restricted={true} path="/:userId/profile" >
-                <Aprofile />
-              </PrivateRoute>
+        
               
               {/* Public Routes */}
               {/* Always public */}
-
               <PrivateRoute restricted={false} path="/:userId/status/:bunkerId" >
                 <Aprofile />
               </PrivateRoute>

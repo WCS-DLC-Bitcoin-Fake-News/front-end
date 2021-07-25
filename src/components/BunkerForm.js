@@ -105,7 +105,7 @@ function BunkerForm() {
       <div class="flex-col mx-auto max-w-max px-6 py-12 nm-flat-white hover:bg-gray-100 rounded-lg">
         <h1 class="text-2xl text-black font-montserrat font-bold mb-8">Build your Bunker</h1>
         <form id="form" onSubmit={onSubmit}>
-          <div class="relative z-0 w-full mb-5">
+          <div class="relative z-0 w-full h-auto mb-5">
             <input
               onChange={editTitle}
               type="text"
@@ -120,7 +120,7 @@ function BunkerForm() {
             >
               Enter Title
             </label>
-            <span class="text-sm text-red-600 hidden" id="error">
+            <span class=" text-red-600 hidden" id="error">
               Title is required
             </span>
           </div>

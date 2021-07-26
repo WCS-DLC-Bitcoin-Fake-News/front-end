@@ -109,7 +109,7 @@ const NavBar = () => {
             )} */}
           </div>
         </div>
-        <div className="nm-concave-yellowBunker rounded-full p-2">{<Wallet />}</div>
+        <div className="nm-concave-yellowBunker rounded-full p-2">{<Wallet count={10} text={"Your Balance:"}/>}</div>
         <div>{user && <ProfileDropDown user={user} />}</div>
       </nav>
     </div>

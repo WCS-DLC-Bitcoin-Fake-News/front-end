@@ -22,7 +22,7 @@ const AuthForm = ({ type }) => {
 
   const signIn = () => (
     <div>
-      <form
+      <form 
         onSubmit={async (e) => {
           try {
             e.preventDefault();
@@ -41,17 +41,17 @@ const AuthForm = ({ type }) => {
           }
         
         }}>
-        <div className="mb-4 bg-blue-900">
+        <div className="mb-4">
           <label
-            className="block text-black text-sm font-Cabin font-bold p-4"
+            className="block text-black text-lg font-cabin font-bold pl-4"
             htmlFor="Email">
             Email
             <input
               className="
-            bg-blue-900
-            py-4
-            font-Raleway
-            shadow appearance-none rounded w-full text-black placeholder-gray-200 leading-tight"
+              py-4
+              nm-inset-white
+              font-raleway
+              rounded-full w-full text-black placeholder-gray-300 "
               id="email"
               type="email"
               placeholder="Email"
@@ -62,17 +62,17 @@ const AuthForm = ({ type }) => {
           </label>
         </div>
         <div className="mb-6">
-          <div className="mb-4 bg-blue-900">
+          <div className="mb-4">
             <label
-              className="block text-black text-sm font-Cabin font-bold p-4"
+              className="block text-black text-lg font-cabin font-bold p-4"
               htmlFor="password">
               Password
               <input
                 className="
-            bg-blue-900
-            py-4
-            font-poppins
-            shadow appearance-none rounded w-full text-white placeholder-blue-300 leading-tight"
+                py-4
+                nm-inset-white
+                font-raleway
+                rounded-full w-full text-black placeholder-gray-300"
                 id="password"
                 type="password"
                 placeholder="********"
@@ -90,9 +90,9 @@ const AuthForm = ({ type }) => {
             </div>
           )}
         </div>
-        <div className="flex flex-row flex-wrap items-center">
+        <div className="flex flex-row flex-wrap content-center">
           <button
-            className={`relative text-black font-Cabin font-bold py-4 px-8 rounded-full ml-4 focus:outline-none focus:shadow-outline ${
+            className={`relative text-black text-lg font-cabin font-bold py-4 px-8 rounded-full ml-4 focus:outline-none focus:shadow-outline ${
               authLoading ? "cursor-not-allowed bg-#CCDE04" : "nm-flat-yellowBunker-sm"
             } `}
             type="submit">
@@ -111,7 +111,7 @@ const AuthForm = ({ type }) => {
           </button>
           <div className="py-4 mr-0 ml-auto">
             <Link to="/signup">
-              <a className="font-noto text-white font-semibold">
+              <a className="font-raleway text-white text-xl font-semibold">
                 Create an account?
               </a>
             </Link>
@@ -125,17 +125,17 @@ const AuthForm = ({ type }) => {
     <div>
       <form>
         <div className="mb-4">
-          <div className="mb-4 bg-blue-900">
+          <div className="mb-4">
             <label
-              className="block text-primary text-sm font-bold p-4"
+              className="block font-cabin text-lg font-bold p-4"
               htmlFor="name">
               Name
               <input
                 className="
-              bg-blue-900
-              py-4
-              font-poppins
-              shadow appearance-none rounded w-full text-white placeholder-blue-300 leading-tight"
+                py-4
+                nm-inset-white
+                font-raleway
+                rounded-full w-full text-black placeholder-gray-300 "
                 id="name"
                 type="text"
                 placeholder="Name"
@@ -147,17 +147,17 @@ const AuthForm = ({ type }) => {
           </div>
         </div>
         <div className="mb-4">
-          <div className="mb-4 bg-blue-900">
+          <div className="mb-4">
             <label
-              className="block text-primary text-sm font-bold p-4"
+              className="block font-cabin text-lg font-bold p-4"
               htmlFor="Email">
               Email
               <input
                 className="
-            bg-blue-900
-            py-4
-            font-poppins
-            shadow appearance-none rounded w-full text-white placeholder-blue-300 leading-tight"
+                py-4
+                nm-inset-white
+                font-raleway
+                rounded-full w-full text-black placeholder-gray-300 "
                 id="email"
                 type="email"
                 placeholder="Email"
@@ -169,17 +169,17 @@ const AuthForm = ({ type }) => {
           </div>
         </div>
         <div className="mb-4">
-          <div className="mb-4 bg-blue-900">
+          <div className="mb-4">
             <label
-              className="block text-primary text-sm font-bold p-4"
+              className="block font-cabin text-lg font-bold p-4"
               htmlFor="username">
               Username
               <input
                 className="
-              bg-blue-900
-              py-4
-              font-poppins
-              shadow appearance-none rounded w-full text-white placeholder-blue-300 leading-tight"
+                py-4
+                nm-inset-white
+                font-raleway
+                rounded-full w-full text-black placeholder-gray-300 "
                 id="username"
                 type="text"
                 placeholder="Username"
@@ -192,17 +192,17 @@ const AuthForm = ({ type }) => {
         </div>
 
         <div className="mb-6">
-          <div className="mb-4 bg-blue-900">
+          <div className="mb-4">
             <label
-              className="block text-primary text-sm font-bold p-4"
+              className="block font-cabin text-lg font-bold p-4"
               htmlFor="password">
               Password
               <input
-                className="
-              bg-blue-900
-              py-4
-              font-poppins
-              shadow appearance-none rounded w-full text-white placeholder-blue-300 leading-tight"
+                className="          
+                py-4
+                nm-inset-white
+                font-raleway
+                rounded-full w-full text-black placeholder-gray-300 "
                 id="password"
                 type="password"
                 placeholder="********"
@@ -246,8 +246,8 @@ const AuthForm = ({ type }) => {
                 }
          
               }}
-              className={`relative text-white font-bold py-4 px-8 rounded focus:outline-none focus:shadow-outline ${
-                authLoading ? "cursor-not-allowed bg-blue-300" : "bg-primary"
+              className={`relative text-black text-lg font-cabin font-bold ml-4 py-4 px-8 rounded-full focus:outline-none focus:shadow-outline ${
+                authLoading ? "cursor-not-allowed bg-#CCDE04" : "nm-flat-yellowBunker-sm"
               } `}
               type="submit">
               Sign Up

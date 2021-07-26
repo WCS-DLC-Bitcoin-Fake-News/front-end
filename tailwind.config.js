@@ -12,6 +12,9 @@ module.exports = {
       montserrat: ["Montserrat"],
     },
     extend: {
+      // backgroundImage: theme => ({
+      //   'bunker-blur-bg': "url('/images/logos/deBunker_bg_fullscreen.svg')"
+      // }),
       colors: {
         yellowBunker: "#E4F705",
         primary: "",

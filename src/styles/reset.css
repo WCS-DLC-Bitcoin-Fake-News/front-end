@@ -365,7 +365,7 @@ video {
 
 .bg-primary {
   --bg-opacity: 1;
-  background-color: #2f80ed;
+  background-color: rgb(224, 224, 224);
   background-color: rgba(47, 128, 237, var(--bg-opacity));
 }
 
@@ -957,7 +957,7 @@ video {
 
 .text-primary {
   --text-opacity: 1;
-  color: #2f80ed;
+  color: black;
   color: rgba(47, 128, 237, var(--text-opacity));
 }
 

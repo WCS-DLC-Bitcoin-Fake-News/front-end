@@ -21,12 +21,12 @@ const LoginButtons = () => {
   ) : (
     <div>
       <Link to="/signin">
-        <button className="mr-2 p-1 hover:bg-blue-200 rounded-lg text-lg w-22 h-11 text-gray-600	 font-bold tracking-wide2">
+        <button className="mr-2 p-1 hover:bg-yellow rounded-lg text-lg w-22 h-11 text-gray-600	 font-bold tracking-wide2">
           Sign In
         </button>
       </Link>
       <Link to="/signup">
-        <button className="ml-2 p-1 hover:bg-white hover:text-blue-800 rounded-lg text-lg w-22 h-11 font-bold tracking-wide2 bg-primary text-white">
+        <button className="ml-2 p-1 hover:bg-white hover:bg-yellowBunker rounded-lg text-lg w-22 h-11 font-bold tracking-wide2 bg-primary text-white">
           Sign Up
         </button>
       </Link>
@@ -56,7 +56,7 @@ const Navbar = () => {
               <NavLink
                 to="/about"
                 activeClassName="text-secondary "
-                className=" p-1	text-gray-600	 hover:bg-blue-100 dark:hover:bg-blue-900 rounded-lg text-lg"
+                className=" p-1	text-gray-600	 hover:bg-yellowBunker dark:hover:bg-yellowBunker-900 rounded-lg text-lg"
               >
                 About
               </NavLink>
@@ -64,7 +64,7 @@ const Navbar = () => {
               <NavLink
                 to="/contact"
                 activeClassName="text-secondary"
-                className=" p-1 text-gray-600	 hover:bg-blue-100 dark:hover:bg-blue-900 rounded-lg text-lg"
+                className=" p-1 text-gray-600	 hover:bg-yellowBunker dark:hover:bg-yellowBunker-900 rounded-lg text-lg"
               >
                 Contact
               </NavLink>
@@ -72,7 +72,7 @@ const Navbar = () => {
               <NavLink
                 to="/help"
                 activeClassName="text-secondary"
-                className=" p-1	text-gray-600	 hover:bg-blue-100 rounded-lg text-lg"
+                className=" p-1	text-gray-600	 hover:bg-yellowBunker rounded-lg text-lg"
               >
                 Help
               </NavLink>
@@ -80,7 +80,7 @@ const Navbar = () => {
               <NavLink
                 to="/post"
                 activeClassName="text-secondary"
-                className=" p-1	text-gray-600	 hover:bg-blue-100 rounded-lg text-lg"
+                className=" p-1	text-gray-600	 hover:bg-yellowBunker rounded-lg text-lg"
               >
                 Post
               </NavLink>
@@ -88,7 +88,7 @@ const Navbar = () => {
               <NavLink
                 to="/upvote"
                 activeClassName="text-secondary"
-                className=" p-1	text-gray-600	 hover:bg-blue-100 rounded-lg text-lg"
+                className=" p-1	text-gray-600	 hover:bg-yellowBunker rounded-lg text-lg"
               >
                 Vote
               </NavLink>
@@ -100,7 +100,7 @@ const Navbar = () => {
           <button
             onClick={() => setIsOpen(!isOpen)}
             type="button"
-            className="bg-blue-200 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-blue-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-blue-300 focus:ring-white"
+            className="bg-blue-200 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-yellowBunker focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-blue-300 focus:ring-white"
             aria-controls="mobile-menu"
             aria-expanded="false"
           >
@@ -157,7 +157,7 @@ const Navbar = () => {
               <Link
                 to="/about"
                 activeClassName="text-secondary "
-                className=" p-1	text-gray-600	 hover:bg-blue-100 dark:hover:bg-blue-900 rounded-lg text-lg"
+                className=" p-1	text-gray-600	 hover:bg-yellowBunker dark:hover:bg-yellowBunker-900 rounded-lg text-lg"
               >
                 About
               </Link>
@@ -165,7 +165,7 @@ const Navbar = () => {
               <Link
                 to="/contact"
                 activeClassName="text-secondary"
-                className=" p-1 text-gray-600	 hover:bg-blue-100 dark:hover:bg-blue-900 rounded-lg text-lg"
+                className=" p-1 text-gray-600	 hover:bg-yellowBunker dark:hover:bg-yellowBunker-900 rounded-lg text-lg"
               >
                 Contact
               </Link>
@@ -173,7 +173,7 @@ const Navbar = () => {
               <Link
                 to="/help"
                 activeClassName="text-secondary"
-                className=" p-1	text-gray-600	 hover:bg-blue-100 rounded-lg text-lg"
+                className=" p-1	text-gray-600	 hover:bg-yellowBunker rounded-lg text-lg"
               >
                 Help
               </Link>
@@ -181,7 +181,7 @@ const Navbar = () => {
               <Link
                 to="/post"
                 activeClassName="text-secondary"
-                className=" p-1	text-gray-600	 hover:bg-blue-100 rounded-lg text-lg"
+                className=" p-1	text-gray-600	 hover:bg-yellowBunker-100 rounded-lg text-lg"
               >
                 Post
               </Link>
@@ -189,7 +189,7 @@ const Navbar = () => {
               <Link
                 to="/article"
                 activeClassName="text-secondary"
-                className=" p-1	text-gray-600	 hover:bg-blue-100 rounded-lg text-lg"
+                className=" p-1	text-gray-600	 hover:bg-yellowBunker rounded-lg text-lg"
               >
                 Article
               </Link>
@@ -197,19 +197,19 @@ const Navbar = () => {
               <Link
                 to="/upvote"
                 activeClassName="text-secondary"
-                className=" p-1	text-gray-600	 hover:bg-blue-100 rounded-lg text-lg"
+                className=" p-1	text-gray-600	 hover:bg-yellowBunker rounded-lg text-lg"
               >
                 Vote
               </Link>
             </div>
             <div>
               <Link to="signin">
-                <button className="mr-2 p-1 hover:bg-blue-200 rounded-lg text-lg w-19 h-11 text-gray-600	 font-bold tracking-wide2">
+                <button className="mr-2 p-1 hover:bg-yellowBunker rounded-lg text-lg w-19 h-11 text-gray-600	 font-bold tracking-wide2">
                   Sign In
                 </button>
               </Link>
               <Link to="signup">
-                <button className="ml-2 p-1 hover:bg-white hover:text-blue-800 rounded-lg text-lg w-19 h-9 font-bold tracking-wide2 bg-primary text-white">
+                <button className="ml-2 p-1 hover:bg-white hover:bg-yellowBunker rounded-lg text-lg w-19 h-9 font-bold tracking-wide2 bg-primary text-white">
                   Sign Up
                 </button>
               </Link>

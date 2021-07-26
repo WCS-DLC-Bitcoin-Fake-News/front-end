@@ -50,7 +50,7 @@ const BunkerContent = ({ tags, argument, source, printedSource}) => {
                 </p>
                 <div
                     to="blog/detail"
-                    className="font-bold hover:text-blue-400 text-gray-100"
+                    className="font-bold hover:bg-yellowBunker-400 text-gray-100"
                     >read more...</div
                     >
             </div>

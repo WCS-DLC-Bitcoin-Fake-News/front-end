@@ -27,10 +27,6 @@ const BunkerInput = () => {
     <div className="nm-flat-white rounded-lg h-auto overflow-hidden ">
       <div className="p-5">
         <div className="flex flex-row my-5">
-          <div className="w-20 h-20 rounded-lg overflow-hidden">
-            {user && <Avatar src={user.name} />}
-          </div>
-
           <div className="w-full mx-5">
             <div className="flex flex-col">
               <form

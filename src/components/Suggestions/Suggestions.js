@@ -60,10 +60,10 @@ const Suggestions = ({ type, userID }) => {
             <div className="font-raleway font-medium text-gray-600">Final Stake - 1004</div>
             <div className="font-raleway font-medium text-gray-600">Ended 23/07</div>
           </div>
-          <div>
+          {/* <div>
             <label className="py-2 font-raleway font-semibold" for="votes bar">Final Votes</label>
             <progress className="nm-inset-white w-full p-5 rounded-full" id="votes bar" max="100" value="70"> 70% </progress>
-          </div>
+          </div> */}
         </div>
       )}
     </div>

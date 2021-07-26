@@ -10,14 +10,14 @@ import { Link } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import UserContext from "../../contexts/UserContext";
 import { deleteBunker } from "../../Api/DeleteBunker";
-import { fetchBunkerLikes, fetchBunkerSaves, upVoteBunker  } from "../../Api/FetchData";
+import { fetchBunker, fetchBunkerLikes, fetchBunkerSaves, upVoteBunker } from "../../Api/FetchData";
 import Avatar from "../Avatar/Avatar";
 import BunkerVisualizer from "../modules/Bunker/BunkerVisualizer";
 import axios from "axios";
 import PostButtons from "./PostButtons";
 import Wallet from "../Wallet/Wallet";
 
-const Post = ( { bunker, isThumb } ) => {
+const Post = ( { setBunker, bunker, isThumb } ) => {
   console.log("bunker?", bunker)
   const { user } = useContext(UserContext);
   // const [bunker, setLocalBunker] = useState(bunker);
@@ -36,25 +36,20 @@ const Post = ( { bunker, isThumb } ) => {
   const upVote = async () => {
     console.log(" iam in like bunker ")
     console.log(bunker)
-    const upvote = {
-      pro : true,
-      author: bunker.author
-    }
+    
   
     if (!user) {
       alert("You need to sign in for that");
       return;
     }
-    // axios col to upVote
+   
+    await upVoteBunker( bunker._id, user._id )
 
-    const res = await axios.post(
-      `/bunkers/${bunker.id}/votes`,
-      upvote,
-    );
-
-    return res.data;
 
     setVotes((prev) => prev + 1);
+    let updated = await fetchBunker( bunker._id )
+    setBunker(updated)
+
     // setLikeDocID(id);
     setIsLiked(true);
   };

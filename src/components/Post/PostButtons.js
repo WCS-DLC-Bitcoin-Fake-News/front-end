@@ -15,7 +15,7 @@ import Avatar from "../Avatar/Avatar";
 import BunkerVisualizer from "../modules/Bunker/BunkerVisualizer";
 import axios from "axios";
 
-const PostButtons = ({ bunker, likeBunker, dislikeBunker, saveBunkers, unsaveBunkers, isSaved }) => {
+const PostButtons = ({ bunker, upVote, likeBunker, dislikeBunker, saveBunkers, unsaveBunkers, isSaved }) => {
   const user = useContext(UserContext)
   return(
     <>
@@ -37,7 +37,7 @@ const PostButtons = ({ bunker, likeBunker, dislikeBunker, saveBunkers, unsaveBun
             type="submit"
             onClick={(e) => {
               e.stopPropagation();
-              likeBunker();
+              upVote();
             }}>
             <span className="">
               <ThumbUpIcon style={{ color: "#828282" }} />

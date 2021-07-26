@@ -55,7 +55,7 @@ const Bookmarks = () => {
               ) : (
               
                     <div className="space-y-6 ">
-                     { bunker._id &&  <><Post bunker={bunker} /> <CommentContainer id={bunker._id} />
+                     { bunker._id &&  <><Post setBunker={setBunker} bunker={bunker} /> <CommentContainer id={bunker._id} />
                     
                       </>}
                     </div>

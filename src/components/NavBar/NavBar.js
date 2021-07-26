@@ -6,7 +6,8 @@ import { useHistory } from "react-router-dom";
 import React, { useContext } from "react";
 import UserContext from "../../contexts/UserContext";
 import ProfileDropDown from "../ProfileDropDown/ProfileDropDown";
-
+import thumbnailLogo from "../../assets/debunker_logo_title_300.png";
+import Wallet from "../Wallet/Wallet";
 const NavBar = () => {
   const { user } = useContext(UserContext);
   const router = useHistory();
@@ -19,8 +20,8 @@ const NavBar = () => {
         
         to="/">
           <img
-            className="cursor-pointer ml-4"
-            src="/images/logos/bunker.png"
+            className="cursor-pointer ml-4 object-scale-down h-16"
+            src={thumbnailLogo}
             alt="logo"
           />
         </NavLink>
@@ -108,6 +109,7 @@ const NavBar = () => {
             )} */}
           </div>
         </div>
+        <div className="nm-concave-yellowBunker rounded-full p-2">{<Wallet />}</div>
         <div>{user && <ProfileDropDown user={user} />}</div>
       </nav>
     </div>

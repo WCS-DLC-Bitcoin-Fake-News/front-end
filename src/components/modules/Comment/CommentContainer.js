@@ -42,7 +42,7 @@ const CommentContainer = (props) => {
   const filtered = comments.filter((comment) => !comment.commentId);
 
   return (
-    <div className="bg-white rounded-b-lg">
+    <div className="nm-flat-white rounded-lg">
       <CommentEditor id={id} loadComments={loadComments}/> 
       {filtered.map((comment) => {
         return (

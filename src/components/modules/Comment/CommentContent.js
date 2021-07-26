@@ -33,7 +33,7 @@ const CommentContent = (props) => {
   }, []);
 
   return (
-    <div className="flex flex-row items-center">
+    <div className="rounded-lg flex flex-row items-center">
       <Comment
         actions={[
           <PostButtons 

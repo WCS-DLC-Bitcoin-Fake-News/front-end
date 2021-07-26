@@ -60,7 +60,7 @@ const Home = () => {
               {isEmpty ? (
                 <h1>You are following no one</h1>
               ) : (
-                homeBunkers.length && homeBunkers.map((bunker) => (
+                 homeBunkers.map((bunker) => (
                   <span key={bunker.id}>
                     <Link to={`/bunkers/${bunker._id}`}>
                       <div className="mb-5">

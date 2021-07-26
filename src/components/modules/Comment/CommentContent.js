@@ -6,15 +6,16 @@ import ThreadContent from "./ThreadContent";
 import ThreadEditor from "./ThreadEditor"
 import PostButtons from "../../Post/PostButtons";
 import Avatar from "./../../Avatar/Avatar"
+import Moment from "react-moment";
+
 
 const CommentContent = (props) => {
   let { id, comment, loadComments } = props;
-  console.log(id);
+
   const [showEditor, setShowEditor] = useState(false);
   const [thread, setThread] = useState([]);
 
   const loadThreads = async (commentId) => {
-    console.log(commentId);
     try {
       const { data } = await axios.get(
         `/bunkers/${id}/comments/${commentId}/threads`
@@ -42,7 +43,7 @@ const CommentContent = (props) => {
             saveBunkers={() => setShowEditor(!showEditor)} 
             unsaveBunkers={() => setShowEditor(!showEditor)} 
             isSaved={false}  
-        />
+           />
         ]}
         author={<a>{comment.author.name}</a>}
         avatar={
@@ -55,10 +56,19 @@ const CommentContent = (props) => {
         }
         content={<p>{comment.body}</p>}
       >
-        <p>{comment.createdAt}</p>
-        {showEditor ? <ThreadEditor id={id} commentId={comment._id} loadThreads={loadThreads} showEditor={showEditor} setShowEditor={setShowEditor}/> : console.log()}
-        {thread.map((comment) => {
-          return <ThreadContent thread={comment} id={id}/>;
+        {showEditor ? (
+          <ThreadEditor
+            id={id}
+            commentId={comment._id}
+            loadThreads={loadThreads}
+            showEditor={showEditor}
+            setShowEditor={setShowEditor}
+          />
+        ) : (
+          console.log()
+        )}
+        {thread.map((comment, idx) => {
+          return <ThreadContent key={idx} thread={comment} id={id} />;
         })}
       </Comment>
     </div>

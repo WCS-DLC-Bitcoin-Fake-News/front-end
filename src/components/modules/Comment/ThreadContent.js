@@ -63,8 +63,8 @@ function ThreadContent(props) {
         ) : (
           console.log()
         )}
-        {secondThread.map((comment) => {
-          return <SecondThread thread={comment} id={id} />;
+        {secondThread.map((comment, idx) => {
+          return <SecondThread key={idx} thread={comment} id={id} />;
         })}
       </Comment>
     </>

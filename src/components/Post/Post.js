@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import UserContext from "../../contexts/UserContext";
 import { deleteBunker } from "../../Api/DeleteBunker";
-import { fetchBunkerLikes, fetchBunkerSaves } from "../../Api/FetchData";
+import { fetchBunkerLikes, fetchBunkerSaves, upVoteBunker  } from "../../Api/FetchData";
 import Avatar from "../Avatar/Avatar";
 import BunkerVisualizer from "../modules/Bunker/BunkerVisualizer";
 import axios from "axios";

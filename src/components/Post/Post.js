@@ -186,7 +186,7 @@ const Post = ( { bunker, isThumb } ) => {
         )}
         <div className="flex justify-between my-5">
           <div className="inline-flex justify-center w-2/5 rounded-full shadow-sm p-4 nm-convex-white border border-yellowBunker text-sm font-raleway font-medium text-gray-700 hover:bg-gray-50">
-          {<Wallet text={`Stake`} count={4} />}
+          {<Wallet text={`Stake`} count={bunker.stake + bunker.initialStake} />}
           </div>
           <p className="mx-1 text-gray-500 font-raleway font-medium pt-4">
             {comments} Comments

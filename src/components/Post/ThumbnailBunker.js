@@ -14,6 +14,7 @@ import { fetchBunkerLikes, fetchBunkerSaves } from "../../Api/FetchData";
 import Avatar from "../Avatar/Avatar";
 import BunkerVisualizer from "../modules/Bunker/BunkerVisualizer";
 import axios from "axios";
+import Wallet from "../Wallet/Wallet"
 const ThumbnailBunker = ( { bunker, isThumb } ) => {
   console.log("bunker?", bunker)
   const { user } = useContext(UserContext);
@@ -125,18 +126,18 @@ const ThumbnailBunker = ( { bunker, isThumb } ) => {
         </div>
         <div className="w-full">
           <Link href={`/${bunker.author.username}`}>
-            <p className="font-poppins font-medium text-base my-1 hover:underline">
+            <p className="font-montserrat font-medium text-base my-1 hover:underline">
               {bunker.author.name}
             </p>
           </Link>
-          <p className="font-poppins text-sm font-medium my-1 text-gray-700  ">
+          <p className="font-montserrat text-sm font-medium my-1 text-gray-700  ">
             @{bunker.author.username}
           </p>
-          <p className="font-noto text-gray-500 text-base my-1">
+          <p className="font-raleway text-gray-500 text-base my-1">
             {bunker.createdAt}
           </p>
         </div>
-
+        <div className="inline-flex justify-center w-2/5 rounded-full shadow-sm p-4 nm-convex-white border border-yellowBunker text-sm font-raleway font-medium text-gray-700 hover:bg-gray-50 font-montserrat font-bold">{<Wallet />}</div>
         {myBunker && (
           <div
             className="w-16 h-16 flex flex-col justify-center items-center"

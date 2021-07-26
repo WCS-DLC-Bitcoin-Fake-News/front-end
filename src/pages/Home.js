@@ -10,6 +10,7 @@ import HomeBunkersContext from "../contexts/HomeBunkersContext";
 import UserContext from "../contexts/UserContext";
 import Layout from "../layouts";
 import { fetchUser, fetchPublishedBunkers } from "../Api/FetchData";
+import ThumbnailBunker from "../components/Post/ThumbnailBunker";
 
 const Home = () => {
   const { user } = useContext(UserContext);
@@ -63,7 +64,7 @@ const Home = () => {
                   <span key={bunker.id}>
                     <Link to={`/bunkers/${bunker._id}`}>
                       <div className="mb-5">
-                        <Post isThumb={true} bunker={bunker} />
+                        <ThumbnailBunker isThumb={true} bunker={bunker} />
                       </div>
                     </Link>
                   </span>

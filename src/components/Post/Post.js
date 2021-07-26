@@ -22,7 +22,7 @@ const Post = ( { bunker, isThumb } ) => {
   const { user } = useContext(UserContext);
   // const [bunker, setLocalBunker] = useState(bunker);
 
-  const [liked, setVotes] = useState(0);
+  const [votes, setVotes] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
   const [likeDocID, setLikeDocID] = useState("");
 
@@ -192,10 +192,10 @@ const Post = ( { bunker, isThumb } ) => {
             {comments} Comments
           </p>
           <p className="mx-1 text-gray-500 font-raleway font-medium pt-4">
-            {liked} Upvote
+            {votes} Upvote
           </p>
           <p className="mx-1 text-gray-500 font-raleway font-medium pt-4">
-            {liked} Downvote
+            {votes} Downvote
           </p>
           <p className="mx-1 text-gray-500 font-raleway font-medium pt-4 pr-4">
             {saves} Saved

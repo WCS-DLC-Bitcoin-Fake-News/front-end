@@ -22,7 +22,7 @@ const Post = ( { bunker, isThumb } ) => {
   const { user } = useContext(UserContext);
   // const [bunker, setLocalBunker] = useState(bunker);
 
-  const [likes, setLikes] = useState(0);
+  const [liked, setVotes] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
   const [likeDocID, setLikeDocID] = useState("");
 
@@ -33,7 +33,7 @@ const Post = ( { bunker, isThumb } ) => {
   const [comments, setComments] = useState(0);
   const [myBunker, setMyBunker] = useState(false);
 
-  const likeBunker = async () => {
+  const upVote = async () => {
     console.log(" iam in like bunker ")
     console.log(bunker)
     const upvote = {
@@ -54,12 +54,12 @@ const Post = ( { bunker, isThumb } ) => {
 
     return res.data;
 
-    setLikes((prev) => prev + 1);
+    setVotes((prev) => prev + 1);
     // setLikeDocID(id);
     setIsLiked(true);
   };
 
-  const dislikeBunker = () => {
+  const downVote = () => {
     console.log(" iam in dislike bunker ")
 
     if (!user) {
@@ -67,7 +67,7 @@ const Post = ( { bunker, isThumb } ) => {
       return;
     }
     // axios col to downVote
-    setLikes((prev) => prev - 1);
+    setVotes((prev) => prev - 1);
     setIsLiked(false);
   };
 
@@ -94,12 +94,12 @@ const Post = ( { bunker, isThumb } ) => {
   };
 
   useEffect(async () => {
-    // setLikes((await fetchBunkerLikes(bunker.id)).size);
+    // setVotes((await fetchBunkerLikes(bunker.id)).size);
     if (user) {
-      async function checkForLikes(bunkerId) {
+      async function checkForVotes(bunkerId) {
   
       }
-      checkForLikes();
+      checkForVotes();
 
       async function checkForSaves() {
       // axios call to count how many bookmarks on a bunker
@@ -192,10 +192,10 @@ const Post = ( { bunker, isThumb } ) => {
             {comments} Comments
           </p>
           <p className="mx-1 text-gray-500 font-raleway font-medium pt-4">
-            {likes} Upvote
+            {liked} Upvote
           </p>
           <p className="mx-1 text-gray-500 font-raleway font-medium pt-4">
-            {likes} Downvote
+            {liked} Downvote
           </p>
           <p className="mx-1 text-gray-500 font-raleway font-medium pt-4 pr-4">
             {saves} Saved
@@ -206,8 +206,8 @@ const Post = ( { bunker, isThumb } ) => {
 
       <PostButtons
         bunker={bunker}
-        likeBunker={likeBunker} 
-        dislikeBunker={dislikeBunker} 
+        upVote={upVote} 
+        downVote={downVote} 
         saveBunkers={saveBunkers} 
         unsaveBunkers={unsaveBunkers} 
         isSaved={isSaved}  

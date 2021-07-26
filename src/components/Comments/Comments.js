@@ -21,7 +21,7 @@ const Comments = ({ bunkerID }) => {
   }, []);
 
   return (
-    <div className="bg-white rounded-b-lg">
+    <div className="bg-white rounded-lg">
       {comments &&
         comments.length > 0 &&
         comments.map((comment) => (

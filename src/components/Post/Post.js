@@ -15,7 +15,7 @@ import Avatar from "../Avatar/Avatar";
 import BunkerVisualizer from "../modules/Bunker/BunkerVisualizer";
 import axios from "axios";
 import PostButtons from "./PostButtons";
-
+import Wallet from "../Wallet/Wallet";
 
 const Post = ( { bunker, isThumb } ) => {
   console.log("bunker?", bunker)
@@ -184,17 +184,20 @@ const Post = ( { bunker, isThumb } ) => {
             </a>
           </div>
         )}
-        <div className="flex flex-row justify-end my-5">
-          <p className="mx-1 text-gray-500 font-noto font-medium">
+        <div className="flex justify-between my-5">
+          <div className="inline-flex justify-center w-2/5 rounded-full shadow-sm p-4 nm-convex-white border border-yellowBunker text-sm font-raleway font-medium text-gray-700 hover:bg-gray-50">
+          {<Wallet />}
+          </div>
+          <p className="mx-1 text-gray-500 font-raleway font-medium pt-4">
             {comments} Comments
           </p>
-          <p className="mx-1 text-gray-500 font-noto font-medium">
+          <p className="mx-1 text-gray-500 font-raleway font-medium pt-4">
             {likes} Upvote
           </p>
-          <p className="mx-1 text-gray-500 font-noto font-medium">
+          <p className="mx-1 text-gray-500 font-raleway font-medium pt-4">
             {likes} Downvote
           </p>
-          <p className="mx-1 text-gray-500 font-noto font-medium">
+          <p className="mx-1 text-gray-500 font-raleway font-medium pt-4 pr-4">
             {saves} Saved
           </p>
         </div>

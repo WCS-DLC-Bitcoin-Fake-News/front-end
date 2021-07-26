@@ -44,7 +44,7 @@ const CommentEditor = (props) => {
     }
   };
   return (
-    <>
+    <div className="nm-flat-white rounded-lg">
       <Comment
         avatar={
           <Avatar
@@ -53,7 +53,7 @@ const CommentEditor = (props) => {
           />
         }
         content={
-          <div className="w-full px-4">
+          <div className="w-full px-4 rounded-lg">
             <Form.Item>
               <TextArea
                 className="bg-gray-200 placeholder-gray-600  rounded-lg h-12 w-full font-noto text-sm font-medium"
@@ -68,7 +68,7 @@ const CommentEditor = (props) => {
             <Form.Item>
               {user ? (
                 <button
-                  className="flex flex-row py-4 bottom-0 relative text-white px-8 py-4 rounded-full nm-convex-yellowBunker-sm"
+                  className="flex flex-row py-4 bottom-0 relative font-cabin text-black px-8 py-4 rounded-full nm-convex-yellowBunker-sm"
                   htmlType="submit"
                   loading={false}
                   onClick={(e) => {
@@ -92,7 +92,7 @@ const CommentEditor = (props) => {
           </div>
         }
       />
-    </>
+    </div>
   );
 };
 

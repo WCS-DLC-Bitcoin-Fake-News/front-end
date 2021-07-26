@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import UserContext from "../../contexts/UserContext";
 import { deleteBunker } from "../../Api/DeleteBunker";
-import { fetchBunkerLikes, fetchBunkerSaves, postVote } from "../../Api/FetchData";
+import { fetchBunkerLikes, fetchBunkerSaves } from "../../Api/FetchData";
 import Avatar from "../Avatar/Avatar";
 import BunkerVisualizer from "../modules/Bunker/BunkerVisualizer";
 import axios from "axios";
@@ -137,7 +137,7 @@ const ThumbnailBunker = ( { bunker, isThumb } ) => {
             {bunker.createdAt}
           </p>
         </div>
-        <div className="inline-flex justify-center w-2/5 rounded-full shadow-sm p-4 nm-convex-white border border-yellowBunker text-sm font-raleway font-medium text-gray-700 hover:bg-gray-50 font-montserrat font-bold">{<Wallet />}</div>
+        <div className="inline-flex justify-center w-2/5 rounded-full shadow-sm p-4 nm-convex-white border border-yellowBunker text-sm font-raleway font-medium text-gray-700 hover:bg-gray-50 font-montserrat font-bold">{<Wallet text={"Stake"} count={bunker.stake + bunker.initialStake} />}</div>
         {myBunker && (
           <div
             className="w-16 h-16 flex flex-col justify-center items-center"

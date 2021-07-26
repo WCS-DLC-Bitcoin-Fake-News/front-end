@@ -10,18 +10,18 @@ import { Link } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import UserContext from "../../contexts/UserContext";
 import { deleteBunker } from "../../Api/DeleteBunker";
-import { fetchBunkerLikes, fetchBunkerSaves } from "../../Api/FetchData";
+import { upVote, downvote, fetchBunkerSaves } from "../../Api/FetchData";
 import Avatar from "../Avatar/Avatar";
 import BunkerVisualizer from "../modules/Bunker/BunkerVisualizer";
 import axios from "axios";
 
-const PostButtons = ({bunker, likeBunker, dislikeBunker, saveBunkers, unsaveBunkers, isSaved }) => {
+const PostButtons = ({ bunker, likeBunker, dislikeBunker, saveBunkers, unsaveBunkers, isSaved }) => {
+  const user = useContext(UserContext)
   return(
     <>
     <hr></hr>
 
     <div className="flex flex-row my-2 items-stretch">
-
         <button
           onClick={(e) => e.stopPropagation() && likeBunker()}
           className="flex-1 mx-4 font-noto font-medium rounded-lg hover:bg-gray-400 cursor-pointer py-6"

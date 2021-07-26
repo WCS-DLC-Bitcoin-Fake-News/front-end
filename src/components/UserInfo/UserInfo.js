@@ -45,7 +45,7 @@ const UserInfo = ({ fetchedUser }) => {
               className="inline m-2 text-xs font-poppins font-semibold hover:underline cursor-pointer"
               onClick={() => getFollowings()}>
               {fetchedUser.followingsCount - 1}
-              <span className="m-1 text-gray-500"> Following</span>
+              <span className="m-1 text-gray-500">Following</span>
             </p>
           </span>
           {user && fetchedUser.username === user.username ? (

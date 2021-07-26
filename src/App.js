@@ -1,7 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext, Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import UserContext from "./contexts/UserContext";
-import ProtectedRoute from "./components/ProtectedRoute";
+import PrivateRoute from "./components/Routes/PrivateRoute";
+import PublicRoute from "./components/Routes/PublicRoute";
+
 
 import Init from "./pages";
 import Landing from "./pages/Landing";
@@ -14,51 +16,58 @@ import Explore from "./pages/Explore";
 import Bookmarks from "./pages/Bookmarks";
 import Signup from "./pages/Signup";
 import AppContext from "./pages/AppContext"
-
 import Aprofile from "./pages/Aprofile"
 import Abunker from "./pages/Aprofile/status/aBunker.js"
+import RouteBuilder from "./RouteBuilder"
 
 function App() {
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    if (localStorage.getItem("user")) {
-      setUser(JSON.parse(localStorage.getItem("user")));
-    }
-  }, []);
-
   return (
     <AppContext>
         <Router>
             <Switch>
-              <Route exact path="/">
-                <Init />
-              </Route>
-              <Route exact path="/signin">
-                <Signin />
-              </Route>
-              <Route exact path="/signup">
-                <Signup />
-              </Route>
-              <Route exact path="/home">
+              {/* Private Routes */}
+              {/* Restricted to user logged in */}
+              <PrivateRoute exact path="/">
                 <Home />
-              </Route>
-              <Route exact path="/explore">
+              </PrivateRoute>
+              <PrivateRoute restricted={true} path="/explore">
                 <Explore />
-              </Route>
-              <Route exact path="/bookmarks">
-                <Bookmarks />
-              </Route>
-              <Route path="/debunk/:bunkerId" >
+              </PrivateRoute>
+              <PrivateRoute restricted={true} path="/debunk/:bunkerId" >
                 <BunkerEditor />
-              </Route>
-              <Route path="/:userId/status/:bunkerId" >
+              </PrivateRoute>
+              <PrivateRoute restricted={true} path="/:userId/profile" >
                 <Aprofile />
-              </Route>
-              <Route path="/manifesto" >
+              </PrivateRoute>
+
+
+              {/* Public Routes */}
+              {/* Restricted, for logged user */}
+              <PublicRoute restricted={true} path="/signin">
+                <Init />
+              </PublicRoute>
+
+              <PublicRoute restricted={true} path="/signup">
+                <Signup />
+              </PublicRoute>
+        
+              
+              {/* Public Routes */}
+              {/* Always public */}
+              <PrivateRoute restricted={false} path="/:userId/status/:bunkerId" >
+                <Aprofile />
+              </PrivateRoute>
+
+              <PublicRoute restricted={false} path="/manifesto" >
                 <Manifesto />
-              </Route>
+              </PublicRoute>
+
+              <PublicRoute restricted={false} path="/bunkers/:bunkerId">
+                <Bookmarks />
+              </PublicRoute>
+
             </Switch>
+
           </Router>
     </AppContext>
   );

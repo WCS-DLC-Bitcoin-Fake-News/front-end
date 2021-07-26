@@ -9,14 +9,17 @@ async function handleSignUp(email, password, name) {
       },
     };
     const body = JSON.stringify({name, email, password});
-    const res = await axios.post("/users/signup", body, config);
+    const { data } = await axios.post("/users/signup", body, config);
 
     // storing token and userId in the browser localStorage
     localStorage.setItem(
       "user",
-      JSON.stringify({ ...res.data.user, token: res.data.token })
+      JSON.stringify({ ...data.user, token: data.token })
     );
-    return { ...res.data.user, token: res.data.token }
+    return { 
+      ...data.user, 
+      token: data.token 
+    }
 
   } catch (error) {
     return error;
@@ -37,29 +40,33 @@ async function handleSignIn(email, password) {
     };
 
     const body = JSON.stringify(user);
-    const res = await axios.post("/users/signin", body, config);
-    if (res.data.user) {
+    const { data } = await axios.post("/users/signin", body, config);
+    console.log("res")
+    console.log(data)
+    if (data.user) {
       localStorage.setItem(
         "user",
-        JSON.stringify({ ...res.data.user, token: res.data.token })
+        JSON.stringify({ ...data.user, token: data.token })
       );
-      return res.data.user
+      return { 
+        ...data.user, 
+        token: data.token 
+      }
+
     }
   } catch (error) {
-    console.error(error);
-    return error
+    console.log("thowed ???")
+    // console.log(error.errorMessage)
+    console.log(error.response.data.errorMessage);
+    throw new Error(error.response.data.errorMessage)
   }
 }
 
-async function handleSignOut() {
+async function handleSignOut(cb) {
   try {
-    localStorage.removeItem("user")
-      
-    
-    return true;
+    return cb();
   } catch (error) {
     console.error(error);
-
     return error;
   }
 }

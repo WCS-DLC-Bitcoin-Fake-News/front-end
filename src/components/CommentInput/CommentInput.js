@@ -4,6 +4,7 @@ import postBunker from "../../Api/PostBunker";
 import Avatar from "../Avatar/Avatar";
 
 const CommentInput = ({ bunkerID }) => {
+  console.log("In Comment Input ?")
   const { user } = useContext(UserContext);
   const [comment, setComment] = useState("");
 
@@ -11,7 +12,7 @@ const CommentInput = ({ bunkerID }) => {
     <div className="bg-white">
       <div className="flex flex-row items-center">
         <div className="w-12 h-12 overflow-hidden rounded-lg m-4">
-          <Avatar src={user && user.profilePicture} />
+          <Avatar src={user && user.name} />
         </div>
         <div className="w-full">
           <form

@@ -27,10 +27,6 @@ const BunkerInput = () => {
     <div className="nm-flat-white rounded-lg h-auto overflow-hidden ">
       <div className="p-5">
         <div className="flex flex-row my-5">
-          <div className="w-20 h-20 rounded-lg overflow-hidden">
-            {user && <Avatar  />}
-          </div>
-
           <div className="w-full mx-5">
             <div className="flex flex-col">
               <form
@@ -81,10 +77,10 @@ const BunkerInput = () => {
                       className={`bottom-0 relative text-white px-8 py-4 rounded-full ${
                         bunkering
                           ? "nm-inset-yellowBunker cursor-not-allowed"
-                          : "nm-concave-yellowBunker-sm"
+                          : "nm-convex-yellowBunker-sm"
                       }`}
                       type="submit">
-                      {bunkering ? "Bunkering...." : "Bunker"}
+                      {bunkering ? "Bunkering...." : "Debunk"}
                       {bunkering && (
                         <span
                           style={{

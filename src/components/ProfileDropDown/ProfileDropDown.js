@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import CircularProgress from "@material-ui/core/CircularProgress";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
@@ -9,10 +9,17 @@ import {Link, useHistory} from "react-router-dom";
 import { handleSignOut } from "../../Api/Authentication";
 import { deleteAccount } from "../../Api/DeleteAccount";
 import Avatar from "../Avatar/Avatar";
+import useLocalStorage from "./../../hooks/useLocalStorage";
+import UserContext from "./../../contexts/UserContext"
 
-const ProfileDropDown = ({ user }) => {
+
+const ProfileDropDown = () => {
+  const { user, setUser } = useContext(UserContext)
+
   const [dropdown, setDropdown] = useState(false);
   const [deletingAccount, setDeletingAccount] = useState(false);
+  const [localUser, setLocalUser] = useLocalStorage("user");
+
   const history = useHistory()
   return (
     <div>
@@ -21,14 +28,14 @@ const ProfileDropDown = ({ user }) => {
           <div>
             <button
               type="button"
-              className="inline-flex justify-center w-full rounded-full shadow-sm px-4 py-2 nm-convex-white border border-yellowBunker  text-sm font-medium text-gray-700 hover:bg-gray-50 "
+              className="inline-flex justify-center w-full rounded-full shadow-sm px-4 py-2 nm-convex-white border border-yellowBunker  text-sm font-raleway font-medium text-gray-700 hover:bg-gray-50 "
               id="options-menu"
               aria-haspopup="true"
               aria-expanded="true"
               onClick={() => setDropdown(!dropdown)}>
               {user && (
                 <span className="w-8 h-8 overflow-hidden rounded-lg">
-                  <Avatar src={user.profilePicture} />
+                  <Avatar src={user.name} />
                 </span>
               )}
               <span className="hidden md:flex md:flex-col justify-center pl-2">
@@ -56,7 +63,7 @@ const ProfileDropDown = ({ user }) => {
                 role="menu"
                 aria-orientation="vertical"
                 aria-labelledby="options-menu">
-                <Link href={`/${user.username}`}>
+                <Link to={`/${user._id}/profile`}>
                   <a
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                     role="menuitem">
@@ -109,7 +116,7 @@ const ProfileDropDown = ({ user }) => {
                   className="block w-full text-left px-4 py-2 text-sm text-red-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
                   role="menuitem"
                   onClick={() => {
-                    handleSignOut()
+                    handleSignOut(() => setUser(null))
                     history.push("/")
                   }}>
                   <span className="pr-4">

@@ -1,9 +1,12 @@
 import React from "react";
 import CommentContent from "./CommentContent";
-import CommentEditor from "./CommentEditor";
-import { Comment, Avatar, Form, Button, List, Input, Tooltip } from "antd";
+
+import CommentEditor from "./CommentEditor"
+import { Comment, Form, Button, List, Input, Tooltip } from "antd";
 import { useState, useEffect } from "react";
 import axios from "axios";
+
+import Avatar from "./../../Avatar/Avatar"
 import InfiniteScroll from "react-infinite-scroll-component";
 
 const CommentContainer = (props) => {
@@ -39,31 +42,14 @@ const CommentContainer = (props) => {
   const filtered = comments.filter((comment) => !comment.commentId);
 
   return (
-    <>
-      <CommentEditor id={id} loadComments={loadComments} />
-      <InfiniteScroll
-        dataLength={comments.length}
-        next={loadMoreComments}
-        hasMore={hasMore}
-        loader={<h4>Loading...</h4>}
-        endMessage={
-          <p style={{ textAlign: "center" }}>
-            <b>Yay! You have seen it all</b>
-          </p>
-        }
-      >
-        {filtered.map((comment, idx) => {
-          return (
-            <CommentContent
-              comment={comment}
-              loadComments={loadComments}
-              id={id}
-              key={idx}
-            />
-          );
-        })}
-      </InfiniteScroll>
-    </>
+    <div className="bg-white rounded-b-lg">
+      <CommentEditor id={id} loadComments={loadComments}/> 
+      {filtered.map((comment) => {
+        return (
+          <CommentContent comment={comment} loadComments={loadComments} id={id}/>
+        );
+      })}
+    </div>  
   );
 };
 export default CommentContainer;

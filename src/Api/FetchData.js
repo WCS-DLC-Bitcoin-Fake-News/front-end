@@ -22,7 +22,10 @@ export const downVoteBunker = async ( bunkerId, userId ) => {
   try {
     const { data } = await axios.post(
       `/bunkers/${bunkerId}/votes`,
-      {bunkerId, userId, upvote: false},
+      {
+        author: userId, 
+        pro: false
+      }
     );
     console.log(data)
 

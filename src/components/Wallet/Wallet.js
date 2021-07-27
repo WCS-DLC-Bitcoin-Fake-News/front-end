@@ -1,10 +1,9 @@
 import { useState } from "react";
 
-const Wallet = ({text, count}) => {
-// const [balance, setBalance] = useState(0);
+const Wallet = ({text, count, currency=`$`}) => {
     return(
-        <div>
-            <h5>{text} {count}</h5>
+        <div className="nm-concave-yellowBunker rounded-full p-2">
+            <h5>{text} {count} {currency}</h5>
         </div>
     )
 }

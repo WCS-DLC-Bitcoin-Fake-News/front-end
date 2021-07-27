@@ -15,15 +15,24 @@ import Avatar from "../Avatar/Avatar";
 import BunkerVisualizer from "../modules/Bunker/BunkerVisualizer";
 import axios from "axios";
 
-const PostButtons = ({ bunker, upVote, likeBunker, dislikeBunker, saveBunkers, unsaveBunkers, isSaved }) => {
-  const user = useContext(UserContext)
+const PostButtons = ({ 
+  bunker, 
+  upVote, 
+  downVote, 
+  saveBunkers, 
+  unsaveBunkers, 
+  isWatchedByUser, 
+  isUpVotedByUser, 
+  isDownVotedByUser 
+}) => {
+
   return(
     <>
     <hr></hr>
 
     <div className="flex flex-row my-2 items-stretch">
         <button
-          onClick={(e) => e.stopPropagation() && likeBunker()}
+          onClick={(e) => e.stopPropagation()}
           className="flex-1 mx-4 font-noto font-medium rounded-lg hover:bg-gray-400 cursor-pointer py-6"
           type="submit"
           >
@@ -33,37 +42,27 @@ const PostButtons = ({ bunker, upVote, likeBunker, dislikeBunker, saveBunkers, u
           <span className="hidden lg:block">Comments</span>
         </button>
         <button
-            className="flex-1 mx-4 font-noto font-medium rounded-lg hover:bg-gray-400 cursor-pointer py-6"
-            type="submit"
-            onClick={(e) => {
-              e.stopPropagation();
-              upVote();
-            }}>
+            className={!isUpVotedByUser ? "flex-1 mx-4 font-noto font-medium rounded-lg hover:bg-gray-400 cursor-pointer py-6" : "flex-1 mx-4 font-noto font-medium rounded-lg text-blue-600 hover:bg-gray-400 cursor-pointer py-6"}
+            // className="flex-1 mx-4 font-noto font-medium rounded-lg hover:bg-gray-400 cursor-pointer py-6"
+            onClick={upVote}>
             <span className="">
               <ThumbUpIcon style={{ color: "#828282" }} />
             </span>
             <span className="hidden lg:block">Upvote</span>
           </button>
           <button
-            className="flex-1 mx-4 font-noto font-medium rounded-lg hover:bg-gray-400 cursor-pointer py-6"
-            type="submit"
-            onClick={(e) => {
-              e.stopPropagation();
-              dislikeBunker();
-            }}>
+            className={!isDownVotedByUser ? "flex-1 mx-4 font-noto font-medium rounded-lg hover:bg-gray-400 cursor-pointer py-6" : "flex-1 mx-4 font-noto font-medium rounded-lg text-blue-600 hover:bg-gray-400 cursor-pointer py-6"}
+            onClick={downVote}>
             <span className="">
               <ThumbDownIcon style={{ color: "#828282" }} />
             </span>
             <span className="hidden lg:block">Downvote</span>
           </button>
-        {isSaved ? (
+        {isWatchedByUser ? (
           <button
             className="flex-1 mx-4 font-noto font-medium rounded-lg text-blue-600 hover:bg-gray-400 cursor-pointer py-6"
             type="submit"
-            onClick={(e) => {
-              e.stopPropagation();
-              unsaveBunkers();
-            }}>
+            onClick={unsaveBunkers}>
             <span className="">
               <BookmarkIcon style={{ color: "#2D9CDB" }} />
             </span>
@@ -73,10 +72,7 @@ const PostButtons = ({ bunker, upVote, likeBunker, dislikeBunker, saveBunkers, u
           <button
             className="flex-1 mx-4 font-noto font-medium rounded-lg hover:bg-gray-400 cursor-pointer py-6"
             type="submit"
-            onClick={(e) => {
-              e.stopPropagation();
-              saveBunkers();
-            }}>
+            onClick={saveBunkers}>
             <span className="">
               <BookmarkBorderIcon style={{ color: "#828282" }} />
             </span>

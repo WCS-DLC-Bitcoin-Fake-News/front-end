@@ -11,7 +11,7 @@ import { deleteAccount } from "../../Api/DeleteAccount";
 import Avatar from "../Avatar/Avatar";
 import useLocalStorage from "./../../hooks/useLocalStorage";
 import UserContext from "./../../contexts/UserContext"
-
+import Wallet from "./../Wallet/Wallet"
 
 const ProfileDropDown = () => {
   const { user, setUser } = useContext(UserContext)
@@ -20,7 +20,8 @@ const ProfileDropDown = () => {
   const [deletingAccount, setDeletingAccount] = useState(false);
   const [localUser, setLocalUser] = useLocalStorage("user");
 
-  const history = useHistory()
+  const history = useHistory();
+  
   return (
     <div>
       <div className="flex flex-row items-center mr-4">
@@ -34,12 +35,16 @@ const ProfileDropDown = () => {
               aria-expanded="true"
               onClick={() => setDropdown(!dropdown)}>
               {user && (
-                <span className="w-8 h-8 overflow-hidden rounded-lg">
-                  <Avatar src={user.name} />
-                </span>
+                <>
+                  <span className="w-8 h-8 overflow-hidden rounded-lg">
+                    <Avatar src={user.name} />
+
+                  </span>
+                </>
               )}
               <span className="hidden md:flex md:flex-col justify-center pl-2">
                 {user && user.name}
+                {user && <Wallet text={"Balance"} count={user.wallet} currency={`$`} />}
               </span>
               <svg
                 className="-mr-1 ml-2 w-5 flex flex-col justify-center"

@@ -33,7 +33,7 @@ const Modal = ({ users, close, loading }) => {
           <div className="py-4 ">
             <div className="flex flex-row items-center">
               <div className="w-10 h-10 overflow-hidden rounded-lg mr-4">
-                <Avatar src={localUser.profilePicture} />
+                <Avatar src={localUser.avatar} />
               </div>
               <div>
                 <Link href={`/${localUser.username}`}>

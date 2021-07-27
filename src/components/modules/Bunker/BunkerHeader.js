@@ -21,7 +21,7 @@ const BunkerHeader = ({author, user, date, title}) => {
             </div>
             <div className="py-2 px-4">
                 <h1
-                    className="text-xl font-medium leading-6 tracking-wide text-gray-300 hover:bg-yellowBunker-500 cursor-pointer"
+                    className="text-xl font-montserrat font-medium leading-6 tracking-wide text-gray-300 hover:bg-yellowBunker-500 cursor-pointer"
                     >
                     <a href="/:id">{title}</a>
                 </h1>

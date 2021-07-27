@@ -109,7 +109,7 @@ const NavBar = () => {
             )} */}
           </div>
         </div>
-        {<Wallet count={10} text={"Your Balance:"}/>}
+        {/* {<Wallet count={10} text={"Your Balance:"}/>} */}
         <div>{user && <ProfileDropDown user={user} />}</div>
       </nav>
     </div>

@@ -13,7 +13,7 @@ import { useParams } from "react-router-dom";
 import CommentContainer from "./../components/modules/Comment/CommentContainer";
 
 const Bookmarks = () => {
-  const { user } = useContext(UserContext);
+  // const { user } = useContext(UserContext);
   const [userCanComment, setUserCanComment] = useState(false);
   const [ bunker, setBunker] = useState({});
   const [loading, setIsLoading] = useState(true);

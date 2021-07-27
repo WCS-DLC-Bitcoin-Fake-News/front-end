@@ -17,6 +17,7 @@ import axios from "axios";
 import PostButtons from "./PostButtons";
 import Wallet from "../Wallet/Wallet";
 import { Upload } from "antd";
+import useLocalStorage from "./../../hooks/useLocalStorage"
 
 const Post = ( {setBunker, bunker, isThumb, userCanComment, setUserCanComment } ) => {
   const getUpvotesCount = () => {
@@ -42,9 +43,8 @@ const Post = ( {setBunker, bunker, isThumb, userCanComment, setUserCanComment } 
   const [comments, setComments] = useState(0);
   const [myBunker, setMyBunker] = useState(false);
 
-  const { user } = useContext(UserContext);
-
-
+  const { user, setUser } = useContext(UserContext);
+  // const [user, setUser] = useLocalStorage("user");
 
   const reloadBunker = async () => {
     let updated = await fetchBunker(bunker._id);
@@ -64,12 +64,13 @@ const Post = ( {setBunker, bunker, isThumb, userCanComment, setUserCanComment } 
     }
   
     setUpVotes((prev) => prev + 1);
-    setUserCanComment(true)
-    await upVoteBunker(bunker._id, user._id);
+    setUserCanComment(true);
+    let newVote = await upVoteBunker(bunker._id, user._id);
+    setUser({ ...user, wallet: newVote.votantNewWallet })
     reloadBunker();
     // window.scrollTo(0,document.body.scrollHeight);
    
-    setIsUpVotedByUser(true);
+    setIsUpVotedByUser(true); 
 
   };
 

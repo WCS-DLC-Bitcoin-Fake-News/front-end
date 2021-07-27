@@ -15,8 +15,16 @@ import Avatar from "../Avatar/Avatar";
 import BunkerVisualizer from "../modules/Bunker/BunkerVisualizer";
 import axios from "axios";
 
-const PostButtons = ({ bunker, upVote, downVote, saveBunkers, unsaveBunkers, isWatchedByUser, isUpVotedByUser, isDownVotedByUser }) => {
-  const user = useContext(UserContext)
+const PostButtons = ({ 
+  bunker, 
+  upVote, 
+  downVote, 
+  saveBunkers, 
+  unsaveBunkers, 
+  isWatchedByUser, 
+  isUpVotedByUser, 
+  isDownVotedByUser 
+}) => {
 
   return(
     <>

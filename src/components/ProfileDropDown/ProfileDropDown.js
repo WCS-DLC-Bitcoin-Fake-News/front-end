@@ -11,7 +11,7 @@ import { deleteAccount } from "../../Api/DeleteAccount";
 import Avatar from "../Avatar/Avatar";
 import useLocalStorage from "./../../hooks/useLocalStorage";
 import UserContext from "./../../contexts/UserContext"
-
+import Wallet from "./../Wallet/Wallet"
 
 const ProfileDropDown = () => {
   const { user, setUser } = useContext(UserContext)

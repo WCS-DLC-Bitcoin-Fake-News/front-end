@@ -10,51 +10,72 @@ import { Link } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import UserContext from "../../contexts/UserContext";
 import { deleteBunker } from "../../Api/DeleteBunker";
-import { fetchBunker, fetchBunkerLikes, fetchBunkerSaves, upVoteBunker } from "../../Api/FetchData";
+import { fetchBunker, fetchBunkerLikes, fetchBunkerSaves, upVoteBunker, downVoteBunker } from "../../Api/FetchData";
 import Avatar from "../Avatar/Avatar";
 import BunkerVisualizer from "../modules/Bunker/BunkerVisualizer";
 import axios from "axios";
 import PostButtons from "./PostButtons";
 import Wallet from "../Wallet/Wallet";
+import { Upload } from "antd";
 
-const Post = ( { setBunker, bunker, isThumb } ) => {
-  console.log("bunker?", bunker)
-  const { user } = useContext(UserContext);
-  // const [bunker, setLocalBunker] = useState(bunker);
+const Post = ( {setBunker, bunker, isThumb, userCanComment, setUserCanComment } ) => {
+  const getUpvotesCount = () => {
+    return 12
+  }
 
-  const [votes, setVotes] = useState(0);
-  const [isLiked, setIsLiked] = useState(false);
-  const [likeDocID, setLikeDocID] = useState("");
+  const getDownvotesCount = () => {
+    return 37
+  }
 
-  const [saves, setSaves] = useState(0);
-  const [isSaved, setIsSaved] = useState(false);
-  const [saveDocID, setSaveDocID] = useState("");
+  const getWatchedCount = () => {
+    return 37
+  }
+
+  const [upVotes, setUpVotes] = useState(getUpvotesCount());
+  const [downVotes, setDownVotes] = useState(getDownvotesCount());
+  const [watchedCount, setWatchedCount] = useState(getWatchedCount());
+
+  const [isUpVotedByUser, setIsUpVotedByUser] = useState(false);
+  const [isDownVotedByUser, setIsDownVotedByUser] = useState(false);
+  const [isWatchedByUser, setIsWatchedByUser] = useState(false);
 
   const [comments, setComments] = useState(0);
   const [myBunker, setMyBunker] = useState(false);
 
-  const upVote = async () => {
-    console.log(" iam in like bunker ")
+  const { user } = useContext(UserContext);
+
+
+
+  const reloadBunker = async () => {
+    let updated = await fetchBunker(bunker._id);
+    setBunker(updated);
+  }
+
+
+  const upVote = async (e) => {
+    // e.stopPropagation();
+    e.preventDefault()
+    console.log(" iam in like bunker")
     console.log(bunker)
-    
-  
+   
     if (!user) {
       alert("You need to sign in for that");
       return;
     }
+  
+    setUpVotes((prev) => prev + 1);
+    setUserCanComment(true)
+    await upVoteBunker(bunker._id, user._id);
+    reloadBunker();
+    window.scrollTo(0,document.body.scrollHeight);
    
-    await upVoteBunker( bunker._id, user._id )
+    setIsUpVotedByUser(true);
 
-
-    setVotes((prev) => prev + 1);
-    let updated = await fetchBunker( bunker._id )
-    setBunker(updated)
-
-    // setLikeDocID(id);
-    setIsLiked(true);
   };
 
-  const downVote = () => {
+  const downVote = async (e) => {
+    e.preventDefault()
+
     console.log(" iam in dislike bunker ")
 
     if (!user) {
@@ -62,30 +83,39 @@ const Post = ( { setBunker, bunker, isThumb } ) => {
       return;
     }
     // axios col to downVote
-    setVotes((prev) => prev - 1);
-    setIsLiked(false);
+    await downVoteBunker(bunker._id, user._id)
+    setUserCanComment(true)
+    reloadBunker()
+    window.scrollTo(0,document.body.scrollHeight);
+
+    setDownVotes((prev) => prev - 1);
+    setIsDownVotedByUser(false);
   };
 
-  const saveBunkers = () => {
+  const saveBunkers = (e) => {
+    e.preventDefault()
+
     if (!user) {
       alert("You need to sign in for that");
       return;
     }
     // axios call to bookmarks a bunker
 
-    setSaves((prev) => prev + 1);
+    setWatchedCount((prev) => prev + 1);
     // setSaveDocID(id);
-    setIsSaved(true);
+    setIsWatchedByUser(true);
   };
 
-  const unsaveBunkers = () => {
+  const unsaveBunkers = (e) => {
+    e.preventDefault()
+
     if (!user) {
       alert("You need to sign in for that");
       return;
     }
     // axios call to unbookmark a bunker
-    setSaves((prev) => prev - 1);
-    setIsSaved(false);
+    setWatchedCount((prev) => prev - 1);
+    setIsWatchedByUser(false);
   };
 
   useEffect(async () => {
@@ -187,13 +217,13 @@ const Post = ( { setBunker, bunker, isThumb } ) => {
             {comments} Comments
           </p>
           <p className="mx-1 text-gray-500 font-raleway font-medium pt-4">
-            {votes} Upvote
+            {upVotes} Upvote
           </p>
           <p className="mx-1 text-gray-500 font-raleway font-medium pt-4">
-            {votes} Downvote
+            {downVotes} Downvote
           </p>
           <p className="mx-1 text-gray-500 font-raleway font-medium pt-4 pr-4">
-            {saves} Saved
+            {watchedCount} Watched
           </p>
         </div>
       </span>
@@ -205,7 +235,9 @@ const Post = ( { setBunker, bunker, isThumb } ) => {
         downVote={downVote} 
         saveBunkers={saveBunkers} 
         unsaveBunkers={unsaveBunkers} 
-        isSaved={isSaved}  
+        isWatchedByUser={isWatchedByUser}
+        isUpVotedByUser={isUpVotedByUser}
+        isDownVotedByUser={isDownVotedByUser}  
       />
       
     </div>

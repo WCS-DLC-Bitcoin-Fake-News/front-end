@@ -15,6 +15,7 @@ import Avatar from "../Avatar/Avatar";
 import BunkerVisualizer from "../modules/Bunker/BunkerVisualizer";
 import axios from "axios";
 import Wallet from "../Wallet/Wallet"
+import ReactQuill from "react-quill";
 const ThumbnailBunker = ( { bunker, isThumb } ) => {
   console.log("bunker?", bunker)
   const { user } = useContext(UserContext);
@@ -165,23 +166,23 @@ const ThumbnailBunker = ( { bunker, isThumb } ) => {
               height: "350px",
             })}>
          
-            <a
+            <h1 className="font-montserrat font-bold text-2xl"
               href={bunker.imgLink}
               target="_blank"
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}>
                 {bunker.title}
-                <div dangerouslySetInnerHTML={{__html: bunker.body}}></div>
-                {bunker.printedSource.length && <BunkerVisualizer isThumb={isThumb} source={bunker.source} printedSource={bunker.printedSource} />}
+
               {/* <img
                 className="w-full h-full object-cover"
                 src={bunker.imgLink}
                 alt="POST IMG HERE"
               /> */}
-
-            </a>
+            </h1>
+            {bunker.printedSource.length && <BunkerVisualizer isThumb={isThumb} source={bunker.source} printedSource={bunker.printedSource} />}
           </div>
         )}
+        <article style={{overflow:"hidden", height: "82px"}} dangerouslySetInnerHTML={{__html: bunker.body}}></article>
         <div className="flex flex-row justify-end my-5">
           <p className="mx-1 text-gray-500 font-noto font-medium">
             {comments} Comments
@@ -233,7 +234,7 @@ const ThumbnailBunker = ( { bunker, isThumb } ) => {
           </button>
         {isSaved ? (
           <button
-            className="flex-1 mx-4 font-noto font-medium rounded-lg text-blue-600 hover:bg-gray-400 cursor-pointer py-6"
+            className="flex-1 mx-4 font-raleway font-medium rounded-lg text-blue-600 hover:bg-gray-400 cursor-pointer py-6"
             type="submit"
             onClick={(e) => {
               e.stopPropagation();

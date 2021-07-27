@@ -67,7 +67,7 @@ const Post = ( {setBunker, bunker, isThumb, userCanComment, setUserCanComment } 
     setUserCanComment(true)
     await upVoteBunker(bunker._id, user._id);
     reloadBunker();
-    window.scrollTo(0,document.body.scrollHeight);
+    // window.scrollTo(0,document.body.scrollHeight);
    
     setIsUpVotedByUser(true);
 
@@ -86,7 +86,7 @@ const Post = ( {setBunker, bunker, isThumb, userCanComment, setUserCanComment } 
     await downVoteBunker(bunker._id, user._id)
     setUserCanComment(true)
     reloadBunker()
-    window.scrollTo(0,document.body.scrollHeight);
+    // window.scrollTo(0,document.body.scrollHeight);
 
     setDownVotes((prev) => prev - 1);
     setIsDownVotedByUser(false);

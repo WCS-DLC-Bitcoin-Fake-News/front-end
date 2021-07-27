@@ -9,5 +9,3 @@ const Wallet = ({text, count, currency=`$`}) => {
 }
 
 export default Wallet;
-
-// className="nm-concave-yellowBunker rounded-full p-2"

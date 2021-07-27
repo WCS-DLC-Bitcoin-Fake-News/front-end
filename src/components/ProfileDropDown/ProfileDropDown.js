@@ -42,7 +42,7 @@ const ProfileDropDown = () => {
                   </span>
                 </>
               )}
-              <span className="hidden md:flex md:flex-col justify-center pl-2">
+              <span className="hidden md:flex md:flex-col justify-start pl-2">
                 {user && user.name}
                 {user && <Wallet text={"Balance"} count={user.wallet} currency={`$`} />}
               </span>

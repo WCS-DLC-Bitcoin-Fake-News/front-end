@@ -104,6 +104,9 @@ const PdfViewer = ({ name, printedSource, author, isThumb }) => {
               <Page pageNumber={pageNumber}  width={pdfWidth} />
             </Document>
             <p>Page {pageNumber} of {numPages}</p>
+            <span onClick={(() => {setPageNumber(pageNumber + 1 )})}>next</span>
+            <span onClick={(() => {setPageNumber(pageNumber - 1 )})}>previous</span>
+
           </>
         )}
       </DocumentContainer>

@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 const Avatar = ({ src }) => {
   return (
-    <img className="w-full h-full object-cover rounded-lg" src="https://i.pravatar.cc/300" alt="user_avatar" />
+    <img className="w-full h-full object-cover rounded-lg" src={src} alt="user_avatar" />
   );
 };
 

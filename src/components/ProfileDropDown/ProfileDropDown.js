@@ -37,7 +37,7 @@ const ProfileDropDown = () => {
               {user && (
                 <>
                   <span className="w-8 h-8 overflow-hidden rounded-lg">
-                    <Avatar src={user.name} />
+                    <Avatar src={user.avatar} />
 
                   </span>
                 </>

@@ -199,7 +199,7 @@ const Post = ( {setBunker, bunker, isThumb, userCanComment, setUserCanComment } 
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}>
                 {bunker.title}
-                <div dangerouslySetInnerHTML={{__html: bunker.body}}></div>
+                <article dangerouslySetInnerHTML={{__html: bunker.body}}></article>
                 {bunker.printedSource.length && <BunkerVisualizer isThumb={isThumb} source={bunker.source} printedSource={bunker.printedSource} />}
               {/* <img
                 className="w-full h-full object-cover"

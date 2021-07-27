@@ -154,14 +154,14 @@ const Post = ( {setBunker, bunker, isThumb, userCanComment, setUserCanComment } 
         </div>
         <div className="w-full">
           <Link href={`/${bunker.author.username}`}>
-            <p className="font-poppins font-medium text-base my-1 hover:underline">
+            <p className="font-cabin font-medium text-base my-1 hover:underline">
               {bunker.author.name}
             </p>
           </Link>
-          <p className="font-poppins text-sm font-medium my-1 text-gray-700  ">
+          <p className="font-cabin text-sm font-medium my-1 text-gray-700  ">
             @{bunker.author.username}
           </p>
-          <p className="font-noto text-gray-500 text-base my-1">
+          <p className="font-cabin text-gray-500 text-base my-1">
             {bunker.createdAt}
           </p>
         </div>
@@ -187,29 +187,28 @@ const Post = ( {setBunker, bunker, isThumb, userCanComment, setUserCanComment } 
 
         </div>
         {bunker.printedSource && (
-          <div
+          <div 
             className="my-5 overflow-hidden rounded-lg"
             style={isThumb && ({
               height: "350px",
             })}>
          
-            <a
+            <h1 className="font-montserrat font-bold text-2xl"
               href={bunker.imgLink}
               target="_blank"
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}>
                 {bunker.title}
-                <div dangerouslySetInnerHTML={{__html: bunker.body}}></div>
-                {bunker.printedSource.length && <BunkerVisualizer isThumb={isThumb} source={bunker.source} printedSource={bunker.printedSource} />}
               {/* <img
                 className="w-full h-full object-cover"
                 src={bunker.imgLink}
                 alt="POST IMG HERE"
               /> */}
-
-            </a>
+            </h1>
+            {bunker.printedSource.length && <BunkerVisualizer isThumb={isThumb} source={bunker.source} printedSource={bunker.printedSource} />}
           </div>
         )}
+        <div dangerouslySetInnerHTML={{__html: bunker.body}}></div>
         <div className="flex justify-between my-5">
           <div className="inline-flex justify-center w-2/5 rounded-full shadow-sm p-4 nm-convex-white border border-yellowBunker text-sm font-raleway font-medium text-gray-700 hover:bg-gray-50">
           {<Wallet text={`Stake`} count={bunker.stake + bunker.initialStake} />}

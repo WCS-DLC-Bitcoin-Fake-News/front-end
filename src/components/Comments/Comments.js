@@ -28,7 +28,7 @@ const Comments = ({ bunkerID }) => {
           <div className="rounded-lg" key={comment.id}>
             <div className="flex flex-row">
               <div className="m-2 w-12 h-12">
-                <Avatar src={comment.author.name} />
+                <Avatar src={comment.author.avatar} />
               </div>
               <div className="flex flex-col  w-full">
                 <div className="bg-gray-200 p-4">

@@ -21,7 +21,7 @@ const UserInfo = ({ fetchedUser }) => {
         <div
           className="relative rounded-md lg:rounded-xl overflow-hidden bg-white  lg:p-2 h-24 w-24 lg:w-40 lg:h-40"
           style={{ top: "-20px" }}>
-          <Avatar src={fetchedUser.profilePicture} />
+          <Avatar src={fetchedUser.avatar} />
         </div>
       </div>
 
@@ -45,7 +45,7 @@ const UserInfo = ({ fetchedUser }) => {
               className="inline m-2 text-xs font-poppins font-semibold hover:underline cursor-pointer"
               onClick={() => getFollowings()}>
               {fetchedUser.followingsCount - 1}
-              <span className="m-1 text-gray-500"> Following</span>
+              <span className="m-1 text-gray-500">Following</span>
             </p>
           </span>
           {user && fetchedUser.username === user.username ? (

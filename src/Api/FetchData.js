@@ -1,5 +1,53 @@
 import axios from "axios";
 
+export const upVoteBunker = async ( bunkerId, userId ) => {
+  try {
+    const { data } = await axios.post(
+      `/bunkers/${bunkerId}/votes`,
+      {
+        author: userId, 
+        pro: true
+      },
+    );
+    console.log(data)
+
+    return data;
+  } catch (error) {
+    console.error(error);
+    return error
+  }
+};
+
+export const downVoteBunker = async ( bunkerId, userId ) => {
+  try {
+    const { data } = await axios.post(
+      `/bunkers/${bunkerId}/votes`,
+      {
+        author: userId, 
+        pro: false
+      }
+    );
+    console.log(data)
+
+    return data;
+  } catch (error) {
+    console.error(error);
+    return error
+  }
+};
+
+export const watchBunger = async ( userID ) => {
+  try {
+    const { data } = await axios.get(`/users/${userID}`);
+    console.log(data)
+    return data;
+  } catch (error) {
+    console.error(error);
+    return error
+  }
+};
+
+
 export const fetchUser = async ( userID ) => {
   debugger
   try {

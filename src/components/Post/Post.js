@@ -10,56 +10,73 @@ import { Link } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import UserContext from "../../contexts/UserContext";
 import { deleteBunker } from "../../Api/DeleteBunker";
-import { fetchBunkerLikes, fetchBunkerSaves } from "../../Api/FetchData";
+import { fetchBunker, fetchBunkerLikes, fetchBunkerSaves, upVoteBunker, downVoteBunker } from "../../Api/FetchData";
 import Avatar from "../Avatar/Avatar";
 import BunkerVisualizer from "../modules/Bunker/BunkerVisualizer";
 import axios from "axios";
 import PostButtons from "./PostButtons";
 import Wallet from "../Wallet/Wallet";
+import { Upload } from "antd";
+import useLocalStorage from "./../../hooks/useLocalStorage"
 
-const Post = ( { bunker, isThumb } ) => {
-  console.log("bunker?", bunker)
-  const { user } = useContext(UserContext);
-  // const [bunker, setLocalBunker] = useState(bunker);
+const Post = ( {setBunker, bunker, isThumb, userCanComment, setUserCanComment } ) => {
+  const getUpvotesCount = () => {
+    return 12
+  }
 
-  const [likes, setLikes] = useState(0);
-  const [isLiked, setIsLiked] = useState(false);
-  const [likeDocID, setLikeDocID] = useState("");
+  const getDownvotesCount = () => {
+    return 37
+  }
 
-  const [saves, setSaves] = useState(0);
-  const [isSaved, setIsSaved] = useState(false);
-  const [saveDocID, setSaveDocID] = useState("");
+  const getWatchedCount = () => {
+    return 37
+  }
+
+  const [upVotes, setUpVotes] = useState(getUpvotesCount());
+  const [downVotes, setDownVotes] = useState(getDownvotesCount());
+  const [watchedCount, setWatchedCount] = useState(getWatchedCount());
+
+  const [isUpVotedByUser, setIsUpVotedByUser] = useState(false);
+  const [isDownVotedByUser, setIsDownVotedByUser] = useState(false);
+  const [isWatchedByUser, setIsWatchedByUser] = useState(false);
 
   const [comments, setComments] = useState(0);
   const [myBunker, setMyBunker] = useState(false);
 
-  const likeBunker = async () => {
-    console.log(" iam in like bunker ")
+  const { user, setUser } = useContext(UserContext);
+  // const [user, setUser] = useLocalStorage("user");
+
+  const reloadBunker = async () => {
+    let updated = await fetchBunker(bunker._id);
+    setBunker(updated);
+  }
+
+
+  const upVote = async (e) => {
+    // e.stopPropagation();
+    e.preventDefault()
+    console.log(" iam in like bunker")
     console.log(bunker)
-    const upvote = {
-      pro : true,
-      author: bunker.author
-    }
-  
+   
     if (!user) {
       alert("You need to sign in for that");
       return;
     }
-    // axios col to upVote
+  
+    setUpVotes((prev) => prev + 1);
+    setUserCanComment(true);
+    let newVote = await upVoteBunker(bunker._id, user._id);
+    setUser({ ...user, wallet: newVote.votantNewWallet })
+    reloadBunker();
+    // window.scrollTo(0,document.body.scrollHeight);
+   
+    setIsUpVotedByUser(true); 
 
-    const res = await axios.post(
-      `/bunkers/${bunker.id}/votes`,
-      upvote,
-    );
-
-    return res.data;
-
-    setLikes((prev) => prev + 1);
-    // setLikeDocID(id);
-    setIsLiked(true);
   };
 
-  const dislikeBunker = () => {
+  const downVote = async (e) => {
+    e.preventDefault()
+
     console.log(" iam in dislike bunker ")
 
     if (!user) {
@@ -67,39 +84,48 @@ const Post = ( { bunker, isThumb } ) => {
       return;
     }
     // axios col to downVote
-    setLikes((prev) => prev - 1);
-    setIsLiked(false);
+    await downVoteBunker(bunker._id, user._id)
+    setUserCanComment(true)
+    reloadBunker()
+    // window.scrollTo(0,document.body.scrollHeight);
+
+    setDownVotes((prev) => prev - 1);
+    setIsDownVotedByUser(false);
   };
 
-  const saveBunkers = () => {
+  const saveBunkers = (e) => {
+    e.preventDefault()
+
     if (!user) {
       alert("You need to sign in for that");
       return;
     }
     // axios call to bookmarks a bunker
 
-    setSaves((prev) => prev + 1);
+    setWatchedCount((prev) => prev + 1);
     // setSaveDocID(id);
-    setIsSaved(true);
+    setIsWatchedByUser(true);
   };
 
-  const unsaveBunkers = () => {
+  const unsaveBunkers = (e) => {
+    e.preventDefault()
+
     if (!user) {
       alert("You need to sign in for that");
       return;
     }
     // axios call to unbookmark a bunker
-    setSaves((prev) => prev - 1);
-    setIsSaved(false);
+    setWatchedCount((prev) => prev - 1);
+    setIsWatchedByUser(false);
   };
 
   useEffect(async () => {
-    // setLikes((await fetchBunkerLikes(bunker.id)).size);
+    // setVotes((await fetchBunkerLikes(bunker.id)).size);
     if (user) {
-      async function checkForLikes(bunkerId) {
+      async function checkForVotes(bunkerId) {
   
       }
-      checkForLikes();
+      checkForVotes();
 
       async function checkForSaves() {
       // axios call to count how many bookmarks on a bunker
@@ -124,18 +150,18 @@ const Post = ( { bunker, isThumb } ) => {
     <div className="p-5 nm-flat-white rounded-lg hover:bg-gray-100 cursor-pointer">
       <div className="flex items-center content-evenly">
         <div className="w-16 h-16 overflow-hidden rounded-lg m-4">
-          <Avatar src={bunker.author.name} />
+          <Avatar src={bunker.author.avatar} />
         </div>
         <div className="w-full">
           <Link href={`/${bunker.author.username}`}>
-            <p className="font-poppins font-medium text-base my-1 hover:underline">
+            <p className="font-cabin font-medium text-base my-1 hover:underline">
               {bunker.author.name}
             </p>
           </Link>
-          <p className="font-poppins text-sm font-medium my-1 text-gray-700  ">
+          <p className="font-cabin text-sm font-medium my-1 text-gray-700  ">
             @{bunker.author.username}
           </p>
-          <p className="font-noto text-gray-500 text-base my-1">
+          <p className="font-cabin text-gray-500 text-base my-1">
             {bunker.createdAt}
           </p>
         </div>
@@ -161,44 +187,43 @@ const Post = ( { bunker, isThumb } ) => {
 
         </div>
         {bunker.printedSource && (
-          <div
+          <div 
             className="my-5 overflow-hidden rounded-lg"
             style={isThumb && ({
               height: "350px",
             })}>
          
-            <a
+            <h1 className="font-montserrat font-bold text-2xl"
               href={bunker.imgLink}
               target="_blank"
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}>
                 {bunker.title}
-                <div dangerouslySetInnerHTML={{__html: bunker.body}}></div>
-                {bunker.printedSource.length && <BunkerVisualizer isThumb={isThumb} source={bunker.source} printedSource={bunker.printedSource} />}
               {/* <img
                 className="w-full h-full object-cover"
                 src={bunker.imgLink}
                 alt="POST IMG HERE"
               /> */}
-
-            </a>
+            </h1>
+            {bunker.printedSource.length && <BunkerVisualizer isThumb={isThumb} source={bunker.source} printedSource={bunker.printedSource} />}
           </div>
         )}
+        <article dangerouslySetInnerHTML={{__html: bunker.body}}></article>
         <div className="flex justify-between my-5">
           <div className="inline-flex justify-center w-2/5 rounded-full shadow-sm p-4 nm-convex-white border border-yellowBunker text-sm font-raleway font-medium text-gray-700 hover:bg-gray-50">
-          {<Wallet />}
+          {<Wallet text={`Stake`} count={bunker.stake + bunker.initialStake} />}
           </div>
           <p className="mx-1 text-gray-500 font-raleway font-medium pt-4">
             {comments} Comments
           </p>
           <p className="mx-1 text-gray-500 font-raleway font-medium pt-4">
-            {likes} Upvote
+            {upVotes} Upvote
           </p>
           <p className="mx-1 text-gray-500 font-raleway font-medium pt-4">
-            {likes} Downvote
+            {downVotes} Downvote
           </p>
           <p className="mx-1 text-gray-500 font-raleway font-medium pt-4 pr-4">
-            {saves} Saved
+            {watchedCount} Watched
           </p>
         </div>
       </span>
@@ -206,11 +231,13 @@ const Post = ( { bunker, isThumb } ) => {
 
       <PostButtons
         bunker={bunker}
-        likeBunker={likeBunker} 
-        dislikeBunker={dislikeBunker} 
+        upVote={upVote} 
+        downVote={downVote} 
         saveBunkers={saveBunkers} 
         unsaveBunkers={unsaveBunkers} 
-        isSaved={isSaved}  
+        isWatchedByUser={isWatchedByUser}
+        isUpVotedByUser={isUpVotedByUser}
+        isDownVotedByUser={isDownVotedByUser}  
       />
       
     </div>

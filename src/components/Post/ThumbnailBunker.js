@@ -15,6 +15,7 @@ import Avatar from "../Avatar/Avatar";
 import BunkerVisualizer from "../modules/Bunker/BunkerVisualizer";
 import axios from "axios";
 import Wallet from "../Wallet/Wallet"
+import ReactQuill from "react-quill";
 const ThumbnailBunker = ( { bunker, isThumb } ) => {
   console.log("bunker?", bunker)
   const { user } = useContext(UserContext);
@@ -122,7 +123,7 @@ const ThumbnailBunker = ( { bunker, isThumb } ) => {
     <div className="p-5 nm-flat-white rounded-lg hover:bg-gray-100 cursor-pointer">
       <div className="flex items-center content-evenly">
         <div className="w-16 h-16 overflow-hidden rounded-lg m-4">
-          <Avatar src={bunker.author.name} />
+          <Avatar src={bunker.author.avatar} />
         </div>
         <div className="w-full">
           <Link href={`/${bunker.author.username}`}>
@@ -137,7 +138,7 @@ const ThumbnailBunker = ( { bunker, isThumb } ) => {
             {bunker.createdAt}
           </p>
         </div>
-        <div className="inline-flex justify-center w-2/5 rounded-full shadow-sm p-4 nm-convex-white border border-yellowBunker text-sm font-raleway font-medium text-gray-700 hover:bg-gray-50 font-montserrat font-bold">{<Wallet />}</div>
+        <div className="inline-flex justify-center w-2/5 rounded-full shadow-sm p-4 nm-convex-white border border-yellowBunker text-sm font-raleway font-medium text-gray-700 hover:bg-gray-50 font-montserrat font-bold">{<Wallet text={"Stake"} count={bunker.stake + bunker.initialStake} />}</div>
         {myBunker && (
           <div
             className="w-16 h-16 flex flex-col justify-center items-center"
@@ -165,23 +166,23 @@ const ThumbnailBunker = ( { bunker, isThumb } ) => {
               height: "350px",
             })}>
          
-            <a
+            <h1 className="font-montserrat font-bold text-2xl"
               href={bunker.imgLink}
               target="_blank"
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}>
                 {bunker.title}
-                <div dangerouslySetInnerHTML={{__html: bunker.body}}></div>
-                {bunker.printedSource.length && <BunkerVisualizer isThumb={isThumb} source={bunker.source} printedSource={bunker.printedSource} />}
+
               {/* <img
                 className="w-full h-full object-cover"
                 src={bunker.imgLink}
                 alt="POST IMG HERE"
               /> */}
-
-            </a>
+            </h1>
+            {bunker.printedSource.length && <BunkerVisualizer isThumb={isThumb} source={bunker.source} printedSource={bunker.printedSource} />}
           </div>
         )}
+        <article style={{overflow:"hidden", height: "82px"}} dangerouslySetInnerHTML={{__html: bunker.body}}></article>
         <div className="flex flex-row justify-end my-5">
           <p className="mx-1 text-gray-500 font-noto font-medium">
             {comments} Comments
@@ -233,7 +234,7 @@ const ThumbnailBunker = ( { bunker, isThumb } ) => {
           </button>
         {isSaved ? (
           <button
-            className="flex-1 mx-4 font-noto font-medium rounded-lg text-blue-600 hover:bg-gray-400 cursor-pointer py-6"
+            className="flex-1 mx-4 font-raleway font-medium rounded-lg text-blue-600 hover:bg-gray-400 cursor-pointer py-6"
             type="submit"
             onClick={(e) => {
               e.stopPropagation();

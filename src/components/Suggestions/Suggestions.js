@@ -42,7 +42,7 @@ const Suggestions = ({ type, userID }) => {
         <div>
           <div className="flex flex-row my-4">
             <div className="w-12 h-12 mr-4 rounded-lg">
-              <Avatar src={user.name} />
+              <Avatar src={user.avatar} />
             </div>
             <div className="mr-0 ml-auto">
               <FollowButton userID={user.uid} />

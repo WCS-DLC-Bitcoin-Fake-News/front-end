@@ -4,8 +4,6 @@ import axios from "axios";
 import { Document, Page, pdfjs } from "react-pdf/dist/esm/entry.webpack";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 
-// const token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo0LCJmaXJzdG5hbWUiOiJQaWVycmUiLCJsYXN0bmFtZSI6IkdpZGRpb0Jhc3RpYSIsImVtYWlsIjoicGllcnJlZ2lkZGlvc2Nvb3RAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkYXJnb24yaSR2PTE5JG09NDA5Nix0PTMscD0xJDRKdTdWNWl1eFY3V3FabGNHckQwNzFaWG5qa0hWeVVRMTFjRG5wcUJoMmckL2g2d1hpVlNid0Q2TFNYNjRKOVlQSkhqT2lzbncxU1JZVm1aMGNVSFlXMCIsInRlbGVwaG9uZSI6bnVsbCwiY3JlYXRlZEF0IjoiMjAyMS0wMS0zMCIsInVwZGF0ZWRBdCI6IjIwMjEtMDEtMzAiLCJQcml2aWxlZ2UiOnsiaWQiOjQsInJvbGUiOiJzY291dCIsImFnZUdyYWRlIjpbMjAwNSwyMDA0XSwiY3JlYXRlZEF0IjoiMjAyMS0wMS0zMCIsInVwZGF0ZWRBdCI6IjIwMjEtMDEtMzAiLCJVc2VySWQiOjR9fSwiaWF0IjoxNjEyMDgzNzk0LCJleHAiOjE2MTIxMDUzOTR9.9DwGbg8tT-ZetZhYAzCAa8f0XSvSd0VTL6yB_uqZ6LQ`
-//const token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo0LCJmaXJzdG5hbWUiOiJQaWVycmUiLCJsYXN0bmFtZSI6IkdpZGRpbyIsImVtYWlsIjoicGdAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkYXJnb24yaSR2PTE5JG09NDA5Nix0PTMscD0xJEJRZndldHVqM2J0YS81ZzNKUmJTSHFSelN5dXFPVFpYdXRQYTB3Vk80MVUkcjQwS0UycXVCck5hcWYydUZycVJTRjVVK1NYRzRyYUxmdXN1MGVFekZSZyIsInRlbGVwaG9uZSI6MTIzNDUsImNyZWF0ZWRBdCI6IjIwMjEtMDItMDQiLCJ1cGRhdGVkQXQiOiIyMDIxLTAyLTA0IiwiUHJpdmlsZWdlIjp7ImlkIjo0LCJyb2xlIjoibWFuYWdlciIsImFnZUdyYWRlIjpbIioiXSwiY3JlYXRlZEF0IjoiMjAyMS0wMi0wNCIsInVwZGF0ZWRBdCI6IjIwMjEtMDItMDQiLCJVc2VySWQiOjR9fSwiaWF0IjoxNjEyNDUwNzk4LCJleHAiOjE2MTI0NzIzOTh9.xXcBvP66lgTOzPYXDdZoqgAQRMKxkQLGyM76AEU4rHA`;
 
 // import colors from '../utils/colors';
 const colors = {
@@ -52,8 +50,8 @@ const Container = styled.div`
 const DocumentContainer = styled.div`
   border: none;
   min-height: 270px; 
-  width: ${props => props.isThumb ? "300px" : "900px"};
-  padding: 5px;
+  width: ${props => props.isThumb ? "100%" : "900px"};
+  
 `;
 
 const Author = styled.p`
@@ -100,13 +98,17 @@ const PdfViewer = ({ name, printedSource, author, isThumb }) => {
       <DocumentContainer isThumb={isThumb} >
         {pdf !== null && (
           <>
-            <Document file={pdf} onLoadSuccess={onDocumentLoadSuccess}>
+            <Document className="nm-inset-white rounded-lg" file={pdf} onLoadSuccess={onDocumentLoadSuccess}>
               <Page pageNumber={pageNumber}  width={pdfWidth} />
-            </Document>
-            <p>Page {pageNumber} of {numPages}</p>
+            </Document >
           </>
         )}
       </DocumentContainer>
+      <div className="flex justify-start">
+        <p className="p-2 m-2">Page {pageNumber} of {numPages}</p>
+      </div>
+      <span className="nm-concave-white rounded-full p-2 m-2" onClick={(() => {setPageNumber(pageNumber - 1 )})}>previous</span>
+      <span className="nm-concave-white rounded-full p-2 m-2" onClick={(() => {setPageNumber(pageNumber + 1 )})}>next</span>
       <Author>
         <b>{author}</b>
       </Author>

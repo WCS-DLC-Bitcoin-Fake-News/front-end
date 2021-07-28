@@ -13,8 +13,9 @@ import { useParams } from "react-router-dom";
 import CommentContainer from "./../components/modules/Comment/CommentContainer";
 
 const Bookmarks = () => {
-  const { user } = useContext(UserContext);
-  const [bunker, setBunker] = useState({});
+  // const { user } = useContext(UserContext);
+  const [userCanComment, setUserCanComment] = useState(false);
+  const [ bunker, setBunker] = useState({});
   const [loading, setIsLoading] = useState(true);
   const [isEmpty, setIsEmpty] = useState(false);
   // const [showEditor, setShowEditor] = useState(false);
@@ -55,9 +56,7 @@ const Bookmarks = () => {
               ) : (
               
                     <div className="space-y-6 ">
-                     { bunker._id &&  <><Post bunker={bunker} /> <CommentContainer id={bunker._id} />
-                    
-                      </>}
+                     { bunker._id &&  <><Post setBunker={setBunker} bunker={bunker} setUserCanComment={setUserCanComment} userCanComment={userCanComment} /> {userCanComment && <CommentContainer id={bunker._id} />}</>}
                     </div>
                 )
               }

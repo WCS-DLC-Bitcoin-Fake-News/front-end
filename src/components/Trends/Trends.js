@@ -2,37 +2,25 @@ const Trends = () => {
   // axios call to get trends and map results
   return (
     <div
-      className="bg-white w-full p-5 rounded-lg"
+      className="nm-flat-white w-full p-5 rounded-lg"
       style={{ height: "max-content" }}>
-      <p className="font-poppins font-semibold text-base mb-3">Trends</p>
+      <p className="font-montserrat font-bold text-lg mb-3">Hot Bunkers 🔥</p>
       <hr />
       <div className="tags">
-        <p className="py-2 font-noto font-semibold">#bitcoin</p>
-        <p className="font-noto font-medium text-gray-600">213k Bunkers</p>
+        <p className="py-2 font-raleway font-semibold">Elon always knew about BTC clean energy usage</p>
+        <p className="font-raleway font-medium text-gray-600">856 Staked</p>
       </div>
       <div className="tags">
-        <p className="py-2 font-noto font-semibold">#dogecoin</p>
-        <p className="font-noto font-medium text-gray-600">3k Bunkers</p>
+        <p className="py-2 font-raleway font-semibold">Chinese miner exodus its a hoax</p>
+        <p className="font-raleway font-medium text-gray-600">550 Staked</p>
       </div>
       <div className="tags">
-        <p className="py-2 font-noto font-semibold">#speculation</p>
-        <p className="font-noto font-medium text-gray-600">21.3k Bunkers</p>
+        <p className="py-2 font-raleway font-semibold">EU to ban private wallets</p>
+        <p className="font-raleway font-medium text-gray-600">476 Staked</p>
       </div>
       <div className="tags">
-        <p className="py-2 font-noto font-semibold">#musk</p>
-        <p className="font-noto font-medium text-gray-600">33k Bunkers</p>
-      </div>
-      <div className="tags">
-        <p className="py-2 font-noto font-semibold">#crash</p>
-        <p className="font-noto font-medium text-gray-600">213k Bunkers</p>
-      </div>
-      <div className="tags">
-        <p className="py-2 font-noto font-semibold">#energy</p>
-        <p className="font-noto font-medium text-gray-600">25k Bunkers</p>
-      </div>
-      <div className="tags">
-        <p className="py-2 font-noto font-semibold">#failures</p>
-        <p className="font-noto font-medium text-gray-600">213k Bunkers</p>
+        <p className="py-2 font-raleway font-semibold">"Altcoin Psycho" EOY BTC price prediction</p>
+        <p className="font-raleway font-medium text-gray-600">330 Staked</p>
       </div>
     </div>
   );

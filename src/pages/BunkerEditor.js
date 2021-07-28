@@ -6,7 +6,11 @@ import Layout from "./../layouts"
 
 function BunkerEditor() {
   const { user } = useContext(UserContext);
-  return ( <Layout><BunkerForm /> </Layout>);
+  return (  
+            <Layout>
+              <BunkerForm />
+            </Layout>
+         );
 }
 
 export default withRouter(BunkerEditor);

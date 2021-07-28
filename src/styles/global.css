@@ -1,8 +1,135 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap");
-
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,500;0,600;0,700;0,800;1,100;1,200;1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cabin:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300&display=swap');
 /* purgecss start ignore */
 @tailwind base;
 @tailwind components;
 /* purgecss end ignore */
 @tailwind utilities;
+
+
+
+article {
+  display: grid;
+  /* I'm using 440px instead of 740px as it makes it easier to view it in the Scrimba simulator additive-symbols: */
+  grid-template-columns: 1fr 1fr 10px 440px 10px 1fr 1fr;
+}
+
+article > * {
+  grid-column: 4;
+}
+
+article > figure {
+  grid-column: 1 / -1;
+  margin: 20px 0;
+}
+
+article > .aside {
+  grid-column: 5 / -1;
+}
+
+article > blockquote {
+  grid-column: 3 / span 2;
+  margin: 0px 0;
+  color: #666;
+  border-left: 3px solid black;
+  padding-left: 10px;
+}
+
+/* General styling */
+
+html, body {
+  margin: 0;
+  padding: 0;
+  line-height: 1.4;
+}
+
+/* Basic */
+article > * {
+  min-width: 0;
+}
+
+article > h1 {
+  font-family: Lucida Grande;
+}
+
+article > p {    
+  --x-height-multiplier: 0.375;
+  --baseline-multiplier: 0.17;
+  font-family: Georgia,Cambria,"Times New Roman",Times,serif;
+  letter-spacing: .01rem;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 21px;
+  line-height: 1.58;
+  letter-spacing: -.003em;
+  color: rgba(0,0,0,.84);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+article > .aside {
+  font-family: Lucida Grande;
+  margin: 30px 20px;
+  color: #666;
+  font-size: 0.8em;
+}
+
+img {
+  width: 100%;
+}
+
+.line-numbers a {
+  text-decoration: none;
+  color: #000;
+  padding-right: 1em;
+}
+
+code {
+  background: #eee;
+  padding: 2px 5px;
+}
+
+pre {
+  background: #eee;
+  padding: 10px 15px;
+  overflow: auto;
+}
+
+pre > code {
+  padding: 0;
+}
+
+figure {
+  margin: 0;
+}
+
+figure figcaption {
+  color: #666;
+  font-style: italic;
+  font-size: 0.8em;
+}
+
+
+.ant-comment {
+  border-radius: 0.5rem !important;
+}
+
+input:focus ~ label,
+input:not(:placeholder-shown) ~ label,
+textarea:focus ~ label,
+textarea:not(:placeholder-shown) ~ label,
+select:focus ~ label,
+select:not([value='']):valid ~ label {
+  @apply transform;
+  @apply scale-75;
+  @apply -translate-y-6;
+}
+
+input:focus ~ label,
+select:focus ~ label {
+  @apply text-black;
+  @apply left-0;
+}

@@ -1,6 +1,55 @@
 import axios from "axios";
 
+export const upVoteBunker = async ( bunkerId, userId ) => {
+  try {
+    const { data } = await axios.post(
+      `/bunkers/${bunkerId}/votes`,
+      {
+        author: userId, 
+        pro: true
+      },
+    );
+    console.log(data)
+
+    return data;
+  } catch (error) {
+    console.error(error);
+    return error
+  }
+};
+
+export const downVoteBunker = async ( bunkerId, userId ) => {
+  try {
+    const { data } = await axios.post(
+      `/bunkers/${bunkerId}/votes`,
+      {
+        author: userId, 
+        pro: false
+      }
+    );
+    console.log(data)
+
+    return data;
+  } catch (error) {
+    console.error(error);
+    return error
+  }
+};
+
+export const watchBunger = async ( userID ) => {
+  try {
+    const { data } = await axios.get(`/users/${userID}`);
+    console.log(data)
+    return data;
+  } catch (error) {
+    console.error(error);
+    return error
+  }
+};
+
+
 export const fetchUser = async ( userID ) => {
+  debugger
   try {
     const { data } = await axios.get(`/users/${userID}`);
     console.log(data)
@@ -27,7 +76,6 @@ export const fetchUserBunkers = async (userID) => {
 };
 
 export const fetchBunker = async (bunkerID) => {
-  const bunker = {}
 
   try {
     const { data } = await axios.get(`/bunkers/${bunkerID}`);
@@ -105,7 +153,7 @@ export const fetchBunkerSaves = async (bunkerID) => {
 
 };
 
-const fetchAllUserData = async (userId) => {
+const fetchAllUserData = async (userId, bunkerId) => {
   console.log("fetching All User Data, bunkers and more");
 
   try {

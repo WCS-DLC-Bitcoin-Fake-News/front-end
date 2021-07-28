@@ -1,24 +1,48 @@
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { Link } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import ExploreFilters from "../components/ExploreFIlters/ExploreFilters";
 import Post from "../components/Post/Post";
-import ExploreBunkersContext from "../contexts/ExploreBunkersContext";
+// import ExploreBunkersContext from "../contexts/ExploreBunkersContext";
 import Layout from "../layouts";
 import { fetchUser } from "../Api/FetchData";
+import ExploreBunkersContext from "../contexts/ExploreBunkersContext";
+import UserContext from "../contexts/UserContext";
+
+import { fetchPublishedBunkers } from "../Api/FetchData";
+
 
 const Explore = () => {
+  const { user } = useContext(UserContext);
   const [exploreBunkers, setExploreBunkers] = useState([]);
-  const { exploreBunkersContext, setExploreBunkersContext } = React.useContext(
+  const [loading, setLoading] = useState(true);
+  const [isEmpty, setIsEmpty] = useState(false);
+
+  const { exploreBunkersContext, setExploreBunkersContext } = useContext(
     ExploreBunkersContext
   );
 
-  useEffect(async () => {
-    if (!exploreBunkersContext) {
-      setExploreBunkers(exploreBunkersContext);
-      //setExploreBunkersContext(exploreUserBunkers);
+  useEffect(async () => { 
+    try {
+      if (!exploreBunkersContext) {
+          console.log("there is not")
+          setLoading(true);
+          setIsEmpty(true);
+          setExploreBunkers([]);
+          const bunkers = await fetchPublishedBunkers()
+          setExploreBunkersContext(bunkers);
+          setExploreBunkers(bunkers);
+          setLoading(false);
+          setIsEmpty(false);
+      } else {
+        console.log("there is a context")
+        setLoading(false);
+        setExploreBunkers(exploreBunkersContext);
+      }
+    } catch (err) {
+      console.log(err);
     }
-  }, []);
+  }, [user]);
 
   return (
     <div>
@@ -33,10 +57,10 @@ const Explore = () => {
             <div className="lg:col-span-2">
               {exploreBunkers && exploreBunkers.length > 0 ? (
                 exploreBunkers.map((bunker) => (
-                  <span key={bunker.id}>
-                    <Link href={`${bunker.author.username}/status/${bunker.id}`}>
+                  <span key={bunker._id}>
+                    <Link to={`/bunkers/${bunker._id}`}>
                       <div className="mb-5">
-                        <Post bunker={bunker} />
+                        <Post isThumb={true} bunker={bunker} />
                       </div>
                     </Link>
                   </span>

@@ -2,12 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "antd/dist/antd.css";
 /* import "./index.css"; */
-import { Comment, Avatar, Form, Button, List, Input, Tooltip } from "antd";
+import { Comment, Form, Button, List, Input, Tooltip } from "antd";
 import axios from "axios";
 import { useState, useContext } from "react";
 import moment from "moment";
 import UserContext from "../../../contexts/UserContext";
-
+import Avatar from "./../../Avatar/Avatar"
 const { TextArea } = Input;
 
 const CommentEditor = (props) => {
@@ -44,18 +44,19 @@ const CommentEditor = (props) => {
     }
   };
   return (
-    <>
+    <div className="nm-flat-white rounded-lg">
       <Comment
         avatar={
           <Avatar
-            src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+            src={user.avatar}
             alt="Han Solo"
           />
         }
         content={
-          <>
+          <div className="w-full px-4 rounded-lg">
             <Form.Item>
               <TextArea
+                className="bg-gray-200 placeholder-gray-600  rounded-lg h-12 w-full font-noto text-sm font-medium"
                 rows={4}
                 onChange={(e) => {
                   setCommentValue(e.target.value);
@@ -66,7 +67,8 @@ const CommentEditor = (props) => {
             </Form.Item>
             <Form.Item>
               {user ? (
-                <Button
+                <button
+                  className="flex flex-row py-4 bottom-0 relative font-cabin text-black px-8 py-4 rounded-full nm-convex-yellowBunker-sm"
                   htmlType="submit"
                   loading={false}
                   onClick={(e) => {
@@ -75,7 +77,7 @@ const CommentEditor = (props) => {
                   type="primary"
                 >
                   Add Comment
-                </Button>
+                </button>
               ) : (
                 <>
                   <Link to="/signin">
@@ -87,10 +89,10 @@ const CommentEditor = (props) => {
                 </>
               )}
             </Form.Item>
-          </>
+          </div>
         }
       />
-    </>
+    </div>
   );
 };
 

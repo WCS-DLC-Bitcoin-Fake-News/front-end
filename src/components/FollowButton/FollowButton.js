@@ -43,7 +43,7 @@ const FollowButton = ({ userID }) => {
   return (
     <div>
       <button
-        className="lg:mr-0 lg:ml-auto bg-primary text-white px-2 py-4  lg:px-8 lg:py-4 rounded-md"
+        className="inline-flex justify-center w-full rounded-full shadow-sm px-4 py-2 nm-convex-white border border-yellowBunker  text-sm font-raleway font-medium text-gray-700 hover:bg-gray-50 "
         type="submit"
         onClick={() => (isFollowing ? stopFollowing() : startFollowing())}>
         <span className="mx-2">

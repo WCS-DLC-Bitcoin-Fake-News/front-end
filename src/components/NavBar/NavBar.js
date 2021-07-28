@@ -6,58 +6,70 @@ import { useHistory } from "react-router-dom";
 import React, { useContext } from "react";
 import UserContext from "../../contexts/UserContext";
 import ProfileDropDown from "../ProfileDropDown/ProfileDropDown";
-
+import thumbnailLogo from "../../assets/debunker_logo_title_300.png";
+import Wallet from "../Wallet/Wallet";
 const NavBar = () => {
   const { user } = useContext(UserContext);
   const router = useHistory();
 
   return (
-    <div className="font-poppins bg-white">
+    <div className="opacity-80 font-montserrat font-bold nm-flat-white">
       <nav className="justify-between h-16 flex flex-row lg:justify-between items-center">
-        <NavLink to="/home">
+        <NavLink
+              activeClassname={"font-montserrat font-bold text-lg"}
+        
+        to="/">
           <img
-            className="cursor-pointer ml-4"
-            src="/images/logos/bunker.png"
+            className="cursor-pointer ml-4 object-scale-down h-16"
+            src={thumbnailLogo}
             alt="logo"
           />
         </NavLink>
 
         <div className="hidden lg:block menu">
           {user && (
-            <NavLink to="/home">
+            <NavLink 
+              activeClassname={"font-montserrat font-bold text-lg"}
+            
+              to="/">
               <li
-                activeClassname={"text-primary font-semibold"}
+                activeClassname={"font-montserrat font-bold text-lg"}
                 className={`list-none inline-block mx-20 cursor-pointer`}>
-                Home
+                Debunk
               </li>
             </NavLink>
           )}
-          <NavLink to="/explore">
+          <NavLink 
+            activeClassname={"font-montserrat font-bold text-lg"}
+          
+          
+          to="/explore">
             <li
-              activeClassname={"text-primary font-semibold"}
+              activeClassname={"font-montserrat font-bold text-lg"}
               className={`list-none inline-block mx-20 cursor-pointer`}>
-              Explore
+              Investigate
             </li>
           </NavLink>
-          {user && (
+          {/* {user && (
             <NavLink to="/bookmarks">
               <li
-                activeClassname={"text-primary font-semibold"}
+                activeClassname={"font-montserrat font-bold text-lg"}
                 className={`list-none inline-block mx-20 cursor-pointer`}>
                 Bookmarks
               </li>
             </NavLink>
-          )}
+          )} */}
         </div>
 
         <div className="bg-white w-full lg:hidden flex justify-between items-center fixed bottom-0 h-16 px-4">
           <div>
             {user && (
-              <NavLink to="/home">
+              <NavLink 
+               activeClassname={"font-montserrat font-bold text-lg"}
+              
+              to="/">
                 <span>
                   <HomeIcon
-                    activeClassname={"text-primary font-semibold"}
-
                     fontSize="large"
                     style={{
                       color: true === "/home" ? "#2F80ED" : "#828282",
@@ -68,7 +80,9 @@ const NavBar = () => {
             )}
           </div>
           <div>
-            <NavLink to="/explore">
+            <NavLink 
+              activeClassname={"font-montserrat font-bold text-lg"}
+            to="/explore">
               <span>
                 <ExploreIcon
                   fontSize="large"
@@ -80,7 +94,7 @@ const NavBar = () => {
             </NavLink>
           </div>
           <div>
-            {user && (
+            {/* {user && (
               <NavLink to="/bookmarks">
                 <span>
                   <BookmarkIcon
@@ -92,9 +106,10 @@ const NavBar = () => {
                   />
                 </span>
               </NavLink>
-            )}
+            )} */}
           </div>
         </div>
+        {/* {<Wallet count={10} text={"Your Balance:"}/>} */}
         <div>{user && <ProfileDropDown user={user} />}</div>
       </nav>
     </div>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import CircularProgress from "@material-ui/core/CircularProgress";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
@@ -9,11 +9,19 @@ import {Link, useHistory} from "react-router-dom";
 import { handleSignOut } from "../../Api/Authentication";
 import { deleteAccount } from "../../Api/DeleteAccount";
 import Avatar from "../Avatar/Avatar";
+import useLocalStorage from "./../../hooks/useLocalStorage";
+import UserContext from "./../../contexts/UserContext"
+import Wallet from "./../Wallet/Wallet"
 
-const ProfileDropDown = ({ user }) => {
+const ProfileDropDown = () => {
+  const { user, setUser } = useContext(UserContext)
+
   const [dropdown, setDropdown] = useState(false);
   const [deletingAccount, setDeletingAccount] = useState(false);
-  const history = useHistory()
+  const [localUser, setLocalUser] = useLocalStorage("user");
+
+  const history = useHistory();
+  
   return (
     <div>
       <div className="flex flex-row items-center mr-4">
@@ -21,18 +29,22 @@ const ProfileDropDown = ({ user }) => {
           <div>
             <button
               type="button"
-              className="inline-flex justify-center w-full rounded-md border  shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 "
+              className="inline-flex justify-center w-full rounded-full shadow-sm px-4 py-2 nm-convex-white border border-yellowBunker  text-sm font-raleway font-medium text-gray-700 hover:bg-gray-50 "
               id="options-menu"
               aria-haspopup="true"
               aria-expanded="true"
               onClick={() => setDropdown(!dropdown)}>
               {user && (
-                <span className="w-8 h-8 overflow-hidden rounded-lg">
-                  <Avatar src={user.profilePicture} />
-                </span>
+                <>
+                  <span className="w-8 h-8 overflow-hidden rounded-lg">
+                    <Avatar src={user.avatar} />
+
+                  </span>
+                </>
               )}
-              <span className="hidden md:flex md:flex-col justify-center pl-2">
+              <span className="hidden md:flex md:flex-col justify-start pl-2">
                 {user && user.name}
+                {user && <Wallet text={"Balance"} count={user.wallet} currency={`$`} />}
               </span>
               <svg
                 className="-mr-1 ml-2 w-5 flex flex-col justify-center"
@@ -56,7 +68,7 @@ const ProfileDropDown = ({ user }) => {
                 role="menu"
                 aria-orientation="vertical"
                 aria-labelledby="options-menu">
-                <Link href={`/${user.username}`}>
+                <Link to={`/${user._id}/profile`}>
                   <a
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                     role="menuitem">
@@ -109,7 +121,7 @@ const ProfileDropDown = ({ user }) => {
                   className="block w-full text-left px-4 py-2 text-sm text-red-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
                   role="menuitem"
                   onClick={() => {
-                    handleSignOut()
+                    handleSignOut(() => setUser(null))
                     history.push("/")
                   }}>
                   <span className="pr-4">

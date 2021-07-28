@@ -1,9 +1,12 @@
 import React from "react";
-import { Comment, Avatar } from "antd";
+import { Comment } from "antd";
 import ThreadEditor from "./ThreadEditor";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import SecondThread from "./SecondThread";
+
+import PostButtons from "../../Post/Post";
+import Avatar from "./../../Avatar/Avatar"
 
 function ThreadContent(props) {
   const [showEditor, setShowEditor] = useState(false);
@@ -30,17 +33,21 @@ function ThreadContent(props) {
     <>
       <Comment
         actions={[
-          <span
-            onClick={() => setShowEditor(!showEditor)}
-            key="comment-nested-reply-to"
-          >
-            Reply to
-          </span>,
+          // <PostButtons
+          //     isComment={true} 
+          //     bunker={thread}
+          //     likeBunker={() => setShowEditor(!showEditor)} 
+          //     dislikeBunker={() => setShowEditor(!showEditor)} 
+          //     saveBunkers={() => setShowEditor(!showEditor)} 
+          //     unsaveBunkers={() => setShowEditor(!showEditor)} 
+          //     isSaved={false}  
+          // />,
         ]}
         author={<a>{thread.author.name}</a>}
         avatar={
+
           <Avatar
-            src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+            src={thread.author.avatar}
             alt="User1"
           />
         }

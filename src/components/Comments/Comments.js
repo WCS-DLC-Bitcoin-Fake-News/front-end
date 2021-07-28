@@ -21,14 +21,15 @@ const Comments = ({ bunkerID }) => {
   }, []);
 
   return (
-    <div className="bg-white rounded-b-lg">
+    <div className="bg-white rounded-lg">
       {comments &&
         comments.length > 0 &&
         comments.map((comment) => (
+          
           <div className="rounded-lg" key={comment.id}>
             <div className="flex flex-row">
               <div className="m-2 w-12 h-12">
-                <Avatar src={comment.author.profilePicture} />
+                <Avatar src={comment.author.avatar} />
               </div>
               <div className="flex flex-col  w-full">
                 <div className="bg-gray-200 p-4">

@@ -2,122 +2,176 @@ import BookmarkIcon from "@material-ui/icons/Bookmark";
 import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
 import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
 import DeleteIcon from "@material-ui/icons/Delete";
+import ThumbUpIcon from "@material-ui/icons/ThumbUp";
+import ThumbDownIcon from "@material-ui/icons/ThumbDown";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import { Link } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import UserContext from "../../contexts/UserContext";
 import { deleteBunker } from "../../Api/DeleteBunker";
-import { fetchBunkerLikes, fetchBunkerSaves } from "../../Api/FetchData";
+import {
+  fetchBunker,
+  fetchBunkerLikes,
+  fetchBunkerSaves,
+  upVoteBunker,
+  downVoteBunker,
+} from "../../Api/FetchData";
 import Avatar from "../Avatar/Avatar";
 import BunkerVisualizer from "../modules/Bunker/BunkerVisualizer";
-const Post = ( { bunker } ) => {
-  console.log("bunker?", bunker)
-  const { user } = useContext(UserContext);
-  const [localBunker, setLocalBunker] = useState(bunker);
+import axios from "axios";
+import PostButtons from "./PostButtons";
+import Wallet from "../Wallet/Wallet";
+import { Upload } from "antd";
+import useLocalStorage from "./../../hooks/useLocalStorage";
 
-  const [likes, setLikes] = useState(0);
-  const [isLiked, setIsLiked] = useState(false);
-  const [likeDocID, setLikeDocID] = useState("");
+const Post = ({
+  isHome,
+  setBunker,
+  bunker,
+  isThumb,
+  userCanComment,
+  setUserCanComment,
+}) => {
+  const getUpvotesCount = () => {
+    return 12;
+  };
 
-  const [saves, setSaves] = useState(0);
-  const [isSaved, setIsSaved] = useState(false);
-  const [saveDocID, setSaveDocID] = useState("");
+  const getDownvotesCount = () => {
+    return 37;
+  };
+
+  const getWatchedCount = () => {
+    return 37;
+  };
+
+  const [upVotes, setUpVotes] = useState(getUpvotesCount());
+  const [downVotes, setDownVotes] = useState(getDownvotesCount());
+  const [watchedCount, setWatchedCount] = useState(getWatchedCount());
+
+  const [isUpVotedByUser, setIsUpVotedByUser] = useState(false);
+  const [isDownVotedByUser, setIsDownVotedByUser] = useState(false);
+  const [isWatchedByUser, setIsWatchedByUser] = useState(false);
 
   const [comments, setComments] = useState(0);
-
   const [myBunker, setMyBunker] = useState(false);
 
-  const likeBunker = async () => {
+  const { user, setUser } = useContext(UserContext);
+  // const [user, setUser] = useLocalStorage("user");
+
+  const reloadBunker = async () => {
+    let updated = await fetchBunker(bunker._id);
+    setBunker(updated);
+  };
+
+  const upVote = async (e) => {
+    // e.stopPropagation();
+    e.preventDefault();
+    console.log(" iam in like bunker");
+    console.log(bunker);
+
     if (!user) {
       alert("You need to sign in for that");
       return;
     }
-    // axios col to upVote
 
-    setLikes((prev) => prev + 1);
-    // setLikeDocID(id);
-    setIsLiked(true);
+    setUpVotes((prev) => prev + 1);
+    setUserCanComment(true);
+    let newVote = await upVoteBunker(bunker._id, user._id);
+    setUser({ ...user, wallet: newVote.votantNewWallet });
+    reloadBunker();
+    // window.scrollTo(0,document.body.scrollHeight);
+
+    setIsUpVotedByUser(true);
   };
 
-  const dislikeBunker = () => {
+  const downVote = async (e) => {
+    e.preventDefault();
+
+    console.log(" iam in dislike bunker ");
+
     if (!user) {
       alert("You need to sign in for that");
       return;
     }
     // axios col to downVote
-    setLikes((prev) => prev - 1);
-    setIsLiked(false);
+    await downVoteBunker(bunker._id, user._id);
+    setUserCanComment(true);
+    reloadBunker();
+    // window.scrollTo(0,document.body.scrollHeight);
+
+    setDownVotes((prev) => prev - 1);
+    setIsDownVotedByUser(false);
   };
 
-  const saveBunkers = () => {
+  const saveBunkers = (e) => {
+    e.preventDefault();
+
     if (!user) {
       alert("You need to sign in for that");
       return;
     }
     // axios call to bookmarks a bunker
 
-    setSaves((prev) => prev + 1);
+    setWatchedCount((prev) => prev + 1);
     // setSaveDocID(id);
-    setIsSaved(true);
+    setIsWatchedByUser(true);
   };
 
-  const unsaveBunkers = () => {
+  const unsaveBunkers = (e) => {
+    e.preventDefault();
+
     if (!user) {
       alert("You need to sign in for that");
       return;
     }
     // axios call to unbookmark a bunker
-    setSaves((prev) => prev - 1);
-    setIsSaved(false);
+    setWatchedCount((prev) => prev - 1);
+    setIsWatchedByUser(false);
   };
 
   useEffect(async () => {
-    // setLikes((await fetchBunkerLikes(localBunker.id)).size);
+    // setVotes((await fetchBunkerLikes(bunker.id)).size);
     if (user) {
-      async function checkForLikes(bunkerId) {
-  
-      }
-      checkForLikes();
+      async function checkForVotes(bunkerId) {}
+      checkForVotes();
 
       async function checkForSaves() {
-      // axios call to count how many bookmarks on a bunker
-
-        
+        // axios call to count how many bookmarks on a bunker
       }
       checkForSaves();
 
       async function getCommentsCount() {
         // axios call to get the number of comments
-       
       }
       getCommentsCount();
       // if (user.uid === bunker.author.uid) {
       //   setMyBunker(true);
       // }
     }
-    // setSaves((await fetchBunkerSaves(localBunker.id)).length);
+    // setSaves((await fetchBunkerSaves(bunker.id)).length);
   }, []);
 
   return (
-    <div className="p-5 bg-white rounded-lg hover:bg-gray-100 cursor-pointer">
+    <div className="p-5 nm-flat-white rounded-lg hover:bg-gray-100 cursor-pointer">
       <div className="flex items-center content-evenly">
         <div className="w-16 h-16 overflow-hidden rounded-lg m-4">
-          <Avatar src={localBunker.author.profilePicture} />
+          <Avatar src={isHome ? user.avatar : bunker.author.avatar} />
         </div>
         <div className="w-full">
           <Link href={`/${bunker.author.username}`}>
-            <p className="font-poppins font-medium text-base my-1 hover:underline">
-              {localBunker.author.name}
+            <p className="font-cabin font-medium text-base my-1 hover:underline">
+              {isHome ? user.name : bunker.author.name}
             </p>
           </Link>
-          <p className="font-poppins text-sm font-medium my-1 text-gray-700  ">
-            @{localBunker.author.username}
+          <p className="font-cabin text-sm font-medium my-1 text-gray-700  ">
+            @{bunker.author.username}
           </p>
-          <p className="font-noto text-gray-500 text-base my-1">
-            {localBunker.createdAt}
+          <p className="font-cabin text-gray-500 text-base my-1">
+            {bunker.createdAt}
           </p>
         </div>
+
         {myBunker && (
           <div
             className="w-16 h-16 flex flex-col justify-center items-center"
@@ -129,113 +183,74 @@ const Post = ( { bunker } ) => {
               if (answer) {
                 deleteBunker(bunker.id);
               }
-            }}>
+            }}
+          >
             <DeleteIcon htmlColor={"red"} fontSize="medium" />
           </div>
         )}
       </div>
       <span>
-        <div className="font-noto text-base font-normal pt-4">
-          {localBunker.body}
-          {localBunker.printedSource.length && <BunkerVisualizer source={localBunker.source} printedSource={localBunker.printedSource} />}
-
-        </div>
-        {bunker.imgLink && (
+        <h1 className="font-montserrat font-bold text-2xl">{bunker.title}</h1>
+        <div className="font-noto text-base font-normal pt-4"></div>
+        {bunker.printedSource && (
           <div
             className="my-5 overflow-hidden rounded-lg"
-            style={{
-              height: "350px",
-            }}>
-            <a
-              href={localBunker.imgLink}
-              target="_blank"
-              rel="noopener noreferrer"
+            style={
+              isThumb && {
+                height: "350px",
+              }
+            }
+          >
+            {/* <h1 className="font-montserrat font-bold text-2xl"
               onClick={(e) => e.stopPropagation()}>
-              <img
-                className="w-full h-full object-cover"
-                src={localBunker.imgLink}
-                alt="POST IMG HERE"
-              />
-            </a>
+                {bunker.title}
+            </h1> */}
           </div>
         )}
-        <div className="flex flex-row justify-end my-5">
-          <p className="mx-1 text-gray-500 font-noto font-medium">
+        <article dangerouslySetInnerHTML={{ __html: bunker.body }}></article>
+        {bunker.printedSource.length && (
+          <BunkerVisualizer
+            isThumb={false}
+            source={bunker.source}
+            printedSource={bunker.printedSource}
+          />
+        )}
+
+        <div className="flex justify-between my-5">
+          <div className="inline-flex justify-center w-2/5 rounded-full shadow-sm p-4 nm-convex-white border border-yellowBunker text-sm font-raleway font-medium text-gray-700 hover:bg-gray-50">
+            {
+              <Wallet
+                text={`Stake`}
+                count={bunker.stake + bunker.initialStake}
+              />
+            }
+          </div>
+          <p className="mx-1 text-gray-500 font-raleway font-medium pt-4">
             {comments} Comments
           </p>
-          <p className="mx-1 text-gray-500 font-noto font-medium">
-            {likes} Likes
+          <p className="mx-1 text-gray-500 font-raleway font-medium pt-4">
+            {upVotes} Upvote
           </p>
-          <p className="mx-1 text-gray-500 font-noto font-medium">
-            {saves} Saved
+          <p className="mx-1 text-gray-500 font-raleway font-medium pt-4">
+            {downVotes} Downvote
+          </p>
+          <p className="mx-1 text-gray-500 font-raleway font-medium pt-4 pr-4">
+            {watchedCount} Watched
           </p>
         </div>
       </span>
       <hr />
-      <div className="flex flex-row my-2 items-stretch">
-        <button
-          className="flex-1 mx-4 font-noto font-medium rounded-lg hover:bg-gray-400 cursor-pointer py-6"
-          type="submit">
-          <span className="">
-            <ChatBubbleOutlineIcon style={{ color: "#828282" }} />
-          </span>
-          <span className="hidden lg:block">Comments</span>
-        </button>
-        {isLiked ? (
-          <button
-            className="flex-1 mx-4 font-noto font-medium text-red-600 rounded-lg hover:bg-gray-400 cursor-pointer py-6"
-            type="submit"
-            onClick={(e) => {
-              e.stopPropagation();
-              dislikeBunker();
-            }}>
-            <span className="">
-              <FavoriteIcon style={{ color: "#e53e3e" }} />
-            </span>
-            <span className="hidden lg:block">Liked</span>
-          </button>
-        ) : (
-          <button
-            className="flex-1 mx-4 font-noto font-medium rounded-lg hover:bg-gray-400 cursor-pointer py-6"
-            type="submit"
-            onClick={(e) => {
-              e.stopPropagation();
-              likeBunker();
-            }}>
-            <span className="">
-              <FavoriteBorderIcon style={{ color: "#828282" }} />
-            </span>
-            <span className="hidden lg:block">Likes</span>
-          </button>
-        )}
-        {isSaved ? (
-          <button
-            className="flex-1 mx-4 font-noto font-medium rounded-lg text-blue-600 hover:bg-gray-400 cursor-pointer py-6"
-            type="submit"
-            onClick={(e) => {
-              e.stopPropagation();
-              unsaveBunkers();
-            }}>
-            <span className="">
-              <BookmarkIcon style={{ color: "#2D9CDB" }} />
-            </span>
-            <span className="hidden lg:block">Saved</span>
-          </button>
-        ) : (
-          <button
-            className="flex-1 mx-4 font-noto font-medium rounded-lg hover:bg-gray-400 cursor-pointer py-6"
-            type="submit"
-            onClick={(e) => {
-              e.stopPropagation();
-              saveBunkers();
-            }}>
-            <span className="">
-              <BookmarkBorderIcon style={{ color: "#828282" }} />
-            </span>
-            <span className="hidden lg:block">Save</span>
-          </button>
-        )}
-      </div>
+
+      <PostButtons
+        bunker={bunker}
+        upVote={upVote}
+        downVote={downVote}
+        saveBunkers={saveBunkers}
+        unsaveBunkers={unsaveBunkers}
+        isWatchedByUser={isWatchedByUser}
+        isUpVotedByUser={isUpVotedByUser}
+        isDownVotedByUser={isDownVotedByUser}
+      />
     </div>
   );
 };

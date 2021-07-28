@@ -1,9 +1,9 @@
 import React from "react";
-import { Comment, Avatar } from "antd";
+import { Comment } from "antd";
 import ThreadEditor from "./ThreadEditor";
 import { useState, useEffect } from "react";
 import axios from "axios";
-
+import Avatar from "../../Avatar/Avatar"
 function SecondThread(props) {
   const [showEditor, setShowEditor] = useState(false);
   const [secondThread, setSecondThread] = useState([]);
@@ -33,7 +33,7 @@ function SecondThread(props) {
         author={<a>{thread.author.name}</a>}
         avatar={
           <Avatar
-            src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+            src={thread.author.avatar}
             alt="User1"
           />
         }

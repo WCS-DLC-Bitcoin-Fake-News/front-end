@@ -9,6 +9,7 @@ import { fetchBunker } from "./../Api/FetchData"
 function BunkerForm() {
   const { user } = useContext(UserContext);
   const { bunkerId } = useParams();
+  console.log('user context in the form', user)
 
   const [body, setBody] = useState(" ");
   const [title, setTitle] = useState(" ");
@@ -78,8 +79,7 @@ function BunkerForm() {
     };
     try {
       // this const gets the 'token' and 'user'from localStorage. Check Signup.js to see how to access and save in localStorage.
-      
-
+    
       const config = {
         headers: {
           "Content-Type": "application/json",
@@ -92,60 +92,41 @@ function BunkerForm() {
         { ...newPost, published: true },
         config
       );
-      history.push("/home");
+      history.push(`/${user._id}/profile`);
     } catch (error) {
       console.log(error);
     }
   };
 
   return (
-    <div class="min-h-screen bg-gray-300 p-0 sm:p-12">
-      <div class="mx-auto max-w-xl px-6 py-12 bg-white border-0 shadow-lg sm:rounded-3xl">
-        <h1 class="text-2xl text-black font-bold mb-8">Build your Bunker</h1>
+    <div class="min-h-screen bg-gray-200 p-0 sm:p-12">
+      {/* p-5 nm-flat-white   cursor-pointer */}
+      <div class="flex-col mx-auto max-w-max px-6 py-12 nm-flat-white hover:bg-gray-100 rounded-lg">
+        <h1 class="text-2xl text-black font-montserrat font-bold mb-8">Build your Bunker</h1>
         <form id="form" onSubmit={onSubmit}>
-          <div class="relative z-0 w-full mb-5">
+          <div class="relative z-0 w-full h-auto mb-5">
             <input
               onChange={editTitle}
               type="text"
               title="title"
               placeholder=" "
               required
-              class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-gray-400 border-gray-200 text-gray-400"
+              class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-gray-400 border-gray-200 font-raleway text-black"
             />
             <label
               for="name"
-              class="absolute duration-300 top-3 -z-1 origin-0 text-gray-200"
+              class="absolute duration-300 top-3 -z-1 origin-0 font-raleway text-gray-600"
             >
               Enter Title
             </label>
-            <span class="text-sm text-red-600 hidden" id="error">
+            <span class=" text-red-600 hidden" id="error">
               Title is required
             </span>
           </div>
-
-          <div class="relative z-0 w-full mb-5">
-            <input
-              onPaste={editSource}
-              type="url"
-              source="source"
-              placeholder=""
-              value={source}
-              class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-gray-400 border-gray-200 text-gray-400"
-            />
-            <label
-              for="source"
-              class="absolute duration-300 top-3 -z-1 origin-0 text-gray-200"
-            >
-              Paste Source URL
-            </label>
-            <span class="text-sm text-red-600 hidden" id="error">
-              URL is required
-            </span>
+          <div className="nm-flat-white rounded-lg">
+              {printedSource && <BunkerVisualizer printedSource={printedSource} />}
           </div>
-
-          {printedSource && <BunkerVisualizer printedSource={printedSource} />}
-
-          <div class="relative z-0 w-full mb-5 text-black bg-gray-400">
+          <div class="nm-flat-gray-100 h-auto rounded-lg relative z-0 w-full mb-5 text-black">
             {/* <label for="argument" class="absolute duration-300 top-3 -z-1 origin-0 text-black">Elaborate your argument</label>  */}
 
             <ReactQuill
@@ -158,45 +139,6 @@ function BunkerForm() {
               An argument is required
             </span>
           </div>
-
-          <fieldset class="relative z-0 w-full p-px mb-5">
-            <legend class="absolute text-black transform scale-75 -top-3 origin-0">
-              Choose type of media to DeBunk
-            </legend>
-            <div class="block pt-3 pb-2 space-x-4 text-black">
-              <label>
-                <input
-                  type="radio"
-                  name="radio"
-                  value="1"
-                  class="mr-2 text-black border-2 border-gray-300 focus:border-gray-300 focus:ring-black"
-                />
-                Bunker
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  name="radio"
-                  value="2"
-                  class="mr-2 text-black border-2 border-gray-300 focus:border-gray-300 focus:ring-black"
-                />
-                Article
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  name="radio"
-                  value="3"
-                  class="mr-2 text-black border-2 border-gray-300 focus:border-gray-300 focus:ring-black"
-                />
-                Price Speculation
-              </label>
-            </div>
-            <span class="text-sm text-red-600 hidden" id="error">
-              Option has to be selected
-            </span>
-          </fieldset>
-
           <div class="relative z-0 w-full mb-5">
             <input
               type="number"
@@ -204,10 +146,10 @@ function BunkerForm() {
               placeholder=" "
               class="pt-3 pb-2 pl-5 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 text-black appearance-none focus:outline-none focus:ring-0 focus:border-gray-300 border-gray-200"
             />
-            <div class="absolute top-0 left-0 mt-3 ml-1 text-gray-400">$</div>
+            <div class="absolute top-0 left-0 mt-3 ml-1"></div>
             <label
               for="money"
-              class="absolute duration-300 top-3 left-5 -z-1 origin-0 text-gray-200"
+              class="absolute duration-300 top-3 -z-1 origin-0 font-raleway text-gray-600"
             >
               Stake
             </label>
@@ -216,7 +158,7 @@ function BunkerForm() {
             </span>
           </div>
 
-          <div class="relative z-0 w-full mb-5 text-gray-200">
+          <div class="relative z-0 w-full mb-5 font-raleway text-gray-600">
             <input
               type="date"
               deadline="deadline"
@@ -238,7 +180,7 @@ function BunkerForm() {
           <button
             type="submit"
             value="ok"
-            class="w-full px-6 py-3 mt-3 text-lg text-black transition-all duration-150 ease-linear rounded-lg shadow outline-none bg-yellowBunker hover:bg-buttonRedDark hover:shadow-lg focus:outline-none"
+            class="w-full h-15 px-6 py-3 mt-3 text-lg font-raleway font-bold text-black transition-all duration-150 ease-linear rounded-full shadow outline-none nm-flat-yellowBunker hover:bg-buttonRedDark hover:shadow-lg focus:outline-none"
           >
             DeBunk it!
           </button>

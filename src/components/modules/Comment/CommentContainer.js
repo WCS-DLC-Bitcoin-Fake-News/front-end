@@ -1,9 +1,12 @@
 import React from "react";
 import CommentContent from "./CommentContent";
-import CommentEditor from "./CommentEditor";
-import { Comment, Avatar, Form, Button, List, Input, Tooltip } from "antd";
+
+import CommentEditor from "./CommentEditor"
+import { Comment, Form, Button, List, Input, Tooltip } from "antd";
 import { useState, useEffect } from "react";
 import axios from "axios";
+
+import Avatar from "./../../Avatar/Avatar"
 import InfiniteScroll from "react-infinite-scroll-component";
 
 const CommentContainer = (props) => {
@@ -14,7 +17,7 @@ const CommentContainer = (props) => {
   const loadComments = async () => {
     try {
       const { data } = await axios.get(`/bunkers/${id}/comments`);
-
+      console.log(data)
       setComments(data.comments);
     } catch (error) {
       console.log(error);
@@ -39,31 +42,18 @@ const CommentContainer = (props) => {
   const filtered = comments.filter((comment) => !comment.commentId);
 
   return (
-    <>
-      <CommentEditor id={id} loadComments={loadComments} />
-      <InfiniteScroll
-        dataLength={comments.length}
-        next={loadMoreComments}
-        hasMore={hasMore}
-        loader={<h4>Loading...</h4>}
-        endMessage={
-          <p style={{ textAlign: "center" }}>
-            <b>Yay! You have seen it all</b>
-          </p>
-        }
-      >
-        {filtered.map((comment, idx) => {
-          return (
-            <CommentContent
-              comment={comment}
-              loadComments={loadComments}
-              id={id}
-              key={idx}
-            />
-          );
-        })}
-      </InfiniteScroll>
-    </>
+    <div className="nm-flat-white rounded-lg">
+      {props.userCanComment === true && <CommentEditor id={id} loadComments={loadComments}/> }
+      {filtered.map((comment) => {
+        return (
+          <CommentContent 
+            comment={comment} 
+            loadComments={loadComments} 
+            id={id}
+          />
+        );
+      })}
+    </div>  
   );
 };
 export default CommentContainer;

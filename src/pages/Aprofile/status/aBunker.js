@@ -7,40 +7,37 @@ import UserContext from "../../../contexts/UserContext";
 // import firebase from "../../../firebase/init";
 import Layout from "../../../layouts";
 import { fetchUser } from "../../../Api/FetchData";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 const Bunker = () => {
-  console.log("going here in Bunker")
+  console.log("going here in Bunker");
   const [ bunker, setBunker ] = useState({})
-
+  const { bunkerId } = useParams()
   const { user } = useContext(UserContext);
-
-  useEffect(() => {
+  console.log(user)
     
-  }, [])
+  async function handleUserLoad(context) {
+    console.log("jjklll")
+    const res = await axios.get(`/bunkers/${bunkerId}`);
 
-  // function handleUserLoad(context) {
-  //   const bunkerID = context.params.bunkerId;
-  //   const res = await firebase
-  //     .firestore()
-  //     .collection("bunkers")
-  //     .doc(bunkerID)
-  //     .get();
-  //   const bunker = res.data();
-  //   const id = res.id;
-  //   const user = await fetchUser({ userID: bunker.authorId });
+    const id = res.id;
+    const user = await fetchUser({ userID: bunker.authorId });
   
-  //   return {
-  //     props: {
-  //       bunker: {
-  //         ...bunker,
-  //         createdAt: bunker.createdAt.toDate().toString(),
-  //         id,
-  //         author: user,
-  //       },
-  //     },
-  //   };
-  // }
+    // return {
+    //   props: {
+    //     bunker: {
+    //       ...bunker,
+    //       createdAt: bunker.createdAt.toDate().toString(),
+    //       id,
+    //       author: user,
+    //     },
+    //   }
+  }
 
+  useEffect(async () => {
+    await handleUserLoad()
+  }, [])
 
   return (
     <div>
@@ -52,12 +49,12 @@ const Bunker = () => {
         <div>
           <div className="flex flex-col lg:grid lg:grid-cols-3 lg:col-gap-5 my-5 lg:mx=24 xl:mx-48">
             <div className="col-span-2">
-              {/* <Post bunker={bunker} /> */}
-              {/* {user && <CommentInput bunkerID={bunker.id} />} */}
-              {/* <Comments bunkerID={bunker.id} /> */}
+              <Post bunker={bunker} /> 
+              {user && <CommentInput bunkerID={bunker.id} />}
+              <Comments bunkerID={bunker.id} />
             </div>
             <div className="hidden lg:block">
-              {/* <Suggestions type="relavant" userID={bunker.authorId} /> */}
+             <Suggestions type="relavant" userID={bunker.authorId} />
             </div>
           </div>
         </div>
@@ -67,5 +64,4 @@ const Bunker = () => {
 };
 
 
-
-export default Bunker;
+export default Bunker

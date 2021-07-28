@@ -7,29 +7,30 @@ import Post from "../../components/Post/Post";
 import UserInfo from "../../components/UserInfo/UserInfo";
 import fetchAllUserData from "../../Api/FetchData";
 import {useParams} from "react-router-dom"
-// import fetchAllUserData from "../../Api/FetchData";
 
+// import fetchAllUserData from "../../Api/FetchData";
 const UserName = () => {
   console.log("going here in UserName")
-
   const [userExits, setUserExits] = useState(false);
-  const [ userWithBunkers, setUserWithBunker ] = useState({})
-  // const { bunkers } = userWithBunkers
+  const [ userWithBunkers, setUserWithBunkers ] = useState({})
+  const [ bunkerWithUser, setBunkerWithUser ] = useState({})
 
+  
+  const { bunkers } = userWithBunkers
   const { userId, bunkerId  } = useParams();
- // const [bunker, setBunker] = useState({})
+  const [bunker, setBunker] = useState({})
 
   useEffect(async () => {
     try {
-      const userWithData = await fetchAllUserData(userId);
+      const userWithBunkers = await fetchAllUserData(userId, bunkerId);
       console.log("goo")
-      console.log(userWithData);
-      
-      setUserExits(true,setUserWithBunker(userWithData) );
+      console.log(userWithBunkers);
+      // setBunkerWithUser(bunkerWithUser)
+      setUserExits(true);
+      setUserWithBunkers(userWithBunkers)
     } catch(error) {
       console.error(error)
       return error
-
     }
     
   }, []);
@@ -38,7 +39,7 @@ const UserName = () => {
     <div>
         <title>
           {userExits
-            ? `${userWithBunkers.name} (@${userWithBunkers.username}) | Bunkerer`
+            ? `${userWithBunkers.name} (@${userWithBunkers.name}) | Bunkerer`
             : `USER NOT FOUND`}
         </title>
 
@@ -59,18 +60,18 @@ const UserName = () => {
                   <Filters />
                 </div>
                 <div className="col-span-2">
-                  {userWithBunkers.bunkers.length && userWithBunkers.bunkers.map((bunker) => {
+                  {userWithBunkers.bunkers && userWithBunkers.bunkers.map((bunker) => {
                     return (
-                      <span key={bunker.id}>
+                      <span key={bunker._id}>
                         <Link
-                          to={`${bunker.author.username}/status/${bunker.id}`}>
+                          to={`/bunkers/${bunker._id}`}>
                           <div className="mb-5">
-                            <Post bunker={bunker} />
+                            <Post isThumb={true} bunker={bunker} isHome={true}/>
                           </div>
                         </Link>
                       </span>
                     );
-                  })}
+                  }).reverse()}
                 </div>
               </div>
             </div>
@@ -82,15 +83,5 @@ const UserName = () => {
     </div>
   );
 };
-
-export async function getServerSideProps(context) {
-  const userInfo = await fetchAllUserData(context.params.username);
-
-  return {
-    props: {
-      ...userInfo,
-    },
-  };
-}
 
 export default UserName;

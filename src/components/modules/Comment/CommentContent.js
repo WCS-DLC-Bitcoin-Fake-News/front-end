@@ -1,9 +1,11 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Comment, Avatar } from "antd";
+import { Comment } from "antd";
 import axios from "axios";
 import ThreadContent from "./ThreadContent";
-import ThreadEditor from "./ThreadEditor";
+import ThreadEditor from "./ThreadEditor"
+import PostButtons from "../../Post/PostButtons";
+import Avatar from "./../../Avatar/Avatar"
 import Moment from "react-moment";
 
 const CommentContent = (props) => {
@@ -29,24 +31,29 @@ const CommentContent = (props) => {
     }
   }, []);
 
-  return (
-    <>
+  return ( 
+    <div className="rounded-lg flex flex-row items-center">
       <Comment
         actions={[
-          <span
-            onClick={() => setShowEditor(!showEditor)}
-            key="comment-nested-reply-to"
-          >
-            <Moment format="YYYY/MM/DD kk:mm" date={comment.createdAt}></Moment>
-            <p>Reply to</p>
-          </span>,
+          <PostButtons 
+            onClick={() => setShowEditor(true)}
+            bunker={() => setShowEditor(!showEditor)}
+            startComment={() => setShowEditor(!showEditor)}
+            likeBunker={() => setShowEditor(!showEditor)} 
+            dislikeBunker={() => setShowEditor(!showEditor)} 
+            saveBunkers={() => setShowEditor(!showEditor)} 
+            unsaveBunkers={() => setShowEditor(!showEditor)} 
+            isSaved={false}  
+           />
         ]}
         author={<a>{comment.author.name}</a>}
         avatar={
-          <Avatar
-            src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-            alt="User1"
-          />
+          <div className="w-12 h-12 overflow-hidden rounded-lg m-4">
+            <Avatar
+                src={comment.author.avatar}
+                alt="User1"
+              />
+          </div>
         }
         content={<p>{comment.body}</p>}
       >
@@ -65,7 +72,7 @@ const CommentContent = (props) => {
           return <ThreadContent key={idx} thread={comment} id={id} />;
         })}
       </Comment>
-    </>
+    </div>
   );
 };
 

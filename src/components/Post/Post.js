@@ -199,17 +199,9 @@ const Post = ({
             })}>
          
             <h1 className="font-montserrat font-bold text-2xl"
-              href={bunker.imgLink}
-              target="_blank"
-              rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}>
                 {bunker.title}
-              {/* <img
-                className="w-full h-full object-cover"
-                src={bunker.imgLink}
-                alt="POST IMG HERE"
-              /> */}
-            {/* {bunker.printedSource.length && <BunkerVisualizer isThumb={isThumb} source={bunker.source} printedSource={bunker.printedSource} />} */}
+            </h1>
           </div>
         )}
         <article dangerouslySetInnerHTML={{__html: bunker.body}}></article>

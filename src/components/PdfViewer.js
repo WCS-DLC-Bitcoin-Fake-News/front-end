@@ -100,13 +100,15 @@ const PdfViewer = ({ name, printedSource, author, isThumb }) => {
           <>
             <Document className="nm-inset-white rounded-lg" file={pdf} onLoadSuccess={onDocumentLoadSuccess}>
               <Page pageNumber={pageNumber}  width={pdfWidth} />
-            </Document>
-            <p>Page {pageNumber} of {numPages}</p>
-            <span onClick={(() => {setPageNumber(pageNumber - 1 )})}>previous</span>
-            <span onClick={(() => {setPageNumber(pageNumber + 1 )})}>next</span>
+            </Document >
           </>
         )}
       </DocumentContainer>
+      <div className="flex justify-start">
+        <p className="p-2 m-2">Page {pageNumber} of {numPages}</p>
+      </div>
+      <span className="nm-concave-white rounded-full p-2 m-2" onClick={(() => {setPageNumber(pageNumber - 1 )})}>previous</span>
+      <span className="nm-concave-white rounded-full p-2 m-2" onClick={(() => {setPageNumber(pageNumber + 1 )})}>next</span>
       <Author>
         <b>{author}</b>
       </Author>

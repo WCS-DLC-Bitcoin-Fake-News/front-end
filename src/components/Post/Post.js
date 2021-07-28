@@ -194,23 +194,17 @@ const Post = ({
         {bunker.printedSource && (
           <div
             className="my-5 overflow-hidden rounded-lg"
-            style={
-              isThumb && {
-                height: "350px",
-              }
-            }
-          >
-            <article
-              dangerouslySetInnerHTML={{ __html: bunker.body }}
-            ></article>
-            {bunker.printedSource.length && (
-              <BunkerVisualizer
-                isThumb={isThumb}
-                source={bunker.source}
-                printedSource={bunker.printedSource}
-              />
-            )}
-            {/* <img
+            style={isThumb && ({
+              height: "350px",
+            })}>
+         
+            <h1 className="font-montserrat font-bold text-2xl"
+              href={bunker.imgLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}>
+                {bunker.title}
+              {/* <img
                 className="w-full h-full object-cover"
                 src={bunker.imgLink}
                 alt="POST IMG HERE"
@@ -218,7 +212,7 @@ const Post = ({
             {/* {bunker.printedSource.length && <BunkerVisualizer isThumb={isThumb} source={bunker.source} printedSource={bunker.printedSource} />} */}
           </div>
         )}
-        {/* <div dangerouslySetInnerHTML={{__html: bunker.body}}></div> */}
+        <article dangerouslySetInnerHTML={{__html: bunker.body}}></article>
         <div className="flex justify-between my-5">
           <div className="inline-flex justify-center w-2/5 rounded-full shadow-sm p-4 nm-convex-white border border-yellowBunker text-sm font-raleway font-medium text-gray-700 hover:bg-gray-50">
             {

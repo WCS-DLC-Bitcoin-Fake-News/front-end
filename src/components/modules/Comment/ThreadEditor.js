@@ -49,7 +49,7 @@ const ThreadEditor = (props) => {
       <Comment
         avatar={
           <Avatar
-            src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+            src={user.avatar}
             alt="Han Solo"
           />
         }

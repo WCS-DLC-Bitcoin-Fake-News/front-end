@@ -26,6 +26,7 @@ import { Upload } from "antd";
 import useLocalStorage from "./../../hooks/useLocalStorage";
 
 const Post = ({
+  isHome,
   setBunker,
   bunker,
   isThumb,
@@ -155,12 +156,12 @@ const Post = ({
     <div className="p-5 nm-flat-white rounded-lg hover:bg-gray-100 cursor-pointer">
       <div className="flex items-center content-evenly">
         <div className="w-16 h-16 overflow-hidden rounded-lg m-4">
-          <Avatar src={bunker.author.avatar} />
+          <Avatar src={isHome ? user.avatar : bunker.author.avatar} />
         </div>
         <div className="w-full">
           <Link href={`/${bunker.author.username}`}>
             <p className="font-cabin font-medium text-base my-1 hover:underline">
-              {bunker.author.name}
+              {isHome ? user.name : bunker.author.name}
             </p>
           </Link>
           <p className="font-cabin text-sm font-medium my-1 text-gray-700  ">

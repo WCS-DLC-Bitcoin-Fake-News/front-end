@@ -46,7 +46,7 @@ const CommentContent = (props) => {
             isSaved={false}  
            />
         ]}
-        author={<a>{comment.author.avatar}</a>}
+        author={<a>{comment.author.name}</a>}
         avatar={
           <div className="w-12 h-12 overflow-hidden rounded-lg m-4">
             <Avatar

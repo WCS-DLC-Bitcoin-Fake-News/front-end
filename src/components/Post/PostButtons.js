@@ -19,7 +19,8 @@ const PostButtons = ({
   bunker, 
   upVote, 
   downVote, 
-  saveBunkers, 
+  saveBunkers,
+  startComment, 
   unsaveBunkers, 
   isWatchedByUser, 
   isUpVotedByUser, 
@@ -32,7 +33,7 @@ const PostButtons = ({
 
     <div className="flex flex-row my-2 items-stretch">
         <button
-          onClick={(e) => e.stopPropagation()}
+          onClick={(e) => e.stopPropagation() && startComment()}
           className="flex-1 mx-4 font-noto font-medium rounded-lg hover:bg-gray-400 cursor-pointer py-6"
           type="submit"
           >
@@ -46,7 +47,8 @@ const PostButtons = ({
             // className="flex-1 mx-4 font-noto font-medium rounded-lg hover:bg-gray-400 cursor-pointer py-6"
             onClick={upVote}>
             <span className="">
-              <ThumbUpIcon style={{ color: "#828282" }} />
+              <ThumbUpIcon style={{ color: "#828282" }}      
+        />
             </span>
             <span className="hidden lg:block">Upvote</span>
           </button>

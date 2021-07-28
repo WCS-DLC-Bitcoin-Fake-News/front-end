@@ -8,7 +8,6 @@ import PostButtons from "../../Post/PostButtons";
 import Avatar from "./../../Avatar/Avatar"
 import Moment from "react-moment";
 
-
 const CommentContent = (props) => {
   let { id, comment, loadComments } = props;
 
@@ -32,12 +31,14 @@ const CommentContent = (props) => {
     }
   }, []);
 
-  return (
+  return ( 
     <div className="rounded-lg flex flex-row items-center">
       <Comment
         actions={[
           <PostButtons 
+            onClick={() => setShowEditor(true)}
             bunker={() => setShowEditor(!showEditor)}
+            startComment={() => setShowEditor(!showEditor)}
             likeBunker={() => setShowEditor(!showEditor)} 
             dislikeBunker={() => setShowEditor(!showEditor)} 
             saveBunkers={() => setShowEditor(!showEditor)} 
@@ -49,7 +50,7 @@ const CommentContent = (props) => {
         avatar={
           <div className="w-12 h-12 overflow-hidden rounded-lg m-4">
             <Avatar
-                src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                src={comment.author.avatar}
                 alt="User1"
               />
           </div>

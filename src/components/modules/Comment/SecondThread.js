@@ -33,7 +33,7 @@ function SecondThread(props) {
         author={<a>{thread.author.name}</a>}
         avatar={
           <Avatar
-            src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+            src={thread.author.avatar}
             alt="User1"
           />
         }

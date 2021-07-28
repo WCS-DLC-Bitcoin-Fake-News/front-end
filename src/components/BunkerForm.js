@@ -22,6 +22,7 @@ function BunkerForm() {
   const [source, setSource] = useState("");
   const [printedSource, setPrintedSource] = useState("");
   const [id, setId] = useState("");
+  const [deadline, setDeadline] = useState("");
   let history = useHistory();
 
   const createBunkerDraft = async (url) => {
@@ -69,6 +70,9 @@ function BunkerForm() {
     console.log(html);
     setBody(html);
   };
+  const editDeadline = (e) => {
+    setDeadline(e.target.value);
+  }
   const editSource = (e) => {
     e.preventDefault();
     const url = e.clipboardData.getData("text");
@@ -82,11 +86,13 @@ function BunkerForm() {
       title,
       source,
       body,
+      deadline,
     };
     try {
       console.log("Heeeeeeee")
+      console.log(newPost.deadline)
       if(detectURLs(newPost.body) === null) {
-        return alert("You must bring an source url elaborate your argument!")
+        return alert("You must bring a source url, elaborate your argument!")
       } 
       // this const gets the 'token' and 'user'from localStorage. Check Signup.js to see how to access and save in localStorage.
     
@@ -170,7 +176,7 @@ function BunkerForm() {
           </div>
 
           <div class="relative z-0 w-full mb-5 font-raleway text-gray-600">
-            <input
+            <input onChange={editDeadline}
               type="date"
               deadline="deadline"
               placeholder=" "

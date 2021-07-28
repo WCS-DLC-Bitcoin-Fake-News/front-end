@@ -1,7 +1,7 @@
 import {Link} from "react-router-dom";
 import React from "react";
 import AuthForm from "../components/AuthForm/AuthForm";
-
+import logo from "../assets/Thumbnail_Debunker_title.svg";
 const SignIn = () => {
   return (
     <div className="h-screen flex justify-center items-center bg-blue-800">
@@ -10,7 +10,7 @@ const SignIn = () => {
           <Link to="/">
             <img
               className="cursor-pointer"
-              src="/images/logos/bunker.png"
+              src={logo} 
               alt="logo"
             />
           </Link>

@@ -11,10 +11,10 @@ const Home = () => {
             </h1>
           </div>
         </div>
-        <div className="lg:w-2/4 nm-inset-gray-300 py-6">
+        <div className="lg:w-2/4 nm-inset-gray-300 py-4">
           <div className="mx-6 mt-44">
-            <div className="my-4">
-              <img src={logo} alt="logo" />
+            <div>
+              <img className="object-scale-down" src={logo} alt="logo" />
             </div>
             <div className="m-auto">
               <AuthForm type="signIn" />

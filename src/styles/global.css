@@ -9,7 +9,35 @@
 /* purgecss end ignore */
 @tailwind utilities;
 
+.ql-container {
+  height: 390px;
+}
 
+/* textarea:focus, input:focus{
+  outline: none;
+}
+
+textarea:focus, input:focus, input[type]:focus, .uneditable-input:focus {   
+  border-color: rgba(229, 103, 23, 0.8);
+  box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(229, 103, 23, 0.6);
+  outline: 0 none;
+}
+
+*:focus {
+  outline: none;
+}
+
+.form-control:focus {
+  border-color: inherit;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+input:focus {
+  outline:none;
+} */
+
+/* Medium Like Css */
 
 article {
   display: grid;

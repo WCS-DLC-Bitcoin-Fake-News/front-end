@@ -199,8 +199,6 @@ const Post = ( {setBunker, bunker, isThumb, userCanComment, setUserCanComment } 
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}>
                 {bunker.title}
-                <article dangerouslySetInnerHTML={{__html: bunker.body}}></article>
-                {bunker.printedSource.length && <BunkerVisualizer isThumb={isThumb} source={bunker.source} printedSource={bunker.printedSource} />}
               {/* <img
                 className="w-full h-full object-cover"
                 src={bunker.imgLink}
@@ -210,7 +208,7 @@ const Post = ( {setBunker, bunker, isThumb, userCanComment, setUserCanComment } 
             {bunker.printedSource.length && <BunkerVisualizer isThumb={isThumb} source={bunker.source} printedSource={bunker.printedSource} />}
           </div>
         )}
-        <div dangerouslySetInnerHTML={{__html: bunker.body}}></div>
+        <article dangerouslySetInnerHTML={{__html: bunker.body}}></article>
         <div className="flex justify-between my-5">
           <div className="inline-flex justify-center w-2/5 rounded-full shadow-sm p-4 nm-convex-white border border-yellowBunker text-sm font-raleway font-medium text-gray-700 hover:bg-gray-50">
           {<Wallet text={`Stake`} count={bunker.stake + bunker.initialStake} />}

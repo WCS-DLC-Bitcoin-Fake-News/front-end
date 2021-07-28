@@ -24,6 +24,7 @@ import PostButtons from "./PostButtons";
 import Wallet from "../Wallet/Wallet";
 import { Upload } from "antd";
 import useLocalStorage from "./../../hooks/useLocalStorage";
+import Moment from "react-moment";
 
 const Post = ({
   isHome,
@@ -168,7 +169,7 @@ const Post = ({
             @{bunker.author.username}
           </p>
           <p className="font-cabin text-gray-500 text-base my-1">
-            {bunker.createdAt}
+            <Moment format="YYYY/MM/DD kk:mm" date={bunker.createdAt}></Moment>
           </p>
         </div>
 

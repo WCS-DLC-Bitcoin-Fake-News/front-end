@@ -5,21 +5,22 @@ import ReactQuill from "react-quill";
 import "../../node_modules/react-quill/dist/quill.snow.css";
 import BunkerVisualizer from "./modules/Bunker/BunkerVisualizer";
 import UserContext from "../contexts/UserContext";
-import { fetchBunker } from "./../Api/FetchData"
+import { fetchBunker } from "./../Api/FetchData";
 function BunkerForm() {
   const { user } = useContext(UserContext);
   const { bunkerId } = useParams();
-  console.log('user context in the form', user)
+  console.log("user context in the form", user);
 
   const [body, setBody] = useState(" ");
   const [title, setTitle] = useState(" ");
   const [source, setSource] = useState("");
+  const [expirationDate, setExpirationDate] = useState("");
   const [printedSource, setPrintedSource] = useState("");
   const [id, setId] = useState("");
   let history = useHistory();
 
   const createBunkerDraft = async (url) => {
-    console.log(user)
+    console.log(user);
 
     const newPost = {
       source: url,
@@ -44,17 +45,29 @@ function BunkerForm() {
       console.log(res);
       setPrintedSource(res.data.printedSource);
       setId(res.data._id);
-
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(async () => {
-      const data = await fetchBunker(bunkerId)
-      setPrintedSource(data.printedSource);
-      setId(data._id);
-  }, [])
+    const data = await fetchBunker(bunkerId);
+    setPrintedSource(data.printedSource);
+    setId(data._id);
+  }, []);
+
+  function parseDate(s) {
+    var b = s.split(/\D/);
+    return new Date(b[0], --b[1], b[2]).now() / 1000;
+  }
+
+  const editExpirationDate = (e) => {
+    setExpirationDate(e.target.value);
+    const timeStamp = parseDate(expirationDate);
+    console.log(timeStamp);
+  };
+
+  console.log(expirationDate);
 
   const editTitle = (e) => {
     setTitle(e.target.value);
@@ -79,7 +92,7 @@ function BunkerForm() {
     };
     try {
       // this const gets the 'token' and 'user'from localStorage. Check Signup.js to see how to access and save in localStorage.
-    
+
       const config = {
         headers: {
           "Content-Type": "application/json",
@@ -102,7 +115,9 @@ function BunkerForm() {
     <div class="min-h-screen bg-gray-200 p-0 sm:p-12">
       {/* p-5 nm-flat-white   cursor-pointer */}
       <div class="flex-col mx-auto max-w-max px-6 py-12 nm-flat-white hover:bg-gray-100 rounded-lg">
-        <h1 class="text-2xl text-black font-montserrat font-bold mb-8">Build your Bunker</h1>
+        <h1 class="text-2xl text-black font-montserrat font-bold mb-8">
+          Build your Bunker
+        </h1>
         <form id="form" onSubmit={onSubmit}>
           <div class="relative z-0 w-full h-auto mb-5">
             <input
@@ -124,7 +139,9 @@ function BunkerForm() {
             </span>
           </div>
           <div className="nm-flat-white rounded-lg">
-              {printedSource && <BunkerVisualizer printedSource={printedSource} />}
+            {printedSource && (
+              <BunkerVisualizer printedSource={printedSource} />
+            )}
           </div>
           <div class="nm-flat-gray-100 h-auto rounded-lg relative z-0 w-full mb-5 text-black">
             {/* <label for="argument" class="absolute duration-300 top-3 -z-1 origin-0 text-black">Elaborate your argument</label>  */}
@@ -161,6 +178,7 @@ function BunkerForm() {
           <div class="relative z-0 w-full mb-5 font-raleway text-gray-600">
             <input
               type="date"
+              onChange={editExpirationDate}
               deadline="deadline"
               placeholder=" "
               class="pt-3 pb-2 pr-12 block w-full px-0 mt-0 text-text-gray-200 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-gray-300 border-gray-200"
@@ -169,9 +187,7 @@ function BunkerForm() {
             <label
               for="duration"
               class="absolute duration-300 top-3 -z-1 origin-0 text-black"
-            >
-              
-            </label>
+            ></label>
             <span class="text-sm text-red-600 hidden" id="error">
               Deadline is required
             </span>

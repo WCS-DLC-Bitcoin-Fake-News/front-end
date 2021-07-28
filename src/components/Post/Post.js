@@ -195,18 +195,26 @@ const Post = ({
         {bunker.printedSource && (
           <div
             className="my-5 overflow-hidden rounded-lg"
-            style={isThumb && ({
-              height: "350px",
-            })}>
-         
-            <h1 className="font-montserrat font-bold text-2xl"
+            style={
+              isThumb && {
+                height: "350px",
+              }
+            }
+          >
+            {/* <h1 className="font-montserrat font-bold text-2xl"
               onClick={(e) => e.stopPropagation()}>
                 {bunker.title}
-            </h1>
+            </h1> */}
           </div>
         )}
-        <article dangerouslySetInnerHTML={{__html: bunker.body}}></article>
-        {bunker.printedSource.length && <BunkerVisualizer isThumb={false} source={bunker.source} printedSource={bunker.printedSource} />}
+        <article dangerouslySetInnerHTML={{ __html: bunker.body }}></article>
+        {bunker.printedSource.length && (
+          <BunkerVisualizer
+            isThumb={false}
+            source={bunker.source}
+            printedSource={bunker.printedSource}
+          />
+        )}
 
         <div className="flex justify-between my-5">
           <div className="inline-flex justify-center w-2/5 rounded-full shadow-sm p-4 nm-convex-white border border-yellowBunker text-sm font-raleway font-medium text-gray-700 hover:bg-gray-50">

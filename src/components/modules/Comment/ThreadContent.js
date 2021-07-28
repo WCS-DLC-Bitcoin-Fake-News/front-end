@@ -33,20 +33,21 @@ function ThreadContent(props) {
     <>
       <Comment
         actions={[
-          <PostButtons 
-              bunker={thread}
-              likeBunker={() => setShowEditor(!showEditor)} 
-              dislikeBunker={() => setShowEditor(!showEditor)} 
-              saveBunkers={() => setShowEditor(!showEditor)} 
-              unsaveBunkers={() => setShowEditor(!showEditor)} 
-              isSaved={false}  
-          />,
+          // <PostButtons
+          //     isComment={true} 
+          //     bunker={thread}
+          //     likeBunker={() => setShowEditor(!showEditor)} 
+          //     dislikeBunker={() => setShowEditor(!showEditor)} 
+          //     saveBunkers={() => setShowEditor(!showEditor)} 
+          //     unsaveBunkers={() => setShowEditor(!showEditor)} 
+          //     isSaved={false}  
+          // />,
         ]}
         author={<a>{thread.author.name}</a>}
         avatar={
 
           <Avatar
-            src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+            src={thread.author.avatar}
             alt="User1"
           />
         }

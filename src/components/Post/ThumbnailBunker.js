@@ -182,6 +182,19 @@ const ThumbnailBunker = ( { bunker, isThumb } ) => {
             {bunker.printedSource.length && <BunkerVisualizer isThumb={isThumb} source={bunker.source} printedSource={bunker.printedSource} />}
           </div>
         )}
+
+        {/* <CountdownCircleTimer
+          {...timerProps}
+          colors={[["#7E2E84"]]}
+          duration={daysDuration}
+          initialRemainingTime={remainingTime}
+        >
+          {({ elapsedTime }) =>
+            renderTime("days", getTimeDays(daysDuration - elapsedTime))
+          }
+        </CountdownCircleTimer> */}
+
+
         <article style={{overflow:"hidden", height: "82px"}} dangerouslySetInnerHTML={{__html: bunker.body}}></article>
         <div className="flex flex-row justify-end my-5">
           <p className="mx-1 text-gray-500 font-noto font-medium">

@@ -15,7 +15,7 @@ import CommentContainer from "./../components/modules/Comment/CommentContainer";
 const Bookmarks = () => {
   // const { user } = useContext(UserContext);
   const [userCanComment, setUserCanComment] = useState(false);
-  const [ bunker, setBunker] = useState({});
+  const [bunker, setBunker] = useState({});
   const [loading, setIsLoading] = useState(true);
   const [isEmpty, setIsEmpty] = useState(false);
   // const [showEditor, setShowEditor] = useState(false);
@@ -26,14 +26,13 @@ const Bookmarks = () => {
   const { bunkerId } = useParams();
 
   useEffect(async () => {
-      setIsLoading(true)
-      setIsEmpty(true);
-      const data = await fetchBunker(bunkerId)
-      setBunker(data)
-      setIsEmpty(false);
-      setIsLoading(false);
-    
-  }, [ bunkerId ]);
+    setIsLoading(true);
+    setIsEmpty(true);
+    const data = await fetchBunker(bunkerId);
+    setBunker(data);
+    setIsEmpty(false);
+    setIsLoading(false);
+  }, [bunkerId]);
 
   return (
     <div>
@@ -54,12 +53,20 @@ const Bookmarks = () => {
               {isEmpty ? (
                 <h1>You have no Saved Bunkers</h1>
               ) : (
-              
-                    <div className="space-y-6 ">
-                     { bunker._id &&  <><Post setBunker={setBunker} bunker={bunker} setUserCanComment={setUserCanComment} userCanComment={userCanComment} /> {userCanComment && <CommentContainer id={bunker._id} />}</>}
-                    </div>
-                )
-              }
+                <div className="space-y-6 ">
+                  {bunker._id && (
+                    <>
+                      <Post
+                        setBunker={setBunker}
+                        bunker={bunker}
+                        setUserCanComment={setUserCanComment}
+                        userCanComment={userCanComment}
+                      />{" "}
+                      <CommentContainer userCanComment={userCanComment} id={bunker._id} />
+                    </>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </div>

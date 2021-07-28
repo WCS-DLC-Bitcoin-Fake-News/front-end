@@ -6,6 +6,12 @@ import "../../node_modules/react-quill/dist/quill.snow.css";
 import BunkerVisualizer from "./modules/Bunker/BunkerVisualizer";
 import UserContext from "../contexts/UserContext";
 import { fetchBunker } from "./../Api/FetchData"
+
+function detectURLs(message) {
+  var urlRegex = /(((https?:\/\/)|(www\.))[^\s]+)/g;
+  return message.match(urlRegex)
+}
+ 
 function BunkerForm() {
   const { user } = useContext(UserContext);
   const { bunkerId } = useParams();
@@ -78,6 +84,10 @@ function BunkerForm() {
       body,
     };
     try {
+      console.log("Heeeeeeee")
+      if(detectURLs(newPost.body) === null) {
+        return alert("You must bring an source url elaborate your argument!")
+      } 
       // this const gets the 'token' and 'user'from localStorage. Check Signup.js to see how to access and save in localStorage.
     
       const config = {
@@ -126,9 +136,10 @@ function BunkerForm() {
           <div className="nm-flat-white rounded-lg">
               {printedSource && <BunkerVisualizer printedSource={printedSource} />}
           </div>
+          <br></br>
+          <h1 class="text-2xl text-black font-montserrat font-bold mb-8">Elaborate an argument</h1>
           <div class="nm-flat-gray-100 h-auto rounded-lg relative z-0 w-full mb-5 text-black">
-            {/* <label for="argument" class="absolute duration-300 top-3 -z-1 origin-0 text-black">Elaborate your argument</label>  */}
-
+            
             <ReactQuill
               placeholder="Elaborate your argument"
               onChange={editBody}

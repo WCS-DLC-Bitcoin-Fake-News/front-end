@@ -50,7 +50,7 @@ const Container = styled.div`
 const DocumentContainer = styled.div`
   border: none;
   min-height: 270px; 
-  width: ${props => props.isThumb ? "100%" : "900px"};
+  width: ${props => props.isThumb ? "100%" : "auto"};
   
 `;
 
@@ -65,6 +65,13 @@ const Title = styled.p`
   font-size: 0.8rem;
   flex-wrap: wrap;
 `;
+
+const ButtonsContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+`
 
 const PdfViewer = ({ name, printedSource, author, isThumb }) => {
   console.log(printedSource)
@@ -107,8 +114,10 @@ const PdfViewer = ({ name, printedSource, author, isThumb }) => {
       <div className="flex justify-start">
         <p className="p-2 m-2">Page {pageNumber} of {numPages}</p>
       </div>
-      <span className="nm-concave-white rounded-full p-2 m-2" onClick={(() => {setPageNumber(pageNumber - 1 )})}>previous</span>
-      <span className="nm-concave-white rounded-full p-2 m-2" onClick={(() => {setPageNumber(pageNumber + 1 )})}>next</span>
+      <ButtonsContainer >
+        <span className="nm-concave-white rounded-full p-2 m-2" onClick={(() => {setPageNumber(pageNumber - 1 )})}>previous</span>
+        <span className="nm-concave-white rounded-full p-2 m-2" onClick={(() => {setPageNumber(pageNumber + 1 )})}>next</span>
+      </ButtonsContainer>
       <Author>
         <b>{author}</b>
       </Author>

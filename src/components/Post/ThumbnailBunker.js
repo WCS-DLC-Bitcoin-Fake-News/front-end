@@ -21,6 +21,7 @@ import CountdownCircleTimer from "../CountdownCircleTimer/CountdownCircleTimer";
 
 const ThumbnailBunker = ({ bunker, isThumb }) => {
   console.log("bunker?", bunker);
+  
   const { user } = useContext(UserContext);
   // const [bunker, setLocalBunker] = useState(bunker);
 

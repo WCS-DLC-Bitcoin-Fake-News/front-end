@@ -41,7 +41,7 @@ const Bookmarks = () => {
           <div className="flex flex-col lg:grid lg:grid-cols-3 lg:col-gap-5">
             <div className="hidden lg:block lg:col-span-1">
               <div className="mb-5">
-                <Filters />
+                <Filters bunker={bunker} />
               </div>
             </div>
             <div className="lg:col-span-2">

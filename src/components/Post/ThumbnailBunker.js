@@ -17,6 +17,8 @@ import axios from "axios";
 import Wallet from "../Wallet/Wallet";
 import ReactQuill from "react-quill";
 import Moment from "react-moment";
+import CountdownCircleTimer from "../CountdownCircleTimer/CountdownCircleTimer";
+
 const ThumbnailBunker = ({ bunker, isThumb }) => {
   console.log("bunker?", bunker);
   const { user } = useContext(UserContext);
@@ -131,9 +133,12 @@ const ThumbnailBunker = ({ bunker, isThumb }) => {
             <Moment format="YYYY/MM/DD kk:mm" date={bunker.createdAt}></Moment>
           </p>
         </div>
-        <div className="inline-flex justify-center w-2/5 rounded-full shadow-sm p-4 nm-convex-white border border-yellowBunker text-sm font-raleway font-medium text-gray-700 hover:bg-gray-50 font-montserrat font-bold">
+        <div className="inline-flex justify-center w-2/5 rounded-full shadow-sm p-4 nm-convex-white border border-yellowBunker text-sm font-raleway mr-12 font-medium text-gray-700 hover:bg-gray-50 font-montserrat font-bold">
           {<Wallet text={"Stake"} count={bunker.stake + bunker.initialStake} />}
         </div>
+        <div>
+            <CountdownCircleTimer deadline={bunker.deadline}/>
+          </div>
         {myBunker && (
           <div
             className="w-16 h-16 flex flex-col justify-center items-center"

@@ -44,7 +44,7 @@ const ProfileDropDown = () => {
               )}
               <span className="hidden md:flex md:flex-col justify-start pl-2">
                 {user && user.name}
-                {user && <Wallet text={"Balance"} count={user.wallet} currency={`$`} />}
+                {user && <Wallet text={"Balance"} count={user.wallet} currency={`TK`} />}
               </span>
               <svg
                 className="-mr-1 ml-2 w-5 flex flex-col justify-center"

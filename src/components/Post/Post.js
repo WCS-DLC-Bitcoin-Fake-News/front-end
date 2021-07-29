@@ -25,6 +25,7 @@ import Wallet from "../Wallet/Wallet";
 import { Upload } from "antd";
 import useLocalStorage from "./../../hooks/useLocalStorage";
 import Moment from "react-moment";
+import CountdownCircleTimer from "../CountdownCircleTimer/CountdownCircleTimer";
 
 const Post = ({
   isHome,
@@ -171,8 +172,11 @@ const Post = ({
           <p className="font-cabin text-gray-500 text-base my-1">
             <Moment format="YYYY/MM/DD kk:mm" date={bunker.createdAt}></Moment>
           </p>
+        
         </div>
-
+        <div>
+            <CountdownCircleTimer deadline={bunker.deadline} />
+          </div>
         {myBunker && (
           <div
             className="w-16 h-16 flex flex-col justify-center items-center"

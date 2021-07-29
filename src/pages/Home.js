@@ -24,21 +24,16 @@ const Home = () => {
 
   useEffect(async () => { 
     try {
-      if (!homeBunkersContext) {
+      // if (!homeBunkersContext) {
           console.log("there is not")
           setLoading(true);
           setIsEmpty(true);
           setHomeBunkers([]);
           const bunkers = await fetchPublishedBunkers()
           setHomeBunkersContext(bunkers);
-          setHomeBunkers(bunkers);
+          setHomeBunkers(bunkers.reverse());
           setLoading(false);
           setIsEmpty(false);
-      } else {
-        console.log("there is a context")
-        setLoading(false);
-        setHomeBunkers(homeBunkersContext);
-      }
     } catch (err) {
       console.log(err);
     }

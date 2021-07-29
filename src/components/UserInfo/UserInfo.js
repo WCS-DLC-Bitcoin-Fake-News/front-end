@@ -31,7 +31,7 @@ const UserInfo = ({ fetchedUser }) => {
       </div>
 
       <div className="px-4 py-4 flex flex-col justify-evenly w-full h-full ">
-        <div className="relative flex flex-col lg:flex-row items-center">
+        <div className="flex justify-between flex-col lg:flex-row items-center">
           <span className="py-4">
             <p className="text-2xl font-poppins font-semibold">
               {fetchedUser.name}
@@ -55,7 +55,7 @@ const UserInfo = ({ fetchedUser }) => {
           </span>
           {user && fetchedUser.username === user.username ? (
             <button
-              className="lg:mr-0 lg:ml-auto bg-primary text-white px-2 py-4  lg:px-8 lg:py-4 rounded-md"
+              className="inline-flex flex justify-end w-42 rounded-full shadow-sm px-4 py-2 nm-convex-white border border-yellowBunker mr-4 text-sm font-raleway font-medium text-gray-700 hover:bg-gray-50"
               type="submit"
             >
               <span className="mx-2">

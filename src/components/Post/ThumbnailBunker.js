@@ -117,7 +117,7 @@ const ThumbnailBunker = ({ bunker, isThumb }) => {
   return (
     <div className="p-5 nm-flat-white rounded-lg hover:bg-gray-100 cursor-pointer">
       <div className="flex items-center content-evenly">
-        <div className="w-16 h-16 overflow-hidden rounded-lg m-4">
+        <div className="w-18 h-16 overflow-hidden rounded-lg m-4">
           <Avatar src={bunker.author.avatar} />
         </div>
         <div className="w-full">

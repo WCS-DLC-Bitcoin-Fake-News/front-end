@@ -15,7 +15,7 @@ function BunkerForm() {
   const { user } = useContext(UserContext);
   const { bunkerId } = useParams();
   console.log("user context in the form", user);
-
+  const [stake, setStake] = useState("");
   const [body, setBody] = useState(" ");
   const [title, setTitle] = useState(" ");
   const [source, setSource] = useState("");
@@ -99,6 +99,7 @@ function BunkerForm() {
       source,
       body,
       deadline,
+      stake,
     };
     try {
       console.log("Heeeeeeee")
@@ -174,6 +175,7 @@ function BunkerForm() {
           </div>
           <div class="relative z-0 w-full mb-5">
             <input
+              onChange={(e)=>setStake(e.target.value)}
               type="number"
               stake="stake"
               placeholder=" "

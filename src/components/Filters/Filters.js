@@ -44,76 +44,85 @@ const Filters = ({ bunker }) => {
   const [ isWinner, setIsWinner ] = useState("pro");
   const [ proStake, setProStake ] = useState(0);
   const [ proPercentage, setProPercentage ] = useState(0);
+  const [ totalStake, setTotalStake ] = useState(0);
+  const [numberOfProVotants, setNumberOfProVotants] = useState(0)
+  const [numberOfConVotants, setNumberOfConVotants] = useState(0)
 
-  const totalStake = bunker.stake;
-  const initialBunkerStake = bunker.initialStake;
-  const intialProVotes = 40;
-  const intialConVotes = 40;
-  const initialDownVotes = 40;
+  // console.log("yo", initialProStake, initialConStake);
+
+  // const declareWinner = () => {
+  //   if(intialProVotes > initialDownVotes) {
+  //     setIsWinner("pro")
+  //   }
+  //   else {
+  //     setIsWinner("con")
+  //   }
+  // }
   
-  const initialProStake = 0
-  const initialConStake = 0
-
-  console.log("yo", initialProStake, initialConStake);
-
-  const declareWinner = () => {
-    if(intialProVotes > initialDownVotes) {
-      setIsWinner("pro")
-    }
-    else {
-      setIsWinner("con")
-    }
-  }
+  const dispatchFunds = () => {
+    setTotalStake(bunker.stake) 
+    // const initialBunkerStake = bunker.initialStake;
   
-  const dispatchFunds = (isWinner, totalStake) => {
-    declareWinner();
-    setAuthorEarned(initialConStake / 2);
-    setProEarned(initialConStake / 2);
-    setWinnerGrowth(calculateGrowth(initialProStake, proEarned))
-    setAuthorGrowth(calculateGrowth(initialBunkerStake, authorEarned))
-    setProPercentage((intialProVotes / intialConVotes) * 100);
-  }
- 
-  const calculateGrowth = (before, after) => {
-    return before - after / before 
-  }
-  
-  useEffect(() => {
+    const initialProStake = bunker.votes ? bunker.votes.reduce((sum, li) => {
+      const result = li.pro ? sum + li.stake : 1;
+      console.log(result)
+      return result
+    }, 0) : 0
 
-    // const initialProStake = bunker.votes.reduce((sum, li) => {
-    //   return li.pro ? sum + li.stake : 0
-    // }, 0);
+    const initialConStake = bunker.votes ? bunker.votes.reduce((sum, li) => {
+      const result = !li.pro ? sum + li.stake : 1;
+      console.log(result)
+      return result
+    }, 0) : 0
 
-    // const initialConStake = bunker.votes.reduce((sum, li) => {
-    //   return !li.pro ? sum + li.stake : 0
-    // }, 0);
+    const numberOfProVotants = bunker.votes ? bunker.votes.filter((vote) => vote.pro).length : 1
+    const numberOfConVotants = bunker.votes ? bunker.votes.filter((vote) => !vote.pro).length : 1
+
+    setNumberOfProVotants(numberOfProVotants)
+    setNumberOfConVotants(numberOfConVotants)
 
     console.log("test", initialConStake);
     console.log("test2", initialProStake);
 
-    dispatchFunds()
-  }, [])
+    // declareWinner();
+    setAuthorEarned(initialConStake / 2);
+    setProEarned(initialConStake / 2);
+    setWinnerGrowth(calculateGrowth(initialProStake, proEarned))
+    // setAuthorGrowth(calculateGrowth(initialBunkerStake, authorEarned))
+    setProPercentage((numberOfProVotants / numberOfConVotants | 1) * 100);
+
+  }
+ 
+  const calculateGrowth = (before, after) => {
+    console.log("goog", before - after / before)
+    return before - after / before 
+  }
+  
+  useEffect(() => {
+    bunker && dispatchFunds()
+
+  }, [bunker])
 
   return (
-    <>
+    <div style={{ position: "fixed"}}>
       <div
-        className="w-full bg-white rounded-lg p-5"
+        className="w-full bg-white rounded-lg p-5 sticky"
         style={{ height: "max-content" }}>
         <li className="font-montserrat font-semibold text-lg flex justify-center py-2 list-none">
           Consensus
         </li>
-        <ProgressBar bgcolor="#9EAEC0" completed={70} />
+        <ProgressBar bgcolor="#9EAEC0" completed={proPercentage} />
         <li className="font-montserrat font-semibold text-lg  py-2 list-none">
           Pro ✅
         </li>
             <li className="font-raleway text-lg py-2 list-none">
-              75 Users - Bounty {winnerGrowth}%
+              {numberOfProVotants} Users - Bounty {winnerGrowth}%
             </li>
         <li className="font-montserrat font-semibold text-lg text-black py-2 list-none ">
           Con ❎
         </li>
             <li className="font-raleway text-lg py-2 list-none">
-                32 Users - Bounty 0%
+              {numberOfConVotants} Users - Bounty 0%
             </li>
         <li className="font-montserrat font-semibold text-lg text-black py-2 list-none ">
           Author earned 🤲
@@ -132,7 +141,7 @@ const Filters = ({ bunker }) => {
             <progress className="nm-inset-white w-full p-5 rounded-full" id="votes bar" max="100" value="70"> 70% </progress>
           </div> */}
       </div>
-    </>
+    </div>
   );
 };
 export default Filters;

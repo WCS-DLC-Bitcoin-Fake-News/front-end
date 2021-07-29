@@ -36,11 +36,14 @@ const Post = ({
   setUserCanComment,
 }) => {
   const getUpvotesCount = () => {
-    return 12;
+    return 0
+    // return  bunker.votes ? bunker.votes.filter((vote) => vote.pro).length : 0;
   };
 
   const getDownvotesCount = () => {
-    return 37;
+    return 0
+
+    // return  bunker.votes ? bunker.votes.filter((vote) => !vote.pro).length : 0;
   };
 
   const getWatchedCount = () => {

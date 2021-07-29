@@ -102,7 +102,7 @@ const Post = ({
     reloadBunker();
     // window.scrollTo(0,document.body.scrollHeight);
 
-    setDownVotes((prev) => prev - 1);
+    setDownVotes((prev) => prev + 1);
     setIsDownVotedByUser(false);
   };
 

@@ -47,7 +47,7 @@ const NavBar = () => {
             <li
               activeClassname={"font-montserrat font-bold text-lg"}
               className={`list-none inline-block mx-20 cursor-pointer`}>
-              Investigate
+              Archive
             </li>
           </NavLink>
           {/* {user && (

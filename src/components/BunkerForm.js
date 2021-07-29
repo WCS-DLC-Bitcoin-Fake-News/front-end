@@ -194,7 +194,6 @@ function BunkerForm() {
           <div class="relative z-0 w-full mb-5 font-raleway text-gray-600">
             <input onChange={editDeadline}
               type="date"
-              onChange={editExpirationDate}
               deadline="deadline"
               placeholder=" "
               class="pt-3 pb-2 pr-12 block w-full px-0 mt-0 text-text-gray-200 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-gray-300 border-gray-200"
